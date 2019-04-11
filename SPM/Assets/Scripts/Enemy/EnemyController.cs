@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     public float damage = 5;
     public float MoveSpeed = 4;
     public float MaxDist = 10;
-    public float MinDist = 3;
+    public float MinDist = 0.1f;
     public float AttackDistance = 5;
     public float DamageResistance = 5;
 
@@ -76,15 +76,13 @@ public class EnemyController : MonoBehaviour
 
     // Attacking actions
     void Attack() {
-        if (AttackTrigger)
-        {
+        if (AttackTrigger) {
+
             switch (enemyType) {
                 case 5:
                     //add attacking move for enemy 5
                     break;
                 case 4:
-                    StartCoroutine(ChargingTimer(2f));
-
                     ChargeAttack();
                     break;
                 case 3:
@@ -111,23 +109,27 @@ public class EnemyController : MonoBehaviour
     void ChargeAttack() {
         if (RecentlyCharged)
         {
+            if (!Charging)
+            {
+                Debug.Log(chargeposition);
+                float step = (MoveSpeed*5) * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, chargeposition, step);
 
+            }
+            else
+            {
+
+                //if (Vector3.Distance(transform.position, chargeposition) < MinDist) { RecentlyCharged = true; Attacking = false; }
+            }
         }
         else {
             chargeposition = player.position;
             RecentlyCharged = true;
-        }
-
-        if (Charging)
-        {
-
+            StartCoroutine(ChargingTimer(2f));
 
         }
-        else {
-            float step = (MoveSpeed) * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, chargeposition, step);
-            if (Vector3.Distance(transform.position, chargeposition) < MinDist) { RecentlyCharged = true; Attacking = false; }
-        }
+
+
         //transform.position += chargeposition * (MoveSpeed*3) * Time.deltaTime;
 
 

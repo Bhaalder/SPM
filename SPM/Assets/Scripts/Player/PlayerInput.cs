@@ -31,13 +31,18 @@ public class PlayerInput : MonoBehaviour
 
                     selectedWeapon.SetAmmoInClip(ammoInClip + totalAmmoLeft);
                     selectedWeapon.SetTotalAmmoLeft(0);
-                    GameController.Instance.UpdateSelectedWeaponAmmoText();
+                    Debug.Log("Reloading " + selectedWeapon.GetName());
+                    if (Time.time >= nextTimeToFireOrReload) {
+                        GameController.Instance.UpdateSelectedWeaponAmmoText();
+                    }
                     return;
                 }
                 selectedWeapon.SetAmmoInClip(maxAmmoInClip);
                 selectedWeapon.SetTotalAmmoLeft(totalAmmoLeft - ammoSpent);
-                GameController.Instance.UpdateSelectedWeaponAmmoText();
                 Debug.Log("Reloading " + selectedWeapon.GetName());
+                if (Time.time >= nextTimeToFireOrReload) {
+                    GameController.Instance.UpdateSelectedWeaponAmmoText();
+                }
             }
         }
     }

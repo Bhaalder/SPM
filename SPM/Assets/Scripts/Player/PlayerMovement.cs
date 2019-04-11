@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Run()
     {
-        Debug.Log(playerColl.GetGroundCollision());
+        //Debug.Log(playerColl.GetGroundCollision());
         //Debug.Log("Forward: " + playerColl.GetForward() + " | Right: " + playerColl.GetRight());
         if (Input.GetKey(KeyCode.W) && !playerColl.GetFrontColl())
             transform.position += playerColl.GetForward() * (movementSpeed + speedBoost) * Time.deltaTime;
