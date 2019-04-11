@@ -5,6 +5,8 @@ using StateHandler;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private bool controlingCam = false;
+
     private float gravity = 9.82f;
     private float xRotation, yRotation;
     [SerializeField] private float rotationSpeedX, rotationSpeedY;
@@ -68,8 +70,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void RotatePlayerAndCam()
     {
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (!controlingCam)
+                controlingCam = true;
+            else
+                controlingCam = false;
+        }
         //Högerklick för att röra crosshair + kamera
-        if (Input.GetMouseButton(1))
+        if (controlingCam)
         {
             xRotation += Input.GetAxis("Mouse X");
             yRotation += Input.GetAxis("Mouse Y");

@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-    PlayerShoot playerShoot;
+    private PlayerShoot playerShoot;
     private Weapon selectedWeapon;
     private float nextTimeToFireOrReload = 0f;
 
-    void Start(){
+    private void Start(){
         playerShoot = GetComponentInChildren<PlayerShoot>();
     }
 
-    void Update(){
+    private void Update(){
         selectedWeapon = GameController.Instance.selectedWeapon;
         ReloadWeaponInput();
         ShootWeaponInput();
         SwitchWeaponInput();      
     }
-    void ReloadWeaponInput() {      
+    private void ReloadWeaponInput() {      
         int ammoInClip = selectedWeapon.GetAmmoInClip();
         int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
         int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
@@ -47,14 +47,14 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    void ShootWeaponInput() {
+    private void ShootWeaponInput() {
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFireOrReload) {
             nextTimeToFireOrReload = Time.time + 1f/selectedWeapon.GetFireRate();
             playerShoot.StartShooting(selectedWeapon);
         }
     }
 
-    void SwitchWeaponInput() {
+    private void SwitchWeaponInput() {
         Weapon first = GameController.Instance.playerWeapons[0];
         Weapon second = GameController.Instance.playerWeapons[1];
         Weapon third = GameController.Instance.playerWeapons[2];

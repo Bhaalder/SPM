@@ -11,12 +11,7 @@ public class PlayerCollision : MonoBehaviour
     private RaycastHit groundInfo;
     private Ray groundRay;
 
-    private void Update()
-    {
-        Debug.DrawLine(transform.position, transform.position - new Vector3(0, 1.1f, 0));
-    }
-
-    //Kontrollerar ifall spelaren kolliderar med något underfrån.
+    //Returnerar om spelaren kolliderar med något underfrån.
     public bool GetGroundCollision()
     {
         groundRay = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down);
@@ -26,7 +21,7 @@ public class PlayerCollision : MonoBehaviour
             return false;
     }
 
-    //Kontrollerar ifall spelaren kolliderar med något ovanfrån.
+    //Returnerar om spelaren kolliderar med något ovanfrån.
     public bool GetHeadCollision()
     {
         groundRay = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down);
@@ -36,6 +31,8 @@ public class PlayerCollision : MonoBehaviour
             return true;
     }
 
+
+    //Returnerar markvinkeln för rörelse framåt
     public Vector3 GetForward()
     {
         if (!GetGroundCollision())
@@ -47,6 +44,7 @@ public class PlayerCollision : MonoBehaviour
         return Vector3.Cross(groundInfo.normal, -transform.right);
     }
 
+    //Returnerar markvinkeln för rörelse åt höger
     public Vector3 GetRight()
     {
         if (!GetGroundCollision())
