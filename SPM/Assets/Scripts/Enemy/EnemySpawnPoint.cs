@@ -5,21 +5,21 @@ using UnityEngine;
 public class EnemySpawnPoint : MonoBehaviour
 {
 
-    public bool spawntrigger;
+    public bool spawnTrigger;
     public bool waitTrigger;
     public Transform EnemyPrefab;
 
     void Start()
     {
-        spawntrigger = false;
+        spawnTrigger = false;
         waitTrigger = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (spawntrigger & waitTrigger) {
-            spawntrigger = false;
+        if (spawnTrigger & waitTrigger) {
+            spawnTrigger = false;
             waitTrigger = false;
             StartCoroutine(Spawntimer());
         }

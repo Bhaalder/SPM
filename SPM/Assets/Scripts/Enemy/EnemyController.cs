@@ -12,11 +12,19 @@ public class EnemyController : MonoBehaviour
     public float MinDist = 3;
     public float AttackDistance = 5;
     public float DamageResistance = 5;
+
+    public int enemyType;
+
     public Transform gameController;
     public Transform spawnPoint;
     public Transform player;
-    public bool AttackTrigger;
 
+    public bool AttackTrigger;
+    public bool Attacking;
+    public bool Charging;
+    public bool RecentlyCharged;
+
+    private Vector3 chargeposition;
 
 
     // Start is called before the first frame update
@@ -25,6 +33,9 @@ public class EnemyController : MonoBehaviour
         spawnPoint = GameObject.Find("Enemy_Spawn_Point").transform;
         player = GameObject.Find("Player").transform;
         AttackTrigger = true;
+        Attacking = false;
+        Charging = false;
+        RecentlyCharged = false;
     }
 
     // Update is called once per frame
@@ -43,15 +54,22 @@ public class EnemyController : MonoBehaviour
     
     public void Movement()
     {
-        transform.LookAt(player);
-        if (Vector3.Distance(transform.position, player.position) >= MinDist && Vector3.Distance(transform.position, player.position) <= MaxDist)
+        if (!Attacking)
         {
+            transform.LookAt(player);
+            if (Vector3.Distance(transform.position, player.position) >= MinDist && Vector3.Distance(transform.position, player.position) <= MaxDist)
+            {
 
-            transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+                transform.position += transform.forward * MoveSpeed * Time.deltaTime;
 
+            }
+            if (Vector3.Distance(transform.position, player.position) <= AttackDistance && !Attacking)
+            {
+                Attacking = true;
+                Attack();
+            }
         }
-        if (Vector3.Distance(transform.position, player.position) <= AttackDistance)
-        {
+        else {
             Attack();
         }
     }
@@ -60,10 +78,63 @@ public class EnemyController : MonoBehaviour
     void Attack() {
         if (AttackTrigger)
         {
-            gameController.GetComponent<GameController>().TakeDamage((int)damage);
-            AttackTrigger = false;
-            StartCoroutine(AttackTimer());
+            switch (enemyType) {
+                case 5:
+                    //add attacking move for enemy 5
+                    break;
+                case 4:
+                    StartCoroutine(ChargingTimer(2f));
+
+                    ChargeAttack();
+                    break;
+                case 3:
+                    //add attacking move for enemy 3
+                    break;
+                case 2:
+                    //add attacking move for enemy 2
+                    break;
+                case 1:
+                    MeleeAttack();
+                    break;
+
+            }
+
         }
+    }
+
+    void MeleeAttack() {
+        gameController.GetComponent<GameController>().TakeDamage((int)damage);
+        AttackTrigger = false;
+        Attacking = false;
+        StartCoroutine(AttackTimer());
+    }
+    void ChargeAttack() {
+        if (RecentlyCharged)
+        {
+
+        }
+        else {
+            chargeposition = player.position;
+            RecentlyCharged = true;
+        }
+
+        if (Charging)
+        {
+
+
+        }
+        else {
+            float step = (MoveSpeed) * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, chargeposition, step);
+            if (Vector3.Distance(transform.position, chargeposition) < MinDist) { RecentlyCharged = true; Attacking = false; }
+        }
+        //transform.position += chargeposition * (MoveSpeed*3) * Time.deltaTime;
+
+
+        Debug.Log("move done");
+        //Attacking = false;
+
+
     }
 
     IEnumerator AttackTimer()
@@ -72,10 +143,16 @@ public class EnemyController : MonoBehaviour
         AttackTrigger = true;
     }
 
+    IEnumerator ChargingTimer(float waitTime) {
+        Charging = true;
+        yield return new WaitForSeconds(waitTime);
+        Charging = false;
+    }
+
     // Sets bool on respawn point
     void OnDeathRespawn()
     {
-        spawnPoint.GetComponent<EnemySpawnPoint>().spawntrigger = true;
+        spawnPoint.GetComponent<EnemySpawnPoint>().spawnTrigger = true;
     }
 
     // Show the lookRadius in editor

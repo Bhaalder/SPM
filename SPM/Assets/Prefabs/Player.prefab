@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 8279343510140872280}
   - component: {fileID: 8279343510140872283}
   - component: {fileID: 8279343510140872282}
+  - component: {fileID: 670449513885060360}
   - component: {fileID: 8279343510140872613}
   - component: {fileID: 8279343510140872612}
   - component: {fileID: 8279343510140872615}
@@ -163,6 +164,18 @@ MonoBehaviour:
   movementSpeed: 8
   camFocus: {fileID: 0}
   speedBoostTime: 10
+--- !u!114 &670449513885060360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8279343510140872614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9cb620e53338094ca44c77ccb334f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &8279343510140872613
 CapsuleCollider:
   m_ObjectHideFlags: 0
