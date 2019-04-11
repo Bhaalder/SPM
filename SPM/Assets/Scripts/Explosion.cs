@@ -5,10 +5,12 @@ using UnityEngine;
 public class Explosion : MonoBehaviour
 {
     public float explosionRadius;
-    public GameObject explosionEffect;
+
+    //public GameObject explosionEffect;
 
     public void Explode(float explosionForce, float damage) {
-        Instantiate(explosionEffect, transform.position, transform.rotation);
+
+        //Instantiate(explosionEffect, transform.position, transform.rotation);
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 

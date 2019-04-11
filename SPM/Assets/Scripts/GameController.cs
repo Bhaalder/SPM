@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour {
         playerWeapons.Add(rifle);
         Weapon shotgun = new Weapon("Shotgun", 30, 100, 2f, 0.5f, 30, 25, 25, 100, null, null, null);
         playerWeapons.Add(shotgun);
-        Weapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", 50, 100, 1f, 0.3f, 100, 1, 5, 5, 100, null, null, null, null);
+        Weapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", 50, 100, 1f, 0.3f, 20, 10, 5, 5, 100, null, null, null, null);
         playerWeapons.Add(rocketLauncher);
 
         totalRifleAmmunition = rifle.GetTotalAmmoLeft();

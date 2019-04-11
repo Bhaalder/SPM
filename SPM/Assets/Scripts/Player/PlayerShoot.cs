@@ -53,7 +53,9 @@ public class PlayerShoot : MonoBehaviour
 
             GameObject rocketProj = Instantiate(rocketGO, transform.position + transform.forward * 2, Quaternion.identity);
             rocketProj.transform.LookAt(camFocusTrans);
-            rocketProj.transform.position += transform.forward * weapon.GetProjectileSpeed() * (Time.deltaTime * Time.deltaTime);
+            rocketProj.GetComponent<RocketProjectile>().SetProjectileSpeed(weapon.GetProjectileSpeed());
+            rocketProj.GetComponent<RocketProjectile>().SetProjectileForce(weapon.GetImpactForce());
+            rocketProj.GetComponent<RocketProjectile>().SetProjectileDamage(weapon.GetDamage());
 
         } else if (weapon.GetAmmoInClip() <= 0) {
             Debug.Log("Out of Ammo");
