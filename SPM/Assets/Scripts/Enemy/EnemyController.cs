@@ -114,7 +114,6 @@ public class EnemyController : MonoBehaviour
                 Debug.Log(chargeposition);
                 float step = (MoveSpeed*5) * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, chargeposition, step);
-
             }
             else
             {
@@ -149,6 +148,13 @@ public class EnemyController : MonoBehaviour
         Charging = true;
         yield return new WaitForSeconds(waitTime);
         Charging = false;
+    }
+
+    void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.tag == "Player") {
+            Debug.Log("just collided with player");
+            gameController.GetComponent<GameController>().TakeDamage((int)damage);
+        }
     }
 
     // Sets bool on respawn point
