@@ -8012,6 +8012,7 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: [{fileID: 1215846141, guid: b8a168c850e19644b90513ee279db5d2,
-        type: 3}, {fileID: 1215846144, guid: b8a168c850e19644b90513ee279db5d2, type: 3}]
+    m_RemovedComponents:
+    - {fileID: 1215846141, guid: b8a168c850e19644b90513ee279db5d2, type: 3}
+    - {fileID: 1215846144, guid: b8a168c850e19644b90513ee279db5d2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b8a168c850e19644b90513ee279db5d2, type: 3}
