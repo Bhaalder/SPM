@@ -10,9 +10,8 @@ public class RocketProjectile : MonoBehaviour
 
     private void Update()
     {
-        transform.position += transform.forward * projectileSpeed * 0.01f;
+        transform.position += transform.forward * projectileSpeed * 0.03f;
         IncreaseSpeed();
-
     }
 
     private void IncreaseSpeed()

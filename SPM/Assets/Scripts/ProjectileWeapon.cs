@@ -7,7 +7,7 @@ public class ProjectileWeapon : Weapon
     private float projectileSpeed;
     private GameObject projectile;
 
-    public ProjectileWeapon(string name, float damage, float range, float fireRate, float reloadTime, float impactForce, float projectileSpeed, int ammoInClip, int maxAmmoInClip, int totalAmmoLeft, GameObject projectile, AudioClip reloadSound, AudioClip shootSound, AudioClip noAmmoSound): base(name, damage, range, fireRate, reloadTime, impactForce, ammoInClip, maxAmmoInClip, totalAmmoLeft, reloadSound, shootSound, noAmmoSound) {
+    public ProjectileWeapon(string name, float damage, float range, float fireRate, float reloadTime, float impactForce, float spread, float projectileSpeed, int ammoInClip, int maxAmmoInClip, int totalAmmoLeft, GameObject projectile, AudioClip reloadSound, AudioClip shootSound, AudioClip noAmmoSound): base(name, damage, range, fireRate, reloadTime, impactForce, spread, ammoInClip, maxAmmoInClip, totalAmmoLeft, reloadSound, shootSound, noAmmoSound) {
         this.projectileSpeed = projectileSpeed;
         this.projectile = projectile;
     }
