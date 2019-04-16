@@ -102,6 +102,7 @@ public class EnemyController : MonoBehaviour
 
     void MeleeAttack() {
         gameController.GetComponent<GameController>().TakeDamage((int)damage);
+        Debug.Log("damage taken");
         AttackTrigger = false;
         Attacking = false;
         StartCoroutine(AttackTimer());
@@ -151,16 +152,16 @@ public class EnemyController : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag == "Player") {
+        if (collision.gameObject.tag == "Player" && RecentlyCharged) {
             Debug.Log("just collided with player");
-            gameController.GetComponent<GameController>().TakeDamage((int)damage);
+            gameController.GetComponent<GameController>().TakeDamage((int)damage*3);
         }
     }
 
     // Sets bool on respawn point
     void OnDeathRespawn()
     {
-        spawnPoint.GetComponent<EnemySpawnPoint>().spawnTrigger = true;
+        //spawnPoint.GetComponent<EnemySpawnPoint>().spawnTrigger = true;
     }
 
     // Show the lookRadius in editor

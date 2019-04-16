@@ -9,6 +9,7 @@ public class Weapon{
     private float fireRate;
     private float reloadTime;
     private float impactForce;
+    private float spread;
     private int ammoInClip;
     private int maxAmmoInClip;
     private int totalAmmoLeft;
@@ -16,7 +17,7 @@ public class Weapon{
     private AudioClip shootSound;
     private AudioClip noAmmoSound;
 
-    public Weapon (string name, float damage, float range, float fireRate, float reloadTime, float impactForce, int ammoInClip, int maxAmmoInClip, int totalAmmoLeft,
+    public Weapon (string name, float damage, float range, float fireRate, float reloadTime, float impactForce, float spread, int ammoInClip, int maxAmmoInClip, int totalAmmoLeft,
         AudioClip reloadSound, AudioClip shootSound, AudioClip noAmmoSound) {
         this.name = name;
         this.damage = damage;
@@ -24,6 +25,7 @@ public class Weapon{
         this.fireRate = fireRate;
         this.reloadTime = reloadTime;
         this.impactForce = impactForce;
+        this.spread = spread;
         this.ammoInClip = ammoInClip;
         this.maxAmmoInClip = maxAmmoInClip;
         this.totalAmmoLeft = totalAmmoLeft;
@@ -67,6 +69,12 @@ public class Weapon{
     }
     public void SetImpactForce(float f) {
         impactForce = f;
+    }
+    public float GetSpread() {
+        return spread;
+    }
+    public void SetSpread(float f) {
+        spread = f;
     }
     public int GetAmmoInClip() {
         return ammoInClip;

@@ -9,7 +9,7 @@ public class CameraFocus : MonoBehaviour
 
     private Camera cam;
 
-    [SerializeField] private float distance = 20.0f;
+    [SerializeField] private float distance = 20f;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
     [SerializeField] private float sensitivityX = 1f;
@@ -23,10 +23,15 @@ public class CameraFocus : MonoBehaviour
 
     private void Update()
     {
-        Vector3 dir = new Vector3(1, 0, distance);
+        Vector3 dir = new Vector3(1, 1, distance);
         Quaternion rotation = Quaternion.Euler(currentX * sensitivityX, currentY * sensitivityY, 0);
         playerFocusTransform.position = playerTransform.position + rotation * dir;
         playerFocusTransform.LookAt(playerTransform.position);
+    }
+
+    public void SetDistance(float distance)
+    {
+        this.distance = distance;
     }
 
     public void SetCurrentX(float x)

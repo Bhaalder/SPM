@@ -43,10 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2362073d8c018074dbbdc328820e0451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  cam: {fileID: 0}
-  ammoText: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1585
   camFocusTrans: {fileID: 0}
+  rocketProjectileGO: {fileID: 219585091385160446, guid: c66ffa24388ab814188c0d787f5da840,
+    type: 3}
+  bulletImpactGO: {fileID: 8994105869451675289, guid: 2fae76d263ade994482ad8ff80b1c845,
+    type: 3}
 --- !u!1 &8279343510140872614
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cb620e53338094ca44c77ccb334f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slowmotion: {fileID: 4320215421209216543, guid: a312182574752a14db595d72c94a2952,
+    type: 3}
 --- !u!136 &8279343510140872613
 CapsuleCollider:
   m_ObjectHideFlags: 0

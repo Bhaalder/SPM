@@ -10,6 +10,9 @@ public class CameraFollow : MonoBehaviour
 
     private Camera cam;
 
+    private bool blocked = false;
+    private RaycastHit hitForward;
+    private RaycastHit hitBackward;
     private float distance = 4.0f;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
@@ -21,6 +24,10 @@ public class CameraFollow : MonoBehaviour
         camTransform = transform;
         cam = Camera.main;
     }
+    private void Update()
+    {
+        MoveFocusPoint();
+    }
 
     private void LateUpdate()
     {
@@ -28,6 +35,35 @@ public class CameraFollow : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(-currentX * sensitivityX, -currentY * sensitivityY, 0);
         camTransform.position = playerTransform.position + rotation * dir;
         camTransform.LookAt(playerFocusTransform.position);
+        Debug.DrawLine(playerTransform.position, playerFocusTransform.position);
+        Debug.DrawLine(playerTransform.position, transform.position);
+        MoveCamera();
+        CameraBlocked();
+    }
+
+    private void MoveCamera()
+    {
+        if (blocked && !hitBackward.transform.name.Equals("MainCamera"))
+            distance = hitBackward.distance;
+        else
+            distance = 4;
+    }
+
+    private void CameraBlocked()
+    {
+        blocked = Physics.Raycast(new Ray(playerTransform.position, -transform.forward), out hitBackward, 4f);
+    }
+
+    private void MoveFocusPoint()
+    {
+        Physics.Raycast(new Ray(transform.position, transform.forward), out RaycastHit hitForward);
+        Vector3 temp = playerFocusTransform.position;
+        if (hitForward.transform != null)
+            if (!hitForward.transform.name.Equals("CameraFocus") && hitForward.distance > 4.5f)
+                playerFocusTransform.GetComponent<CameraFocus>().SetDistance(hitForward.distance - 4);
+            else
+                playerFocusTransform.GetComponent<CameraFocus>().SetDistance(20);
+
     }
 
     public void SetCurrentX(float x)

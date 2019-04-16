@@ -49,8 +49,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void Run()
     {
-        //Debug.Log(playerColl.GetGroundCollision());
-        //Debug.Log("Forward: " + playerColl.GetForward() + " | Right: " + playerColl.GetRight());
         if (Input.GetKey(KeyCode.W) && !playerColl.GetFrontColl())
             transform.position += playerColl.GetForward() * (movementSpeed + speedBoost) * Time.deltaTime;
         if (Input.GetKey(KeyCode.S) && !playerColl.GetBackColl())
@@ -82,10 +80,10 @@ public class PlayerMovement : MonoBehaviour
         {
             xRotation += Input.GetAxis("Mouse X");
             yRotation += Input.GetAxis("Mouse Y");
-            if (yRotation >= 15)
-                yRotation = 15;
-            else if (yRotation <= -15)
-                yRotation = -15;
+            if (yRotation >= 30)
+                yRotation = 30;
+            else if (yRotation <= -30)
+                yRotation = -30;
             transform.rotation = Quaternion.Euler(0, xRotation * rotationSpeedX, 0);
             cam.SetCurrentY(-xRotation * rotationSpeedX);
             cam.SetCurrentX(-yRotation * rotationSpeedY);

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6964004597814307124}
   - component: {fileID: 6168297538791629986}
+  - component: {fileID: 4320215421209216543}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -46,7 +47,28 @@ MonoBehaviour:
   subscribedScripts: []
   gameEventID: 0
   player: {fileID: 0}
+  HealthSlider: {fileID: 0}
+  ArmorSlider: {fileID: 0}
+  weaponNameText: {fileID: 0}
+  weaponAmmoText: {fileID: 0}
   playerHP: 0
   playerArmor: 0
-  playerAmmunition: 0
+  totalRifleAmmunition: 0
+  totalShotgunAmmunition: 0
+  totalRocketLauncherAmmunition: 0
   gameIsPaused: 0
+  gameIsSlowmotion: 0
+--- !u!114 &4320215421209216543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814260381439902556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1282962c95234e4ca0a49cca59b7400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowdownAmount: 0.1
+  slowdownLength: 2
