@@ -58,22 +58,42 @@ public class PlayerCollision : MonoBehaviour
 
     public bool GetFrontColl()
     {
-        return false;
+        Vector3 boxSize = new Vector3(0.49f, 0.3f, 0);
+        if (Physics.BoxCast(transform.position + new Vector3(0, 0.6f, 0), boxSize, transform.forward, out RaycastHit boxHit))
+        {
+            return boxHit.distance < 0.51f;
+        }
+        else
+            return false;     
     }
 
     public bool GetBackColl()
     {
-        return false;
+        Vector3 boxSize = new Vector3(0.49f, 0.3f, 0);
+        if (Physics.BoxCast(transform.position + new Vector3(0, 0.6f, 0), boxSize, -transform.forward, out RaycastHit boxHit))
+            return boxHit.distance < 0.51f;
+        else
+            return false;
     }
 
     public bool GetLeftColl()
     {
-        return false;
+        Vector3 boxSize = new Vector3(0.49f, 0.3f, 0);
+        if (Physics.BoxCast(transform.position + new Vector3(0, 0.6f, 0), boxSize, -transform.right, out RaycastHit boxHit))
+            return boxHit.distance < 0.51f;
+        else
+            return false;
     }
 
     public bool GetRightColl()
     {
-        return false;
+        Vector3 boxSize = new Vector3(0, 0.3f, 0.49f);
+        if (Physics.BoxCast(transform.position + new Vector3(0, 0.6f, 0), boxSize, transform.right, out RaycastHit boxHit))
+        {
+            return boxHit.distance < 0.51f;
+        }
+        else
+            return false;
     }
 
     private void OnTriggerStay(Collider other)

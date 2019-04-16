@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour {
         Weapon rifle = new Weapon("Rifle", 10, 100, 10f, 0.5f, 0.1f, 15, 50, 50, 999, null, null, null);
         playerWeapons.Add(rifle);
         //TESTAR SHOTGUN
-        Weapon shotgun = new Weapon("Shotgun", 30, 10, 2f, 0.5f, 0.1f, 30, 25, 25, 100, null, null, null);
+        Weapon shotgun = new Weapon("Shotgun", 30, 18, 2f, 0.5f, 0.1f, 30, 25, 25, 100, null, null, null);
         playerWeapons.Add(shotgun);
         Weapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", 30, 100, 1f, 0.3f, 0.01f, 20, 10, 5, 5, 100, null, null, null, null);
         playerWeapons.Add(rocketLauncher);

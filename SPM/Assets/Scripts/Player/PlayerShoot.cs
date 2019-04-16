@@ -70,7 +70,8 @@ public class PlayerShoot : MonoBehaviour
                         hits[x].rigidbody.AddForce(-hits[x].normal * weapon.GetImpactForce());
                     }
                     if (hits[x].collider.gameObject.layer == 9){
-                        float fallOff = (hits[x].distance * hits[x].distance) / 3;
+                        float fallOff = (hits[x].distance * (hits[x].distance / 2)) / 4;
+                        Debug.Log(weapon.GetDamage() - fallOff);
                         if(fallOff > weapon.GetDamage()){
                             fallOff = weapon.GetDamage();
                         }
