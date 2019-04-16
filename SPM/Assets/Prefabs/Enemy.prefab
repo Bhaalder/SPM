@@ -138,12 +138,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 20
   damage: 5
-  MoveSpeed: 4
-  MaxDist: 10
-  MinDist: 3
-  AttackDistance: 5
+  MoveSpeed: 8
+  MaxDist: 30
+  MinDist: 1
+  AttackDistance: 2
   DamageResistance: 5
-  enemyType: 0
+  enemyType: 1
   gameController: {fileID: 6964004597814307124, guid: a312182574752a14db595d72c94a2952,
     type: 3}
   spawnPoint: {fileID: 5251623405000365419, guid: 3c8ab25a3edaef74a84f12853dd205bd,
