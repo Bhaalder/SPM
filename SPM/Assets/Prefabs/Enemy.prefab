@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 3177c1d206cf251469b2eb458d31818b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -142,9 +142,14 @@ MonoBehaviour:
   MaxDist: 10
   MinDist: 3
   AttackDistance: 5
+  DamageResistance: 5
+  enemyType: 0
   gameController: {fileID: 6964004597814307124, guid: a312182574752a14db595d72c94a2952,
     type: 3}
   spawnPoint: {fileID: 5251623405000365419, guid: 3c8ab25a3edaef74a84f12853dd205bd,
     type: 3}
   player: {fileID: 8279343510140872286, guid: b8a168c850e19644b90513ee279db5d2, type: 3}
   AttackTrigger: 0
+  Attacking: 0
+  Charging: 0
+  RecentlyCharged: 0
