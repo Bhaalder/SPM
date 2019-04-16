@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour {
     public int totalRifleAmmunition, totalShotgunAmmunition, totalRocketLauncherAmmunition;
 
     public bool gameIsPaused;
+    public bool gameIsSlowmotion = false;
 
  
     private static GameController instance;
@@ -41,16 +42,19 @@ public class GameController : MonoBehaviour {
     }
 
     private void Start() {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         DontDestroyOnLoad(gameObject);
         HealthSlider.value = playerHP;
         ArmorSlider.value = playerArmor;
 
         //detta ger spelaren alla vapen direkt
-        Weapon rifle = new Weapon("Rifle", 10, 100, 10f, 0.5f, 15, 50, 50, 100, null, null, null);
+        Weapon rifle = new Weapon("Rifle", 10, 100, 10f, 0.5f, 0.1f, 15, 50, 50, 999, null, null, null);
         playerWeapons.Add(rifle);
-        Weapon shotgun = new Weapon("Shotgun", 30, 100, 2f, 0.5f, 30, 25, 25, 100, null, null, null);
+        //TESTAR SHOTGUN
+        Weapon shotgun = new Weapon("Shotgun", 30, 10, 2f, 0.5f, 0.1f, 30, 25, 25, 100, null, null, null);
         playerWeapons.Add(shotgun);
-        Weapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", 50, 100, 1f, 0.3f, 20, 10, 5, 5, 100, null, null, null, null);
+        Weapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", 30, 100, 1f, 0.3f, 0.01f, 20, 10, 5, 5, 100, null, null, null, null);
         playerWeapons.Add(rocketLauncher);
 
         totalRifleAmmunition = rifle.GetTotalAmmoLeft();
@@ -88,7 +92,7 @@ public class GameController : MonoBehaviour {
     }
 
     public void TakeDamage(int damage) {
-        if (playerArmor <= 0) { playerHP -= damage; }
+        if (playerArmor <= 0) { playerHP -= damage; Debug.Log("damage has arrived"); }
         else { playerArmor -= damage; }
 
     }
