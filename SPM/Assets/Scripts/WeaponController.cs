@@ -15,7 +15,7 @@ public class WeaponController : MonoBehaviour
                 instance = FindObjectOfType<WeaponController>();
 #if UNITY_EDITOR
                 if (FindObjectsOfType<WeaponController>().Length > 1) {
-                    Debug.LogError("Found more than one gamecontroller");
+                    Debug.LogError("Found more than one weaponcontroller");
                 }
 #endif
             }
