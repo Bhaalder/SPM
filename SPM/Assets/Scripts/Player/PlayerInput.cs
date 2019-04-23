@@ -6,7 +6,7 @@ public class PlayerInput : MonoBehaviour
 {
     private PlayerShoot playerShoot;
     public Slowmotion slowmotion;
-    private Weapon selectedWeapon;
+    private BaseWeapon selectedWeapon;
     private float nextTimeToFireOrReload = 0f;
 
 
@@ -59,20 +59,40 @@ public class PlayerInput : MonoBehaviour
     }
 
     private void SwitchWeaponInput() {
-        Weapon firstWeapon = GameController.Instance.playerWeapons[0];
-        Weapon secondWeapon = GameController.Instance.playerWeapons[1];
-        Weapon thirdWeapon = GameController.Instance.playerWeapons[2];
-        if (Input.GetButtonDown("Weapon1")) {
-            if(selectedWeapon == firstWeapon) {}
-            else {GameController.Instance.selectedWeapon = firstWeapon;}
-        }
-        if (Input.GetButtonDown("Weapon2")) {
-            if (selectedWeapon == secondWeapon) {}
-            else {GameController.Instance.selectedWeapon = secondWeapon;}
-        }
-        if (Input.GetButtonDown("Weapon3")) {
-            if (selectedWeapon == thirdWeapon) {} 
-            else {GameController.Instance.selectedWeapon = thirdWeapon;}
+        try {
+            BaseWeapon firstWeapon = GameController.Instance.playerWeapons[0];
+            BaseWeapon secondWeapon = GameController.Instance.playerWeapons[1];
+            BaseWeapon thirdWeapon = GameController.Instance.playerWeapons[2];
+            if (Input.GetButtonDown("Weapon1")) {
+                if (selectedWeapon == firstWeapon) { } else { GameController.Instance.selectedWeapon = firstWeapon; }
+            }
+            if (Input.GetButtonDown("Weapon2")) {
+                if (selectedWeapon == secondWeapon) { } else { GameController.Instance.selectedWeapon = secondWeapon; }
+            }
+            if (Input.GetButtonDown("Weapon3")) {
+                if (selectedWeapon == thirdWeapon) { } else { GameController.Instance.selectedWeapon = thirdWeapon; }
+            }
+            
+        } catch (System.ArgumentOutOfRangeException) {
+            try {
+                BaseWeapon firstWeapon = GameController.Instance.playerWeapons[0];
+                BaseWeapon secondWeapon = GameController.Instance.playerWeapons[1];
+                if (Input.GetButtonDown("Weapon1")) {
+                    if (selectedWeapon == firstWeapon) { } else { GameController.Instance.selectedWeapon = firstWeapon; }
+                }
+                if (Input.GetButtonDown("Weapon2")) {
+                    if (selectedWeapon == secondWeapon) { } else { GameController.Instance.selectedWeapon = secondWeapon; }
+                }
+            } catch (System.ArgumentOutOfRangeException) {
+                try {
+                    BaseWeapon firstWeapon = GameController.Instance.playerWeapons[0];
+                    if (Input.GetButtonDown("Weapon1")) {
+                        if (selectedWeapon == firstWeapon) { } else { GameController.Instance.selectedWeapon = firstWeapon; }
+                    }
+                } catch (System.ArgumentOutOfRangeException) {
+
+                }
+            }            
         }
         GameController.Instance.UpdateSelectedWeaponText();
     }
