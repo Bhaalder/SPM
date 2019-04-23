@@ -91,10 +91,26 @@ public class GameController : MonoBehaviour {
         ArmorSlider.value = playerArmor;
     }
 
+    //lägger den här för tillfället.
+    public GameObject respawnPoint;
+
+
     public void TakeDamage(int damage) {
         if (playerArmor <= 0) { playerHP -= damage; Debug.Log("damage has arrived"); }
         else { playerArmor -= damage; }
 
+        //respawn
+        if(playerHP <= 1)
+        {
+            respawn();
+        }
+    }
+
+    public void respawn()
+    {
+        player.transform.position = respawnPoint.transform.position;
+        playerHP = 100;
+        playerArmor = 100;
     }
 
 }
