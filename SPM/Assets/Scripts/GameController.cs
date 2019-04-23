@@ -6,20 +6,17 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 
     public List<MonoBehaviour> subscribedScripts = new List<MonoBehaviour>();
-    public List<Weapon> playerWeapons = new List<Weapon>();
+    public List<BaseWeapon> playerWeapons = new List<BaseWeapon>();
     public int gameEventID; //detta är till för att markera vissa händelser i spelet
 
     public GameObject player;
 
-    public Weapon selectedWeapon;
+    public BaseWeapon selectedWeapon;
 
     public Slider HealthSlider, ArmorSlider;
     public Text weaponNameText, weaponAmmoText;
 
     public int playerHP, playerArmor;
-
-    //detta ifall man vill kunna byta vapen senare men fortfarande ha en begränsning av 3 vapen men ha kvar info om hur mkt ammo man har kvar
-    public int totalRifleAmmunition, totalShotgunAmmunition, totalRocketLauncherAmmunition;
 
     public bool gameIsPaused;
     public bool gameIsSlowmotion = false;
@@ -48,18 +45,11 @@ public class GameController : MonoBehaviour {
         HealthSlider.value = playerHP;
         ArmorSlider.value = playerArmor;
 
-        //detta ger spelaren alla vapen direkt
-        Weapon rifle = new Weapon("Rifle", 10, 100, 10f, 0.5f, 0.1f, 15, 50, 50, 999, null, null, null);
+        BaseWeapon rifle = WeaponController.Instance.GetRifle();
         playerWeapons.Add(rifle);
-        //TESTAR SHOTGUN
-        Weapon shotgun = new Weapon("Shotgun", 30, 10, 2f, 0.5f, 0.1f, 30, 25, 25, 100, null, null, null);
-        playerWeapons.Add(shotgun);
-        Weapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", 30, 100, 1f, 0.3f, 0.01f, 20, 10, 5, 5, 100, null, null, null, null);
-        playerWeapons.Add(rocketLauncher);
-
-        totalRifleAmmunition = rifle.GetTotalAmmoLeft();
-        totalShotgunAmmunition = shotgun.GetTotalAmmoLeft();
-        totalRocketLauncherAmmunition = rocketLauncher.GetTotalAmmoLeft();
+        //TESTAR SHOTGUN (shotgun stats finns nu i weaponcontroller)   
+        //BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
+        //playerWeapons.Add(shotgun);
 
         selectedWeapon = playerWeapons[0];
         UpdateSelectedWeaponText();
@@ -91,26 +81,10 @@ public class GameController : MonoBehaviour {
         ArmorSlider.value = playerArmor;
     }
 
-    //lägger den här för tillfället.
-    public GameObject respawnPoint;
-
-
     public void TakeDamage(int damage) {
         if (playerArmor <= 0) { playerHP -= damage; Debug.Log("damage has arrived"); }
         else { playerArmor -= damage; }
 
-        //respawn
-        if(playerHP <= 1)
-        {
-            respawn();
-        }
-    }
-
-    public void respawn()
-    {
-        player.transform.position = respawnPoint.transform.position;
-        playerHP = 100;
-        playerArmor = 100;
     }
 
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon{
+public class BaseWeapon{
     private string name;
     private float damage;
     private float range;
@@ -17,7 +17,7 @@ public class Weapon{
     private AudioClip shootSound;
     private AudioClip noAmmoSound;
 
-    public Weapon (string name, float damage, float range, float fireRate, float reloadTime, float impactForce, float spread, int ammoInClip, int maxAmmoInClip, int totalAmmoLeft,
+    public BaseWeapon (string name, float damage, float range, float fireRate, float reloadTime, float impactForce, float spread, int ammoInClip, int maxAmmoInClip, int totalAmmoLeft,
         AudioClip reloadSound, AudioClip shootSound, AudioClip noAmmoSound) {
         this.name = name;
         this.damage = damage;
@@ -53,12 +53,18 @@ public class Weapon{
         range = f;
     }
     public float GetFireRate() {
+        if(Time.timeScale < 1) {
+            return fireRate * 5;
+        }    //för slowmotion, borde finnas en bättre lösning
         return fireRate;
     }
     public void SetFireRate(float f) {
         fireRate = f;
     }
     public float GetReloadTime() {
+        if (Time.timeScale < 1) {
+            return reloadTime * 10;
+        }   //för slowmotion, borde finnas en bättre lösning
         return reloadTime;
     }
     public void SetReloadTime(float f) {
@@ -96,6 +102,9 @@ public class Weapon{
     }
     public void SetTotalAmmoLeft(int i) {
         totalAmmoLeft = i;
+    }
+    public void IncreaseTotalAmmoLeft(int i) {
+        totalAmmoLeft += i;
     }
     public AudioClip GetReloadSound() {
         return reloadSound;

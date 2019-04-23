@@ -38,8 +38,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        playerStateMachine.Update();
         RotatePlayerAndCam();
+    }
+
+    private void FixedUpdate()
+    {
+        playerStateMachine.Update();
     }
 
     public void Jump()

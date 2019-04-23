@@ -10,8 +10,6 @@ public class PlayerShoot : MonoBehaviour
 
     [SerializeField] private Transform camFocusTrans;
 
-    [SerializeField] private GameObject rocketProjectileGO;
-
     [SerializeField] private GameObject bulletImpactGO;
 
     private void Start(){
@@ -22,7 +20,7 @@ public class PlayerShoot : MonoBehaviour
         transform.LookAt(camFocusTrans);
     }
 
-    public void StartShooting(Weapon weapon) {
+    public void StartShooting(BaseWeapon weapon) {
         if (weapon is ProjectileWeapon) {
             ShootProjectile((ProjectileWeapon) weapon);
         }
@@ -32,7 +30,7 @@ public class PlayerShoot : MonoBehaviour
         else {ShootHitScan(weapon);}            
     }
 
-    private void ShootHitScan(Weapon weapon) {
+    private void ShootHitScan(BaseWeapon weapon) {
 
         if (weapon.GetAmmoInClip() != 0) {
             weapon.DecreaseAmmoInClip();
@@ -55,7 +53,7 @@ public class PlayerShoot : MonoBehaviour
     }
 
     //TEST
-    private void ShootShotgunHitScan(Weapon weapon){
+    private void ShootShotgunHitScan(BaseWeapon weapon){
         if (weapon.GetAmmoInClip() != 0){
             weapon.DecreaseAmmoInClip();
             bool[] hitTarget = new bool[5];
@@ -70,7 +68,8 @@ public class PlayerShoot : MonoBehaviour
                         hits[x].rigidbody.AddForce(-hits[x].normal * weapon.GetImpactForce());
                     }
                     if (hits[x].collider.gameObject.layer == 9){
-                        float fallOff = (hits[x].distance * hits[x].distance) / 3;
+                        float fallOff = (hits[x].distance * (hits[x].distance / 2)) / 4;
+                        Debug.Log(weapon.GetDamage() - fallOff);
                         if(fallOff > weapon.GetDamage()){
                             fallOff = weapon.GetDamage();
                         }
@@ -90,7 +89,7 @@ public class PlayerShoot : MonoBehaviour
         if (weapon.GetAmmoInClip() != 0) {
             weapon.DecreaseAmmoInClip();
 
-            GameObject rocketProj = Instantiate(rocketProjectileGO, transform.position + transform.forward * 2, Quaternion.identity);
+            GameObject rocketProj = Instantiate(weapon.GetProjectile(), transform.position + transform.forward * 2, Quaternion.identity);
             rocketProj.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             rocketProj.transform.LookAt(camFocusTrans);
             rocketProj.GetComponent<RocketProjectile>().SetProjectileSpeed(weapon.GetProjectileSpeed());
