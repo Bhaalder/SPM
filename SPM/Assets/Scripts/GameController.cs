@@ -53,6 +53,11 @@ public class GameController : MonoBehaviour {
 
         selectedWeapon = playerWeapons[0];
         UpdateSelectedWeaponText();
+
+        DontDestroyOnLoad(HealthSlider);
+        DontDestroyOnLoad(ArmorSlider);
+        DontDestroyOnLoad(weaponNameText);
+        DontDestroyOnLoad(weaponAmmoText);
     }
 
     public void UpdateSelectedWeaponText() {
