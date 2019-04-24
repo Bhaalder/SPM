@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         if (controlingCam)
         {
             xRotation += Input.GetAxis("Mouse X");
-            yRotation += Input.GetAxis("Mouse Y");
+            yRotation -= Input.GetAxis("Mouse Y");
             if (yRotation >= 30)
                 yRotation = 30;
             else if (yRotation <= -30)
