@@ -82,14 +82,16 @@ public class GameController : MonoBehaviour {
     }
 
     void Update() {
-        HealthSlider.value = playerHP;
-        ArmorSlider.value = playerArmor;
+      
     }
 
-    public void TakeDamage(int damage) {
+
+    public void TakeDamage(int damage)
+    {
         if (playerArmor <= 0) { playerHP -= damage; Debug.Log("damage has arrived"); }
         else { playerArmor -= damage; }
-
+        HealthSlider.value = playerHP;
+        ArmorSlider.value = playerArmor;
     }
 
 }
