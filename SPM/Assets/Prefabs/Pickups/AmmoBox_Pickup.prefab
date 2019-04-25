@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1298806506993965474}
   - component: {fileID: 1298806506993965475}
   - component: {fileID: 8048206193341322467}
+  - component: {fileID: 6509306509311437427}
   m_Layer: 0
   m_Name: AmmoBox_Pickup
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1298806506993965472}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 0.5, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 1428857896269279037}
@@ -107,6 +108,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clipIncrease: 0
+--- !u!114 &6509306509311437427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298806506993965472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c9604d9c5e9734c9b67a557b50e699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4534630130676586432
 GameObject:
   m_ObjectHideFlags: 0

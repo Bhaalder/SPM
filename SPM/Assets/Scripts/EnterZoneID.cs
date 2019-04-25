@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillZoneScript : MonoBehaviour
+public class EnterZoneID : MonoBehaviour
 {
-
-
-
-
-    public PlayerRespawner pr;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +16,15 @@ public class KillZoneScript : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+
+
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            pr.RespawnMethod();
+            GameController.Instance.PlayerPassedEvent();
+            Debug.Log("New Zone!");
+            Destroy(gameObject);
         }
-       
     }
 }
