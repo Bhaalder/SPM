@@ -13,7 +13,7 @@ public class PowerUp1 : MonoBehaviour
         {
             other.GetComponent<PlayerMovement>().StartSpeedBoost(10, 10);
             print(Time.time);
-            GameObject.Find("PowerUp1_Spawn").GetComponent<PowerUpSpawner>().Respawner(1);
+            GameObject.Find("Powerup_MoveSpeed_Spawn").GetComponent<PowerUpSpawner>().Respawner(1);
             //powerUpSpawner.GetComponent<PowerUpSpawner>().Respawner();
             print(Time.time);
 

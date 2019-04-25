@@ -12,7 +12,7 @@ public class PowerUp3 : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             GameObject.Find("GameController").GetComponent<GameController>().playerArmor = 100;
-            GameObject.Find("PowerUp1_Spawn3").GetComponent<PowerUpSpawner>().Respawner(1);
+            GameObject.Find("Powerup_Armor_Spawn").GetComponent<PowerUpSpawner>().Respawner(1);
 
             StartCoroutine(UsedBoost());
 
