@@ -44,6 +44,9 @@ public class GameController : MonoBehaviour {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         DontDestroyOnLoad(gameObject);
+
+
+        FindAndSetSliders();
         HealthSlider.value = playerHP;
         ArmorSlider.value = playerArmor;
 
@@ -55,11 +58,16 @@ public class GameController : MonoBehaviour {
 
         selectedWeapon = playerWeapons[0];
         UpdateSelectedWeaponText();
+        
+    }
 
-        DontDestroyOnLoad(HealthSlider);
-        DontDestroyOnLoad(ArmorSlider);
-        DontDestroyOnLoad(weaponNameText);
-        DontDestroyOnLoad(weaponAmmoText);
+    public void FindAndSetSliders() {
+        //HealthSlider = GameObject.Find("SilderHealth").GetComponent<Slider>();
+        //ArmorSlider = GameObject.Find("SilderArmor").GetComponent<Slider>();
+    }
+
+    public void FindAndSetText() {
+
     }
 
     public void UpdateSelectedWeaponText() {

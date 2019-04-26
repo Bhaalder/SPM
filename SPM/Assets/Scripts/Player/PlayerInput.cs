@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;//TA BORT SEN
 
 public class PlayerInput : MonoBehaviour
 {
@@ -21,6 +22,9 @@ public class PlayerInput : MonoBehaviour
         ShootWeaponInput();
         SwitchWeaponInput();
         SlowmotionInput();
+        if (Input.GetKeyDown(KeyCode.T)) {//TA BORT SEN
+            SceneManager.LoadScene("Level2WhiteBox");
+        }//TA BORT SEN
     }
     private void ReloadWeaponInput() {      
         int ammoInClip = selectedWeapon.GetAmmoInClip();

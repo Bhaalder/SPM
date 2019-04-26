@@ -22,6 +22,7 @@ public class EnemyController : MonoBehaviour
 
     public bool AttackTrigger;
     public bool Attacking;
+    public bool BeingAttacked;
     public bool Charging;
     public bool RecentlyCharged;
     public bool timerRunning = true;
@@ -43,6 +44,7 @@ public class EnemyController : MonoBehaviour
         Attacking = false;
         Charging = false;
         RecentlyCharged = false;
+        BeingAttacked = false;
         objSpawn = (GameObject)GameObject.FindWithTag("Spawner");
 
     }
@@ -57,6 +59,7 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(float damage){
 		health = health - (damage - DamageResistance);
+        BeingAttacked = true;
         if (health <= 0){
             OnDeathRespawn();
             //removeMe();
@@ -88,21 +91,30 @@ public class EnemyController : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, player.position) >= MinDist && Vector3.Distance(transform.position, player.position) <= MaxDist)
             {
-                transform.LookAt(player);
-
-
-                transform.position += transform.forward * MoveSpeed * Time.deltaTime;
-
+                MoveToPlayer();
             }
             if (Vector3.Distance(transform.position, player.position) <= AttackDistance && !Attacking)
             {
                 Attacking = true;
                 Attack();
             }
+            if (BeingAttacked)
+            {
+                MoveToPlayer();
+            }
+
         }
         else {
             Attack();
         }
+    }
+
+    private void MoveToPlayer()
+    {
+        transform.LookAt(player);
+
+        transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+
     }
 
     // Attacking actions
@@ -132,7 +144,7 @@ public class EnemyController : MonoBehaviour
     }
 
     void MeleeAttack() {
-        gameController.GetComponent<GameController>().TakeDamage((int)damage);
+        GameController.Instance.TakeDamage((int)damage);
         Debug.Log("damage taken");
         AttackTrigger = false;
         Attacking = false;
@@ -185,7 +197,7 @@ public class EnemyController : MonoBehaviour
     void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "Player" && RecentlyCharged) {
             Debug.Log("just collided with player");
-            gameController.GetComponent<GameController>().TakeDamage((int)damage*3);
+            GameController.Instance.TakeDamage((int)damage*3);
         }
     }
 
