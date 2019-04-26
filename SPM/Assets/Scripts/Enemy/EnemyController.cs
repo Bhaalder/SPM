@@ -192,8 +192,10 @@ public class EnemyController : MonoBehaviour
     // Sets bool on respawn point
     void OnDeathRespawn()
     {
-
-        //GetComponentInParent<SpawnManager>().EnemyDefeated();
+        if (GetComponentInParent<SpawnManager>())
+        {
+            GetComponentInParent<SpawnManager>().EnemyDefeated();
+        }
         //spawnPoint.GetComponent<EnemySpawnPoint>().spawnTrigger = true;
     }
 
