@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnterZoneID : MonoBehaviour
+public class CheckpointTrigger : MonoBehaviour
 {
+
+    public int spawnPoint = 0;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -16,15 +19,12 @@ public class EnterZoneID : MonoBehaviour
         
     }
 
-
-
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameController.Instance.PlayerPassedEvent();
-            Debug.Log("New Zone!");
-            Destroy(gameObject);
+            GameController.Instance.gameEventID = spawnPoint;
+            Debug.Log("Spawnpoint: " + spawnPoint);
         }
     }
 }

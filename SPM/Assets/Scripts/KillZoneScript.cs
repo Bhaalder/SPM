@@ -8,7 +8,7 @@ public class KillZoneScript : MonoBehaviour
 
 
 
-    public PlayerRespawner pr;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,8 @@ public class KillZoneScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            pr.RespawnMethod();
+            GameController.Instance.playerHP = 1;
+            
         }
        
     }

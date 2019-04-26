@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerRespawner : MonoBehaviour
 {
-    private int HP = 100;
-    private int AR = 100;
+    
     public GameObject Player;
     public GameObject[] respawn;
     public GameController cntrl;
@@ -13,8 +12,7 @@ public class PlayerRespawner : MonoBehaviour
 
     void Start()
     {
-        HP = cntrl.GetComponent<GameController>().playerHP;
-        AR = cntrl.GetComponent<GameController>().playerArmor;
+        
     }
 
     // Update is called once per frame
@@ -28,17 +26,17 @@ public class PlayerRespawner : MonoBehaviour
 
     public void RespawnMethod()
     {
-        if (GameController.Instance.gameEventID == 2)
+        if (GameController.Instance.gameEventID == 1)
         {
             Player.transform.position = respawn[0].transform.position;
             resetStatus();
         }
-        if (GameController.Instance.gameEventID == 4)
+        if (GameController.Instance.gameEventID == 2)
         {
             Player.transform.position = respawn[1].transform.position;
             resetStatus();
         }
-        if (GameController.Instance.gameEventID == 6)
+        if (GameController.Instance.gameEventID == 3)
         {
             Player.transform.position = respawn[2].transform.position;
             resetStatus();
@@ -46,7 +44,7 @@ public class PlayerRespawner : MonoBehaviour
     }
     public void resetStatus()
     {
-        cntrl.GetComponent<GameController>().playerHP = HP;
-        cntrl.GetComponent<GameController>().playerArmor = AR;
+        cntrl.GetComponent<GameController>().playerHP = 100;
+        cntrl.GetComponent<GameController>().playerArmor = 100;
     }
 }

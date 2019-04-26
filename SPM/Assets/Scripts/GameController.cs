@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour {
 
     public List<MonoBehaviour> subscribedScripts = new List<MonoBehaviour>();
     public List<BaseWeapon> playerWeapons = new List<BaseWeapon>();
-    public int gameEventID = 0; //detta är till för att markera vissa händelser i spelet
+    public int gameEventID = 1; //detta är till för att markera vissa händelser i spelet
 
     public GameObject player;
 
@@ -21,7 +21,9 @@ public class GameController : MonoBehaviour {
     public bool gameIsPaused;
     public bool gameIsSlowmotion = false;
 
- 
+    public PlayerRespawner pR;
+
+
     private static GameController instance;
 
     public static GameController Instance {
@@ -81,7 +83,7 @@ public class GameController : MonoBehaviour {
             Time.timeScale = 1f;
         }
     }
-    public PlayerRespawner pR;
+    
     void Update() {
        
             HealthSlider.value = playerHP;
@@ -89,6 +91,8 @@ public class GameController : MonoBehaviour {
 
         if (playerHP <= 1)
         {
+
+            
             pR.RespawnMethod();
         }
 
