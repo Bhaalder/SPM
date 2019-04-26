@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
     public float MinDist = 0.1f;
     public float AttackDistance = 5;
     public float DamageResistance = 5;
+    public float EnterMoveSeconds = 0.5f;
 
     public int enemyType;
 
@@ -23,42 +24,72 @@ public class EnemyController : MonoBehaviour
     public bool Attacking;
     public bool Charging;
     public bool RecentlyCharged;
+    public bool timerRunning = true;
+
+
 
     private Vector3 chargeposition;
+
+    private GameObject objSpawn;
+    private int SpawnerID;
+    private int i;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        spawnPoint = GameObject.Find("Enemy_Spawn_Point").transform;
         player = GameObject.Find("Player").transform;
         AttackTrigger = true;
         Attacking = false;
         Charging = false;
         RecentlyCharged = false;
+        objSpawn = (GameObject)GameObject.FindWithTag("Spawner");
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Movement();
+        JustEntered();
+
     }
 
-	public void TakeDamage(float damage){
+    public void TakeDamage(float damage){
 		health = health - (damage - DamageResistance);
         if (health <= 0){
             OnDeathRespawn();
-            Destroy(gameObject); }
+            //removeMe();
+            Destroy(gameObject);
+        }
 	}
+
+    void JustEntered()
+    {
+        if (timerRunning)
+        {
+            EnterMoveSeconds -= Time.smoothDeltaTime;
+            if (EnterMoveSeconds >= 0)
+            {
+                transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+            }
+            else
+            {
+                Debug.Log("Done");
+                timerRunning = false;
+            }
+        }
+    }
 
     
     public void Movement()
     {
         if (!Attacking)
         {
-            transform.LookAt(player);
             if (Vector3.Distance(transform.position, player.position) >= MinDist && Vector3.Distance(transform.position, player.position) <= MaxDist)
             {
+                transform.LookAt(player);
+
 
                 transform.position += transform.forward * MoveSpeed * Time.deltaTime;
 
@@ -161,8 +192,21 @@ public class EnemyController : MonoBehaviour
     // Sets bool on respawn point
     void OnDeathRespawn()
     {
+
         GetComponentInParent<SpawnManager>().EnemyDefeated();
         //spawnPoint.GetComponent<EnemySpawnPoint>().spawnTrigger = true;
+    }
+
+    // Call this when you want to kill the enemy
+    void removeMe()
+    {
+        objSpawn.BroadcastMessage("killEnemy", SpawnerID);
+        Destroy(gameObject);
+    }
+    // this gets called in the beginning when it is created by the spawner script
+    void setName(int sName)
+    {
+        SpawnerID = sName;
     }
 
     // Show the lookRadius in editor

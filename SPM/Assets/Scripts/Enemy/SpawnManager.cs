@@ -7,7 +7,7 @@ using UnityEngine;
 public class Wave
 {
     public int EnemiesPerWave;
-    public GameObject Enemy;
+    public GameObject Enemy1;
 }
 
 public class SpawnManager : MonoBehaviour
@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
     // Coroutine to spawn all of our enemies
     IEnumerator SpawnEnemies()
     {
-        GameObject enemy = Waves[_currentWave].Enemy;
+        GameObject enemy1 = Waves[_currentWave].Enemy1;
         while (_spawnedEnemies < _totalEnemiesInCurrentWave)
         {
             _spawnedEnemies++;
@@ -60,8 +60,8 @@ public class SpawnManager : MonoBehaviour
             int spawnPointIndex = Random.Range(0, SpawnPoints.Length);
 
             // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-            var newEnemy = Instantiate(enemy, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
-            newEnemy.transform.parent = gameObject.transform;
+            var newEnemy1 = Instantiate(enemy1, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
+            newEnemy1.transform.parent = gameObject.transform;
             yield return new WaitForSeconds(TimeBetweenEnemies);
         }
         yield return null;
