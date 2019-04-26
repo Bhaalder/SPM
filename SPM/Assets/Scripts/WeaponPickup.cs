@@ -29,6 +29,12 @@ public class WeaponPickup : MonoBehaviour {
                 weaponPickup = WeaponController.Instance.GetRocketLauncher();                
             }
             if (weaponPickup != null) {
+                foreach(BaseWeapon weapon in GameController.Instance.playerWeapons) {
+                    if(weaponPickup.GetName() == weapon.GetName()) {
+                        Destroy(gameObject);
+                        return;
+                    }
+                }
                 GameController.Instance.playerWeapons.Add(weaponPickup);
             }
             Destroy(gameObject);

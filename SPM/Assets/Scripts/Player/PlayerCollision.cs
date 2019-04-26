@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    private LayerMask layerMasks;
+    public LayerMask layerMasks;
     private Vector3 additionalMovement;
     public Vector3 GetAdditionalMovement() { return additionalMovement; }
 
@@ -15,7 +15,7 @@ public class PlayerCollision : MonoBehaviour
     public bool GetGroundCollision()
     {
         groundRay = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down);
-        if (Physics.Raycast(groundRay, out groundInfo, 1.1f))
+        if (Physics.Raycast(groundRay, out groundInfo, 1.1f, layerMasks))
             return true;
         else
             return false;
@@ -25,7 +25,7 @@ public class PlayerCollision : MonoBehaviour
     public bool GetHeadCollision()
     {
         groundRay = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down);
-        if (Physics.Raycast(groundRay, out groundInfo, 1.1f))
+        if (Physics.Raycast(groundRay, out groundInfo, 1.1f, layerMasks))
             return false;
         else
             return true;
@@ -39,7 +39,7 @@ public class PlayerCollision : MonoBehaviour
             return transform.forward;
 
         groundRay = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down);
-        Physics.Raycast(groundRay, out groundInfo, 1.1f);
+        Physics.Raycast(groundRay, out groundInfo, 1.1f, layerMasks);
 
         return Vector3.Cross(groundInfo.normal, -transform.right);
     }
@@ -51,7 +51,7 @@ public class PlayerCollision : MonoBehaviour
             return transform.right;
 
         groundRay = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down);
-        Physics.Raycast(groundRay, out groundInfo, 1.1f);
+        Physics.Raycast(groundRay, out groundInfo, 1.1f, layerMasks);
 
         return Vector3.Cross(groundInfo.normal, transform.forward);
     }

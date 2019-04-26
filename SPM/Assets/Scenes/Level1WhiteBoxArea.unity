@@ -34285,6 +34285,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RespawnPoints
       objectReference: {fileID: 0}
+    - target: {fileID: 2682031802577546319, guid: 348cd09e4564d6642943056145274ac7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2682031802577546316, guid: 348cd09e4564d6642943056145274ac7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -34339,6 +34344,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682031801596881739, guid: 348cd09e4564d6642943056145274ac7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682031802555090387, guid: 348cd09e4564d6642943056145274ac7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682031801113916346, guid: 348cd09e4564d6642943056145274ac7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682031801948724147, guid: 348cd09e4564d6642943056145274ac7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682031802793160197, guid: 348cd09e4564d6642943056145274ac7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2682031802984833919, guid: 348cd09e4564d6642943056145274ac7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 348cd09e4564d6642943056145274ac7, type: 3}
@@ -34671,6 +34706,11 @@ PrefabInstance:
       propertyPath: camFocusTrans
       value: 
       objectReference: {fileID: 1528689787}
+    - target: {fileID: 8279343510140872615, guid: b8a168c850e19644b90513ee279db5d2,
+        type: 3}
+      propertyPath: layerMasks.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8a168c850e19644b90513ee279db5d2, type: 3}
 --- !u!1001 &9135304762955487285
