@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1034,7 +1034,7 @@ GameObject:
   - component: {fileID: 41887257}
   - component: {fileID: 41887259}
   - component: {fileID: 41887258}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ArenaDoorTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34139,6 +34139,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DeathZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558909923637547576, guid: 0cf6d69954f3121468fd5b28d55ddbc5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1558909923637547524, guid: 0cf6d69954f3121468fd5b28d55ddbc5,
         type: 3}
