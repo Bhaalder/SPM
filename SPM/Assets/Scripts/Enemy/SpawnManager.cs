@@ -22,6 +22,8 @@ public class SpawnManager : MonoBehaviour
 
     private int _currentWave;
     private int _totalWaves;
+    private int spawnPointIndex = 0;
+
 
     void Start()
     {
@@ -56,13 +58,16 @@ public class SpawnManager : MonoBehaviour
         {
             _spawnedEnemies++;
             _enemiesInWaveLeft++;
+            spawnPointIndex++;
 
-            int spawnPointIndex = Random.Range(0, SpawnPoints.Length);
+            //Random.Range(0, SpawnPoints.Length);
 
             // Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
             var newEnemy1 = Instantiate(enemy1, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
             newEnemy1.transform.parent = gameObject.transform;
+            if (spawnPointIndex == SpawnPoints.Length - 1) { spawnPointIndex = 0; }    
             yield return new WaitForSeconds(TimeBetweenEnemies);
+            
         }
         yield return null;
     }

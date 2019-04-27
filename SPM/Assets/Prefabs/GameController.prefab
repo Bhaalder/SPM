@@ -46,19 +46,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subscribedScripts: []
   gameEventID: 0
-  player: {fileID: 8279343510140872614, guid: b8a168c850e19644b90513ee279db5d2, type: 3}
-  HealthSlider: {fileID: 318113743869654137, guid: bfbfda9e93581eb468cb06ea044cff23,
-    type: 3}
-  ArmorSlider: {fileID: 8308551033358625794, guid: 625b8b08046b80648a9172cc4648d408,
-    type: 3}
-  weaponNameText: {fileID: 3275281485500089788, guid: e257edcb4e567f745a6dcbdc7e01bbf1,
-    type: 3}
-  weaponAmmoText: {fileID: 5772566862144742516, guid: 98caf9531ab85be44a30768bca1e694a,
-    type: 3}
+  player: {fileID: 0}
+  HealthSlider: {fileID: 0}
+  ArmorSlider: {fileID: 0}
+  SlowmotionSlider: {fileID: 0}
+  ReloadSlider: {fileID: 0}
+  weaponNameText: {fileID: 0}
+  weaponAmmoText: {fileID: 0}
   playerHP: 100
   playerArmor: 100
+  slowMotionTime: 0
+  reloadTime: 0
   gameIsPaused: 0
   gameIsSlowmotion: 0
+  pR: {fileID: 0}
 --- !u!114 &4320215421209216543
 MonoBehaviour:
   m_ObjectHideFlags: 0

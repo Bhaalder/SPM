@@ -13,10 +13,11 @@ public class GameController : MonoBehaviour {
 
     public BaseWeapon selectedWeapon;
 
-    public Slider HealthSlider, ArmorSlider;
+    public Slider HealthSlider, ArmorSlider, SlowmotionSlider, ReloadSlider;
     public Text weaponNameText, weaponAmmoText;
 
     public int playerHP, playerArmor;
+    public float slowMotionTime, reloadTime;
 
     public bool gameIsPaused;
     public bool gameIsSlowmotion = false;
@@ -45,10 +46,10 @@ public class GameController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         DontDestroyOnLoad(gameObject);
 
-
-        FindAndSetSliders();
         HealthSlider.value = playerHP;
         ArmorSlider.value = playerArmor;
+        SlowmotionSlider.value = SlowmotionSlider.maxValue;
+        ReloadSlider.value = reloadTime;
 
         BaseWeapon rifle = WeaponController.Instance.GetRifle();
         playerWeapons.Add(rifle);
@@ -61,15 +62,6 @@ public class GameController : MonoBehaviour {
         
     }
 
-    public void FindAndSetSliders() {
-        //HealthSlider = GameObject.Find("SilderHealth").GetComponent<Slider>();
-        //ArmorSlider = GameObject.Find("SilderArmor").GetComponent<Slider>();
-    }
-
-    public void FindAndSetText() {
-
-    }
-
     public void UpdateSelectedWeaponText() {
         weaponNameText.text = selectedWeapon.GetName();
         UpdateSelectedWeaponAmmoText();
@@ -77,6 +69,10 @@ public class GameController : MonoBehaviour {
 
     public void UpdateSelectedWeaponAmmoText() {
         weaponAmmoText.text = "Ammo: " + selectedWeapon.GetAmmoInClip() + "/" + selectedWeapon.GetMaxAmmoInClip() + " (" + selectedWeapon.GetTotalAmmoLeft() + ")";
+    }
+
+    public void ReloadWeaponSlider() {
+
     }
 
     public void PlayerPassedEvent() {
