@@ -7,7 +7,7 @@ public class PlayerRespawner : MonoBehaviour
     
     public GameObject Player;
     public GameObject[] respawn;
-    public GameController cntrl;
+    //public GameController cntrl;
 
 
     void Start()
@@ -44,7 +44,7 @@ public class PlayerRespawner : MonoBehaviour
     }
     public void resetStatus()
     {
-        cntrl.GetComponent<GameController>().playerHP = 100;
-        cntrl.GetComponent<GameController>().playerArmor = 100;
+        GameController.Instance.playerHP = 100;
+        GameController.Instance.playerArmor = 100;
     }
 }
