@@ -55,6 +55,8 @@ public class GameController : MonoBehaviour {
         //TESTAR SHOTGUN (shotgun stats finns nu i weaponcontroller)   
         //BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
         //playerWeapons.Add(shotgun);
+        //BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
+        //playerWeapons.Add(rocketLaucher);
 
         selectedWeapon = playerWeapons[0];
         UpdateSelectedWeaponText();

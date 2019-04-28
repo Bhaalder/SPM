@@ -9,7 +9,6 @@ public class PowerUpSpawner : MonoBehaviour
     void Start()
     {
         Instantiate(powerUp[1], transform.position, Quaternion.identity);
-
     }
 
     // Update is called once per frame
@@ -28,5 +27,11 @@ public class PowerUpSpawner : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         Instantiate(powerUp[powerUpNumber], transform.position, Quaternion.identity);        
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 1f);
     }
 }
