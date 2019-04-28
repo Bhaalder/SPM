@@ -6,6 +6,8 @@ public class AmmoBox : MonoBehaviour
 {
 
     public int clipIncrease;
+    public float TimeToDestroy = 0.2f;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -16,7 +18,20 @@ public class AmmoBox : MonoBehaviour
                 weapon.IncreaseTotalAmmoLeft(weapon.GetMaxAmmoInClip() * clipIncrease);
             }
             GameController.Instance.UpdateSelectedWeaponAmmoText();
-            Destroy(gameObject);
+            GetComponentInParent<PowerUpSpawner>().Respawner();
+            StartCoroutine(UsedBoost());
         }
+    }
+
+
+    IEnumerator UsedBoost()
+    {
+        yield return new WaitForSeconds(TimeToDestroy);
+        Destroy(gameObject);
+    }
+
+    public void setClipIncrease(int clipIncreaseAmount)
+    {
+        clipIncrease = clipIncreaseAmount;
     }
 }

@@ -5,26 +5,23 @@ using UnityEngine;
 public class PowerUp3 : MonoBehaviour
 {
     public Transform powerUpSpawner;
+    public float TimeToDestroy = 0.2f;
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            GameObject.Find("GameController").GetComponent<GameController>().playerArmor = 100;
-            GameObject.Find("Powerup_Armor_Spawn").GetComponent<PowerUpSpawner>().Respawner(1);
-
+            GameController.Instance.GetComponent<GameController>().playerArmor = 100;
+            GetComponentInParent<PowerUpSpawner>().Respawner();
             StartCoroutine(UsedBoost());
-
         }
     }
 
 
     IEnumerator UsedBoost()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(TimeToDestroy);
         Destroy(gameObject);
-        //gameObject.SetActive(false);
-
     }
 }

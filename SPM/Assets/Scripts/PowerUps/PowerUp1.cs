@@ -5,6 +5,7 @@ using UnityEngine;
 public class PowerUp1 : MonoBehaviour
 {
     public Transform powerUpSpawner;
+    public float TimeToDestroy = 0.2f;
 
 
     private void OnTriggerEnter(Collider other)
@@ -12,22 +13,15 @@ public class PowerUp1 : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             other.GetComponent<PlayerMovement>().StartSpeedBoost(10, 10);
-            print(Time.time);
-            GameObject.Find("Powerup_MoveSpeed_Spawn").GetComponent<PowerUpSpawner>().Respawner(1);
-            //powerUpSpawner.GetComponent<PowerUpSpawner>().Respawner();
-            print(Time.time);
-
-            StartCoroutine(UsedBoost());
-            
+            GetComponentInParent<PowerUpSpawner>().Respawner();
+            StartCoroutine(UsedBoost());   
         }
     }
 
 
     IEnumerator UsedBoost()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(TimeToDestroy);
         Destroy(gameObject);
-        //gameObject.SetActive(false);
-        
     }
 }
