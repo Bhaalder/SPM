@@ -41,6 +41,16 @@ public class PlayerRespawner : MonoBehaviour
             Player.transform.position = respawn[2].transform.position;
             resetStatus();
         }
+        if (GameController.Instance.gameEventID == 4)
+        {
+            Player.transform.position = respawn[3].transform.position;
+            resetStatus();
+        }
+        if (GameController.Instance.gameEventID == 5)
+        {
+            Player.transform.position = respawn[4].transform.position;
+            resetStatus();
+        }
     }
     public void resetStatus()
     {
