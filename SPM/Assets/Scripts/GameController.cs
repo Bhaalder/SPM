@@ -22,9 +22,6 @@ public class GameController : MonoBehaviour {
     public bool gameIsPaused, playerIsInteracting;
     public bool gameIsSlowmotion = false;
 
-    public PlayerRespawner playerRespawner;
-
-
     private static GameController instance;
 
     public static GameController Instance {
@@ -91,9 +88,6 @@ public class GameController : MonoBehaviour {
     void Update() {
         HealthSlider.value = playerHP;
         ArmorSlider.value = playerArmor;
-        if (playerHP < 1){   
-            playerRespawner.RespawnMethod();
-        }
     }
 
 
