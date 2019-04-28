@@ -46,17 +46,19 @@ public class SpawnManager : MonoBehaviour
     {
         _currentWave++;
 
-        // win
-        if (_currentWave > _totalWaves)
-        {
-            Debug.Log("Du har vunnit!!");
-            isRoomCleared = true;
-           return;
-        }
+       
 
         _totalEnemiesInCurrentWave = Waves[_currentWave].EnemiesPerWave;
         _enemiesInWaveLeft = 0;
         _spawnedEnemies = 0;
+        // win
+        if (_currentWave == _totalWaves && _enemiesInWaveLeft == 0 && _enemiesInWaveLeft == 0 && _spawnedEnemies == _totalEnemiesInCurrentWave)
+        {
+            StopCoroutine(SpawnEnemies());
+            Debug.Log("Du har vunnit!!");
+            isRoomCleared = true;
+            return;
+        }
 
         StartCoroutine(SpawnEnemies());
     }
