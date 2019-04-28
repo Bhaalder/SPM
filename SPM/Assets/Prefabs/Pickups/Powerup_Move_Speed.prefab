@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4449727474662209532}
   - component: {fileID: 4449727474662209533}
   - component: {fileID: 4449727474662209529}
+  - component: {fileID: 1885561873563112448}
   m_Layer: 2
   m_Name: Powerup_Move_Speed
   m_TagString: Untagged
@@ -107,6 +108,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpSpawner: {fileID: 1900989423225245315, guid: fe23f9e425df208409da9ff705b68854,
     type: 3}
+--- !u!114 &1885561873563112448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4449727474662209534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c9604d9c5e9734c9b67a557b50e699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6594538252608582433
 GameObject:
   m_ObjectHideFlags: 0
