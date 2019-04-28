@@ -5,10 +5,13 @@ using UnityEngine;
 public class ArenaButton : MonoBehaviour
 {
     public bool ButtonPressed;
+    public GameObject spawner;
+    public SpawnManager spawnerScript;
     // Start is called before the first frame update
     void Start()
     {
         ButtonPressed = false;
+        spawner.SetActive(false);
     }
 
     // Update is called once per frame
@@ -23,6 +26,8 @@ public class ArenaButton : MonoBehaviour
         {
             ButtonPressed = true;
             Debug.Log("Knappen tryckt");
+            spawner.SetActive(true);
+            spawnerScript.GetComponent<SpawnManager>().InitializeSpawner();
         }
     }
 }

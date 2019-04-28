@@ -23,13 +23,22 @@ public class SpawnManager : MonoBehaviour
     private int _currentWave;
     private int _totalWaves;
     private int spawnPointIndex = 0;
-
+    public bool isRoomCleared;
 
     void Start()
     {
+        /*_currentWave = -1; // avoid off by 1
+        _totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
+        isRoomCleared = false;
+        StartNextWave();*/
+    }
+
+
+    public void InitializeSpawner()
+    {
         _currentWave = -1; // avoid off by 1
         _totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
-
+        isRoomCleared = false;
         StartNextWave();
     }
 
@@ -81,6 +90,10 @@ public class SpawnManager : MonoBehaviour
         if (_enemiesInWaveLeft == 0 && _spawnedEnemies == _totalEnemiesInCurrentWave)
         {
             StartNextWave();
+        }
+        else
+        {
+            isRoomCleared = true;
         }
     }
 }

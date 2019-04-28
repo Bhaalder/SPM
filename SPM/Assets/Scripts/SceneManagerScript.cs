@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class SceneManagerScript : MonoBehaviour
 {
     public ArenaButton aB;
-   
-    
+    public GameObject EnemySpawner;
+    private SpawnManager spawnScript;
     // Start is called before the first frame update
     void Start()
     {
-        
-    
+
+        SpawnManager spawnScript = GetComponent<SpawnManager>();
 
     }
 
@@ -23,9 +23,9 @@ public class SceneManagerScript : MonoBehaviour
     }
 
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && aB.ButtonPressed && Input.GetKeyDown(KeyCode.E))
+        if (other.gameObject.CompareTag("Player") && aB.ButtonPressed && Input.GetKeyDown(KeyCode.E) && spawnScript.isRoomCleared == true)
         {
             SceneManager.LoadScene("Level2WhiteBox");
         }

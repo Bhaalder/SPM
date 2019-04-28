@@ -30,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4430046657957968993}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 9.01}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: 2.03, z: 9.01}
+  m_LocalScale: {x: 1.37, y: 3.1699061, z: 1.37}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3177c1d206cf251469b2eb458d31818b, type: 2}
+  - {fileID: 2100000, guid: ee130cb8acae9714396a0e4b2a27be90, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -136,9 +136,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d31cda5a8cbb847b94af0410060cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 15
-  damage: 10
-  MoveSpeed: 8
+  health: 100
+  damage: 30
+  MoveSpeed: 5
   MaxDist: 25
   MinDist: 1
   AttackDistance: 2
@@ -152,6 +152,7 @@ MonoBehaviour:
   player: {fileID: 8279343510140872286, guid: b8a168c850e19644b90513ee279db5d2, type: 3}
   AttackTrigger: 0
   Attacking: 0
+  BeingAttacked: 0
   Charging: 0
   RecentlyCharged: 0
   timerRunning: 1
