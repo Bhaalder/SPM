@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     public float AttackDistance = 5;
     public float DamageResistance = 5;
     public float EnterMoveSeconds = 0.5f;
+    public float TimeBeforeCharge = 2f;
+    public float EnemyStunnedTime = 3f;
 
     public int enemyType;
 
@@ -26,10 +28,12 @@ public class EnemyController : MonoBehaviour
     public bool Charging;
     public bool RecentlyCharged;
     public bool timerRunning = true;
+    public bool isStunned;
 
 
 
     private Vector3 chargeposition;
+    private Vector3 noChargePosition;
 
     private GameObject objSpawn;
     private int SpawnerID;
@@ -45,7 +49,10 @@ public class EnemyController : MonoBehaviour
         Charging = false;
         RecentlyCharged = false;
         BeingAttacked = false;
+        isStunned = false;
         objSpawn = (GameObject)GameObject.FindWithTag("Spawner");
+        noChargePosition = new Vector3(0, 0, 0);
+        chargeposition = noChargePosition;
 
     }
 
@@ -87,25 +94,30 @@ public class EnemyController : MonoBehaviour
     
     public void Movement()
     {
-        if (!Attacking)
+
+        if (!isStunned)
         {
-            if (Vector3.Distance(transform.position, player.position) >= MinDist && Vector3.Distance(transform.position, player.position) <= MaxDist)
+            if (!Attacking)
             {
-                MoveToPlayer();
+                if (Vector3.Distance(transform.position, player.position) >= MinDist && Vector3.Distance(transform.position, player.position) <= MaxDist)
+                {
+                    MoveToPlayer();
+                }
+                if (Vector3.Distance(transform.position, player.position) <= AttackDistance && !Attacking)
+                {
+                    Attacking = true;
+                    Attack();
+                }
+                if (BeingAttacked)
+                {
+                    MoveToPlayer();
+                }
+
             }
-            if (Vector3.Distance(transform.position, player.position) <= AttackDistance && !Attacking)
+            else
             {
-                Attacking = true;
                 Attack();
             }
-            if (BeingAttacked)
-            {
-                MoveToPlayer();
-            }
-
-        }
-        else {
-            Attack();
         }
     }
 
@@ -158,6 +170,7 @@ public class EnemyController : MonoBehaviour
                 Debug.Log(chargeposition);
                 float step = (MoveSpeed*5) * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, chargeposition, step);
+                if (transform.position == chargeposition) { StunEnemy(); chargeposition.Set(0,0,0); }
             }
             else
             {
@@ -166,9 +179,12 @@ public class EnemyController : MonoBehaviour
             }
         }
         else {
-            chargeposition = player.position;
-            RecentlyCharged = true;
-            StartCoroutine(ChargingTimer(2f));
+            if (chargeposition == noChargePosition)
+            {
+                chargeposition = player.position;
+                RecentlyCharged = true;
+                StartCoroutine(ChargingTimer(TimeBeforeCharge));
+            }
 
         }
 
@@ -192,6 +208,20 @@ public class EnemyController : MonoBehaviour
         Charging = true;
         yield return new WaitForSeconds(waitTime);
         Charging = false;
+    }
+
+    IEnumerator StunTime(float EnemyStunnedTime)
+    {
+        isStunned = true;
+        yield return new WaitForSeconds(EnemyStunnedTime);
+        isStunned = false;
+    }
+
+    public void StunEnemy()
+    {
+        StartCoroutine(StunTime(EnemyStunnedTime));
+        Attacking = false;
+        RecentlyCharged = false;
     }
 
     void OnCollisionEnter(Collision collision) {

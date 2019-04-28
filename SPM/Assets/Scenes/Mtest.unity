@@ -2855,6 +2855,11 @@ PrefabInstance:
       propertyPath: EnterMoveSeconds
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4254946551304860469, guid: 5ebe6e51820a5d044befeb13ea05c4c0,
+        type: 3}
+      propertyPath: AttackDistance
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4254946551304860460, guid: 5ebe6e51820a5d044befeb13ea05c4c0,
         type: 3}
       propertyPath: Player
@@ -4342,6 +4347,11 @@ PrefabInstance:
         type: 3}
       propertyPath: EnterMoveSeconds
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4254946551304860469, guid: 5ebe6e51820a5d044befeb13ea05c4c0,
+        type: 3}
+      propertyPath: AttackDistance
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4254946551304860460, guid: 5ebe6e51820a5d044befeb13ea05c4c0,
         type: 3}
@@ -6952,6 +6962,35 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9220699852368298251, guid: 6d4466095c4675343b2d8814822c5af9,
+        type: 3}
+      propertyPath: Waves.Array.data[0].Enemy1
+      value: 
+      objectReference: {fileID: 4254946551304860461, guid: 5ebe6e51820a5d044befeb13ea05c4c0,
+        type: 3}
+    - target: {fileID: 9220699852368298251, guid: 6d4466095c4675343b2d8814822c5af9,
+        type: 3}
+      propertyPath: Waves.Array.data[0].Enemy2
+      value: 
+      objectReference: {fileID: 4430046657957968993, guid: 50f846ecbab46a2468727b55bbc0e0fb,
+        type: 3}
+    - target: {fileID: 9220699852368298251, guid: 6d4466095c4675343b2d8814822c5af9,
+        type: 3}
+      propertyPath: Waves.Array.data[1].Enemy1
+      value: 
+      objectReference: {fileID: 8168278882437978176, guid: 7d25e387d684e2e44b94e8cae21f2ad0,
+        type: 3}
+    - target: {fileID: 9220699852368298251, guid: 6d4466095c4675343b2d8814822c5af9,
+        type: 3}
+      propertyPath: Waves.Array.data[2].Enemy1
+      value: 
+      objectReference: {fileID: 4430046657957968993, guid: 50f846ecbab46a2468727b55bbc0e0fb,
+        type: 3}
+    - target: {fileID: 9220699852368298251, guid: 6d4466095c4675343b2d8814822c5af9,
+        type: 3}
+      propertyPath: TimeBetweenEnemies
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9220699852368298250, guid: 6d4466095c4675343b2d8814822c5af9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7007,41 +7046,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9220699852368298251, guid: 6d4466095c4675343b2d8814822c5af9,
-        type: 3}
-      propertyPath: Waves.Array.data[0].Enemy1
-      value: 
-      objectReference: {fileID: 4254946551304860461, guid: 5ebe6e51820a5d044befeb13ea05c4c0,
-        type: 3}
-    - target: {fileID: 9220699852368298251, guid: 6d4466095c4675343b2d8814822c5af9,
-        type: 3}
-      propertyPath: Waves.Array.data[0].Enemy2
-      value: 
-      objectReference: {fileID: 4430046657957968993, guid: 50f846ecbab46a2468727b55bbc0e0fb,
-        type: 3}
-    - target: {fileID: 9220699852368298251, guid: 6d4466095c4675343b2d8814822c5af9,
-        type: 3}
-      propertyPath: Waves.Array.data[1].Enemy1
-      value: 
-      objectReference: {fileID: 8168278882437978176, guid: 7d25e387d684e2e44b94e8cae21f2ad0,
-        type: 3}
-    - target: {fileID: 9220699852368298251, guid: 6d4466095c4675343b2d8814822c5af9,
-        type: 3}
-      propertyPath: Waves.Array.data[2].Enemy1
-      value: 
-      objectReference: {fileID: 4430046657957968993, guid: 50f846ecbab46a2468727b55bbc0e0fb,
-        type: 3}
-    - target: {fileID: 9220699852368298251, guid: 6d4466095c4675343b2d8814822c5af9,
-        type: 3}
-      propertyPath: TimeBetweenEnemies
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9220699854065314741, guid: 6d4466095c4675343b2d8814822c5af9,
+    - target: {fileID: 9220699853129373219, guid: 6d4466095c4675343b2d8814822c5af9,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9220699853129373219, guid: 6d4466095c4675343b2d8814822c5af9,
+    - target: {fileID: 9220699852941402976, guid: 6d4466095c4675343b2d8814822c5af9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9220699853442327819, guid: 6d4466095c4675343b2d8814822c5af9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9220699854065314741, guid: 6d4466095c4675343b2d8814822c5af9,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
@@ -7067,16 +7087,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9220699853997433356, guid: 6d4466095c4675343b2d8814822c5af9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9220699852941402976, guid: 6d4466095c4675343b2d8814822c5af9,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9220699853442327819, guid: 6d4466095c4675343b2d8814822c5af9,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
@@ -8377,6 +8387,11 @@ PrefabInstance:
       propertyPath: EnterMoveSeconds
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4254946551304860469, guid: 5ebe6e51820a5d044befeb13ea05c4c0,
+        type: 3}
+      propertyPath: AttackDistance
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4254946551304860460, guid: 5ebe6e51820a5d044befeb13ea05c4c0,
         type: 3}
       propertyPath: Player
@@ -8535,6 +8550,11 @@ PrefabInstance:
       propertyPath: camFocus
       value: 
       objectReference: {fileID: 1528689786}
+    - target: {fileID: 8279343509644291158, guid: b8a168c850e19644b90513ee279db5d2,
+        type: 3}
+      propertyPath: camFocusTrans
+      value: 
+      objectReference: {fileID: 1528689787}
     - target: {fileID: 8279343510140872615, guid: b8a168c850e19644b90513ee279db5d2,
         type: 3}
       propertyPath: frontColl
@@ -8555,11 +8575,6 @@ PrefabInstance:
       propertyPath: rightColl
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 8279343509644291158, guid: b8a168c850e19644b90513ee279db5d2,
-        type: 3}
-      propertyPath: camFocusTrans
-      value: 
-      objectReference: {fileID: 1528689787}
     - target: {fileID: 1215846142, guid: b8a168c850e19644b90513ee279db5d2, type: 3}
       propertyPath: m_Enabled
       value: 1
