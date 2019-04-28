@@ -26,7 +26,7 @@ public class SceneManagerScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && buttonIsPressed && Input.GetKeyDown(KeyCode.E) && spawnScript.isRoomCleared)
+        if (other.gameObject.CompareTag("Player") && buttonIsPressed && GameController.Instance.playerIsInteracting && spawnScript.isRoomCleared)
         {
             SceneManager.LoadScene("Level2WhiteBox");
         }
@@ -34,7 +34,7 @@ public class SceneManagerScript : MonoBehaviour
         {
             Debug.Log("Du måste låsa upp dörren!!");
         }
-        if (!Input.GetKeyDown(KeyCode.E))
+        if (!GameController.Instance.playerIsInteracting)
         {
             Debug.Log("Klicka E!");
         }

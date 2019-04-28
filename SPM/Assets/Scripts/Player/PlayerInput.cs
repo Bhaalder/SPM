@@ -5,17 +5,20 @@ using UnityEngine.SceneManagement;//TA BORT SEN
 
 public class PlayerInput : MonoBehaviour
 {
-    private PlayerShoot playerShoot;
+    public float dashForce;
+    public float nextTimeToDash;
     public Slowmotion slowmotion;
 
+    private PlayerShoot playerShoot;
     private BaseWeapon selectedWeapon;
+    private Rigidbody rigidBody;
     private float nextTimeToFireOrReload = 0f;
     private float nextTimeToReload = 0f;
-    private float nextTimeToDash = 0f;
     private bool isReloading = false;
 
     private void Start(){
         playerShoot = GetComponentInChildren<PlayerShoot>();
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     private void Update(){
@@ -25,6 +28,7 @@ public class PlayerInput : MonoBehaviour
         ShootWeaponInput();
         SwitchWeaponInput();
         SlowmotionInput();
+        InteractInput();
         DashInput();
 
 
@@ -38,30 +42,33 @@ public class PlayerInput : MonoBehaviour
 
     private void ReloadWeaponInput() {      
         if (Input.GetButtonDown("Reload") && Time.time >= nextTimeToReload) {
-            int ammoInClip = selectedWeapon.GetAmmoInClip();
-            int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
-            int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
+            ReloadWeapon();
+        }
+    }
 
-            if (ammoInClip != maxAmmoInClip && totalAmmoLeft > 0) {
-                nextTimeToFireOrReload = Time.time + 1f / selectedWeapon.GetReloadTime();
-                nextTimeToReload = Time.time + 1f / selectedWeapon.GetReloadTime();
-                int ammoSpent = maxAmmoInClip - ammoInClip;
-                if (ammoSpent > totalAmmoLeft) {
+    private void ReloadWeapon() {
+        int ammoInClip = selectedWeapon.GetAmmoInClip();
+        int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
+        int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
 
-                    selectedWeapon.SetAmmoInClip(ammoInClip + totalAmmoLeft);
-                    selectedWeapon.SetTotalAmmoLeft(0);
-                    Debug.Log("Reloading " + selectedWeapon.GetName());
-                    GameController.Instance.ReloadSlider.gameObject.SetActive(true);
-                    isReloading = true;
-                    return;
-                }
-                selectedWeapon.SetAmmoInClip(maxAmmoInClip);
-                selectedWeapon.SetTotalAmmoLeft(totalAmmoLeft - ammoSpent);
+        if (ammoInClip != maxAmmoInClip && totalAmmoLeft > 0) {
+            nextTimeToFireOrReload = Time.time + 1f / selectedWeapon.GetReloadTime();
+            nextTimeToReload = Time.time + 1f / selectedWeapon.GetReloadTime();
+            int ammoSpent = maxAmmoInClip - ammoInClip;
+            if (ammoSpent > totalAmmoLeft) {
+
+                selectedWeapon.SetAmmoInClip(ammoInClip + totalAmmoLeft);
+                selectedWeapon.SetTotalAmmoLeft(0);
                 Debug.Log("Reloading " + selectedWeapon.GetName());
                 GameController.Instance.ReloadSlider.gameObject.SetActive(true);
                 isReloading = true;
+                return;
             }
-            
+            selectedWeapon.SetAmmoInClip(maxAmmoInClip);
+            selectedWeapon.SetTotalAmmoLeft(totalAmmoLeft - ammoSpent);
+            Debug.Log("Reloading " + selectedWeapon.GetName());
+            GameController.Instance.ReloadSlider.gameObject.SetActive(true);
+            isReloading = true;
         }
     }
 
@@ -79,6 +86,9 @@ public class PlayerInput : MonoBehaviour
     }
 
     private void ShootWeaponInput() {
+        if (Input.GetButton("Fire1") && GameController.Instance.selectedWeapon.GetAmmoInClip() == 0) {
+            ReloadWeapon();
+        }
         if (Input.GetButton("Fire1") && Time.time >= nextTimeToFireOrReload) {
             nextTimeToFireOrReload = Time.time + 1f/selectedWeapon.GetFireRate();
             playerShoot.StartShooting(selectedWeapon);
@@ -132,10 +142,19 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
+    private void InteractInput() {
+        if (Input.GetButtonDown("Interact")) {
+            GameController.Instance.playerIsInteracting = true;
+            Debug.Log("Player tried to interact");
+        } else {GameController.Instance.playerIsInteracting = false;}
+    }
+
     private void DashInput() {
         if (Input.GetButtonDown("Dash")) {
-           
-            playerShoot.Melee();
+
+            //StartCoroutine(Dash());
+
+            //playerShoot.Melee();
             Debug.Log("Dash");
         }
 
@@ -143,5 +162,11 @@ public class PlayerInput : MonoBehaviour
 
 
     }
+    //IEnumerator Dash() {
+    //    rigidBody.AddForce(transform.forward * dashForce, ForceMode.VelocityChange);
+    //    yield return new WaitForSeconds(nextTimeToDash);
+    //    rigidBody.velocity = Vector3.zero;
+    //}
+
 
 }

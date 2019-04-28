@@ -9,7 +9,7 @@ public class ArenaButton : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.E))
+        if (other.gameObject.CompareTag("Player") && GameController.Instance.playerIsInteracting)
         {
             sceneManagerScript.buttonIsPressed = true;
             Debug.Log("Knappen tryckt");

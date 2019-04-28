@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour {
     public int playerHP, playerArmor;
     public float slowMotionTime, reloadTime;
 
-    public bool gameIsPaused;
+    public bool gameIsPaused, playerIsInteracting;
     public bool gameIsSlowmotion = false;
 
     public PlayerRespawner playerRespawner;
@@ -89,19 +89,15 @@ public class GameController : MonoBehaviour {
     }
     
     void Update() {
-       
-            HealthSlider.value = playerHP;
-            ArmorSlider.value = playerArmor;
-
+        HealthSlider.value = playerHP;
+        ArmorSlider.value = playerArmor;
         if (playerHP < 1){   
             playerRespawner.RespawnMethod();
         }
-
     }
 
 
-    public void TakeDamage(int damage)
-    {
+    public void TakeDamage(int damage){
         if (playerArmor <= 0) { playerHP -= damage; Debug.Log("damage has arrived"); }
         else { playerArmor -= damage; }
         HealthSlider.value = playerHP;
