@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour {
     public List<MonoBehaviour> subscribedScripts = new List<MonoBehaviour>();
     public List<BaseWeapon> playerWeapons = new List<BaseWeapon>();
     public int gameEventID = 1; //detta är till för att markera vissa händelser i spelet
+    public bool sceneCompleted;
+    public Text winText;
 
     public GameObject player;
 
@@ -68,8 +70,13 @@ public class GameController : MonoBehaviour {
         weaponAmmoText.text = "Ammo: " + selectedWeapon.GetAmmoInClip() + "/" + selectedWeapon.GetMaxAmmoInClip() + " (" + selectedWeapon.GetTotalAmmoLeft() + ")";
     }
 
-    public void ReloadWeaponSlider() {
-
+    public void SceneCompletedSequence() {
+        winText.gameObject.SetActive(true);
+        sceneCompleted = true;
+    }
+    public void SceneNotCompletedSequence() {
+        winText.gameObject.SetActive(false);
+        sceneCompleted = false;
     }
 
     public void PlayerPassedEvent() {

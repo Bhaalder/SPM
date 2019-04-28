@@ -7,8 +7,6 @@ public class SceneManagerScript : MonoBehaviour
 {
     public bool buttonIsPressed;
 
-   // public GameObject EnemySpawner;
-    public SpawnManager spawnScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,9 +24,10 @@ public class SceneManagerScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && buttonIsPressed && GameController.Instance.playerIsInteracting && spawnScript.isRoomCleared)
+        if (other.gameObject.CompareTag("Player") && buttonIsPressed && GameController.Instance.playerIsInteracting && GameController.Instance.sceneCompleted)
         {
             SceneManager.LoadScene("Level2WhiteBox");
+            GameController.Instance.SceneNotCompletedSequence();
         }
         if(!buttonIsPressed)
         {
@@ -38,7 +37,7 @@ public class SceneManagerScript : MonoBehaviour
         {
             Debug.Log("Klicka E!");
         }
-        if (!spawnScript.isRoomCleared)
+        if (!GameController.Instance.sceneCompleted)
         {
             Debug.Log("Rensa rummet från fiender!!");
         }

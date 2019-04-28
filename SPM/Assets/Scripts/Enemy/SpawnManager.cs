@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 [System.Serializable]
@@ -52,6 +53,7 @@ public class SpawnManager : MonoBehaviour
         {
             StopCoroutine(SpawnEnemies());
             Debug.Log("Du har vunnit!!");
+            GameController.Instance.SceneCompletedSequence();
             isRoomCleared = true;
             return;
         }
