@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class SceneManagerScript : MonoBehaviour
 {
     public ArenaButton aB;
-    public GameObject EnemySpawner;
-    private SpawnManager spawnScript;
+   // public GameObject EnemySpawner;
+    public SpawnManager spawnScript;
     // Start is called before the first frame update
     void Start()
     {
 
-        SpawnManager spawnScript = GetComponent<SpawnManager>();
+        // SpawnManager spawnScript = GetComponent<SpawnManager>();
 
     }
 
@@ -23,15 +23,23 @@ public class SceneManagerScript : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && aB.ButtonPressed && Input.GetKeyDown(KeyCode.E) && spawnScript.isRoomCleared == true)
+        if (other.gameObject.CompareTag("Player") && aB.ButtonPressed && Input.GetKeyDown(KeyCode.E) && spawnScript.isRoomCleared)
         {
             SceneManager.LoadScene("Level2WhiteBox");
         }
-        else
+        if(!aB.ButtonPressed)
         {
             Debug.Log("Du måste låsa upp dörren!!");
+        }
+        if (!Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("Klicka E!");
+        }
+        if (!spawnScript.isRoomCleared)
+        {
+            Debug.Log("Rensa rummet från fiender!!");
         }
     }
 }

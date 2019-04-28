@@ -49,7 +49,9 @@ public class SpawnManager : MonoBehaviour
         // win
         if (_currentWave > _totalWaves)
         {
-            return;
+            Debug.Log("Du har vunnit!!");
+            isRoomCleared = true;
+           return;
         }
 
         _totalEnemiesInCurrentWave = Waves[_currentWave].EnemiesPerWave;
@@ -91,9 +93,6 @@ public class SpawnManager : MonoBehaviour
         {
             StartNextWave();
         }
-        else
-        {
-            isRoomCleared = true;
-        }
+        
     }
 }
