@@ -10,10 +10,9 @@ public class PlayerInput : MonoBehaviour
 
     private BaseWeapon selectedWeapon;
     private float nextTimeToFireOrReload = 0f;
-    private float nextTimeToReload = 0f;//
+    private float nextTimeToReload = 0f;
+    private float nextTimeToDash = 0f;
     private bool isReloading = false;
-
-
 
     private void Start(){
         playerShoot = GetComponentInChildren<PlayerShoot>();
@@ -26,22 +25,26 @@ public class PlayerInput : MonoBehaviour
         ShootWeaponInput();
         SwitchWeaponInput();
         SlowmotionInput();
+        DashInput();
+
+
         if (Input.GetKeyDown(KeyCode.T)) {//TA BORT SEN
             SceneManager.LoadScene("Level2WhiteBox");
         }//TA BORT SEN
 
 
-
     }
-    private void ReloadWeaponInput() {      
-        int ammoInClip = selectedWeapon.GetAmmoInClip();
-        int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
-        int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
 
+
+    private void ReloadWeaponInput() {      
         if (Input.GetButtonDown("Reload") && Time.time >= nextTimeToReload) {
+            int ammoInClip = selectedWeapon.GetAmmoInClip();
+            int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
+            int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
+
             if (ammoInClip != maxAmmoInClip && totalAmmoLeft > 0) {
                 nextTimeToFireOrReload = Time.time + 1f / selectedWeapon.GetReloadTime();
-                nextTimeToReload = Time.time + 1f / selectedWeapon.GetReloadTime();//
+                nextTimeToReload = Time.time + 1f / selectedWeapon.GetReloadTime();
                 int ammoSpent = maxAmmoInClip - ammoInClip;
                 if (ammoSpent > totalAmmoLeft) {
 
@@ -63,13 +66,15 @@ public class PlayerInput : MonoBehaviour
     }
 
     private void ReloadSequence() {     
-        GameController.Instance.ReloadSlider.maxValue = 1f / selectedWeapon.GetReloadTime();
-        GameController.Instance.ReloadSlider.value += 1f * Time.deltaTime;//
-        if (Time.time >= nextTimeToReload) {
-            isReloading = false;
-            GameController.Instance.ReloadSlider.value = 0;
-            GameController.Instance.UpdateSelectedWeaponAmmoText();
-            GameController.Instance.ReloadSlider.gameObject.SetActive(false);
+        if (isReloading) {
+            GameController.Instance.ReloadSlider.maxValue = 1f / selectedWeapon.GetReloadTime();
+            GameController.Instance.ReloadSlider.value += 1f * Time.deltaTime;
+            if (Time.time >= nextTimeToReload) {
+                isReloading = false;
+                GameController.Instance.ReloadSlider.value = 0;
+                GameController.Instance.UpdateSelectedWeaponAmmoText();
+                GameController.Instance.ReloadSlider.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -118,7 +123,7 @@ public class PlayerInput : MonoBehaviour
                 }
             }
             GameController.Instance.UpdateSelectedWeaponText();
-        }//if !isReloading     
+        }//if !isReloading
     }
     
     private void SlowmotionInput() {
@@ -126,4 +131,17 @@ public class PlayerInput : MonoBehaviour
             slowmotion.SlowTime();
         }
     }
+
+    private void DashInput() {
+        if (Input.GetButtonDown("Dash")) {
+           
+            playerShoot.Melee();
+            Debug.Log("Dash");
+        }
+
+        
+
+
+    }
+
 }

@@ -8,7 +8,7 @@ public class PlayerShoot : MonoBehaviour
 
     public LayerMask layerMask;
 
-    [SerializeField] private Transform camFocusTrans;
+    [SerializeField] public Transform camFocusTrans;
 
     [SerializeField] private GameObject bulletImpactGO;
 
@@ -18,6 +18,20 @@ public class PlayerShoot : MonoBehaviour
 
     void Update(){
         transform.LookAt(camFocusTrans);
+    }
+
+    public void Melee() {
+        bool hitTarget = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 5f, layerMask);
+        if (hitTarget) {
+            if (hit.rigidbody != null) {
+                hit.rigidbody.AddForce(-hit.normal * 10f);
+            }
+            if (hit.collider.gameObject.layer == 9) {
+                hit.transform.GetComponent<EnemyController>().TakeDamage(100f);
+            }
+            GameObject bulletImpact = Instantiate(bulletImpactGO, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(bulletImpact, 0.1f);
+        }
     }
 
     public void StartShooting(BaseWeapon weapon) {
@@ -100,4 +114,5 @@ public class PlayerShoot : MonoBehaviour
             Debug.Log("Out of Ammo");
         }
     }
+    
 }

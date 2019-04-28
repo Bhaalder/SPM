@@ -5,7 +5,7 @@ using StateHandler;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private bool controlingCam = false;
+    private bool controlingCam = true; // ändrat
 
     private float gravity = 9.82f;
     private float xRotation, yRotation;
@@ -72,13 +72,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void RotatePlayerAndCam()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (!controlingCam)
-                controlingCam = true;
-            else
-                controlingCam = false;
-        }
+        //if (Input.GetMouseButtonDown(1))
+        //{
+        //    if (!controlingCam)
+        //        controlingCam = true;
+        //    else
+        //        controlingCam = false;
+        //}
         //Högerklick för att röra crosshair + kamera
         if (controlingCam)
         {
