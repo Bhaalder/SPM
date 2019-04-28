@@ -141,9 +141,11 @@ MonoBehaviour:
   MoveSpeed: 5
   MaxDist: 25
   MinDist: 1
-  AttackDistance: 2
+  AttackDistance: 7
   DamageResistance: 5
   EnterMoveSeconds: 0.5
+  TimeBeforeCharge: 2
+  EnemyStunnedTime: 3
   enemyType: 4
   gameController: {fileID: 6964004597814307124, guid: a312182574752a14db595d72c94a2952,
     type: 3}
@@ -156,3 +158,4 @@ MonoBehaviour:
   Charging: 0
   RecentlyCharged: 0
   timerRunning: 1
+  isStunned: 0
