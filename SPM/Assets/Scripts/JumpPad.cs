@@ -11,8 +11,13 @@ public class JumpPad : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
-        other.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);
-        other.GetComponent<Rigidbody>().AddForce(Vector3.forward * forwardForce);
+        {
+            other.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);
+            other.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * forwardForce);
+
+        }
     }
 
+
 }
+    
