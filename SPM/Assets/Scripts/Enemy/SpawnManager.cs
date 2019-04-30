@@ -25,6 +25,7 @@ public class SpawnManager : MonoBehaviour
     private int _totalWaves;
     private int spawnPointIndex = 0;
     public bool isRoomCleared;
+    public bool isArenaSpawner;
 
     void Start()
     {
@@ -52,8 +53,11 @@ public class SpawnManager : MonoBehaviour
         if (_currentWave == _totalWaves && _enemiesInWaveLeft == 0 && _enemiesInWaveLeft == 0 && _spawnedEnemies == _totalEnemiesInCurrentWave)
         {
             StopCoroutine(SpawnEnemies());
-            Debug.Log("Du har vunnit!!");
-            GameController.Instance.SceneCompletedSequence();
+            if (isArenaSpawner) {
+                Debug.Log("Du har vunnit!!");
+                GameController.Instance.SceneCompletedSequence();
+            }
+            
             isRoomCleared = true;
             return;
         }
