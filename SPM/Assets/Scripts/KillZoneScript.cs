@@ -29,6 +29,8 @@ public class KillZoneScript : MonoBehaviour
             GameController.Instance.playerHP = 0;
             
         }
-       
+        if (other.gameObject.CompareTag("Enemy")){
+            Destroy(other.gameObject);
+        }
     }
 }

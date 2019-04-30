@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 4254946551304860467}
   - component: {fileID: 4254946551304860469}
   m_Layer: 9
-  m_Name: Enemy
-  m_TagString: Untagged
+  m_Name: EnemyLvl1Area1
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,6 +144,8 @@ MonoBehaviour:
   AttackDistance: 2
   DamageResistance: 5
   EnterMoveSeconds: 0.5
+  TimeBeforeCharge: 2
+  EnemyStunnedTime: 3
   enemyType: 1
   gameController: {fileID: 6964004597814307124, guid: a312182574752a14db595d72c94a2952,
     type: 3}
@@ -152,6 +154,8 @@ MonoBehaviour:
   player: {fileID: 8279343510140872286, guid: b8a168c850e19644b90513ee279db5d2, type: 3}
   AttackTrigger: 0
   Attacking: 0
+  BeingAttacked: 0
   Charging: 0
   RecentlyCharged: 0
   timerRunning: 1
+  isStunned: 0

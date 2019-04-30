@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8168278882437978200}
   m_Layer: 9
   m_Name: EnemyType1Level2BigAggro
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,6 +144,8 @@ MonoBehaviour:
   AttackDistance: 2
   DamageResistance: 5
   EnterMoveSeconds: 0.5
+  TimeBeforeCharge: 2
+  EnemyStunnedTime: 3
   enemyType: 1
   gameController: {fileID: 6964004597814307124, guid: a312182574752a14db595d72c94a2952,
     type: 3}
@@ -156,3 +158,4 @@ MonoBehaviour:
   Charging: 0
   RecentlyCharged: 0
   timerRunning: 1
+  isStunned: 0
