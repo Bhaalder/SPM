@@ -27,6 +27,7 @@ public class OpenDoorsLvl1 : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && GameController.Instance.playerIsInteracting)
         {
+            Debug.Log("F");
             theDoor.SetActive(!theDoor.activeSelf);
             isBlack = !isBlack;
             if (isBlack)
