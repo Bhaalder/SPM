@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public GameObject projectile;
 
 	public float health = 20;
     public float damage = 5;
@@ -15,6 +16,10 @@ public class EnemyController : MonoBehaviour
     public float EnterMoveSeconds = 0.5f;
     public float TimeBeforeCharge = 2f;
     public float EnemyStunnedTime = 3f;
+    public float TimeBetweenAttacks = 0.5f;
+    public float projectileSpeed;
+    public float projectileDamage;
+    public float ProjectileTravelDistance;
 
     public int enemyType;
 
@@ -29,7 +34,7 @@ public class EnemyController : MonoBehaviour
     public bool RecentlyCharged;
     public bool timerRunning = true;
     public bool isStunned;
-
+    
 
 
     private Vector3 chargeposition;
@@ -38,6 +43,8 @@ public class EnemyController : MonoBehaviour
     private GameObject objSpawn;
     private int SpawnerID;
     private int i;
+
+    private bool activated;
 
 
     // Start is called before the first frame update
@@ -50,6 +57,7 @@ public class EnemyController : MonoBehaviour
         RecentlyCharged = false;
         BeingAttacked = false;
         isStunned = false;
+        activated = false;
         objSpawn = (GameObject)GameObject.FindWithTag("Spawner");
         noChargePosition = new Vector3(0, 0, 0);
         chargeposition = noChargePosition;
@@ -61,6 +69,10 @@ public class EnemyController : MonoBehaviour
     {
         Movement();
         JustEntered();
+        if (activated)
+        {
+            transform.LookAt(player);
+        }
 
     }
 
@@ -101,6 +113,7 @@ public class EnemyController : MonoBehaviour
             {
                 if (Vector3.Distance(transform.position, player.position) >= MinDist && Vector3.Distance(transform.position, player.position) <= MaxDist)
                 {
+                    activated = true;
                     MoveToPlayer();
                 }
                 if (Vector3.Distance(transform.position, player.position) <= AttackDistance && !Attacking)
@@ -124,8 +137,10 @@ public class EnemyController : MonoBehaviour
     private void MoveToPlayer()
     {
         transform.LookAt(player);
-
-        transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+        if (Vector3.Distance(transform.position, player.position) > AttackDistance)
+        {
+            transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+        }
 
     }
 
@@ -141,7 +156,7 @@ public class EnemyController : MonoBehaviour
                     ChargeAttack();
                     break;
                 case 3:
-                    //add attacking move for enemy 3
+                    RangeAttack();
                     break;
                 case 2:
                     //add attacking move for enemy 2
@@ -157,10 +172,9 @@ public class EnemyController : MonoBehaviour
 
     void MeleeAttack() {
         GameController.Instance.TakeDamage((int)damage);
-        Debug.Log("damage taken");
         AttackTrigger = false;
         Attacking = false;
-        StartCoroutine(AttackTimer());
+        StartCoroutine(AttackTimer(TimeBetweenAttacks));
     }
     void ChargeAttack() {
         if (RecentlyCharged)
@@ -175,7 +189,6 @@ public class EnemyController : MonoBehaviour
             else
             {
 
-                //if (Vector3.Distance(transform.position, chargeposition) < MinDist) { RecentlyCharged = true; Attacking = false; }
             }
         }
         else {
@@ -188,19 +201,23 @@ public class EnemyController : MonoBehaviour
 
         }
 
-
-        //transform.position += chargeposition * (MoveSpeed*3) * Time.deltaTime;
-
-
-        Debug.Log("move done");
-        //Attacking = false;
-
-
     }
 
-    IEnumerator AttackTimer()
+    void RangeAttack()
     {
-        yield return new WaitForSeconds(0.5f);
+        GameObject enemyProj = Instantiate(projectile, transform.position + transform.forward * 2, Quaternion.identity);
+        enemyProj.GetComponent<EnemyProjectile>().SetProjectileSpeed(projectileSpeed);  
+        enemyProj.GetComponent<EnemyProjectile>().SetProjectileTravelDistance(ProjectileTravelDistance);
+        enemyProj.GetComponent<EnemyProjectile>().SetProjectileDamage(projectileDamage);
+        AttackTrigger = false;
+        Attacking = false;
+        StartCoroutine(AttackTimer(TimeBetweenAttacks));
+        StunEnemy();
+    }
+
+    IEnumerator AttackTimer(float timeBetweenAttacks)
+    {
+        yield return new WaitForSeconds(timeBetweenAttacks);
         AttackTrigger = true;
     }
 
@@ -226,7 +243,6 @@ public class EnemyController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.tag == "Player" && RecentlyCharged) {
-            Debug.Log("just collided with player");
             GameController.Instance.TakeDamage((int)damage*3);
         }
     }
