@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 427980816833372840}
   - component: {fileID: 427980816833372841}
   - component: {fileID: 427980816833372842}
-  - component: {fileID: 427980816833372843}
+  - component: {fileID: 7291160478890327919}
   m_Layer: 2
-  m_Name: Switch
+  m_Name: SwitchLvl1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,9 +90,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.525623, y: 2.3889475, z: 10.208172}
-  m_Center: {x: -0.011038479, y: -0.010082957, z: 4.60409}
---- !u!114 &427980816833372843
+  m_Size: {x: 4.6981106, y: 2.3889475, z: 10.208172}
+  m_Center: {x: 0.1302673, y: -0.010082957, z: 4.60409}
+--- !u!114 &7291160478890327919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,8 +101,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 427980816833372836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f329a27c984cfd45ae13c5456672d6b, type: 3}
+  m_Script: {fileID: 11500000, guid: ba1a63163e4c62442870cd261c4de10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theObject: {fileID: 0}
-  material: {fileID: 0}
+  theDoor: {fileID: 0}
