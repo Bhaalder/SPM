@@ -105,12 +105,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b59522ed211d0d4d9a310aebf34bc83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUp:
-  - {fileID: 0}
-  - {fileID: 2102738821957272746, guid: 7d26a91ab52786d409eabbd837407133, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Armor: {fileID: 8381682199667870616, guid: 279bffca1dc9dc9498c862441fa0d2b2, type: 3}
+  Health: {fileID: 2102738821957272751, guid: 7d26a91ab52786d409eabbd837407133, type: 3}
+  Speed: {fileID: 4449727474662209534, guid: ec0742353fe927443affe39b03b9f2e5, type: 3}
+  Ammo: {fileID: 1298806506993965472, guid: e5d2f07e296051c49a72b5827b82964c, type: 3}
+  ArmorPowerUp: 0
+  HealthPowerUp: 0
+  MoveSpeedPowerUp: 0
+  AmmoBoxPowerUp: 0
+  RespawnTime: 5
+  clipIncrease: 0
 --- !u!114 &6879443044017738510
 MonoBehaviour:
   m_ObjectHideFlags: 0
