@@ -6,6 +6,7 @@ public class Trigger : MonoBehaviour
 {
     private bool triggered;
     public GameObject Player;
+    private GameObject parent;
     
     public bool GetTriggered() { return triggered; }
 
@@ -14,7 +15,9 @@ public class Trigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             triggered = true;
-            Player.transform.parent = transform;
+            parent = new GameObject();
+            parent.transform.parent = transform;
+            Player.transform.parent = parent.transform;
         }
         Debug.Log("Trigger on");
         if (other.CompareTag("Panel"))
@@ -31,6 +34,11 @@ public class Trigger : MonoBehaviour
         {
             triggered = false;
             Player.transform.parent = null;
+            foreach (Transform child in transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+            
         }
         Debug.Log("Trigger off");
     }
