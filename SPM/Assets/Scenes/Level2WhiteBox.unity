@@ -3259,11 +3259,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 8048557286435208932, guid: eb59160349c49fb4fb3a82a87c25d512,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8048557285174601951, guid: eb59160349c49fb4fb3a82a87c25d512,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -3275,6 +3270,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8048557286087981854, guid: eb59160349c49fb4fb3a82a87c25d512,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048557286435208932, guid: eb59160349c49fb4fb3a82a87c25d512,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -5382,11 +5382,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 19
       objectReference: {fileID: 0}
-    - target: {fileID: 8048557286435208932, guid: eb59160349c49fb4fb3a82a87c25d512,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8048557285174601951, guid: eb59160349c49fb4fb3a82a87c25d512,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -5398,6 +5393,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8048557286087981854, guid: eb59160349c49fb4fb3a82a87c25d512,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048557286435208932, guid: eb59160349c49fb4fb3a82a87c25d512,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -7103,13 +7103,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317383468}
-  m_LocalRotation: {x: -0, y: -0, z: 0.00088065304, w: 0.99999964}
-  m_LocalPosition: {x: -420.48, y: 36.8, z: -80}
+  m_LocalRotation: {x: 0, y: 0, z: 0.0166148, w: 0.999862}
+  m_LocalPosition: {x: -408.86, y: 26.37, z: -80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2126700456}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.101}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.904}
 --- !u!102 &317383470
 TextMesh:
   serializedVersion: 3
@@ -7118,7 +7118,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317383468}
-  m_Text: 'Rehab rum / soldier facilty
+  m_Text: '1st Room
 
 '
   m_OffsetZ: 0
@@ -8152,7 +8152,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361040273}
   m_LocalRotation: {x: 0, y: 0, z: 0.0166148, w: 0.999862}
-  m_LocalPosition: {x: -221.3, y: 61.6, z: 136}
+  m_LocalPosition: {x: -199.9, y: 61.6, z: 136}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2126700456}
@@ -8166,7 +8166,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 361040273}
-  m_Text: 'Important shit - destroy '
+  m_Text: 3rd Room
   m_OffsetZ: 0
   m_CharacterSize: 5
   m_LineSpacing: 1
@@ -11604,9 +11604,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 521932059}
-  m_Text: 'Headquarter
-
-'
+  m_Text: Hexagon
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -28776,7 +28774,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265448095}
   m_LocalRotation: {x: -0.0166148, y: 0.999862, z: 0.000000004190951, w: 0.0000005215406}
-  m_LocalPosition: {x: -113.2, y: 20.3, z: -247.31}
+  m_LocalPosition: {x: -113.2, y: 18.3, z: -247.31}
   m_LocalScale: {x: 5.4382067, y: 5.4382086, z: 5.4382086}
   m_Children: []
   m_Father: {fileID: 2126700456}
@@ -28790,7 +28788,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1265448095}
-  m_Text: 'Hangar
+  m_Text: '2nd Room
 
 '
   m_OffsetZ: 0
@@ -30518,19 +30516,9 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.71
       objectReference: {fileID: 0}
-    - target: {fileID: 8048557286435208932, guid: eb59160349c49fb4fb3a82a87c25d512,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8048557285174601951, guid: eb59160349c49fb4fb3a82a87c25d512,
         type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8048557286435208935, guid: eb59160349c49fb4fb3a82a87c25d512,
-        type: 3}
-      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8048557285608789780, guid: eb59160349c49fb4fb3a82a87c25d512,
@@ -30541,6 +30529,16 @@ PrefabInstance:
     - target: {fileID: 8048557286087981854, guid: eb59160349c49fb4fb3a82a87c25d512,
         type: 3}
       propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048557286435208932, guid: eb59160349c49fb4fb3a82a87c25d512,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048557286435208935, guid: eb59160349c49fb4fb3a82a87c25d512,
+        type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8048557285174601920, guid: eb59160349c49fb4fb3a82a87c25d512,
@@ -35182,11 +35180,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 8048557286435208932, guid: eb59160349c49fb4fb3a82a87c25d512,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8048557285174601951, guid: eb59160349c49fb4fb3a82a87c25d512,
         type: 3}
       propertyPath: m_StaticEditorFlags
@@ -35198,6 +35191,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8048557286087981854, guid: eb59160349c49fb4fb3a82a87c25d512,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048557286435208932, guid: eb59160349c49fb4fb3a82a87c25d512,
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
