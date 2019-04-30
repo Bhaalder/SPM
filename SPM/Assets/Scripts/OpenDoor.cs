@@ -5,14 +5,13 @@ using UnityEngine;
 public class OpenDoor : MonoBehaviour
 {
     public GameObject theObject;
-    public Material material;
+    public GameObject button;
 
-    private MeshRenderer meshRenderer;
 
 
     void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
+    
     }
 
     private void OnTriggerStay(Collider other)
@@ -20,7 +19,7 @@ public class OpenDoor : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && GameController.Instance.playerIsInteracting)
         {
             theObject.SetActive(!theObject.activeSelf);
-            meshRenderer.material = material;
-        }        
+            button.SetActive(!button.activeSelf);
+        }
     }
 }
