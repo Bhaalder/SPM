@@ -11,10 +11,14 @@ public class PlayerMovementController : MonoBehaviour
     public float extraJumps;
     public float fakeExtraGravity;
 
+    public float distanceToGround;
+
     private float jumpCount;
     private Rigidbody rigidBody;
     
     private CapsuleCollider capsuleCollider;
+    private BoxCollider groundCheck;
+    private Vector2 velocity;
 
     //public LayerMask layerMask;
     //private RaycastHit raycastHit;
@@ -23,6 +27,8 @@ public class PlayerMovementController : MonoBehaviour
     void Start(){
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        groundCheck = GetComponent<BoxCollider>();
+        distanceToGround = groundCheck.bounds.extents.y;
     }
 
     void FixedUpdate(){
@@ -35,7 +41,7 @@ public class PlayerMovementController : MonoBehaviour
         Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         movementInput *= (movementSpeed*(1+speedMultiplier)) * Time.deltaTime;
 
-        Vector2 velocity = movementInput;
+        velocity = movementInput;
 
         //float rayLength = velocity.magnitude + skinWidth;
         //bool hit = Physics.BoxCast(transform.position, capsuleCollider.ClosestPointOnBounds(transform.position), transform.forward, out raycastHit, transform.rotation, rayLength, layerMask);
@@ -63,8 +69,13 @@ public class PlayerMovementController : MonoBehaviour
         }      
     }
 
+    private void OnCollisionEnter(Collision collision) {
+        
+    }
+
     private bool IsGrounded() {
-        if (Physics.Raycast(transform.position, Vector3.down, 0.75f)) {
+        if (Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f)) {
+            velocity.y = 0;
             jumpCount = extraJumps;
             return true;
         } else return false;
