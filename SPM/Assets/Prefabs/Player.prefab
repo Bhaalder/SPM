@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 3047494120650050544}
   - component: {fileID: 3047494121361967268}
   - component: {fileID: 3047494121361967269}
+  - component: {fileID: 5903128779406886051}
   - component: {fileID: 805145496824130771}
   - component: {fileID: 3047494121361967265}
   - component: {fileID: 3047494120657483839}
@@ -370,6 +371,19 @@ CapsuleCollider:
   m_Height: 1.8072553
   m_Direction: 1
   m_Center: {x: 0, y: 0.8941369, z: 0}
+--- !u!65 &5903128779406886051
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047494120657483824}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.05826032, z: 1}
+  m_Center: {x: 0, y: -0.0011231303, z: 0}
 --- !u!114 &805145496824130771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,12 +397,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 12
+  speedMultiplier: 0
   jumpForce: 10
+  extraJumps: 0
   fakeExtraGravity: 5
-  skinWidth: 0.5
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 1
+  distanceToGround: 0
 --- !u!114 &3047494121361967265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,6 +417,9 @@ MonoBehaviour:
   dashForce: 0
   nextTimeToDash: 0
   slowmotion: {fileID: 0}
+  startTeleport: {fileID: 0}
+  secondTeleport: {fileID: 0}
+  thirdTeleport: {fileID: 0}
 --- !u!114 &3047494120657483839
 MonoBehaviour:
   m_ObjectHideFlags: 0
