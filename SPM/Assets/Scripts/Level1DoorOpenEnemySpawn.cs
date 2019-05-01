@@ -24,9 +24,13 @@ public class Level1DoorOpenEnemySpawn : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player") && GameController.Instance.playerIsInteracting)
         {
+            Debug.Log("F");
             aDoor.SetActive(false);
             spawnerScript.GetComponent<SpawnManager>().InitializeSpawner();
             Destroy(gameObject);
+
+            //if(hasSpawner)
         }
+
     }
 }
