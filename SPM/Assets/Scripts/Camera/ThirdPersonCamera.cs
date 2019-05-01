@@ -9,16 +9,13 @@ public class ThirdPersonCamera : MonoBehaviour {
     
     public Vector2 cameraClamp = new Vector2(-40, 85);
     public LayerMask layerMask;
-
-    private float desiredDistanceFromTarget;
-
+    
     float mouseX;
     float mouseY;
 
     private void Start() {
         player = GameObject.Find("Player").transform;
         cameraTarget = GameObject.Find("CameraTarget").transform;
-        desiredDistanceFromTarget = distanceFromTarget;
     }
 
     private void LateUpdate() {
@@ -36,11 +33,11 @@ public class ThirdPersonCamera : MonoBehaviour {
         player.rotation = Quaternion.Euler(0, mouseX, 0);
 
         //bool hitTarget = Physics.Raycast(transform.position, -transform.forward, out RaycastHit hit, 100f, layerMask);
-        //if(hitTarget && hit.distance < desiredDistanceFromTarget) {
-        //    distanceFromTarget = (hit.distance-0.2f);
+        //if(hitTarget && hit.distance < distanceFromTarget) {
+        //    distanceFromTarget = hit.distance;
         //}
-        //if(hit.distance > distanceFromTarget) {
-
+        //if(hitTarget && hit.distance > distanceFromTarget) {
+        //    distanceFromTarget = desiredDistanceFromTarget;
         //}
         transform.position = cameraTarget.position - transform.forward * distanceFromTarget;
     }

@@ -10,6 +10,10 @@ public class PlayerInput : MonoBehaviour
     public float nextTimeToDash;
     public Slowmotion slowmotion;
 
+    public GameObject startTeleport;
+    public GameObject secondTeleport;
+    public GameObject thirdTeleport;
+
     private PlayerShoot playerShoot;
     private BaseWeapon selectedWeapon;
     private Rigidbody rigidBody;
@@ -32,13 +36,38 @@ public class PlayerInput : MonoBehaviour
         InteractInput();
         DashInput();
 
+        Teleport();//TA BORT SEN
 
-        if (Input.GetKeyDown(KeyCode.T)) {//TA BORT SEN
-            SceneManager.LoadScene("Level2WhiteBox");
-        }//TA BORT SEN
 
 
     }
+
+    private void Teleport() {//TA BORT SEN
+        if (Input.GetKeyDown(KeyCode.T)) {
+            SceneManager.LoadScene("Level2WhiteBox");
+        }
+        if (Input.GetKeyDown(KeyCode.I)) {
+            try {
+                transform.position = startTeleport.transform.position;
+            } catch (System.NullReferenceException) {
+                Debug.Log("FINNS INGEN DEFINERAD 'startTeleport'");
+            }      
+        }
+        if (Input.GetKeyDown(KeyCode.O)) {
+            try {
+                transform.position = secondTeleport.transform.position;
+            } catch (System.NullReferenceException) {
+                Debug.Log("FINNS INGEN DEFINERAD 'secondTeleport'");
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.P)) {
+            try {
+                transform.position = thirdTeleport.transform.position;
+            } catch (System.NullReferenceException) {
+                Debug.Log("FINNS INGEN DEFINERAD 'thirdTeleport'");
+            }
+        }
+    }//TA BORT SEN
 
 
     private void ReloadWeaponInput() {      
