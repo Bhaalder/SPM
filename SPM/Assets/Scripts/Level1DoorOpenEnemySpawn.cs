@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Level1ElevatorEvent : MonoBehaviour
+public class Level1DoorOpenEnemySpawn : MonoBehaviour
 {
 
     public GameObject aDoor;

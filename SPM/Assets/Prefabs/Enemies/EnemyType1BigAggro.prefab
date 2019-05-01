@@ -136,16 +136,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d31cda5a8cbb847b94af0410060cdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectile: {fileID: 0}
   health: 15
   damage: 10
   MoveSpeed: 8
-  MaxDist: 35
+  MaxDist: 40
   MinDist: 1
   AttackDistance: 2
   DamageResistance: 5
   EnterMoveSeconds: 0.5
   TimeBeforeCharge: 2
   EnemyStunnedTime: 3
+  TimeBetweenAttacks: 0.5
+  projectileSpeed: 0
+  projectileDamage: 0
+  ProjectileTravelDistance: 0
   enemyType: 1
   gameController: {fileID: 6964004597814307124, guid: a312182574752a14db595d72c94a2952,
     type: 3}
