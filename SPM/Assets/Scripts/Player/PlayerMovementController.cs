@@ -16,7 +16,6 @@ public class PlayerMovementController : MonoBehaviour
     public LayerMask layerMask;
 
     CapsuleCollider capsuleCollider;
-    //BoxCollider boxCollider;//
     RaycastHit raycastHit;
 
 
@@ -24,7 +23,6 @@ public class PlayerMovementController : MonoBehaviour
 
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        //boxCollider = GetComponent<BoxCollider>();//
     }
 
     void FixedUpdate(){
@@ -39,13 +37,13 @@ public class PlayerMovementController : MonoBehaviour
 
         Vector2 velocity = movementInput;
 
-        float rayLength = velocity.magnitude + skinWidth;
-        bool hit = Physics.BoxCast(transform.position, capsuleCollider.ClosestPointOnBounds(transform.position), transform.forward, out raycastHit, transform.rotation, rayLength, layerMask);
-        //bool hit = Physics.BoxCast(transform.position, boxCollider.size, transform.forward, out raycastHit, transform.rotation, rayLength, layerMask);
-        if (hit) {
-            velocity = (raycastHit.distance - skinWidth) * velocity.normalized;
-            rayLength = raycastHit.distance;
-        }
+        //float rayLength = velocity.magnitude + skinWidth;
+        //bool hit = Physics.BoxCast(transform.position, capsuleCollider.ClosestPointOnBounds(transform.position), transform.forward, out raycastHit, transform.rotation, rayLength, layerMask);
+        //if (hit) {
+        //    velocity = (raycastHit.distance - skinWidth) * velocity.normalized;
+        //    rayLength = raycastHit.distance;
+        //    Debug.Log("Kolliderar med " + raycastHit.collider.name);
+        //}
 
         transform.Translate(new Vector3(velocity.x, 0f, velocity.y));
     }
