@@ -46,10 +46,11 @@ public class EnemyController : MonoBehaviour
 
     private bool activated;
 
-
+    private ProjectileWeapon enemyWeapon;
     // Start is called before the first frame update
     void Start()
     {
+        enemyWeapon = WeaponController.Instance.GetEnemyProjectileWeapon();
         player = GameObject.Find("Player").transform;
         AttackTrigger = true;
         Attacking = false;
@@ -205,13 +206,13 @@ public class EnemyController : MonoBehaviour
 
     void RangeAttack()
     {
-        GameObject enemyProj = Instantiate(projectile, transform.position + transform.forward * 2, Quaternion.identity);
-        enemyProj.GetComponent<EnemyProjectile>().SetProjectileSpeed(projectileSpeed);  
-        enemyProj.GetComponent<EnemyProjectile>().SetProjectileTravelDistance(ProjectileTravelDistance);
-        enemyProj.GetComponent<EnemyProjectile>().SetProjectileDamage(projectileDamage);
+        GameObject enemyProj = Instantiate(enemyWeapon.GetProjectile(), transform.position + transform.forward * 2, Quaternion.identity);
+        enemyProj.GetComponent<EnemyProjectile>().SetProjectileSpeed(enemyWeapon.GetProjectileSpeed());  
+        enemyProj.GetComponent<EnemyProjectile>().SetProjectileTravelDistance(enemyWeapon.GetRange());
+        enemyProj.GetComponent<EnemyProjectile>().SetProjectileDamage(enemyWeapon.GetDamage());
         AttackTrigger = false;
         Attacking = false;
-        StartCoroutine(AttackTimer(TimeBetweenAttacks));
+        StartCoroutine(AttackTimer(enemyWeapon.GetFireRate()));
         StunEnemy();
     }
 

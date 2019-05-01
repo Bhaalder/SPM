@@ -6,6 +6,7 @@ public class WeaponController : MonoBehaviour
 {
 
     public GameObject rocketLaucherProjectileGO;
+    public GameObject enemyWeaponProjectileGO;
 
     private static WeaponController instance;
 
@@ -41,5 +42,10 @@ public class WeaponController : MonoBehaviour
         return rocketLauncher;
     }
 
+    public ProjectileWeapon GetEnemyProjectileWeapon() {
+        /////////////////////////////////////////////////////////////////Name___dmg_range_FR_reload_Impact_spr_PS_aic_maic_totalammoleft
+        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Enemy Projectile", 30, 50, 2f, 0.3f, 0.1f, 20, 5, 99999, 99999, 99999, enemyWeaponProjectileGO, null, null, null);
+        return rocketLauncher;
+    }
 
 }
