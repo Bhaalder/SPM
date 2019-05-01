@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
     private bool blocked = false;
     private RaycastHit hitForward;
     private RaycastHit hitBackward;
-    private float distance = 4.0f;
+    public float distance = 2.0f;
     private float currentX = 0.0f;
     private float currentY = 0.0f;
     [SerializeField] private float sensitivityX = 1f;

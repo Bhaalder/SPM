@@ -19,10 +19,12 @@ public class GameController : MonoBehaviour {
     public Text weaponNameText, weaponAmmoText;
 
     public int playerHP, playerArmor;
-    public float slowMotionTime, reloadTime;
 
     public bool gameIsPaused, playerIsInteracting;
     public bool gameIsSlowmotion = false;
+
+    public float invulnerableStateTime;
+    private float invulnerableState;
 
     private static GameController instance;
 
@@ -48,11 +50,10 @@ public class GameController : MonoBehaviour {
         HealthSlider.value = playerHP;
         ArmorSlider.value = playerArmor;
         SlowmotionSlider.value = SlowmotionSlider.maxValue;
-        ReloadSlider.value = reloadTime;
+        ReloadSlider.value = 0;
 
         BaseWeapon rifle = WeaponController.Instance.GetRifle();
         playerWeapons.Add(rifle);
-        //TESTAR SHOTGUN (shotgun stats finns nu i weaponcontroller)   
         //BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
         //playerWeapons.Add(shotgun);
         //BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
@@ -101,10 +102,12 @@ public class GameController : MonoBehaviour {
 
 
     public void TakeDamage(int damage){
-        if (playerArmor <= 0) { playerHP -= damage; Debug.Log("damage has arrived"); }
-        else { playerArmor -= damage; }
-        HealthSlider.value = playerHP;
-        ArmorSlider.value = playerArmor;
+        if (Time.time >= invulnerableState) {
+            invulnerableState = Time.time + invulnerableStateTime;
+            if (playerArmor <= 0) { playerHP -= damage; Debug.Log("damage has arrived"); } else { playerArmor -= damage; }
+        } else {
+            Debug.Log("InvulnerableState active, no damage");
+        }
     }
 
 }
