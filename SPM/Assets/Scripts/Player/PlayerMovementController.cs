@@ -6,34 +6,34 @@ public class PlayerMovementController : MonoBehaviour
 {
 
     public float movementSpeed;
+    public float speedMultiplier; //denna används för att öka movmentspeed med pickups, per 0,1 ökas 10%
     public float jumpForce;
+    public float extraJumps;
     public float fakeExtraGravity;
 
+    private float jumpCount;
     private Rigidbody rigidBody;
     
-    public float skinWidth = 0.5f;
+    private CapsuleCollider capsuleCollider;
 
-    public LayerMask layerMask;
-
-    CapsuleCollider capsuleCollider;
-    RaycastHit raycastHit;
-
+    //public LayerMask layerMask;
+    //private RaycastHit raycastHit;
+    //public float skinWidth = 0.5f;
 
     void Start(){
-
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     void FixedUpdate(){
-        Move();
-        Jump();         
+        Jump();
+        Move();                
         FakeExtraGravity();
     }
 
     private void Move() {
         Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        movementInput *= movementSpeed * Time.deltaTime;
+        movementInput *= (movementSpeed*(1+speedMultiplier)) * Time.deltaTime;
 
         Vector2 velocity = movementInput;
 
@@ -48,10 +48,12 @@ public class PlayerMovementController : MonoBehaviour
         transform.Translate(new Vector3(velocity.x, 0f, velocity.y));
     }
     private void Jump() {
-        if (Input.GetButtonDown("Jump")) {
-            if (IsGrounded()) {
+        if (Input.GetButtonDown("Jump")) {          
+            if (jumpCount>0 || IsGrounded()) {
+                jumpCount--;
                 rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
+            IsGrounded();
         }
     }
 
@@ -62,6 +64,9 @@ public class PlayerMovementController : MonoBehaviour
     }
 
     private bool IsGrounded() {
-        return Physics.Raycast(transform.position, Vector3.down, 1f);
+        if (Physics.Raycast(transform.position, Vector3.down, 0.75f)) {
+            jumpCount = extraJumps;
+            return true;
+        } else return false;
     }
 }

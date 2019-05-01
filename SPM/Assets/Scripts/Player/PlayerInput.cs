@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;//TA BORT SEN
 
 public class PlayerInput : MonoBehaviour
 {
+
     public float dashForce;
     public float nextTimeToDash;
     public Slowmotion slowmotion;
@@ -152,21 +153,13 @@ public class PlayerInput : MonoBehaviour
     private void DashInput() {
         if (Input.GetButtonDown("Dash")) {
 
-            //StartCoroutine(Dash());
+            //rigidBody.AddForce(transform.forward * dashForce, ForceMode.Impulse);
 
             //playerShoot.Melee();
             Debug.Log("Dash");
         }
-
-        
-
-
     }
-    //IEnumerator Dash() {
-    //    rigidBody.AddForce(transform.forward * dashForce, ForceMode.VelocityChange);
-    //    yield return new WaitForSeconds(nextTimeToDash);
-    //    rigidBody.velocity = Vector3.zero;
-    //}
+
 
 
 }
