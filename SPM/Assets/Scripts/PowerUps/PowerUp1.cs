@@ -5,6 +5,7 @@ using UnityEngine;
 public class PowerUp1 : MonoBehaviour
 {
     public Transform powerUpSpawner;
+    public float speedIncrease = 0.1f;
     public float TimeToDestroy = 0.2f;
 
 
@@ -12,7 +13,7 @@ public class PowerUp1 : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            other.GetComponent<PlayerMovement>().StartSpeedBoost(10, 10);
+            other.GetComponent<PlayerMovementController>().speedMultiplier = speedIncrease;
             GetComponentInParent<PowerUpSpawner>().Respawner();
             StartCoroutine(UsedBoost());   
         }
