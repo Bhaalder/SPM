@@ -19,6 +19,7 @@ public class Slowmotion:MonoBehaviour{
         if (GameController.Instance.gameIsSlowmotion && GameController.Instance.SlowmotionSlider.value == 0) {
             GameController.Instance.gameIsSlowmotion = false;
             Time.timeScale = 1f;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
         if (!GameController.Instance.gameIsSlowmotion && GameController.Instance.SlowmotionSlider.value < 100) {
             GameController.Instance.SlowmotionSlider.value += 5 * Time.deltaTime; //20sek
