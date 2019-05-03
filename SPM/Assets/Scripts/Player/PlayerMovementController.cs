@@ -31,7 +31,7 @@ public class PlayerMovementController : MonoBehaviour
         distanceToGround = groundCheck.bounds.extents.y;
     }
 
-    void FixedUpdate(){
+    void Update(){
         Jump();
         Move();                
         FakeExtraGravity();
@@ -57,7 +57,9 @@ public class PlayerMovementController : MonoBehaviour
         if (Input.GetButtonDown("Jump")) {          
             if (jumpCount>0 || IsGrounded()) {
                 jumpCount--;
-                rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                velocity.y = 0;
+                //rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                rigidBody.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
             IsGrounded();
         }
@@ -69,13 +71,8 @@ public class PlayerMovementController : MonoBehaviour
         }      
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        
-    }
-
     private bool IsGrounded() {
-        if (Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f)) {
-            velocity.y = 0;
+        if (Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f)) {           
             jumpCount = extraJumps;
             return true;
         } else return false;
