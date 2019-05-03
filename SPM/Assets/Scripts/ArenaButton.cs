@@ -7,6 +7,9 @@ public class ArenaButton : MonoBehaviour
     public SpawnManager spawnerScript;
     public SceneManagerScript sceneManagerScript;
 
+    public GameObject obj1;
+    public GameObject obj2;
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player") && GameController.Instance.playerIsInteracting)
@@ -15,6 +18,14 @@ public class ArenaButton : MonoBehaviour
             Debug.Log("Knappen tryckt");
             spawnerScript.GetComponent<SpawnManager>().InitializeSpawner();
             Destroy(gameObject);
+
+            obj1.SetActive(false);
+            obj2.SetActive(false);
+
+
+
+
+
         }
     }
 }
