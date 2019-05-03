@@ -41,6 +41,7 @@ public class PlayerInput : MonoBehaviour
 
 
     }
+    
 
     private void Teleport() {//TA BORT SEN
         if (Input.GetKeyDown(KeyCode.T)) {

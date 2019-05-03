@@ -5,20 +5,30 @@ using UnityEngine;
 public class ThirdPersonCamera : MonoBehaviour {
     public float mouseSensitivity = 10;
     public Transform cameraTarget, player;
-    public float distanceFromTarget = 2.4f;
     
+        
     public Vector2 cameraClamp = new Vector2(-40, 85);
-    public LayerMask layerMask;
     
-    float mouseX;
-    float mouseY;
+    private float mouseX;
+    private float mouseY;
+    
+    [Header("Collision Speed")]
+    public float moveSpeed = 40;
+    public float wallSink = 0.3f;
 
+    [Header("Distances")]
+    public float distanceFromTarget = 2.4f;
+    //public float closestDistanceToPlayer = 0.5f;
+
+    [Header("Mask")]
+    public LayerMask collisionMask;
+    
     private void Start() {
         player = GameObject.Find("Player").transform;
         cameraTarget = GameObject.Find("CameraTarget").transform;
     }
 
-    private void LateUpdate() {
+    private void Update() {
         CameraControl();
         ScrollWheelZoom();
     }
@@ -32,14 +42,7 @@ public class ThirdPersonCamera : MonoBehaviour {
         transform.eulerAngles = targetRotation;
         player.rotation = Quaternion.Euler(0, mouseX, 0);
 
-        //bool hitTarget = Physics.Raycast(transform.position, -transform.forward, out RaycastHit hit, 100f, layerMask);
-        //if(hitTarget && hit.distance < distanceFromTarget) {
-        //    distanceFromTarget = hit.distance;
-        //}
-        //if(hitTarget && hit.distance > distanceFromTarget) {
-        //    distanceFromTarget = desiredDistanceFromTarget;
-        //}
-        transform.position = cameraTarget.position - transform.forward * distanceFromTarget;
+        CollisionCheck(cameraTarget.position - transform.forward * distanceFromTarget);
     }
 
     private void ScrollWheelZoom() {
@@ -48,6 +51,19 @@ public class ThirdPersonCamera : MonoBehaviour {
             distanceFromTarget -= 0.15f; //zoom in
         } else if (scroll < 0f) {
             distanceFromTarget += 0.15f; //zoom out
+        }
+    }
+
+    private void CollisionCheck(Vector3 returnPoint) {
+        RaycastHit hit;
+
+        if (Physics.Linecast(cameraTarget.position, returnPoint, out hit, collisionMask)) {
+            Vector3 normal = hit.normal * wallSink;
+            Vector3 point = hit.point - normal;
+
+            transform.position = Vector3.Lerp(transform.position, point, moveSpeed * Time.deltaTime);
+        } else {
+            transform.position = cameraTarget.position - transform.forward * distanceFromTarget;
         }
     }
 }
