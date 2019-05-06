@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-
     public GameObject rocketLaucherProjectileGO;
     public GameObject enemyWeaponProjectileGO;
 

@@ -21,6 +21,10 @@ public class Slowmotion:MonoBehaviour{
             Time.timeScale = 1f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
+        SlowmotionSlider();
+    }
+
+    private void SlowmotionSlider() {
         if (!GameController.Instance.gameIsSlowmotion && GameController.Instance.SlowmotionSlider.value < 100) {
             GameController.Instance.SlowmotionSlider.value += 5 * Time.deltaTime; //20sek
         } else if (GameController.Instance.gameIsSlowmotion) {

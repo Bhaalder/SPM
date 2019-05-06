@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
-
-    public float movementSpeed;
+    [Header("Movementspeeds")]
+    public float movementSpeed = 12;
     public float speedMultiplier; //denna används för att öka movmentspeed med pickups, per 0,1 ökas 10%
-    public float jumpForce;
-    public float extraJumps;
-    public float fakeExtraGravity;
 
-    public float distanceToGround;
+    [Header("Jumping")]
+    public float jumpForce = 10;
+    public float extraJumps;
+    public float fakeExtraGravity = 5;
+
+    [Header("Dash")]//denna funktion funkar ej än, känns dåligt
+    public float dashForce = 0;
+    public float nextTimeToDash;
 
     private float jumpCount;
+    private float distanceToGround;   
+
     private Rigidbody rigidBody;
-    
     private CapsuleCollider capsuleCollider;
     private BoxCollider groundCheck;
     private Vector2 velocity;
@@ -31,7 +36,7 @@ public class PlayerMovementController : MonoBehaviour
         distanceToGround = groundCheck.bounds.extents.y;
     }
 
-    void Update(){
+    void FixedUpdate(){
         Jump();
         Move();                
         FakeExtraGravity();
@@ -63,6 +68,11 @@ public class PlayerMovementController : MonoBehaviour
             }
             IsGrounded();
         }
+    }
+
+    public void Dash() {
+        velocity.y = 0;
+        rigidBody.AddForce(transform.forward * dashForce, ForceMode.VelocityChange);
     }
 
     private void FakeExtraGravity() {

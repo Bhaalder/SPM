@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;//TA BORT SEN
 
 public class PlayerInput : MonoBehaviour
 {
-
-    public float dashForce;
-    public float nextTimeToDash;
     public Slowmotion slowmotion;
 
     public GameObject startTeleport;
@@ -15,15 +12,15 @@ public class PlayerInput : MonoBehaviour
     public GameObject thirdTeleport;
 
     private PlayerShoot playerShoot;
+    private PlayerMovementController playerMovementController;
     private BaseWeapon selectedWeapon;
-    private Rigidbody rigidBody;
     private float nextTimeToFireOrReload = 0f;
     private float nextTimeToReload = 0f;
     private bool isReloading = false;
 
     private void Start(){
         playerShoot = GetComponentInChildren<PlayerShoot>();
-        rigidBody = GetComponent<Rigidbody>();
+        playerMovementController = GetComponent<PlayerMovementController>();
     }
 
     private void Update(){
@@ -182,9 +179,7 @@ public class PlayerInput : MonoBehaviour
 
     private void DashInput() {
         if (Input.GetButtonDown("Dash")) {
-
-            //rigidBody.AddForce(transform.forward * dashForce, ForceMode.Impulse);
-
+            //playerMovementController.Dash();
             //playerShoot.Melee();
             Debug.Log("Dash");
         }

@@ -14,10 +14,10 @@ public class ThirdPersonCamera : MonoBehaviour {
     
     [Header("Collision Speed")]
     public float moveSpeed = 40;
-    public float wallSink = 0.3f;
+    public float wallPush = 0.2f;
 
     [Header("Distances")]
-    public float distanceFromTarget = 2.4f;
+    public float distanceFromPlayer = 2.4f;
     //public float closestDistanceToPlayer = 0.5f;
 
     [Header("Mask")]
@@ -42,15 +42,15 @@ public class ThirdPersonCamera : MonoBehaviour {
         transform.eulerAngles = targetRotation;
         player.rotation = Quaternion.Euler(0, mouseX, 0);
 
-        CollisionCheck(cameraTarget.position - transform.forward * distanceFromTarget);
+        CollisionCheck(cameraTarget.position - transform.forward * distanceFromPlayer);
     }
 
     private void ScrollWheelZoom() {
         var scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll > 0f) {
-            distanceFromTarget -= 0.15f; //zoom in
+            distanceFromPlayer -= 0.15f; //in
         } else if (scroll < 0f) {
-            distanceFromTarget += 0.15f; //zoom out
+            distanceFromPlayer += 0.15f; //out
         }
     }
 
@@ -58,12 +58,12 @@ public class ThirdPersonCamera : MonoBehaviour {
         RaycastHit hit;
 
         if (Physics.Linecast(cameraTarget.position, returnPoint, out hit, collisionMask)) {
-            Vector3 normal = hit.normal * wallSink;
-            Vector3 point = hit.point - normal;
+            Vector3 normal = hit.normal * wallPush;
+            Vector3 point = hit.point + normal;
 
             transform.position = Vector3.Lerp(transform.position, point, moveSpeed * Time.deltaTime);
         } else {
-            transform.position = cameraTarget.position - transform.forward * distanceFromTarget;
+            transform.position = cameraTarget.position - transform.forward * distanceFromPlayer;
         }
     }
 }
