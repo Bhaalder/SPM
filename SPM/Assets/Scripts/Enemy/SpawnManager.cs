@@ -33,7 +33,7 @@ public class SpawnManager : MonoBehaviour
         _currentWave = -1; // avoid off by 1
         _totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
         isRoomCleared = false;
-        StartNextWave();
+        // StartNextWave();
     }
 
 
