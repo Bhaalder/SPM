@@ -12,6 +12,8 @@ public class SceneManagerScript : MonoBehaviour
     {
         buttonIsPressed = false;
         // SpawnManager spawnScript = GetComponent<SpawnManager>();
+        //DontDestroyOnLoad(gameObject);
+
 
     }
 
@@ -20,6 +22,22 @@ public class SceneManagerScript : MonoBehaviour
     {
       
     }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void StartLevelOne()
+    {
+        SceneManager.LoadScene("Level1WhiteBoxArea");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
 
 
     private void OnTriggerStay(Collider other)

@@ -18,12 +18,12 @@ public class PlayerInput : MonoBehaviour
     private float nextTimeToReload = 0f;
     private bool isReloading = false;
 
-    private void Start(){
+    private void Start() {
         playerShoot = GetComponentInChildren<PlayerShoot>();
         playerMovementController = GetComponent<PlayerMovementController>();
     }
 
-    private void Update(){
+    private void Update() {
         selectedWeapon = GameController.Instance.selectedWeapon;
         ReloadWeaponInput();
         ReloadSequence();
@@ -32,13 +32,14 @@ public class PlayerInput : MonoBehaviour
         SlowmotionInput();
         InteractInput();
         DashInput();
+        InGameMenu();
 
         Teleport();//TA BORT SEN
-         
+
 
 
     }
-    
+
 
     private void Teleport() {//TA BORT SEN
         if (Input.GetKeyDown(KeyCode.T)) {
@@ -49,7 +50,7 @@ public class PlayerInput : MonoBehaviour
                 transform.position = startTeleport.transform.position;
             } catch (System.Exception) {
                 Debug.Log("FINNS INGEN DEFINERAD 'startTeleport'");
-            }      
+            }
         }
         if (Input.GetKeyDown(KeyCode.O)) {
             try {
@@ -66,6 +67,24 @@ public class PlayerInput : MonoBehaviour
             }
         }
     }//TA BORT SEN
+
+    private void InGameMenu()
+    {
+
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            try
+            {
+                GameObject menucontroller = GameObject.Find("MenuController");
+                menucontroller.GetComponent<MenuController>().ActivateMenu();
+            }
+            catch (System.Exception)
+            {
+                Debug.Log("FINNS INGEN DEFINERAD 'MenuController'");
+            }
+
+        }
+    }
 
 
     private void ReloadWeaponInput() {      
