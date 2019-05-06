@@ -108,6 +108,6 @@ public class GameController : MonoBehaviour {
         } else {
             Debug.Log("InvulnerableState active, no damage");
         }
-    }
+    } 
 
 }

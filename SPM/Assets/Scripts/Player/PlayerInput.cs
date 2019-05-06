@@ -34,7 +34,7 @@ public class PlayerInput : MonoBehaviour
         DashInput();
 
         Teleport();//TA BORT SEN
-
+         
 
 
     }
