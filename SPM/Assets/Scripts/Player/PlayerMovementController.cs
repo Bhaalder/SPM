@@ -36,8 +36,10 @@ public class PlayerMovementController : MonoBehaviour
         distanceToGround = groundCheck.bounds.extents.y;
     }
 
-    void FixedUpdate(){
+    private void Update() {
         Jump();
+    }
+    private void FixedUpdate(){
         Move();                
         FakeExtraGravity();
     }
