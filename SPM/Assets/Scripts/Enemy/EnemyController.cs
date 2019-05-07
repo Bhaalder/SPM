@@ -51,7 +51,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         enemyWeapon = WeaponController.Instance.GetEnemyProjectileWeapon();
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("InteractionPlayer").transform;
         AttackTrigger = true;
         Attacking = false;
         Charging = false;
@@ -199,7 +199,6 @@ public class EnemyController : MonoBehaviour
             if (chargeposition == noChargePosition)
             {
                 chargeposition = player.position;
-                chargeposition.y += transform.position.y/2;
                 RecentlyCharged = true;
                 StartCoroutine(ChargingTimer(TimeBeforeCharge));
             }
