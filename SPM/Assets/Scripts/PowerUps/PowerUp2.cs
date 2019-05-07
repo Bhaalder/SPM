@@ -5,12 +5,12 @@ using UnityEngine;
 public class PowerUp2 : MonoBehaviour
 {
     public Transform powerUpSpawner;
-    public float TimeToDestroy = 0.2f;
+    public float TimeToDestroy = 0.0f;
 
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "InteractionPlayer")
         {
             GameController.Instance.GetComponent<GameController>().playerHP = 100;
             GetComponentInParent<PowerUpSpawner>().Respawner();
