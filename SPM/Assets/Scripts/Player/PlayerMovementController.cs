@@ -49,7 +49,7 @@ public class PlayerMovementController : MonoBehaviour
         }                    
         FakeExtraGravity();
         if (Time.time <= timeToDash) {
-            transform.position += (Camera.main.transform.forward * dashForce) * Time.deltaTime;
+            transform.position += (Camera.main.transform.forward * (dashForce * (1+speedMultiplier))) * Time.deltaTime;
         } else {
             isDashing = false;
         }
@@ -88,6 +88,16 @@ public class PlayerMovementController : MonoBehaviour
         if(Time.time >= timeToDash+nextTimeToDash) {
             timeToDash = Time.time + dashDuration;
         }
+    }
+
+    public void SpeedMultiplier(float speedDuration, float speedChange) {
+        StartCoroutine(SpeedChange(speedDuration, speedChange));
+    }
+
+    private IEnumerator SpeedChange(float speedDuration, float speedChange) {
+        speedMultiplier = speedChange;
+        yield return new WaitForSeconds(speedDuration);
+        speedMultiplier -= speedChange;
     }
 
     private void FakeExtraGravity() {
