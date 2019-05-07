@@ -76,7 +76,13 @@ public class PlayerInput : MonoBehaviour
             try
             {
                 GameObject menucontroller = GameObject.Find("MenuController");
-                menucontroller.GetComponent<MenuController>().ActivateMenu();
+                if (menucontroller.GetComponent<MenuController>().InGameMenuActive)
+                {
+                    menucontroller.GetComponent<MenuController>().DeactivateMenu();
+                }
+                else {
+                    menucontroller.GetComponent<MenuController>().ActivateMenu();
+                }
             }
             catch (System.Exception)
             {

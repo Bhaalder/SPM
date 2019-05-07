@@ -29,8 +29,16 @@ public class ThirdPersonCamera : MonoBehaviour {
     }
 
     private void Update() {
-        CameraControl();
-        ScrollWheelZoom();
+        if (GameController.Instance.gameIsPaused)
+        {
+
+        }
+        else
+        {
+            CameraControl();
+            ScrollWheelZoom();
+        }
+
     }
 
     private void CameraControl() {
