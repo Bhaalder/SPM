@@ -41,13 +41,14 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Update() {
         Jump();
-        if (Time.time <= timeToDash) {
-            transform.position += transform.forward * dashForce * 0.03f;
-        }
+
     }
     private void FixedUpdate(){
         Move();                
         FakeExtraGravity();
+        if (Time.time <= timeToDash) {
+            transform.position += (transform.forward * dashForce) * Time.deltaTime;
+        }
     }
 
     private void Move() {
