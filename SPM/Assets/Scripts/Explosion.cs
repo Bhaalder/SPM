@@ -25,7 +25,7 @@ public class Explosion : MonoBehaviour
             }
         }
         explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
-        Destroy(explosion, 4f);
+        Destroy(explosion, 3.75f);
         
     }
 }
