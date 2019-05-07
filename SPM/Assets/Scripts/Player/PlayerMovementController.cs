@@ -44,10 +44,14 @@ public class PlayerMovementController : MonoBehaviour
 
     }
     private void FixedUpdate(){
-        Move();                
+        if (!isDashing) {
+            Move();
+        }                    
         FakeExtraGravity();
         if (Time.time <= timeToDash) {
-            transform.position += (transform.forward * dashForce) * Time.deltaTime;
+            transform.position += (Camera.main.transform.forward * dashForce) * Time.deltaTime;
+        } else {
+            isDashing = false;
         }
     }
 
