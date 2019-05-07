@@ -48,7 +48,9 @@ public class MenuController : MonoBehaviour
     public void MainMenu()
     {
         Debug.Log("Clicked button: Main Menu");
+        
         scenemanager.GetComponent<SceneManagerScript>().MainMenu();
+        DeactivateMenu();
     }
 
 }
