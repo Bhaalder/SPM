@@ -6,6 +6,8 @@ public class Explosion : MonoBehaviour
 {
     public float explosionRadius;
     public GameObject explosionEffect;
+
+    private GameObject explosion;
     
     public void Explode(float explosionForce, float damage) {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
@@ -22,8 +24,8 @@ public class Explosion : MonoBehaviour
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
         }
-        Instantiate(explosionEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        Destroy(explosion, 4f);
         
     }
 }

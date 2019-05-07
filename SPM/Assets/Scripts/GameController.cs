@@ -56,8 +56,8 @@ public class GameController : MonoBehaviour {
         playerWeapons.Add(rifle);
         //BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
         //playerWeapons.Add(shotgun);
-        //BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
-        //playerWeapons.Add(rocketLaucher);
+        BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
+        playerWeapons.Add(rocketLaucher);
 
         selectedWeapon = playerWeapons[0];
         UpdateSelectedWeaponText();

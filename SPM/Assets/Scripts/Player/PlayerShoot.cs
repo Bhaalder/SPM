@@ -8,16 +8,22 @@ public class PlayerShoot : MonoBehaviour
 
     public LayerMask layerMask;
 
-    [SerializeField] public Transform camFocusTrans;
+    [SerializeField] public Transform weaponFocus;
 
-    [SerializeField] private GameObject bulletImpactGO;
+    [SerializeField] private GameObject bulletImpactMetalGO;
+
+    [SerializeField] private GameObject bulletImpactAlienGO;
+
+    [SerializeField] private ParticleSystem muzzleFlash;
+
+    private GameObject bulletImpact;
 
     private void Start(){
-
+        weaponFocus = GameObject.Find("WeaponFocus").transform;
     }
 
     void Update(){
-        transform.LookAt(camFocusTrans);
+        transform.LookAt(weaponFocus);
     }
 
     public void Melee() {
@@ -29,8 +35,8 @@ public class PlayerShoot : MonoBehaviour
             if (hit.collider.gameObject.layer == 9) {
                 hit.transform.GetComponent<EnemyController>().TakeDamage(100f);
             }
-            GameObject bulletImpact = Instantiate(bulletImpactGO, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(bulletImpact, 0.1f);
+            bulletImpact = Instantiate(bulletImpactMetalGO, hit.point, Quaternion.LookRotation(hit.normal));
+            Destroy(bulletImpact, 2.0f);
         }
     }
 
@@ -40,13 +46,18 @@ public class PlayerShoot : MonoBehaviour
         }
         else if (weapon.GetName().Equals("Shotgun")){
             ShootShotgunHitScan(weapon);
+            
         }            
-        else {ShootHitScan(weapon);}            
+        else {
+            ShootHitScan(weapon);
+            
+        }            
     }
 
     private void ShootHitScan(BaseWeapon weapon) {
 
         if (weapon.GetAmmoInClip() != 0) {
+            muzzleFlash.Play();
             weapon.DecreaseAmmoInClip();
             bool hitTarget = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, weapon.GetRange(), layerMask);
 
@@ -57,9 +68,11 @@ public class PlayerShoot : MonoBehaviour
                 }
                 if (hit.collider.gameObject.layer == 9){
                     hit.transform.GetComponent<EnemyController>().TakeDamage(weapon.GetDamage());
+                    bulletImpact = Instantiate(bulletImpactAlienGO, hit.point, Quaternion.LookRotation(hit.normal));
+                } else {
+                    bulletImpact = Instantiate(bulletImpactMetalGO, hit.point, Quaternion.LookRotation(hit.normal));
                 }
-                GameObject bulletImpact = Instantiate(bulletImpactGO, hit.point, Quaternion.LookRotation(hit.normal));
-                Destroy(bulletImpact, 0.1f);
+                Destroy(bulletImpact, 2.0f);
             }
         } else if (weapon.GetAmmoInClip() <= 0) {
             Debug.Log("Out of Ammo");
@@ -69,6 +82,7 @@ public class PlayerShoot : MonoBehaviour
     //TEST
     private void ShootShotgunHitScan(BaseWeapon weapon){
         if (weapon.GetAmmoInClip() != 0){
+            muzzleFlash.Play();
             weapon.DecreaseAmmoInClip();
             bool[] hitTarget = new bool[5];
             RaycastHit[] hits = new RaycastHit[5];
@@ -88,9 +102,12 @@ public class PlayerShoot : MonoBehaviour
                             fallOff = weapon.GetDamage();
                         }
                         hits[x].transform.GetComponent<EnemyController>().TakeDamage(weapon.GetDamage() - fallOff);
+                        bulletImpact = Instantiate(bulletImpactAlienGO, hits[x].point, Quaternion.LookRotation(hits[x].normal));
+                    } else {
+                        bulletImpact = Instantiate(bulletImpactMetalGO, hits[x].point, Quaternion.LookRotation(hits[x].normal));
                     }
-                    GameObject bulletImpact = Instantiate(bulletImpactGO, hits[x].point, Quaternion.LookRotation(hits[x].normal));
-                    Destroy(bulletImpact, 0.1f);
+                    
+                    Destroy(bulletImpact, 2.0f);
                 }
             }
         }
@@ -104,8 +121,7 @@ public class PlayerShoot : MonoBehaviour
             weapon.DecreaseAmmoInClip();
 
             GameObject rocketProj = Instantiate(weapon.GetProjectile(), transform.position + transform.forward * 2, Quaternion.identity);
-            rocketProj.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            rocketProj.transform.LookAt(camFocusTrans);
+            rocketProj.transform.LookAt(weaponFocus);
             rocketProj.GetComponent<RocketProjectile>().SetProjectileSpeed(weapon.GetProjectileSpeed());
             rocketProj.GetComponent<RocketProjectile>().SetProjectileForce(weapon.GetImpactForce());
             rocketProj.GetComponent<RocketProjectile>().SetProjectileDamage(weapon.GetDamage());

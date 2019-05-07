@@ -16,9 +16,9 @@ public class RocketProjectile : MonoBehaviour
 
     private void IncreaseSpeed()
     {
-        if (projectileSpeed < 50)
+        if (projectileSpeed < 30)
         {
-            projectileSpeed *= 1.2f;
+            projectileSpeed *= 1.01f;
         }
     }
 
@@ -36,5 +36,6 @@ public class RocketProjectile : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         GetComponent<Explosion>().Explode(projectileForce, projectileDamage);
+        Destroy(gameObject);
     }
 }
