@@ -14,9 +14,12 @@ public class PlayerMovementController : MonoBehaviour
     public float fakeExtraGravity = 5;
 
     [Header("Dash")]//denna funktion funkar ej än, känns dåligt
-    public float dashForce = 0;
-    public float nextTimeToDash;
+    public float dashForce = 10;
+    public float nextTimeToDash = 2;
+    public float dashDuration = 0.5f;
 
+    private float timeToDash;
+    private bool isDashing;
     private float jumpCount;
     private float distanceToGround;   
 
@@ -38,6 +41,9 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Update() {
         Jump();
+        if (Time.time <= timeToDash) {
+            transform.position += transform.forward * dashForce * 0.03f;
+        }
     }
     private void FixedUpdate(){
         Move();                
@@ -73,8 +79,10 @@ public class PlayerMovementController : MonoBehaviour
     }
 
     public void Dash() {
-        velocity.y = 0;
-        rigidBody.AddForce(transform.forward * dashForce, ForceMode.VelocityChange);
+        isDashing = true;
+        if(Time.time >= timeToDash+nextTimeToDash) {
+            timeToDash = Time.time + dashDuration;
+        }
     }
 
     private void FakeExtraGravity() {
