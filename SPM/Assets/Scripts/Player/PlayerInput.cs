@@ -68,13 +68,10 @@ public class PlayerInput : MonoBehaviour
         }
     }//TA BORT SEN
 
-    private void InGameMenu()
-    {
+    private void InGameMenu(){
 
-        if (Input.GetKeyDown(KeyCode.F10))
-        {
-            try
-            {
+        if (Input.GetKeyDown(KeyCode.F10)){
+            try{
                 GameObject menucontroller = GameObject.Find("MenuController");
                 if (menucontroller.GetComponent<MenuController>().InGameMenuActive)
                 {
@@ -84,11 +81,9 @@ public class PlayerInput : MonoBehaviour
                     menucontroller.GetComponent<MenuController>().ActivateMenu();
                 }
             }
-            catch (System.Exception)
-            {
+            catch (System.Exception){
                 Debug.Log("FINNS INGEN DEFINERAD 'MenuController'");
             }
-
         }
     }
 
@@ -204,7 +199,7 @@ public class PlayerInput : MonoBehaviour
 
     private void DashInput() {
         if (Input.GetButtonDown("Dash")) {
-            //playerMovementController.Dash();
+            playerMovementController.Dash();
             //playerShoot.Melee();
             Debug.Log("Dash");
         }
