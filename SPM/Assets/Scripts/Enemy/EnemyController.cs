@@ -70,10 +70,11 @@ public class EnemyController : MonoBehaviour
     {
         Movement();
         JustEntered();
-        if (activated)
+        if (activated && !Charging)
         {
-            transform.LookAt(player);
+            LookAtPlayer();
         }
+        transform.rotation.Normalize();
 
     }
 
@@ -94,7 +95,8 @@ public class EnemyController : MonoBehaviour
             EnterMoveSeconds -= Time.smoothDeltaTime;
             if (EnterMoveSeconds >= 0)
             {
-                transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+                //transform.position += transform.forward * MoveSpeed * Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, player.position, MoveSpeed * Time.deltaTime);
             }
             else
             {
@@ -137,7 +139,8 @@ public class EnemyController : MonoBehaviour
 
     private void MoveToPlayer()
     {
-        transform.LookAt(player);
+
+        LookAtPlayer();
         if (Vector3.Distance(transform.position, player.position) > AttackDistance)
         {
             transform.position += transform.forward * MoveSpeed * Time.deltaTime;
@@ -196,6 +199,7 @@ public class EnemyController : MonoBehaviour
             if (chargeposition == noChargePosition)
             {
                 chargeposition = player.position;
+                chargeposition.y += transform.position.y/2;
                 RecentlyCharged = true;
                 StartCoroutine(ChargingTimer(TimeBeforeCharge));
             }
@@ -240,6 +244,12 @@ public class EnemyController : MonoBehaviour
         StartCoroutine(StunTime(EnemyStunnedTime));
         Attacking = false;
         RecentlyCharged = false;
+        LookAtPlayer();
+    }
+
+    void LookAtPlayer()
+    {
+        transform.LookAt(player, Vector3.up);
     }
 
     void OnCollisionEnter(Collision collision) {
