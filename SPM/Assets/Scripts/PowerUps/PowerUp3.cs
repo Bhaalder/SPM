@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUp3 : MonoBehaviour
 {
     public Transform powerUpSpawner;
-    public float TimeToDestroy = 0.0f;
+    //public float TimeToDestroy = 0.0f;
 
 
     private void OnTriggerEnter(Collider other)
@@ -14,14 +14,15 @@ public class PowerUp3 : MonoBehaviour
         {
             GameController.Instance.GetComponent<GameController>().playerArmor = 100;
             GetComponentInParent<PowerUpSpawner>().Respawner();
-            StartCoroutine(UsedBoost());
+            Destroy(gameObject);//
+            //StartCoroutine(UsedBoost());
         }
     }
 
 
-    IEnumerator UsedBoost()
-    {
-        yield return new WaitForSeconds(TimeToDestroy);
-        Destroy(gameObject);
-    }
+    //IEnumerator UsedBoost()
+    //{
+    //    yield return new WaitForSeconds(TimeToDestroy);
+    //    Destroy(gameObject);
+    //}
 }
