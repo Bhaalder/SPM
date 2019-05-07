@@ -6,7 +6,7 @@ public class WeaponController : MonoBehaviour
 {
     public GameObject rocketLaucherProjectileGO;
     public GameObject enemyWeaponProjectileGO;
-
+     
     private static WeaponController instance;
 
     public static WeaponController Instance {
