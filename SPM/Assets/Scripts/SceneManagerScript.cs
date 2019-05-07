@@ -42,7 +42,7 @@ public class SceneManagerScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && buttonIsPressed && GameController.Instance.playerIsInteracting && GameController.Instance.sceneCompleted)
+        if (other.gameObject.CompareTag("InteractionPlayer") && buttonIsPressed && GameController.Instance.playerIsInteracting && GameController.Instance.sceneCompleted)
         {
             SceneManager.LoadScene("Level2WhiteBox");
             GameController.Instance.SceneNotCompletedSequence();
