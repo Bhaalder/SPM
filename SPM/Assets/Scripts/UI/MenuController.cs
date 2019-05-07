@@ -8,11 +8,14 @@ public class MenuController : MonoBehaviour
 
     private GameObject scenemanager;
 
+    public bool InGameMenuActive;
+
 
     // Start is called before the first frame update
     void Start()
     {
         menuPanel.SetActive(false);
+        InGameMenuActive = false;
         //DontDestroyOnLoad(gameObject);
         scenemanager = GameObject.Find("SceneManager");
     }
@@ -26,15 +29,25 @@ public class MenuController : MonoBehaviour
     public void ActivateMenu()
     {
         menuPanel.SetActive(true);
+        InGameMenuActive = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        GameController.Instance.GamePaused();
+
     }
 
     public void DeactivateMenu()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         menuPanel.SetActive(false);
+        InGameMenuActive = false;
+        GameController.Instance.GamePaused();
     }
 
     public void MainMenu()
     {
+        Debug.Log("Clicked button: Main Menu");
         scenemanager.GetComponent<SceneManagerScript>().MainMenu();
     }
 

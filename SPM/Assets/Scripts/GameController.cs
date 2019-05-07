@@ -89,9 +89,11 @@ public class GameController : MonoBehaviour {
 
     public void GamePaused() {
         if (gameIsPaused) {
-            Time.timeScale = 0f;
-        } else {
+            gameIsPaused = false;
             Time.timeScale = 1f;
+        } else {
+            gameIsPaused = true;
+            Time.timeScale = 0f;
         }
     }
     
