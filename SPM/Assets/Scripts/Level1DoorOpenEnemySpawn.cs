@@ -22,7 +22,7 @@ public class Level1DoorOpenEnemySpawn : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.CompareTag("Player") && GameController.Instance.playerIsInteracting)
+        if(other.gameObject.CompareTag("InteractionPlayer") && GameController.Instance.playerIsInteracting)
         {
             Debug.Log("F");
             aDoor.SetActive(false);

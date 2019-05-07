@@ -25,7 +25,7 @@ public class OpenDoorsLvl1 : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && GameController.Instance.playerIsInteracting)
+        if (other.gameObject.CompareTag("InteractionPlayer") && GameController.Instance.playerIsInteracting)
         {
             Debug.Log("F");
             theDoor.SetActive(!theDoor.activeSelf);
