@@ -13,7 +13,7 @@ public class PowerUp1 : MonoBehaviour
     {
         if (other.gameObject.tag == "InteractionPlayer")
         {
-            other.GetComponent<PlayerMovementController>().speedMultiplier = speedIncrease;
+            other.transform.parent.GetComponent<PlayerMovementController>().speedMultiplier = speedIncrease;
             GetComponentInParent<PowerUpSpawner>().Respawner();
             Destroy(gameObject);//
             //StartCoroutine(UsedBoost());
