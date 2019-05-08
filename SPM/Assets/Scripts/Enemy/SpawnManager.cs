@@ -113,6 +113,9 @@ public class SpawnManager : MonoBehaviour
         yield return null;
     }
 
+
+    public GameObject yeet;
+    
     // called by an enemy when they're defeated
     public void EnemyDefeated()
     {
@@ -132,6 +135,10 @@ public class SpawnManager : MonoBehaviour
                 {
                     Debug.Log("Du har vunnit!!");
                     GameController.Instance.SceneCompletedSequence();
+                    GameObject sceneManager = GameObject.Find("SceneManager");
+                    sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
+                    yeet.SetActive(false);
+
                 }
 
                 isRoomCleared = true;

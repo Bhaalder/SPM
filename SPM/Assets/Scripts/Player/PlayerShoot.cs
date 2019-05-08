@@ -17,6 +17,8 @@ public class PlayerShoot : MonoBehaviour{
     [SerializeField] private ParticleSystem muzzleFlash;
 
     private GameObject bulletImpact;
+    private float alienWoundTimer = 0.2f;
+
 
     private void Start(){
         weaponFocus = GameObject.Find("WeaponFocus").transform;
@@ -35,8 +37,7 @@ public class PlayerShoot : MonoBehaviour{
             if (hit.collider.gameObject.layer == 9) {
                 hit.transform.GetComponent<EnemyController>().TakeDamage(100f);
             }
-            bulletImpact = Instantiate(bulletImpactMetalGO, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(bulletImpact, 2.0f);
+            InstantiateSingleBulletHit(bulletImpactMetalGO, hit, 2.0f);
         }
     }
 
@@ -68,11 +69,10 @@ public class PlayerShoot : MonoBehaviour{
                 }
                 if (hit.collider.gameObject.layer == 9){
                     hit.transform.GetComponent<EnemyController>().TakeDamage(weapon.GetDamage());
-                    bulletImpact = Instantiate(bulletImpactAlienGO, hit.point, Quaternion.LookRotation(hit.normal));
+                    InstantiateSingleBulletHit(bulletImpactAlienGO, hit, alienWoundTimer);
                 } else {
-                    bulletImpact = Instantiate(bulletImpactMetalGO, hit.point, Quaternion.LookRotation(hit.normal));
+                    InstantiateSingleBulletHit(bulletImpactMetalGO, hit, 2.0f);
                 }
-                Destroy(bulletImpact, 2.0f);
             }
         } else if (weapon.GetAmmoInClip() <= 0) {
             Debug.Log("Out of Ammo");
@@ -102,12 +102,11 @@ public class PlayerShoot : MonoBehaviour{
                             fallOff = weapon.GetDamage();
                         }
                         hits[x].transform.GetComponent<EnemyController>().TakeDamage(weapon.GetDamage() - fallOff);
-                        bulletImpact = Instantiate(bulletImpactAlienGO, hits[x].point, Quaternion.LookRotation(hits[x].normal));
+                        InstantiateMultipleBulletHits(bulletImpactAlienGO, hits, x, alienWoundTimer);
                     } else {
-                        bulletImpact = Instantiate(bulletImpactMetalGO, hits[x].point, Quaternion.LookRotation(hits[x].normal));
+                        InstantiateMultipleBulletHits(bulletImpactMetalGO, hits, x, 2.0f);
                     }
                     
-                    Destroy(bulletImpact, 2.0f);
                 }
             }
         }
@@ -131,4 +130,13 @@ public class PlayerShoot : MonoBehaviour{
         }
     }
     
+    private void InstantiateMultipleBulletHits(GameObject impactGO, RaycastHit[] hits, int numberOfHits, float timeUntilDestroy) {
+        bulletImpact = Instantiate(impactGO, hits[numberOfHits].point, Quaternion.LookRotation(hits[numberOfHits].normal));
+        Destroy(bulletImpact, timeUntilDestroy);
+    }
+    private void InstantiateSingleBulletHit(GameObject impactGO, RaycastHit hit, float timeUntilDestroy) {
+        bulletImpact = Instantiate(impactGO, hit.point, Quaternion.LookRotation(hit.normal));
+        Destroy(bulletImpact, timeUntilDestroy);
+    }
+
 }

@@ -101,7 +101,6 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                Debug.Log("Done");
                 timerRunning = false;
             }
         }
