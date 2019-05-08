@@ -18,10 +18,9 @@ public class Explosion : MonoBehaviour
             {
                 nearbyObject.transform.GetComponent<EnemyController>().TakeDamage(damage);
             }
-            Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+            Rigidbody rigidBody = nearbyObject.GetComponent<Rigidbody>();
+            if (rigidBody != null){
+                rigidBody.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
         }
         explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);

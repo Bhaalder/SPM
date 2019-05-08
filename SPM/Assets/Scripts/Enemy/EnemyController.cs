@@ -48,8 +48,7 @@ public class EnemyController : MonoBehaviour
 
     private ProjectileWeapon enemyWeapon;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         enemyWeapon = WeaponController.Instance.GetEnemyProjectileWeapon();
         player = GameObject.Find("InteractionPlayer").transform;
         AttackTrigger = true;

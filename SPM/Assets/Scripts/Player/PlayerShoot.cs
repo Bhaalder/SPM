@@ -63,7 +63,7 @@ public class PlayerShoot : MonoBehaviour
 
             // få in spread på något sätt
             if (hitTarget) {
-                if (hit.rigidbody != null) {
+                if (hit.rigidbody != null && hit.collider.gameObject.layer != 2) {
                     hit.rigidbody.AddForce(-hit.normal * weapon.GetImpactForce());
                 }
                 if (hit.collider.gameObject.layer == 9){
@@ -92,7 +92,7 @@ public class PlayerShoot : MonoBehaviour
             }
             for(int x = 0; x < hitTarget.Length; x++){
                 if (hitTarget[x]){
-                    if (hits[x].rigidbody != null){
+                    if (hits[x].rigidbody != null && hits[x].collider.gameObject.layer != 2) {
                         hits[x].rigidbody.AddForce(-hits[x].normal * weapon.GetImpactForce());
                     }
                     if (hits[x].collider.gameObject.layer == 9){
