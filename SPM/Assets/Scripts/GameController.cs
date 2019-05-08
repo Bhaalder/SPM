@@ -54,10 +54,10 @@ public class GameController : MonoBehaviour {
 
         BaseWeapon rifle = WeaponController.Instance.GetRifle();
         playerWeapons.Add(rifle);
-        //BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
-        //playerWeapons.Add(shotgun);
-        //BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
-        //playerWeapons.Add(rocketLaucher);
+        BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
+        playerWeapons.Add(shotgun);
+        BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
+        playerWeapons.Add(rocketLaucher);
 
         selectedWeapon = playerWeapons[0];
         UpdateSelectedWeaponText();
@@ -90,10 +90,15 @@ public class GameController : MonoBehaviour {
     public void GamePaused() {
         if (gameIsPaused) {
             gameIsPaused = false;
-            Time.timeScale = 1f;
+            if (gameIsSlowmotion) {
+                GetComponent<Slowmotion>().SlowTime();
+            } else {
+                Time.timeScale = 1f;
+            }
         } else {
             gameIsPaused = true;
             Time.timeScale = 0f;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
     }
     
