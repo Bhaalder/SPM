@@ -11,6 +11,10 @@ public class ArenaButton : MonoBehaviour
     public GameObject obj1;
     public GameObject obj2;
 
+    private void Start() {
+        sceneManagerScript = GameObject.Find("SceneManager").GetComponent<SceneManagerScript>();
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("InteractionPlayer") && GameController.Instance.playerIsInteracting)
