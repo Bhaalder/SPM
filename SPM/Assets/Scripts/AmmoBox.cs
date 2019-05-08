@@ -19,6 +19,7 @@ public class AmmoBox : MonoBehaviour
             GameController.Instance.UpdateSelectedWeaponAmmoText();
             GetComponentInParent<PowerUpSpawner>().Respawner();
         }
+        Destroy(gameObject);
     }
     
     public void setClipIncrease(int clipIncreaseAmount)
