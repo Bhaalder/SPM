@@ -58330,6 +58330,11 @@ PrefabInstance:
       propertyPath: Waves.Array.data[2].Numberofenemy.Array.data[2]
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 9220699852368298251, guid: 6d4466095c4675343b2d8814822c5af9,
+        type: 3}
+      propertyPath: isArenaSpawner
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9220699852368298250, guid: 6d4466095c4675343b2d8814822c5af9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -116832,7 +116837,7 @@ PrefabInstance:
     - target: {fileID: 4226101915321100853, guid: 2fae76d263ade994482ad8ff80b1c845,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.922
+      value: 0.209
       objectReference: {fileID: 0}
     - target: {fileID: 4226101915321100853, guid: 2fae76d263ade994482ad8ff80b1c845,
         type: 3}
