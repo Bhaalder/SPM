@@ -6,12 +6,11 @@ public class AmmoBox : MonoBehaviour
 {
     //Author: Patrik Ahlgren
     public int clipIncrease;
-    public float TimeToDestroy = 0.2f;
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "InteractionPlayer")
         {
             foreach (BaseWeapon weapon in GameController.Instance.playerWeapons)
             {
@@ -19,17 +18,9 @@ public class AmmoBox : MonoBehaviour
             }
             GameController.Instance.UpdateSelectedWeaponAmmoText();
             GetComponentInParent<PowerUpSpawner>().Respawner();
-            StartCoroutine(UsedBoost());
         }
     }
-
-
-    IEnumerator UsedBoost()
-    {
-        yield return new WaitForSeconds(TimeToDestroy);
-        Destroy(gameObject);
-    }
-
+    
     public void setClipIncrease(int clipIncreaseAmount)
     {
         clipIncrease = clipIncreaseAmount;

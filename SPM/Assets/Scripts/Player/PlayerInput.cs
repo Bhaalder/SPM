@@ -145,45 +145,39 @@ public class PlayerInput : MonoBehaviour{
 
     private void SwitchWeaponInput() {
        if (!isReloading) {
+            BaseWeapon firstWeapon = null;
+            BaseWeapon secondWeapon = null;
+            BaseWeapon thirdWeapon = null;
             try {
-                BaseWeapon firstWeapon = GameController.Instance.playerWeapons[0];
-                BaseWeapon secondWeapon = GameController.Instance.playerWeapons[1];
-                BaseWeapon thirdWeapon = GameController.Instance.playerWeapons[2];
-                if (Input.GetButtonDown("Weapon1")) {
-                    if (selectedWeapon == firstWeapon) { } else { GameController.Instance.selectedWeapon = firstWeapon; }
-                }
-                if (Input.GetButtonDown("Weapon2")) {
-                    if (selectedWeapon == secondWeapon) { } else { GameController.Instance.selectedWeapon = secondWeapon; }
-                }
-                if (Input.GetButtonDown("Weapon3")) {
-                    if (selectedWeapon == thirdWeapon) { } else { GameController.Instance.selectedWeapon = thirdWeapon; }
-                }
-
+                GetWeaponFromGameController(ref firstWeapon, 0);
+                GetWeaponFromGameController(ref secondWeapon, 1);
+                GetWeaponFromGameController(ref thirdWeapon, 2);
             } catch (System.ArgumentOutOfRangeException) {
-                try {
-                    BaseWeapon firstWeapon = GameController.Instance.playerWeapons[0];
-                    BaseWeapon secondWeapon = GameController.Instance.playerWeapons[1];
-                    if (Input.GetButtonDown("Weapon1")) {
-                        if (selectedWeapon == firstWeapon) { } else { GameController.Instance.selectedWeapon = firstWeapon; }
-                    }
-                    if (Input.GetButtonDown("Weapon2")) {
-                        if (selectedWeapon == secondWeapon) { } else { GameController.Instance.selectedWeapon = secondWeapon; }
-                    }
-                } catch (System.ArgumentOutOfRangeException) {
-                    try {
-                        BaseWeapon firstWeapon = GameController.Instance.playerWeapons[0];
-                        if (Input.GetButtonDown("Weapon1")) {
-                            if (selectedWeapon == firstWeapon) { } else { GameController.Instance.selectedWeapon = firstWeapon; }
-                        }
-                    } catch (System.ArgumentOutOfRangeException) {
 
-                    }
-                }
             }
+
+            if (Input.GetButtonDown("Weapon1") && firstWeapon != null) {
+                if (selectedWeapon != firstWeapon) { GameController.Instance.selectedWeapon = firstWeapon; }
+            }
+            if (Input.GetButtonDown("Weapon2") && secondWeapon != null) {
+                if (selectedWeapon != secondWeapon) { GameController.Instance.selectedWeapon = secondWeapon; }
+            }
+            if (Input.GetButtonDown("Weapon3") && thirdWeapon != null) {
+                if (selectedWeapon != thirdWeapon) { GameController.Instance.selectedWeapon = thirdWeapon; }
+            }
+
             GameController.Instance.UpdateSelectedWeaponText();
         }//if !isReloading
     }
     
+    private BaseWeapon GetWeaponFromGameController(ref BaseWeapon weapon, int i) {
+        if (GameController.Instance.playerWeapons[i] != null) {
+            return weapon = GameController.Instance.playerWeapons[i];
+        } else {
+            return null;
+        }      
+    }
+
     private void SlowmotionInput() {
         if (Input.GetButtonDown("Slowmotion")) {
             slowmotion.SlowTime();

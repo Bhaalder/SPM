@@ -14,7 +14,7 @@ public class PlayerMovementController : MonoBehaviour{
     public float extraJumps;
     public float fakeExtraGravity = 5;
 
-    [Header("Dash")]//denna funktion funkar ej än, känns dåligt
+    [Header("Dash")]
     public float dashForce = 10;
     public float nextTimeToDash = 2;
     public float dashDuration = 0.5f;
@@ -28,10 +28,6 @@ public class PlayerMovementController : MonoBehaviour{
     private CapsuleCollider capsuleCollider;
     private BoxCollider groundCheck;
     private Vector2 velocity;
-
-    //public LayerMask layerMask;
-    //private RaycastHit raycastHit;
-    //public float skinWidth = 0.5f;
 
     void Start(){
         rigidBody = GetComponent<Rigidbody>();
@@ -62,14 +58,6 @@ public class PlayerMovementController : MonoBehaviour{
 
         velocity = movementInput;
 
-        //float rayLength = velocity.magnitude + skinWidth;
-        //bool hit = Physics.BoxCast(transform.position, capsuleCollider.ClosestPointOnBounds(transform.position), transform.forward, out raycastHit, transform.rotation, rayLength, layerMask);
-        //if (hit) {
-        //    velocity = (raycastHit.distance - skinWidth) * velocity.normalized;
-        //    rayLength = raycastHit.distance;
-        //    Debug.Log("Kolliderar med " + raycastHit.collider.name);
-        //}
-
         transform.Translate(new Vector3(velocity.x, 0f, velocity.y));
     }
     private void Jump() {
@@ -77,7 +65,6 @@ public class PlayerMovementController : MonoBehaviour{
             if (jumpCount>0 || IsGrounded()) {
                 jumpCount--;
                 velocity.y = 0;
-                //rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 rigidBody.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
             IsGrounded();
