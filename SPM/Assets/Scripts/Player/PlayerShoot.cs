@@ -17,6 +17,8 @@ public class PlayerShoot : MonoBehaviour{
     [SerializeField] private ParticleSystem muzzleFlash;
 
     private GameObject bulletImpact;
+    private float alienWoundTimer = 0.2f;
+
 
     private void Start(){
         weaponFocus = GameObject.Find("WeaponFocus").transform;
@@ -67,7 +69,7 @@ public class PlayerShoot : MonoBehaviour{
                 }
                 if (hit.collider.gameObject.layer == 9){
                     hit.transform.GetComponent<EnemyController>().TakeDamage(weapon.GetDamage());
-                    InstantiateSingleBulletHit(bulletImpactAlienGO, hit, 0.5f);
+                    InstantiateSingleBulletHit(bulletImpactAlienGO, hit, alienWoundTimer);
                 } else {
                     InstantiateSingleBulletHit(bulletImpactMetalGO, hit, 2.0f);
                 }
@@ -100,7 +102,7 @@ public class PlayerShoot : MonoBehaviour{
                             fallOff = weapon.GetDamage();
                         }
                         hits[x].transform.GetComponent<EnemyController>().TakeDamage(weapon.GetDamage() - fallOff);
-                        InstantiateMultipleBulletHits(bulletImpactAlienGO, hits, x, 0.5f);
+                        InstantiateMultipleBulletHits(bulletImpactAlienGO, hits, x, alienWoundTimer);
                     } else {
                         InstantiateMultipleBulletHits(bulletImpactMetalGO, hits, x, 2.0f);
                     }
