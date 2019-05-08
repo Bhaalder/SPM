@@ -36,10 +36,7 @@ public class PlayerInput : MonoBehaviour{
 
         Teleport();//TA BORT SEN
 
-
-
     }
-
 
     private void Teleport() {//TA BORT SEN
         if (Input.GetKeyDown(KeyCode.T)) {
@@ -69,7 +66,6 @@ public class PlayerInput : MonoBehaviour{
     }//TA BORT SEN
 
     private void InGameMenu(){
-
         if (Input.GetKeyDown(KeyCode.F10)){
             try{
                 GameObject menucontroller = GameObject.Find("MenuController");
@@ -155,7 +151,6 @@ public class PlayerInput : MonoBehaviour{
             } catch (System.ArgumentOutOfRangeException) {
 
             }
-
             if (Input.GetButtonDown("Weapon1") && firstWeapon != null) {
                 if (selectedWeapon != firstWeapon) { GameController.Instance.selectedWeapon = firstWeapon; }
             }
