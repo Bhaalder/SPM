@@ -85,7 +85,7 @@ public class PlayerMovementController : MonoBehaviour{
     private IEnumerator SpeedChange(float speedDuration, float speedChange) {
         speedMultiplier = speedChange;
         yield return new WaitForSeconds(speedDuration);
-        speedMultiplier -= speedChange;
+        speedMultiplier = 0;
     }
 
     private void FakeExtraGravity() {
