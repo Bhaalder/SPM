@@ -19,8 +19,7 @@ public class EnemyController : MonoBehaviour
     public float EnemyStunnedTime = 3f;
     public float TimeBetweenAttacks = 0.5f;
     public float projectileSpeed = 5;
-    public float projectileDamage;
-    public float ProjectileTravelDistance;
+    public float projectileDamage = 30;
 
     public int enemyType;
 
@@ -51,6 +50,7 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start(){
         enemyWeapon = WeaponController.Instance.GetEnemyProjectileWeapon();
+        enemyWeapon.SetDamage(projectileDamage);
         enemyWeapon.SetProjectileSpeed(projectileSpeed);
         player = GameObject.Find("InteractionPlayer").transform;
         AttackTrigger = true;
