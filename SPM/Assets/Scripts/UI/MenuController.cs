@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MenuController : MonoBehaviour
 {
+    //Author: Marcus Söderberg
     public GameObject menuPanel;
 
     private GameObject scenemanager;

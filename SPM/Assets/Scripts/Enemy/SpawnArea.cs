@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnArea : MonoBehaviour
 {
-
+    //Author: Marcus Söderberg
     public float spawnArea;
     // Start is called before the first frame update
     void Start()

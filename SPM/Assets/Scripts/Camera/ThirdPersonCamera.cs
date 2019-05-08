@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour {
+    //Author: Patrik Ahlgren
+
     public float mouseSensitivity = 10;
     public Transform cameraTarget, player;
-    
-        
+            
     public Vector2 cameraClamp = new Vector2(-40, 85);
     
     private float mouseX;
@@ -29,12 +30,10 @@ public class ThirdPersonCamera : MonoBehaviour {
     }
 
     private void Update() {
-        if (GameController.Instance.gameIsPaused)
-        {
+        if (GameController.Instance.gameIsPaused){
 
         }
-        else
-        {
+        else{
             CameraControl();
             ScrollWheelZoom();
         }

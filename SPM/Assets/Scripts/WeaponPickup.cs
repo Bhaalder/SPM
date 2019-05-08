@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponPickup : MonoBehaviour {
+    //Author: Patrik Ahlgren
 
     public GameObject weaponPickupPrefab;
     private MeshFilter meshFilter;
@@ -17,7 +18,7 @@ public class WeaponPickup : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag == "Player") {
+        if (other.gameObject.tag == "InteractionPlayer") {
             BaseWeapon weaponPickup = null;
             if (weaponPickupPrefab.name == "Weapon_Rifle") {
                 weaponPickup = WeaponController.Instance.GetRifle();

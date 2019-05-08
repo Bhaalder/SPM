@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Slowmotion:MonoBehaviour{
+    //Author: Patrik Ahlgren
+
     public float slowdownAmount;
     
     public void SlowTime() {

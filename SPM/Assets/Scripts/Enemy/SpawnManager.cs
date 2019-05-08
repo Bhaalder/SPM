@@ -8,12 +8,14 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Wave
 {
+    //Author: Marcus Söderberg
     public GameObject[] Enemies;
     public int[] Numberofenemy;
 }
 
 public class SpawnManager : MonoBehaviour
 {
+    //Author: Marcus Söderberg
     public Wave[] Waves; // class to hold information per wave
     public Transform[] SpawnPoints;
     public float TimeBetweenEnemies = 2f;

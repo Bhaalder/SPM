@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Level1DoorOpenEnemySpawn : MonoBehaviour
 {
-
+    //Author: Teo
     public GameObject aDoor;
     public SpawnManager spawnerScript;
     

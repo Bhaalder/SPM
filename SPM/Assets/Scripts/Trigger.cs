@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Trigger : MonoBehaviour
 {
+    //Main author: Marcus Söderberg
+    //Secondary author: Fredrik
+
     private bool triggered;
     public GameObject Player;
     private GameObject parent;

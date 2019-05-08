@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PowerUpSpawner : MonoBehaviour
 {
+    //Author: Marcus Söderberg
     public GameObject Armor, Health, Speed, Ammo;
 
     public bool ArmorPowerUp, HealthPowerUp, MoveSpeedPowerUp, AmmoBoxPowerUp;

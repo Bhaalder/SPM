@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
+    //Author: Marcus Söderberg
 
     float projectileSpeed;
     float projectileDamage;

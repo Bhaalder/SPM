@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
+    //Author: Patrik Ahlgren
     public float explosionRadius;
     public GameObject explosionEffect;
 

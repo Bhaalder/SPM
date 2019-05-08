@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PowerUp2 : MonoBehaviour
 {
+    //Author: Marcus Söderberg
     public Transform powerUpSpawner;
     //public float TimeToDestroy = 0.0f;
 

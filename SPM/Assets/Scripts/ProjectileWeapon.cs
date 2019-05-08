@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ProjectileWeapon : BaseWeapon
 {
+    //Author: Patrik Ahlgren
     private float projectileSpeed;
     private GameObject projectile;
 

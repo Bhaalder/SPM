@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    //Author: Marcus Söderberg
     public GameObject projectile;
 
 	public float health = 20;

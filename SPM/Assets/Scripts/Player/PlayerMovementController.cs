@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementController : MonoBehaviour
-{
+public class PlayerMovementController : MonoBehaviour{
+    //Author: Patrik Ahlgren
+
     [Header("Movementspeeds")]
     public float movementSpeed = 12;
     public float speedMultiplier; //denna används för att öka movmentspeed med pickups, per 0,1 ökas 10%

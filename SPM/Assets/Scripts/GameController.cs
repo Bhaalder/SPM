@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
-
+    //Author: Patrik Ahlgren
     public List<MonoBehaviour> subscribedScripts = new List<MonoBehaviour>();
     public List<BaseWeapon> playerWeapons = new List<BaseWeapon>();
     public int gameEventID = 1; //detta är till för att markera vissa händelser i spelet

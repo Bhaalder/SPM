@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JumpPad : MonoBehaviour
 {
-
+    //Author: Marcus Söderberg
     public float jumpForce;
     public float forwardForce;
 

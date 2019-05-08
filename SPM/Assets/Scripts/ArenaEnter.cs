@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArenaEnter : MonoBehaviour
 {
-
+    //Author: Teo
     public GameObject objectRef;
 
     void Start(){

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OpenDoor : MonoBehaviour
 {
+    //Author: Patrik Ahlgren
     public GameObject theObject;
     public GameObject button;
 

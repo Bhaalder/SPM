@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class OpenDoorsLvl1 : MonoBehaviour
 {
-   
+    //Main author: Teo
+    //Secondary author: Patrik Ahlgren
+
     public GameObject theDoor;
     Renderer rend;
     bool isBlack;

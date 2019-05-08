@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RocketProjectile : MonoBehaviour
 {
+    //Main author: Fredrik
+    //Secondary author: Patrik Ahlgren
+
     private float projectileSpeed;
     private float projectileDamage;
     private float projectileForce;
