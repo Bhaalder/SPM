@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketProjectile : MonoBehaviour
-{
+public class RocketProjectile : MonoBehaviour{
     //Main author: Fredrik
     //Secondary author: Patrik Ahlgren
 
@@ -11,33 +10,29 @@ public class RocketProjectile : MonoBehaviour
     private float projectileDamage;
     private float projectileForce;
 
-    private void Update()
-    {
+    private void Update(){
         transform.position += transform.forward * projectileSpeed * 0.03f;
         IncreaseSpeed();
     }
 
-    private void IncreaseSpeed()
-    {
+    private void IncreaseSpeed(){
         if (projectileSpeed < 30)
         {
             projectileSpeed *= 1.01f;
         }
     }
 
-    public void SetProjectileSpeed(float speed)
-    {
+    public void SetProjectileSpeed(float speed){
         projectileSpeed = speed;
     }
-    public void SetProjectileDamage(float damage) {
+    public void SetProjectileDamage(float damage){
         projectileDamage = damage;
     }
-    public void SetProjectileForce(float force) {
+    public void SetProjectileForce(float force){
         projectileForce = force;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
+    private void OnCollisionEnter(Collision collision){
         GetComponent<Explosion>().Explode(projectileForce, projectileDamage);
         Destroy(gameObject);
     }
