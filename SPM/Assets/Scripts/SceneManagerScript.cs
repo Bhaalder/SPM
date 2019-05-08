@@ -8,6 +8,7 @@ public class SceneManagerScript : MonoBehaviour
     //Main author: Teo
     //Secondary author: Marcus Söderberg
     public bool buttonIsPressed;
+    public GameObject menuController;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,8 @@ public class SceneManagerScript : MonoBehaviour
         buttonIsPressed = false;
         // SpawnManager spawnScript = GetComponent<SpawnManager>();
         //DontDestroyOnLoad(gameObject);
+        menuController = GameObject.Find("MenuController");
+
 
 
     }
@@ -60,6 +63,14 @@ public class SceneManagerScript : MonoBehaviour
         if (!GameController.Instance.sceneCompleted)
         {
             Debug.Log("Rensa rummet från fiender!!");
+        }
+    }
+
+    public void EndGameScreen()
+    {
+        if (SceneManager.GetActiveScene().name == "Level2WhiteBox")
+        {
+            menuController.GetComponent<MenuController>().EndGameActivate();
         }
     }
 }

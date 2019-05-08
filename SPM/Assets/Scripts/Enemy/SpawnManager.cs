@@ -135,6 +135,8 @@ public class SpawnManager : MonoBehaviour
                 {
                     Debug.Log("Du har vunnit!!");
                     GameController.Instance.SceneCompletedSequence();
+                    GameObject sceneManager = GameObject.Find("SceneManager");
+                    sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
                     yeet.SetActive(false);
 
                 }
