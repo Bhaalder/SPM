@@ -185,7 +185,6 @@ public class EnemyController : MonoBehaviour
         {
             if (!Charging)
             {
-                Debug.Log(chargeposition);
                 float step = (MoveSpeed*5) * Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, chargeposition, step);
                 if (transform.position == chargeposition) { StunEnemy(); chargeposition.Set(0,0,0); }
