@@ -6,6 +6,7 @@ public class MenuController : MonoBehaviour
 {
     //Author: Marcus Söderberg
     public GameObject menuPanel;
+    public GameObject EndGamePanel;
 
     private GameObject scenemanager;
 
@@ -57,6 +58,24 @@ public class MenuController : MonoBehaviour
     public void Restart()
     {
         scenemanager.GetComponent<SceneManagerScript>().StartLevelOne();
+    }
+
+    public void EndGameActivate()
+    {
+        EndGamePanel.SetActive(true);
+        InGameMenuActive = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        GameController.Instance.GamePaused();
+    }
+
+    public void EndGameDeactivate()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        EndGamePanel.SetActive(false);
+        InGameMenuActive = false;
+        GameController.Instance.GamePaused();
     }
 
 }
