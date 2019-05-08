@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerRespawner : MonoBehaviour
 {
-    
+    //Author: Teo
+
     public GameObject Player;
     public GameObject[] respawn;
     //public GameController cntrl;

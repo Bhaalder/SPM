@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerShoot : MonoBehaviour
-{
+public class PlayerShoot : MonoBehaviour{
+    //Author: Patrik Ahlgren
 
     public LayerMask layerMask;
 

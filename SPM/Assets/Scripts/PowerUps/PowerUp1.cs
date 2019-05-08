@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PowerUp1 : MonoBehaviour
 {
+    //Author: Marcus Söderberg
     public Transform powerUpSpawner;
     private float speedIncrease = 1f;
     private float speedDuration = 2f;

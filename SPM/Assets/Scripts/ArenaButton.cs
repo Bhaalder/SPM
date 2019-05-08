@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ArenaButton : MonoBehaviour
 {
+    //Author: Teo
     public SpawnManager spawnerScript;
     public SceneManagerScript sceneManagerScript;
 

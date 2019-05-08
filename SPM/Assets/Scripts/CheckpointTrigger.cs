@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheckpointTrigger : MonoBehaviour
 {
-
+    //Author: Teo
     public int spawnPoint = 0;
     
     // Start is called before the first frame update

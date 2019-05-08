@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseWeapon{
+    //Author: Patrik Ahlgren
     private string name;
     private float damage;
     private float range;

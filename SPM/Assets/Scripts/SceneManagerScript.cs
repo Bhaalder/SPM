@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerScript : MonoBehaviour
 {
+    //Main author: Teo
+    //Secondary author: Marcus Söderberg
     public bool buttonIsPressed;
 
     // Start is called before the first frame update

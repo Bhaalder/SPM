@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TriggerEnemySpawner : MonoBehaviour
 {
+    //Author: Teo
     public SpawnManager spawnerScript;
 
 

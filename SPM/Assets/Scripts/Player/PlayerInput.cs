@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;//TA BORT SEN
 
-public class PlayerInput : MonoBehaviour
-{
+public class PlayerInput : MonoBehaviour{
+    //Author: Patrik Ahlgren
     public Slowmotion slowmotion;
 
     public GameObject startTeleport;

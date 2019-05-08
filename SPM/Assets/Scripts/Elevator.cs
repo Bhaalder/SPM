@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
+    //Author: Fredrik
     [SerializeField] private GameObject triggerGO;
     [SerializeField] private Transform platformTrans;
     [SerializeField] private Transform lowerPointTrans;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AmmoBox : MonoBehaviour
 {
-
+    //Author: Patrik Ahlgren
     public int clipIncrease;
     public float TimeToDestroy = 0.2f;
 
