@@ -54,4 +54,9 @@ public class MenuController : MonoBehaviour
         DeactivateMenu();
     }
 
+    public void Restart()
+    {
+        scenemanager.GetComponent<SceneManagerScript>().StartLevelOne();
+    }
+
 }
