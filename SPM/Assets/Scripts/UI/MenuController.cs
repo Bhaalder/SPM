@@ -62,6 +62,7 @@ public class MenuController : MonoBehaviour
 
     public void EndGameActivate()
     {
+        scenemanager = GameObject.Find("SceneManager");
         EndGamePanel.SetActive(true);
         InGameMenuActive = true;
         Cursor.visible = true;
