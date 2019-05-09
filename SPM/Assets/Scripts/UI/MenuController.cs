@@ -50,7 +50,8 @@ public class MenuController : MonoBehaviour
     public void MainMenu()
     {
         Debug.Log("Clicked button: Main Menu");
-        
+        Destroy(GameObject.Find("GameController"));
+        Destroy(GameObject.Find("Canvas"));
         scenemanager.GetComponent<SceneManagerScript>().MainMenu();
         DeactivateMenu();
     }
