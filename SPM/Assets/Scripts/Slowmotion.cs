@@ -8,13 +8,16 @@ public class Slowmotion:MonoBehaviour{
     public float slowdownAmount;
     
     public void SlowTime() {
-        if (!GameController.Instance.gameIsSlowmotion) {
-            Time.timeScale = slowdownAmount;
-        } else if (GameController.Instance.gameIsSlowmotion) {
-            Time.timeScale = 1f;
+        if (!GameController.Instance.gameIsPaused) {
+            if (!GameController.Instance.gameIsSlowmotion) {
+                Time.timeScale = slowdownAmount;
+            } else if (GameController.Instance.gameIsSlowmotion) {
+                Time.timeScale = 1f;
+
+            }
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+            GameController.Instance.gameIsSlowmotion = !GameController.Instance.gameIsSlowmotion;
         }
-        Time.fixedDeltaTime = Time.timeScale * 0.02f;
-        GameController.Instance.gameIsSlowmotion = !GameController.Instance.gameIsSlowmotion;
     }
 
     private void Update() {
@@ -27,10 +30,12 @@ public class Slowmotion:MonoBehaviour{
     }
 
     private void SlowmotionSlider() {
-        if (!GameController.Instance.gameIsSlowmotion && GameController.Instance.SlowmotionSlider.value < 100) {
-            GameController.Instance.SlowmotionSlider.value += 5 * Time.deltaTime; //20sek
-        } else if (GameController.Instance.gameIsSlowmotion) {
-            GameController.Instance.SlowmotionSlider.value -= 100 * Time.deltaTime; //10sek
+        if (!GameController.Instance.gameIsPaused) {
+            if (!GameController.Instance.gameIsSlowmotion && GameController.Instance.SlowmotionSlider.value < 100) {
+                GameController.Instance.SlowmotionSlider.value += 5 * Time.fixedUnscaledDeltaTime; //20sek
+            } else if (GameController.Instance.gameIsSlowmotion) {
+                GameController.Instance.SlowmotionSlider.value -= 10 * Time.fixedUnscaledDeltaTime; //10sek
+            }
         }
     }
 

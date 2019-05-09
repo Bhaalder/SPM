@@ -24,17 +24,17 @@ public class WeaponController : MonoBehaviour{
     }
 
     public BaseWeapon GetRifle() {
-        BaseWeapon rifle = new BaseWeapon("Rifle", 10, 100, 10f, 0.6f, 0.1f, 15, 50, 50, 500, null, null, null);
+        BaseWeapon rifle = new BaseWeapon("Rifle", 10, 100, 8f, 0.6f, 0.1f, 15, 50, 50, 500, null, null, null);
         return rifle;
     }
 
     public BaseWeapon GetShotgun() {
-        BaseWeapon shotgun = new BaseWeapon("Shotgun", 30, 18, 2f, 0.5f, 0.1f, 30, 5, 5, 200, null, null, null);
+        BaseWeapon shotgun = new BaseWeapon("Shotgun", 30, 18, 2f, 0.5f, 0.1f, 30, 8, 8, 200, null, null, null);
         return shotgun;
     }
 
     public ProjectileWeapon GetRocketLauncher() {
-        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", 30, 100, 1f, 0.3f, 0.01f, 20, 10, 5, 5, 50, rocketLaucherProjectileGO, null, null, null);
+        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", 30, 100, 2f, 0.3f, 0.01f, 20, 10, 3, 3, 30, rocketLaucherProjectileGO, null, null, null);
         return rocketLauncher;
     }
 
