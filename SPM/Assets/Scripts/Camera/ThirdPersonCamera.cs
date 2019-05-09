@@ -41,8 +41,8 @@ public class ThirdPersonCamera : MonoBehaviour {
     }
 
     private void CameraControl() {
-        mouseX += Input.GetAxis("Mouse X") * mouseSensitivity;
-        mouseY -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+        mouseX += Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        mouseY -= Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
         mouseY = Mathf.Clamp(mouseY, cameraClamp.x, cameraClamp.y);
 
         Vector3 targetRotation = new Vector3(mouseY, mouseX);
