@@ -89,7 +89,8 @@ public class PlayerInput : MonoBehaviour{
             ReloadWeapon();
         }
     }
-
+    // få ammoinfo
+    // 
     private void ReloadWeapon() {
         int ammoInClip = selectedWeapon.GetAmmoInClip();
         int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
