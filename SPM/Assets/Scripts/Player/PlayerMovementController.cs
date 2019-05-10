@@ -54,7 +54,12 @@ public class PlayerMovementController : MonoBehaviour{
 
     private void Move() {
         Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        movementInput *= (movementSpeed*(1+speedMultiplier)) * Time.deltaTime;
+        if (IsGrounded()) {
+            movementInput *= (movementSpeed * (1 + speedMultiplier)) * Time.deltaTime;
+        } else {
+            movementInput *= ((movementSpeed/2) * (1 + speedMultiplier)) * Time.deltaTime;
+        }
+        
 
         velocity = movementInput;
 
