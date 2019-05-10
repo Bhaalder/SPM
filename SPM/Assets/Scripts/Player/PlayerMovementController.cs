@@ -57,7 +57,7 @@ public class PlayerMovementController : MonoBehaviour{
         if (IsGrounded()) {
             movementInput *= (movementSpeed * (1 + speedMultiplier)) * Time.deltaTime;
         } else {
-            movementInput *= ((movementSpeed/2) * (1 + speedMultiplier)) * Time.deltaTime;
+            movementInput *= (movementSpeed * (1 + speedMultiplier)) * Time.deltaTime;
         }
         
 
