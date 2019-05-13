@@ -86,6 +86,24 @@ public class PlayerInput : MonoBehaviour {
         }
     }
 
+    private void ReloadSequence() {
+        if (isReloading) {
+            GameController.Instance.ReloadSlider.value += 1 * Time.fixedUnscaledDeltaTime;
+        }
+        if (GameController.Instance.ReloadSlider.value >= selectedWeapon.GetReloadTime()) {
+            int ammoInClip = selectedWeapon.GetAmmoInClip();
+            int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
+            int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
+            int ammoSpent = maxAmmoInClip - ammoInClip;
+            GameController.Instance.ReloadSlider.value = 0;
+            FinishReload(ammoInClip, totalAmmoLeft, ammoSpent);
+            GameController.Instance.UpdateSelectedWeaponAmmoText();
+            GameController.Instance.ReloadSlider.gameObject.SetActive(false);
+            Debug.Log(GameController.Instance.ReloadSlider.maxValue);
+            isReloading = false;
+        }
+    }
+
     private void ReloadWeapon() {
         int ammoInClip = selectedWeapon.GetAmmoInClip();
         int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
@@ -97,20 +115,6 @@ public class PlayerInput : MonoBehaviour {
             Debug.Log("Reloading " + selectedWeapon.GetName());
             GameController.Instance.ReloadSlider.maxValue = selectedWeapon.GetReloadTime();
             isReloading = true;
-        }
-    }
-
-    private void ReloadSequence() {
-        if (isReloading) {
-            GameController.Instance.ReloadSlider.value += 1 * Time.fixedUnscaledDeltaTime;
-        }
-        if (GameController.Instance.ReloadSlider.value >= selectedWeapon.GetReloadTime()) {
-            GameController.Instance.ReloadSlider.value = 0;
-            FinishReload(selectedWeapon.GetAmmoInClip(), selectedWeapon.GetTotalAmmoLeft(), selectedWeapon.GetMaxAmmoInClip() - selectedWeapon.GetAmmoInClip());
-            GameController.Instance.UpdateSelectedWeaponAmmoText();
-            GameController.Instance.ReloadSlider.gameObject.SetActive(false);
-            Debug.Log(GameController.Instance.ReloadSlider.maxValue);
-            isReloading = false;
         }
     }
 
@@ -135,6 +139,7 @@ public class PlayerInput : MonoBehaviour {
         if (!isReloading) {
             if (Input.GetButton("Fire1") && GameController.Instance.selectedWeapon.GetAmmoInClip() == 0) {
                 ReloadWeapon();
+                return;
             }
             if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire) {
                 nextTimeToFire = Time.time + 1f / selectedWeapon.GetFireRate();
