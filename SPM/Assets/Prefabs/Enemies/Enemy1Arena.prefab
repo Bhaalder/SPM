@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8168278882437978206}
   - component: {fileID: 8168278882437978200}
   m_Layer: 9
-  m_Name: EnemyType1BigAggro
+  m_Name: Enemy1Arena
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
   health: 15
   damage: 10
   MoveSpeed: 8
-  MaxDist: 40
+  MaxDist: 150
   MinDist: 1
   AttackDistance: 2
   DamageResistance: 5
@@ -150,7 +150,6 @@ MonoBehaviour:
   TimeBetweenAttacks: 0.5
   projectileSpeed: 0
   projectileDamage: 0
-  ProjectileTravelDistance: 0
   enemyType: 1
   gameController: {fileID: 6964004597814307124, guid: a312182574752a14db595d72c94a2952,
     type: 3}
