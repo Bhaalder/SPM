@@ -102,7 +102,7 @@ public class GameController : MonoBehaviour {
         }
     }
     
-    void Update() {
+    private void Update() {
         HealthSlider.value = playerHP;
         ArmorSlider.value = playerArmor;
     }
