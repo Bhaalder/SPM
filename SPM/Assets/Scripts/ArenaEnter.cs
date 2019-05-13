@@ -14,6 +14,7 @@ public class ArenaEnter : MonoBehaviour
     private void OnTriggerEnter(Collider other){
         if (other.gameObject.CompareTag("Player")){
             objectRef.SetActive(true);
+            
         }
     }
 }

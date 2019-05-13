@@ -113,8 +113,8 @@ public class SpawnManager : MonoBehaviour
         yield return null;
     }
 
-
     public GameObject yeet;
+    public GameObject[] yeetz;
     
     // called by an enemy when they're defeated
     public void EnemyDefeated()
@@ -138,6 +138,9 @@ public class SpawnManager : MonoBehaviour
                     GameObject sceneManager = GameObject.Find("SceneManager");
                     sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
                     yeet.SetActive(false);
+                    yeetz[0].SetActive(true);
+                    yeetz[1].SetActive(true);
+                    yeetz[2].SetActive(true);
 
                 }
 
