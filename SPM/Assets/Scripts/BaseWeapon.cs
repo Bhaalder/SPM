@@ -54,7 +54,7 @@ public class BaseWeapon{
         range = f;
     }
     public float GetFireRate() {
-        if(Time.timeScale < 1) {
+        if(GameController.Instance.gameIsSlowmotion) {
             return fireRate * 5;
         }    //för slowmotion, borde finnas en bättre lösning
         return fireRate;
