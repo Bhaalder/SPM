@@ -29,6 +29,7 @@ public class SpawnManager : MonoBehaviour
     private int spawnPointIndex = 0;
     public bool isRoomCleared;
     public bool isArenaSpawner;
+    public bool isCommandoRoom;
 
     public GameObject door;
 
@@ -143,6 +144,10 @@ public class SpawnManager : MonoBehaviour
                     sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
                     door.SetActive(false);
 
+                }
+                if (isCommandoRoom)
+                {
+                    door.SetActive(false);
                 }
 
                 isRoomCleared = true;
