@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;//TA BORT SEN
 
-public class PlayerInput : MonoBehaviour{
+public class PlayerInput : MonoBehaviour {
     //Author: Patrik Ahlgren
     public Slowmotion slowmotion;
 
@@ -14,8 +14,7 @@ public class PlayerInput : MonoBehaviour{
     private PlayerShoot playerShoot;
     private PlayerMovementController playerMovementController;
     private BaseWeapon selectedWeapon;
-    private float nextTimeToFireOrReload = 0f;
-    private float nextTimeToReload = 0f;
+    private float nextTimeToFire = 0f;
     private bool isReloading = false;
 
     private void Start() {
@@ -48,130 +47,135 @@ public class PlayerInput : MonoBehaviour{
             } catch (System.Exception) {
                 Debug.Log("FINNS INGEN DEFINERAD 'startTeleport'");
             }
-       }
+        }
         if (Input.GetKeyDown(KeyCode.O)) {
             try {
                 transform.position = secondTeleport.transform.position;
             } catch (System.Exception) {
                 Debug.Log("FINNS INGEN DEFINERAD 'secondTeleport'");
-           }
+            }
         }
         if (Input.GetKeyDown(KeyCode.P)) {
             try {
                 transform.position = thirdTeleport.transform.position;
             } catch (System.Exception) {
-               Debug.Log("FINNS INGEN DEFINERAD 'thirdTeleport'");
-           }
+                Debug.Log("FINNS INGEN DEFINERAD 'thirdTeleport'");
+            }
         }
     }//TA BORT SEN
 
-    private void InGameMenu(){
-        if (Input.GetKeyDown(KeyCode.F10)){
-            try{
+    private void InGameMenu() {
+        if (Input.GetKeyDown(KeyCode.F10)) {
+            try {
                 GameObject menucontroller = GameObject.Find("MenuController");
-                if (menucontroller.GetComponent<MenuController>().InGameMenuActive)
-                {
+                if (menucontroller.GetComponent<MenuController>().InGameMenuActive) {
                     menucontroller.GetComponent<MenuController>().DeactivateMenu();
-                }
-                else {
+                } else {
                     menucontroller.GetComponent<MenuController>().ActivateMenu();
                 }
-            }
-            catch (System.Exception){
+            } catch (System.Exception) {
                 Debug.Log("FINNS INGEN DEFINERAD 'MenuController'");
             }
         }
     }
 
 
-    private void ReloadWeaponInput() {      
-        if (Input.GetButtonDown("Reload") && Time.time >= nextTimeToReload) {
+    private void ReloadWeaponInput() {
+        if (Input.GetButtonDown("Reload")) {
             ReloadWeapon();
         }
     }
-    // få ammoinfo
-    // 
+
     private void ReloadWeapon() {
         int ammoInClip = selectedWeapon.GetAmmoInClip();
         int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
         int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
 
-        if (ammoInClip != maxAmmoInClip && totalAmmoLeft > 0) {
-            nextTimeToFireOrReload = Time.time + 1f / selectedWeapon.GetReloadTime();
-            nextTimeToReload = Time.time + 1f / selectedWeapon.GetReloadTime();
+        if (ammoInClip != maxAmmoInClip && totalAmmoLeft > 0 && !isReloading) {
             int ammoSpent = maxAmmoInClip - ammoInClip;
-            if (ammoSpent > totalAmmoLeft) {
-
-                selectedWeapon.SetAmmoInClip(ammoInClip + totalAmmoLeft);
-                selectedWeapon.SetTotalAmmoLeft(0);
-                Debug.Log("Reloading " + selectedWeapon.GetName());
-                GameController.Instance.ReloadSlider.gameObject.SetActive(true);
-                isReloading = true;
-                return;
-            }
-            selectedWeapon.SetAmmoInClip(maxAmmoInClip);
-            selectedWeapon.SetTotalAmmoLeft(totalAmmoLeft - ammoSpent);
-            Debug.Log("Reloading " + selectedWeapon.GetName());
             GameController.Instance.ReloadSlider.gameObject.SetActive(true);
+            Debug.Log("Reloading " + selectedWeapon.GetName());
+            GameController.Instance.ReloadSlider.maxValue = selectedWeapon.GetReloadTime();
             isReloading = true;
         }
     }
 
-    private void ReloadSequence() {     
+    private void ReloadSequence() {
         if (isReloading) {
-            GameController.Instance.ReloadSlider.maxValue = 1f / selectedWeapon.GetReloadTime();
-            GameController.Instance.ReloadSlider.value += 1f * Time.deltaTime;
-            if (Time.time >= nextTimeToReload) {
-                isReloading = false;
-                GameController.Instance.ReloadSlider.value = 0;
-                GameController.Instance.UpdateSelectedWeaponAmmoText();
-                GameController.Instance.ReloadSlider.gameObject.SetActive(false);
-            }
+            GameController.Instance.ReloadSlider.value += 1 * Time.fixedUnscaledDeltaTime;
+        }
+        if (GameController.Instance.ReloadSlider.value >= selectedWeapon.GetReloadTime()) {
+            GameController.Instance.ReloadSlider.value = 0;
+            FinishReload(selectedWeapon.GetAmmoInClip(), selectedWeapon.GetTotalAmmoLeft(), selectedWeapon.GetMaxAmmoInClip() - selectedWeapon.GetAmmoInClip());
+            GameController.Instance.UpdateSelectedWeaponAmmoText();
+            GameController.Instance.ReloadSlider.gameObject.SetActive(false);
+            Debug.Log(GameController.Instance.ReloadSlider.maxValue);
+            isReloading = false;
         }
     }
 
-    private void ShootWeaponInput() {
-        if (Input.GetButton("Fire1") && GameController.Instance.selectedWeapon.GetAmmoInClip() == 0) {
-            ReloadWeapon();
+    private void FinishReload(int ammoInClip, int totalAmmoLeft, int ammoSpent) {
+        if (ammoSpent > totalAmmoLeft) {
+            selectedWeapon.SetAmmoInClip(ammoInClip + totalAmmoLeft);
+            selectedWeapon.SetTotalAmmoLeft(0);
+            return;
         }
-        if (Input.GetButton("Fire1") && Time.time >= nextTimeToFireOrReload) {
-            nextTimeToFireOrReload = Time.time + 1f/selectedWeapon.GetFireRate();
-            playerShoot.StartShooting(selectedWeapon);
+        selectedWeapon.SetAmmoInClip(selectedWeapon.GetMaxAmmoInClip());
+        selectedWeapon.SetTotalAmmoLeft(totalAmmoLeft - ammoSpent);
+        StopAllCoroutines();
+    }
+
+    private void AbortReload() {
+        isReloading = false;
+        GameController.Instance.ReloadSlider.value = 0;
+        GameController.Instance.ReloadSlider.gameObject.SetActive(false);
+    }
+
+    private void ShootWeaponInput() {
+        if (!isReloading) {
+            if (Input.GetButton("Fire1") && GameController.Instance.selectedWeapon.GetAmmoInClip() == 0) {
+                ReloadWeapon();
+            }
+            if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire) {
+                nextTimeToFire = Time.time + 1f / selectedWeapon.GetFireRate();
+                playerShoot.StartShooting(selectedWeapon);
+            }
         }
     }
 
     private void SwitchWeaponInput() {
-       if (!isReloading) {
-            BaseWeapon firstWeapon = null;
-            BaseWeapon secondWeapon = null;
-            BaseWeapon thirdWeapon = null;
-            try {
-                GetWeaponFromGameController(ref firstWeapon, 0);
-                GetWeaponFromGameController(ref secondWeapon, 1);
-                GetWeaponFromGameController(ref thirdWeapon, 2);
-            } catch (System.ArgumentOutOfRangeException) {
+        BaseWeapon firstWeapon = null;
+        BaseWeapon secondWeapon = null;
+        BaseWeapon thirdWeapon = null;
+        try {
+            GetWeaponFromGameController(ref firstWeapon, 0);
+            GetWeaponFromGameController(ref secondWeapon, 1);
+            GetWeaponFromGameController(ref thirdWeapon, 2);
+        } catch (System.ArgumentOutOfRangeException) {
 
-            }
-            if (Input.GetButtonDown("Weapon1") && firstWeapon != null) {
-                if (selectedWeapon != firstWeapon) { GameController.Instance.selectedWeapon = firstWeapon; }
-            }
-            if (Input.GetButtonDown("Weapon2") && secondWeapon != null) {
-                if (selectedWeapon != secondWeapon) { GameController.Instance.selectedWeapon = secondWeapon; }
-            }
-            if (Input.GetButtonDown("Weapon3") && thirdWeapon != null) {
-                if (selectedWeapon != thirdWeapon) { GameController.Instance.selectedWeapon = thirdWeapon; }
-            }
+        }
+        if (Input.GetButtonDown("Weapon1") && firstWeapon != null) {
+            AbortReload();
+            if (selectedWeapon != firstWeapon) { GameController.Instance.selectedWeapon = firstWeapon; }
+        }
+        if (Input.GetButtonDown("Weapon2") && secondWeapon != null) {
+            AbortReload();
+            if (selectedWeapon != secondWeapon) { GameController.Instance.selectedWeapon = secondWeapon; }
+        }
+        if (Input.GetButtonDown("Weapon3") && thirdWeapon != null) {
+            AbortReload();
+            if (selectedWeapon != thirdWeapon) { GameController.Instance.selectedWeapon = thirdWeapon; }
+        }
 
-            GameController.Instance.UpdateSelectedWeaponText();
-        }//if !isReloading
+        GameController.Instance.UpdateSelectedWeaponText();
     }
-    
+
     private BaseWeapon GetWeaponFromGameController(ref BaseWeapon weapon, int i) {
         if (GameController.Instance.playerWeapons[i] != null) {
             return weapon = GameController.Instance.playerWeapons[i];
         } else {
             return null;
-        }      
+        }
     }
 
     private void SlowmotionInput() {
@@ -184,7 +188,7 @@ public class PlayerInput : MonoBehaviour{
         if (Input.GetButtonDown("Interact")) {
             GameController.Instance.playerIsInteracting = true;
             Debug.Log("Player tried to interact");
-        } else {GameController.Instance.playerIsInteracting = false;}
+        } else { GameController.Instance.playerIsInteracting = false; }
     }
 
     private void DashInput() {

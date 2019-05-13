@@ -63,9 +63,6 @@ public class BaseWeapon{
         fireRate = f;
     }
     public float GetReloadTime() {
-        if (Time.timeScale < 1) {
-            return reloadTime * 10;
-        }   //för slowmotion, borde finnas en bättre lösning
         return reloadTime;
     }
     public void SetReloadTime(float f) {
