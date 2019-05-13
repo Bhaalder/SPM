@@ -46089,7 +46089,7 @@ GameObject:
   - component: {fileID: 1028280891}
   - component: {fileID: 1028280892}
   - component: {fileID: 1028280893}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ArenaEnterDoorThatCloses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62534,6 +62534,11 @@ PrefabInstance:
       propertyPath: yeetz.Array.data[2]
       value: 
       objectReference: {fileID: 613684907}
+    - target: {fileID: 9220699852368298251, guid: 6d4466095c4675343b2d8814822c5af9,
+        type: 3}
+      propertyPath: door
+      value: 
+      objectReference: {fileID: 934837176}
     - target: {fileID: 9220699852368298250, guid: 6d4466095c4675343b2d8814822c5af9,
         type: 3}
       propertyPath: m_LocalPosition.x
