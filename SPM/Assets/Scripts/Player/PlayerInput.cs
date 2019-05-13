@@ -34,7 +34,6 @@ public class PlayerInput : MonoBehaviour {
         InGameMenu();
 
         Teleport();//TA BORT SEN
-
     }
 
     private void Teleport() {//TA BORT SEN
@@ -64,22 +63,7 @@ public class PlayerInput : MonoBehaviour {
         }
     }//TA BORT SEN
 
-    private void InGameMenu() {
-        if (Input.GetKeyDown(KeyCode.F10)) {
-            try {
-                GameObject menucontroller = GameObject.Find("MenuController");
-                if (menucontroller.GetComponent<MenuController>().InGameMenuActive) {
-                    menucontroller.GetComponent<MenuController>().DeactivateMenu();
-                } else {
-                    menucontroller.GetComponent<MenuController>().ActivateMenu();
-                }
-            } catch (System.Exception) {
-                Debug.Log("FINNS INGEN DEFINERAD 'MenuController'");
-            }
-        }
-    }
-
-
+    #region Reload Methods
     private void ReloadWeaponInput() {
         if (Input.GetButtonDown("Reload")) {
             ReloadWeapon();
@@ -132,7 +116,9 @@ public class PlayerInput : MonoBehaviour {
         GameController.Instance.ReloadSlider.value = 0;
         GameController.Instance.ReloadSlider.gameObject.SetActive(false);
     }
+    #endregion
 
+    #region Shoot Method
     private void ShootWeaponInput() {
         if (!isReloading) {
             if (Input.GetButton("Fire1") && GameController.Instance.selectedWeapon.GetAmmoInClip() == 0) {
@@ -145,7 +131,9 @@ public class PlayerInput : MonoBehaviour {
             }
         }
     }
+    #endregion
 
+    #region SwitchWeapon Methods
     private void SwitchWeaponInput() {
         BaseWeapon firstWeapon = null;
         BaseWeapon secondWeapon = null;
@@ -180,20 +168,26 @@ public class PlayerInput : MonoBehaviour {
             return null;
         }
     }
+    #endregion
 
+    #region Slowmotion Method
     private void SlowmotionInput() {
         if (Input.GetButtonDown("Slowmotion")) {
             slowmotion.SlowTime();
         }
     }
+    #endregion
 
+    #region Interaction Method
     private void InteractInput() {
         if (Input.GetButtonDown("Interact")) {
             GameController.Instance.playerIsInteracting = true;
             Debug.Log("Player tried to interact");
         } else { GameController.Instance.playerIsInteracting = false; }
     }
+    #endregion
 
+    #region Dash Method
     private void DashInput() {
         if (Input.GetButtonDown("Dash")) {
             playerMovementController.Dash();
@@ -201,7 +195,23 @@ public class PlayerInput : MonoBehaviour {
             Debug.Log("Dash");
         }
     }
+    #endregion
 
-
+    #region Menu Method
+    private void InGameMenu() {
+        if (Input.GetKeyDown(KeyCode.F10)) {
+            try {
+                GameObject menucontroller = GameObject.Find("MenuController");
+                if (menucontroller.GetComponent<MenuController>().InGameMenuActive) {
+                    menucontroller.GetComponent<MenuController>().DeactivateMenu();
+                } else {
+                    menucontroller.GetComponent<MenuController>().ActivateMenu();
+                }
+            } catch (System.Exception) {
+                Debug.Log("FINNS INGEN DEFINERAD 'MenuController'");
+            }
+        }
+    }
+    #endregion
 
 }
