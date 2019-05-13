@@ -30,12 +30,17 @@ public class SpawnManager : MonoBehaviour
     public bool isRoomCleared;
     public bool isArenaSpawner;
 
+    public GameObject door;
+
+
+
     void Start()
     {
         _currentWave = -1; // avoid off by 1
         _totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
         isRoomCleared = false;
         // StartNextWave();
+        
     }
 
 
@@ -113,8 +118,7 @@ public class SpawnManager : MonoBehaviour
         yield return null;
     }
 
-    public GameObject yeet;
-    public GameObject[] yeetz;
+    
     
     // called by an enemy when they're defeated
     public void EnemyDefeated()
@@ -137,10 +141,7 @@ public class SpawnManager : MonoBehaviour
                     GameController.Instance.SceneCompletedSequence();
                     GameObject sceneManager = GameObject.Find("SceneManager");
                     sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
-                    yeet.SetActive(false);
-                    yeetz[0].SetActive(true);
-                    yeetz[1].SetActive(true);
-                    yeetz[2].SetActive(true);
+                    door.SetActive(false);
 
                 }
 
