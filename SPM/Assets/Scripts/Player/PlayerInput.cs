@@ -86,24 +86,6 @@ public class PlayerInput : MonoBehaviour {
         }
     }
 
-    private void ReloadSequence() {
-        if (isReloading) {
-            GameController.Instance.ReloadSlider.value += 1 * Time.fixedUnscaledDeltaTime;
-        }
-        if (GameController.Instance.ReloadSlider.value >= selectedWeapon.GetReloadTime()) {
-            int ammoInClip = selectedWeapon.GetAmmoInClip();
-            int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
-            int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
-            int ammoSpent = maxAmmoInClip - ammoInClip;
-            GameController.Instance.ReloadSlider.value = 0;
-            FinishReload(ammoInClip, totalAmmoLeft, ammoSpent);
-            GameController.Instance.UpdateSelectedWeaponAmmoText();
-            GameController.Instance.ReloadSlider.gameObject.SetActive(false);
-            Debug.Log(GameController.Instance.ReloadSlider.maxValue);
-            isReloading = false;
-        }
-    }
-
     private void ReloadWeapon() {
         int ammoInClip = selectedWeapon.GetAmmoInClip();
         int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
@@ -118,6 +100,22 @@ public class PlayerInput : MonoBehaviour {
         }
     }
 
+    private void ReloadSequence() {
+        if (isReloading) {
+            GameController.Instance.ReloadSlider.value += 1 * Time.fixedUnscaledDeltaTime;
+        }
+        if (GameController.Instance.ReloadSlider.value >= selectedWeapon.GetReloadTime()) {
+            int ammoInClip = selectedWeapon.GetAmmoInClip();
+            int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
+            int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
+            int ammoSpent = maxAmmoInClip - ammoInClip;
+            GameController.Instance.ReloadSlider.value = 0;
+            FinishReload(ammoInClip, totalAmmoLeft, ammoSpent);
+            GameController.Instance.UpdateSelectedWeaponAmmoText();
+            GameController.Instance.ReloadSlider.gameObject.SetActive(false);
+            isReloading = false;
+        }
+    }
     private void FinishReload(int ammoInClip, int totalAmmoLeft, int ammoSpent) {
         if (ammoSpent > totalAmmoLeft) {
             selectedWeapon.SetAmmoInClip(ammoInClip + totalAmmoLeft);
