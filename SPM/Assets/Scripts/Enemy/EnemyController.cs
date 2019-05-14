@@ -45,6 +45,7 @@ public class EnemyController : MonoBehaviour
     private int i;
 
     private bool activated;
+    private bool isDead;
 
     private ProjectileWeapon enemyWeapon;
     // Start is called before the first frame update
@@ -60,6 +61,7 @@ public class EnemyController : MonoBehaviour
         BeingAttacked = false;
         isStunned = false;
         activated = false;
+        isDead = false;
         objSpawn = (GameObject)GameObject.FindWithTag("Spawner");
         noChargePosition = new Vector3(0, 0, 0);
         chargeposition = noChargePosition;
@@ -259,8 +261,9 @@ public class EnemyController : MonoBehaviour
     // Sets bool on respawn point
     void OnDeathRespawn()
     {
-        if (GetComponentInParent<SpawnManager>())
+        if (GetComponentInParent<SpawnManager>() && !isDead)
         {
+            isDead = true;
             GetComponentInParent<SpawnManager>().EnemyDefeated();
         }
         //spawnPoint.GetComponent<EnemySpawnPoint>().spawnTrigger = true;

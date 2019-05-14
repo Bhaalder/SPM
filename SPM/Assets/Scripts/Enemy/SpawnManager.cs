@@ -116,6 +116,7 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(TimeBetweenEnemies);*/
 
         }
+        Debug.Log("Enemies in wave left: " + _enemiesInWaveLeft);
         yield return null;
     }
 
