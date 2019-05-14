@@ -19,30 +19,11 @@ public class PlayerShoot : MonoBehaviour{
     private GameObject bulletImpact;
     private float alienWoundTimer = 0.2f;
 
-
-    //public Text interact;//
-    //public LayerMask layerMask2;
-
-    //private float distanceToTarget = 2f;//
-
     private void Start(){
         weaponFocus = GameObject.Find("WeaponFocus").transform;
-        //interact = GameObject.Find("InteractionText").GetComponent<Text>();//
     }
 
     void Update(){
-        //Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, distanceToTarget, layerMask2);//
-        //interact.enabled = false;
-        //try {
-        //    if (hit.transform.gameObject.tag == "InteractableObject") {
-
-        //        interact.enabled = true;
-        //    }
-        //} catch (System.NullReferenceException) {
-
-        //}
-        //Debug.DrawLine(transform.position, hit.point, Color.red);//
-
         transform.LookAt(weaponFocus);
     }
 

@@ -23,6 +23,9 @@ public class DontDestroyOnLoad : MonoBehaviour
     }
 
     void Start(){
+        if (instance == null) {
+            instance = this;
+        }
         if (instance != null && instance != this) {
             Destroy(gameObject);
             Debug.LogWarning("Destroyed other Singleton with name: " + gameObject.name);

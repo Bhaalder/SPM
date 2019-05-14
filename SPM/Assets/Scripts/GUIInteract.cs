@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GUIInteract : MonoBehaviour
-{
-    
+public class GUIInteract : MonoBehaviour{
+
+    //Author: Patrik Ahlgren
 	public Text interact;
     public LayerMask layerMask;
 
@@ -14,8 +14,7 @@ public class GUIInteract : MonoBehaviour
     private float distanceToTarget = 2f;
 	
     private void Awake(){
-        interact = GameObject.Find("InteractionText").GetComponent<Text>();
-        
+        interact = GameObject.Find("InteractionText").GetComponent<Text>();       
     }
 
     private void Start() {
