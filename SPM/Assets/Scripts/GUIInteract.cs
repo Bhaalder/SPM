@@ -12,14 +12,16 @@ public class GUIInteract : MonoBehaviour
         interact.enabled = false;
     }
   
-	public void OnTriggerEnter(Collider other){
+	public void OnTriggerStay(Collider other){
 		if(other.gameObject.tag == "InteractableObject"){
 		interact.enabled = true;
-		}
+		} else {
+        interact.enabled = false;
+        }
 	}
-	public void OnTriggerExit(Collider other){
-		if(other.gameObject.tag == "InteractableObject"){
-		interact.enabled = false;
-		}
-	}
+	//public void OnTriggerExit(Collider other){
+	//	if(other.gameObject.tag == "InteractableObject"){
+	//	interact.enabled = false;
+	//	}
+	//}
 }
