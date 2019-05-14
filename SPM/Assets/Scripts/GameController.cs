@@ -74,7 +74,7 @@ public class GameController : MonoBehaviour {
     }
 
     public void UpdateSelectedWeaponAmmoText() {
-        weaponAmmoText.text = "Ammo: " + selectedWeapon.GetAmmoInClip() + "/" + selectedWeapon.GetMaxAmmoInClip() + " (" + selectedWeapon.GetTotalAmmoLeft() + ")";
+        weaponAmmoText.text = selectedWeapon.GetAmmoInClip() + "/" + selectedWeapon.GetTotalAmmoLeft();
     }
 
     public void SceneCompletedSequence() {
