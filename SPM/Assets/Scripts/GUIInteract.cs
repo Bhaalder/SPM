@@ -8,24 +8,17 @@ public class GUIInteract : MonoBehaviour
     
 	public Text interact;
 	
-	// Start is called before the first frame update
-    void Start()
-    {
+    void Start(){       
         interact.enabled = false;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
 	public void OnTriggerEnter(Collider other){
-		if(CompareTag("InteractableObject")){
+		if(other.gameObject.tag == "InteractableObject"){
 		interact.enabled = true;
 		}
 	}
 	public void OnTriggerExit(Collider other){
-		if(CompareTag("InteractableObject")){
+		if(other.gameObject.tag == "InteractableObject"){
 		interact.enabled = false;
 		}
 	}
