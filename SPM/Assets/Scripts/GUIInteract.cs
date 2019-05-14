@@ -2,26 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-// Teo
+
 public class GUIInteract : MonoBehaviour
 {
     
 	public Text interact;
+    public LayerMask layerMask;
+
+    private float distanceToTarget = 5f;
 	
-    void Start(){       
-        interact.enabled = false;
+    private void Awake(){
+        interact = GameObject.Find("E_to_Interact").GetComponent<Text>();
+        interact.gameObject.SetActive(false);
     }
-  
-	public void OnTriggerStay(Collider other){
-		if(other.gameObject.tag == "InteractableObject"){
-		interact.enabled = true;
-		} else {
-        interact.enabled = false;
+
+    private void LateUpdate() {
+        Physics.Raycast(transform.position, Camera.main.transform.forward, out RaycastHit hit, distanceToTarget, layerMask);
+        try {
+            if (hit.transform.gameObject.tag == "InteractableObject") {
+                
+                interact.gameObject.SetActive(true);
+            } else {
+                interact.gameObject.SetActive(false);
+            }
+        } catch (System.NullReferenceException) {
+
         }
-	}
-	//public void OnTriggerExit(Collider other){
-	//	if(other.gameObject.tag == "InteractableObject"){
-	//	interact.enabled = false;
-	//	}
-	//}
+
+        Debug.DrawLine(transform.parent.position, hit.point, Color.red);
+    }
+
 }

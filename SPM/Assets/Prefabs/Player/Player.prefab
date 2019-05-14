@@ -297,7 +297,6 @@ GameObject:
   - component: {fileID: 805145496824130771}
   - component: {fileID: 3047494121361967265}
   - component: {fileID: 3047494120657483839}
-  - component: {fileID: 4174869859954974188}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -433,18 +432,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b40bb5b5d452b9841af17e42154f7b70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4174869859954974188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3047494120657483824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe24a34804bd3124d825b05734d92735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3047494120657483826
@@ -2330,6 +2317,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3047494121147921276}
   - component: {fileID: 3047494121147921275}
+  - component: {fileID: 4720842731121202781}
   m_Layer: 12
   m_Name: 'Shoot '
   m_TagString: Untagged
@@ -2373,6 +2361,22 @@ MonoBehaviour:
   bulletImpactAlienGO: {fileID: 1000010191825552, guid: 83e55d3418297934fab882559d009285,
     type: 3}
   muzzleFlash: {fileID: 1921900937526051730}
+--- !u!114 &4720842731121202781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3047494121147921277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe24a34804bd3124d825b05734d92735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interact: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &3549527072420538944
 GameObject:
   m_ObjectHideFlags: 0
