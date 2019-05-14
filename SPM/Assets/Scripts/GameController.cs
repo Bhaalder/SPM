@@ -43,6 +43,10 @@ public class GameController : MonoBehaviour {
     }
 
     private void Start() {
+        if (instance != null && instance != this) {
+            Destroy(gameObject);
+            Debug.LogError("Destroyed other GameController");
+        }
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         DontDestroyOnLoad(gameObject);
