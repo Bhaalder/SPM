@@ -85,8 +85,12 @@ public class PlayerInput : MonoBehaviour {
     }
 
     private void ReloadSequence() {
-        if (isReloading && !GameController.Instance.gameIsPaused) {
-            GameController.Instance.ReloadSlider.value += 1 * Time.fixedUnscaledDeltaTime;
+        if (isReloading) {
+            if (GameController.Instance.gameIsPaused) {
+
+            } else {
+                GameController.Instance.ReloadSlider.value += 1 * Time.unscaledDeltaTime;
+            }          
         }
         if (GameController.Instance.ReloadSlider.value >= selectedWeapon.GetReloadTime()) {
             int ammoInClip = selectedWeapon.GetAmmoInClip();

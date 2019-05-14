@@ -44,8 +44,8 @@ public class ThirdPersonCamera : MonoBehaviour {
         if (GameController.Instance.gameIsPaused) {
 
         } else {
-            mouseX += Input.GetAxis("Mouse X") * mouseSensitivity * Time.fixedUnscaledDeltaTime;
-            mouseY -= Input.GetAxis("Mouse Y") * mouseSensitivity * Time.fixedUnscaledDeltaTime;
+            mouseX += Input.GetAxis("Mouse X") * mouseSensitivity * Time.unscaledDeltaTime;
+            mouseY -= Input.GetAxis("Mouse Y") * mouseSensitivity * Time.unscaledDeltaTime;
         }      
         mouseY = Mathf.Clamp(mouseY, cameraClamp.x, cameraClamp.y);
 
