@@ -12,8 +12,7 @@ public class GUIInteract : MonoBehaviour
     private float distanceToTarget = 5f;
 	
     private void Awake(){
-        interact = GameObject.Find("E_to_Interact").GetComponent<Text>();
-        
+        interact = GameObject.Find("E_to_Interact").GetComponent<Text>();       
     }
     private void Start() {
         interact.gameObject.SetActive(false);
@@ -23,7 +22,7 @@ public class GUIInteract : MonoBehaviour
         Physics.Raycast(transform.position, Camera.main.transform.forward, out RaycastHit hit, distanceToTarget, layerMask);
         try {
             if (hit.transform.gameObject.tag == "InteractableObject") {
-                
+
                 interact.gameObject.SetActive(true);
             } else {
                 interact.gameObject.SetActive(false);

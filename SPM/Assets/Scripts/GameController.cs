@@ -98,6 +98,7 @@ public class GameController : MonoBehaviour {
                 GetComponent<Slowmotion>().SlowTime();
             } else {
                 Time.timeScale = 1f;
+                Time.fixedDeltaTime = Time.timeScale * 0.02f;
             }
         } else {
             gameIsPaused = true;

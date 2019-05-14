@@ -85,7 +85,7 @@ public class PlayerInput : MonoBehaviour {
     }
 
     private void ReloadSequence() {
-        if (isReloading) {
+        if (isReloading && !GameController.Instance.gameIsPaused) {
             GameController.Instance.ReloadSlider.value += 1 * Time.fixedUnscaledDeltaTime;
         }
         if (GameController.Instance.ReloadSlider.value >= selectedWeapon.GetReloadTime()) {
