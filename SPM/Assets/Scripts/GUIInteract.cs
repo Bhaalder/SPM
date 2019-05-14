@@ -13,6 +13,9 @@ public class GUIInteract : MonoBehaviour
 	
     private void Awake(){
         interact = GameObject.Find("E_to_Interact").GetComponent<Text>();
+        
+    }
+    private void Start() {
         interact.gameObject.SetActive(false);
     }
 
