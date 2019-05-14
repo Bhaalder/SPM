@@ -417,8 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9cb620e53338094ca44c77ccb334f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowmotion: {fileID: 4320215421209216543, guid: a312182574752a14db595d72c94a2952,
-    type: 3}
+  slowmotion: {fileID: 0}
   startTeleport: {fileID: 0}
   secondTeleport: {fileID: 0}
   thirdTeleport: {fileID: 0}
@@ -2317,7 +2316,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3047494121147921276}
   - component: {fileID: 3047494121147921275}
-  - component: {fileID: 4720842731121202781}
   m_Layer: 12
   m_Name: 'Shoot '
   m_TagString: Untagged
@@ -2361,22 +2359,6 @@ MonoBehaviour:
   bulletImpactAlienGO: {fileID: 1000010191825552, guid: 83e55d3418297934fab882559d009285,
     type: 3}
   muzzleFlash: {fileID: 1921900937526051730}
---- !u!114 &4720842731121202781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3047494121147921277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe24a34804bd3124d825b05734d92735, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interact: {fileID: 0}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &3549527072420538944
 GameObject:
   m_ObjectHideFlags: 0
@@ -2387,6 +2369,7 @@ GameObject:
   m_Component:
   - component: {fileID: 549610558096213684}
   - component: {fileID: 8052760656517497038}
+  - component: {fileID: 105483828}
   m_Layer: 12
   m_Name: InteractionPlayer
   m_TagString: InteractionPlayer
@@ -2421,6 +2404,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &105483828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3549527072420538944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe24a34804bd3124d825b05734d92735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interact: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 3895
+  dir: {fileID: 3047494121147921276}
 --- !u!1001 &1735180317396804386
 PrefabInstance:
   m_ObjectHideFlags: 0
