@@ -32,9 +32,9 @@ public class Slowmotion:MonoBehaviour{
     private void SlowmotionSlider() {
         if (!GameController.Instance.gameIsPaused) {
             if (!GameController.Instance.gameIsSlowmotion && GameController.Instance.SlowmotionSlider.value < 100) {
-                GameController.Instance.SlowmotionSlider.value += 5 * Time.fixedUnscaledDeltaTime; //20sek
+                GameController.Instance.SlowmotionSlider.value += 5 * Time.unscaledDeltaTime; //20sek
             } else if (GameController.Instance.gameIsSlowmotion) {
-                GameController.Instance.SlowmotionSlider.value -= 10 * Time.fixedUnscaledDeltaTime; //10sek
+                GameController.Instance.SlowmotionSlider.value -= 10 * Time.unscaledDeltaTime; //10sek
             }
         }
     }
