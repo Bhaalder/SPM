@@ -3,35 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GUIInteract : MonoBehaviour
-{
-    
+public class GUIInteract : MonoBehaviour{
+
+    //Author: Patrik Ahlgren
 	public Text interact;
     public LayerMask layerMask;
 
-    private float distanceToTarget = 5f;
+    public Transform dir;
+
+    private float distanceToTarget = 2f;
 	
     private void Awake(){
-        interact = GameObject.Find("E_to_Interact").GetComponent<Text>();       
+        interact = GameObject.Find("InteractionText").GetComponent<Text>();       
     }
+
     private void Start() {
-        interact.gameObject.SetActive(false);
+        dir = GameObject.Find("Player").transform.GetChild(2);
+        dir.position -= new Vector3(0, 0, 0.1f);
     }
 
     private void LateUpdate() {
-        Physics.Raycast(transform.position, Camera.main.transform.forward, out RaycastHit hit, distanceToTarget, layerMask);
+        Physics.Raycast(dir.position, Camera.main.transform.forward, out RaycastHit hit, distanceToTarget, layerMask);
+        interact.enabled = false;
         try {
             if (hit.transform.gameObject.tag == "InteractableObject") {
-
-                interact.gameObject.SetActive(true);
-            } else {
-                interact.gameObject.SetActive(false);
+                interact.enabled = true;
             }
         } catch (System.NullReferenceException) {
 
         }
 
-        Debug.DrawLine(transform.parent.position, hit.point, Color.red);
+        Debug.DrawLine(dir.position, hit.point, Color.green);
     }
 
 }

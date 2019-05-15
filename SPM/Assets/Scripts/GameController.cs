@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour {
     private void Start() {
         if (instance != null && instance != this) {
             Destroy(gameObject);
-            Debug.LogError("Destroyed other GameController");
+            Debug.LogWarning("Destroyed other Singleton with name: " + gameObject.name);
         }
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

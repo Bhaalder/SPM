@@ -19,7 +19,6 @@ public class PlayerShoot : MonoBehaviour{
     private GameObject bulletImpact;
     private float alienWoundTimer = 0.2f;
 
-
     private void Start(){
         weaponFocus = GameObject.Find("WeaponFocus").transform;
     }
