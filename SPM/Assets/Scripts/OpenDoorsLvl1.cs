@@ -8,12 +8,17 @@ public class OpenDoorsLvl1 : MonoBehaviour
     //Secondary author: Patrik Ahlgren
 
     public GameObject theDoor;
+
+    //public GameObject green;
+    //public GameObject red;
+
     Renderer rend;
     bool isBlack;
     // Start is called before the first frame update
     void Start()
     {
-        
+        //green.SetActive(false);
+        //red.SetActive(true);
         rend = GetComponent<Renderer>();
         rend.material.color = Color.black;
     }
@@ -32,6 +37,9 @@ public class OpenDoorsLvl1 : MonoBehaviour
             Debug.Log("F");
             theDoor.SetActive(!theDoor.activeSelf);
             isBlack = !isBlack;
+            //green.SetActive(!green.activeSelf);
+            //red.SetActive(!red.activeSelf);
+
             if (isBlack)
             {
                 rend.material.color = Color.red;
