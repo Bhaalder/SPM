@@ -9,11 +9,12 @@ public class Slowmotion:MonoBehaviour{
     
     public void SlowTime() {
         if (!GameController.Instance.gameIsPaused) {
-            if (!GameController.Instance.gameIsSlowmotion) {
+            if (!GameController.Instance.gameIsSlowmotion) {               
                 Time.timeScale = slowdownAmount;
+                //AudioController.Instance.SFXSetPitch(0.5f);
             } else if (GameController.Instance.gameIsSlowmotion) {
                 Time.timeScale = 1f;
-
+                //AudioController.Instance.SFXSetPitch(1f);
             }
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
             GameController.Instance.gameIsSlowmotion = !GameController.Instance.gameIsSlowmotion;
@@ -25,6 +26,7 @@ public class Slowmotion:MonoBehaviour{
             GameController.Instance.gameIsSlowmotion = false;
             Time.timeScale = 1f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
+            //AudioController.Instance.SFXSetPitch(1f);
         }
         SlowmotionSlider();
     }
