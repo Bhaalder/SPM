@@ -25,6 +25,7 @@ public class Explosion : MonoBehaviour
             }
         }
         explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        Camera.main.GetComponent<CameraShake>().ShakeIncrease(8f, 1.3f);
         Destroy(explosion, 3.75f);
         
     }

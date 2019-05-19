@@ -16,6 +16,10 @@ public class PlayerShoot : MonoBehaviour{
 
     [SerializeField] private ParticleSystem muzzleFlash;
 
+    public float shotgunRecoil = 4;// TA BORT SEN
+    public float shotgunRecoilDuration = 0.3f; // TA BORT SEN
+
+
     private GameObject bulletImpact;
     private float alienWoundTimer = 0.2f;
 
@@ -57,6 +61,7 @@ public class PlayerShoot : MonoBehaviour{
     private void ShootHitScan(BaseWeapon weapon) {
 
         if (weapon.GetAmmoInClip() != 0) {
+            Camera.main.GetComponent<CameraShake>().Shake(1f, 0.4f);
             muzzleFlash.Play();
             weapon.DecreaseAmmoInClip();
             bool hitTarget = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, weapon.GetRange(), layerMask);
@@ -81,6 +86,7 @@ public class PlayerShoot : MonoBehaviour{
     //TEST
     private void ShootShotgunHitScan(BaseWeapon weapon){
         if (weapon.GetAmmoInClip() != 0){
+            Camera.main.GetComponent<CameraShake>().RecoilShake(shotgunRecoil, shotgunRecoilDuration);
             muzzleFlash.Play();
             weapon.DecreaseAmmoInClip();
             bool[] hitTarget = new bool[5];
