@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 4546447645410128227}
   - component: {fileID: 4546447645410128224}
   - component: {fileID: 6876904868842787257}
-  - component: {fileID: 4967734859713525763}
-  - component: {fileID: 4546447645410128225}
   - component: {fileID: 4546447645410128226}
   - component: {fileID: 6986928774325122745}
   m_Layer: 0
@@ -92,50 +90,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1007aa7034150354e86d6a9bbd7c05d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode: 0
-  shakeAmount: 0
+  shakeValue: 0
   shakeDuration: 0
-  smooth: 0
-  smoothAmount: 5
---- !u!114 &4967734859713525763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4546447645410128255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddeeeb904017ca4438b938cb0414228e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivity: 60
-  cameraTarget: {fileID: 0}
-  player: {fileID: 0}
-  cameraClamp: {x: -85, y: 85}
-  distanceFromPlayer: 0
---- !u!114 &4546447645410128225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4546447645410128255}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c1f1352c3ce81443b3d6252ac2be178, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivity: 60
-  cameraTarget: {fileID: 0}
-  player: {fileID: 0}
-  cameraClamp: {x: -40, y: 85}
-  moveSpeed: 40
-  wallPush: 0.2
-  distanceFromPlayer: 2.4
-  collisionMask:
-    serializedVersion: 2
-    m_Bits: 1
+  isSmooth: 0
+  smoothValue: 3
 --- !u!81 &4546447645410128226
 AudioListener:
   m_ObjectHideFlags: 0
