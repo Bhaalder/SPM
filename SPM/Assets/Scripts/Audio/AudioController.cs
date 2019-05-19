@@ -194,13 +194,13 @@ public class AudioController : MonoBehaviour {
     #endregion
 
     #region FadeIn/Out Methods
-    public void FadeIn(string name, float fadeDuration, float soundVolume) {
+    public void FadeIn(string name, float fadeDuration, float soundVolumePercentage) {
         try {
             foreach (Sound s in allSounds) {
                 if (s.name == name) {
                     s.source.volume = 0;
                     s.source.Play();
-                    StartCoroutine(FadeInAudio(name, fadeDuration, soundVolume, s));
+                    StartCoroutine(FadeInAudio(name, fadeDuration, (soundVolumePercentage / 100), s));
                     return;
                 }
             }
@@ -210,11 +210,11 @@ public class AudioController : MonoBehaviour {
 
     }
 
-    public void FadeOut(string name, float fadeDuration, float soundVolume) {
+    public void FadeOut(string name, float fadeDuration, float soundVolumePercentage) {
         try {
             foreach (Sound s in allSounds) {
                 if (s.name == name) {
-                    StartCoroutine(FadeOutAudio(name, fadeDuration, soundVolume, s));
+                    StartCoroutine(FadeOutAudio(name, fadeDuration, (soundVolumePercentage / 100), s));
                     return;
                 }
             }
