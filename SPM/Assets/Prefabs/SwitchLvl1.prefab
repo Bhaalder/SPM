@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 427980816833372840}
   - component: {fileID: 427980816833372841}
   - component: {fileID: 427980816833372842}
-  - component: {fileID: 7291160478890327919}
+  - component: {fileID: 526480457333152981}
   m_Layer: 2
   m_Name: SwitchLvl1
   m_TagString: Untagged
@@ -92,7 +92,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.6981106, y: 2.3889475, z: 10.208172}
   m_Center: {x: 0.1302673, y: -0.010082957, z: 4.60409}
---- !u!114 &7291160478890327919
+--- !u!114 &526480457333152981
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 427980816833372836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba1a63163e4c62442870cd261c4de10f, type: 3}
+  m_Script: {fileID: 11500000, guid: b21f94d8ce0cb8b4e805b52f358bec9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theDoor: {fileID: 0}
+  anim: {fileID: 0}
