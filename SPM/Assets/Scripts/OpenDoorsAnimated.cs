@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class OpenDoorsAnimated : MonoBehaviour
 {
-    Renderer rend;
-    bool isBlack;
+    
+    
     bool isOpen;
     bool isClosed;
+
+    public GameObject redP;
+    public GameObject greenP;
 
     
     public Animator anim;
@@ -16,10 +19,11 @@ public class OpenDoorsAnimated : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //green.SetActive(false);
-        //red.SetActive(true);
-        rend = GetComponent<Renderer>();
-        rend.material.color = Color.black;
+        greenP.SetActive(false);
+        redP.SetActive(true);
+        
+        
+
         
     }
 
@@ -41,7 +45,9 @@ public class OpenDoorsAnimated : MonoBehaviour
             {
                 //anim.Play("SlidingDoorsOpen");
                 anim.SetBool("isOpen", true);
-                
+                greenP.SetActive(!greenP.activeSelf);
+                redP.SetActive(!redP.activeSelf);
+
             }
             else
             {
@@ -49,25 +55,17 @@ public class OpenDoorsAnimated : MonoBehaviour
 
                 //anim.Play("SlidingDoorsClose");
                 anim.SetBool("isOpen", false);
-                
-            }
-            
-            isBlack = !isBlack;
-            //green.SetActive(!green.activeSelf);
-            //red.SetActive(!red.activeSelf);
-
-            if (isBlack)
-            {
-                rend.material.color = Color.red;
-            }
-            else
-            {
-                rend.material.color = Color.black;
-
+                greenP.SetActive(!greenP.activeSelf);
+                redP.SetActive(!redP.activeSelf);
 
 
 
             }
+
+
+
+
+
 
         }
     }
