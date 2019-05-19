@@ -87,7 +87,7 @@ public class PlayerShoot : MonoBehaviour{
     private void ShootShotgunHitScan(BaseWeapon weapon){
         if (weapon.GetAmmoInClip() != 0){
             Camera.main.GetComponent<CameraShake>().RecoilShake(shotgunRecoil, shotgunRecoilDuration);
-            AudioController.Instance.Play("Shotgun");
+            AudioController.Instance.Play_RandomPitch("Shotgun", 0.95f, 1f);
             muzzleFlash.Play();
             weapon.DecreaseAmmoInClip();
             bool[] hitTarget = new bool[5];

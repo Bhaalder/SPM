@@ -58,11 +58,23 @@ public class CameraShake : MonoBehaviour {
 
         if (!isShaking) {
             StartCoroutine(ShakeCamera());
-        }
-        
+        }       
     }
 
-    IEnumerator Recoil() {
+    public void ShakeIncreaseDistance(float value, float duration, GameObject player, GameObject explosion) {
+        shakeValue += value;
+        startValue = shakeValue;
+        shakeDuration = duration;
+        startDuration = shakeDuration;
+
+        float distance = Vector3.Distance(player.transform.position, explosion.transform.position);
+
+        if (!isShaking) {
+            StartCoroutine(ShakeCameraDistance(distance));
+        }
+    }
+
+    private IEnumerator Recoil() {
         isShaking = true;
 
         while (shakeDuration > 0.01f) {
@@ -74,7 +86,7 @@ public class CameraShake : MonoBehaviour {
             shakeDuration -= 1 * Time.deltaTime;
 
             if (isSmooth) {//kommer antagligen inte ha smooth på recoil
-                //transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(rotationAmount), Time.deltaTime * 3);
+                //transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(rotationAmount), Time.deltaTime * 4);
                 transform.localRotation = Quaternion.Euler(rotationAmount);
             } else {
                 transform.localRotation = Quaternion.Euler(rotationAmount);
@@ -88,7 +100,38 @@ public class CameraShake : MonoBehaviour {
         
     }
 
-    IEnumerator ShakeCamera() {
+    private IEnumerator ShakeCameraDistance(float distance) {
+        isShaking = true;
+        float shaking = 0;
+
+        while (shakeDuration > 0.01f) {
+            if (shakeValue-distance <= 1) {
+                shaking = 1;
+            } else {
+                shaking = shakeValue - distance;
+            }
+            Vector3 rotationAmount = Random.insideUnitSphere * shaking;
+            rotationAmount.z = 0;//
+
+            shakePercentage = shakeDuration / startDuration;
+
+            shakeValue = startValue * shakePercentage;
+            //shakeDuration = Mathf.Lerp(shakeDuration, 0, Time.deltaTime);//lerpa eller inte?
+            shakeDuration -= 1 * Time.deltaTime;
+
+            if (isSmooth) {
+                transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(rotationAmount), Time.deltaTime * smoothValue);
+            } else {
+                transform.localRotation = Quaternion.Euler(rotationAmount);
+            }
+
+            yield return null;
+        }
+        transform.localRotation = Quaternion.identity;
+        isShaking = false;
+    }
+
+    private IEnumerator ShakeCamera() {
         isShaking = true;
 
         while (shakeDuration > 0.01f) {
