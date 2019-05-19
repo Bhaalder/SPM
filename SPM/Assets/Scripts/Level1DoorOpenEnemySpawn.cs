@@ -9,11 +9,13 @@ public class Level1DoorOpenEnemySpawn : MonoBehaviour
     public GameObject parent;
     public SpawnManager spawnManager;
     bool isBlack;
+    Animator anim;
     Renderer rend;
     // Start is called before the first frame update
     void Start()
     {
         rend = parent.GetComponent<Renderer>();
+        anim = aDoor.GetComponent<Animator>();
         
     }
 
@@ -29,7 +31,7 @@ public class Level1DoorOpenEnemySpawn : MonoBehaviour
         {
             Debug.Log("F");
             spawnManager.InitializeSpawner();
-            aDoor.SetActive(!aDoor.activeSelf);
+            anim.SetBool("isOpen", true);
             isBlack = !isBlack;
             
             Destroy(gameObject);
