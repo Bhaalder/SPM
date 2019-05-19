@@ -43,7 +43,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec485ebc31c5a7a409f9d186408e0079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSounds: []
+  playerSounds:
+  - name: Shotgun
+    clip: {fileID: 8300000, guid: 312e2bf96f316194f961ba619390f8a9, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+    loop: 0
+    source: {fileID: 0}
   enemySounds: []
   environmentSounds:
   - name: 

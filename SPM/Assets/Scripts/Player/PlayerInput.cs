@@ -20,6 +20,7 @@ public class PlayerInput : MonoBehaviour {
     private void Start() {
         playerShoot = GetComponentInChildren<PlayerShoot>();
         playerMovementController = GetComponent<PlayerMovementController>();
+        slowmotion = GameController.Instance.GetComponent<Slowmotion>();
     }
 
     private void Update() {

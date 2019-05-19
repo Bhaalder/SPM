@@ -31,7 +31,7 @@ public class AudioController : MonoBehaviour {
                 instance = FindObjectOfType<AudioController>();
 #if UNITY_EDITOR
                 if (FindObjectsOfType<AudioController>().Length > 1) {
-                    Debug.LogError("There is more than one game controller in the scene");
+                    Debug.LogError("There is more than one AudioController in the scene");
                 }
 #endif
             }

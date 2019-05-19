@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 public class CameraShake : MonoBehaviour {
-
+    //Author: Patrik Ahlgrne
     public float shakeValue;
     public float shakeDuration;
 
