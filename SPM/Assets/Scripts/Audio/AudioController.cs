@@ -67,32 +67,6 @@ public class AudioController : MonoBehaviour {
         }
     }
 
-    #region Volume Methods
-    public void SFXSetPitch(float f) {
-        foreach (Sound s in sfxList) {
-            s.source.pitch = f;
-        }
-    }
-
-    public void SFXSetVolume(float f) {
-        foreach (Sound s in sfxList) {
-            s.source.volume = f;
-        }
-    }
-
-    public void MusicSetVolume(float f) {
-        foreach (Sound s in musicList) {
-            s.source.volume = f;
-        }
-    }
-
-    public void AllSoundsSetVolume(float f) {
-        foreach (Sound s in allSounds) {
-            s.source.volume *= f;
-        }
-    }
-    #endregion
-
     #region Play/Stop
     public void Play(string name) {
         try {
@@ -152,7 +126,9 @@ public class AudioController : MonoBehaviour {
         try {
             foreach (Sound s in allSounds) {
                 if (s.name == name) {
-                    s.source.pitch = Random.Range(minPitch, maxPitch);
+                    if (!GameController.Instance.gameIsSlowmotion) {
+                        s.source.pitch = Random.Range(minPitch, maxPitch);
+                    }                  
                     s.source.Play();
                     return;
                 }
@@ -170,7 +146,9 @@ public class AudioController : MonoBehaviour {
                     s.source = soundAtLocationGO.GetComponent<AudioSource>();
                     s.source.clip = s.clip;
                     s.source.volume = s.volume;
-                    s.source.pitch = Random.Range(minPitch, maxPitch);
+                    if (!GameController.Instance.gameIsSlowmotion) {
+                        s.source.pitch = Random.Range(minPitch, maxPitch);
+                    }
                     s.source.spatialBlend = s.spatialBlend_2D_3D;
                     s.source.rolloffMode = (AudioRolloffMode)s.rolloffMode;
                     s.source.minDistance = s.minDistance;
@@ -185,6 +163,32 @@ public class AudioController : MonoBehaviour {
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
+        }
+    }
+    #endregion
+
+    #region Volume / Pitch Methods
+    public void SFXSetPitch(float f) {
+        foreach (Sound s in sfxList) {
+            s.source.pitch = f;
+        }
+    }
+
+    public void SFXSetVolume(float f) {
+        foreach (Sound s in sfxList) {
+            s.source.volume = f;
+        }
+    }
+
+    public void MusicSetVolume(float f) {
+        foreach (Sound s in musicList) {
+            s.source.volume = f;
+        }
+    }
+
+    public void AllSoundsSetVolume(float f) {
+        foreach (Sound s in allSounds) {
+            s.source.volume *= f;
         }
     }
     #endregion
