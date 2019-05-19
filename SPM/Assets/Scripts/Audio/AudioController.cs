@@ -20,6 +20,9 @@ public class AudioController : MonoBehaviour {
     private List<Sound> sfxList = new List<Sound>();
     private List<Sound> allSounds = new List<Sound>();
 
+    private bool continueFadeIn;
+    private bool continueFadeOut;
+
     private static AudioController instance;
 
     public static AudioController Instance {
@@ -64,6 +67,7 @@ public class AudioController : MonoBehaviour {
         }
     }
 
+    #region Volume Methods
     public void SFXSetPitch(float f) {
         foreach (Sound s in sfxList) {
             s.source.pitch = f;
@@ -87,9 +91,9 @@ public class AudioController : MonoBehaviour {
             s.source.volume *= f;
         }
     }
+    #endregion
 
-
-
+    #region Play/Stop
     public void Play(string name) {
         try {
             foreach (Sound s in allSounds) {
@@ -99,60 +103,7 @@ public class AudioController : MonoBehaviour {
                 }
             }
         } catch (System.NullReferenceException) {
-            Debug.LogWarning("The audio with name '" + name + "' could not be found in list. Is it spelled correctly? (NullReferenceException)");
-        }
-    }
-
-    public void Stop(string name) {
-        try {
-            foreach (Sound s in allSounds) {
-                if (s.name == name) {
-                    s.source.Stop();
-                    return;
-                }
-            }
-        } catch (System.NullReferenceException) {
-            Debug.LogWarning("The audio with name '" + name + "' could not be found in list. Is it spelled correctly? (NullReferenceException)");
-        }
-    }
-
-    public void Play_RandomPitch(string name, float minPitch, float maxPitch) {
-        try {
-            foreach (Sound s in allSounds) {
-                if (s.name == name) {
-                    s.source.pitch = Random.Range(minPitch, maxPitch);
-                    s.source.Play();
-                    return;
-                }
-            }
-        } catch (System.NullReferenceException) {
-            Debug.LogWarning("The audio with name '" + name + "' could not be found in list. Is it spelled correctly? (NullReferenceException)");
-        }
-    }
-
-    public void Play_RandomPitch_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
-        try {
-            foreach (Sound s in allSounds) {
-                if (s.name == name) {
-                    GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
-                    s.source = soundAtLocationGO.GetComponent<AudioSource>();
-                    s.source.clip = s.clip;
-                    s.source.volume = s.volume;
-                    s.source.pitch = Random.Range(minPitch, maxPitch);
-                    s.source.spatialBlend = s.spatialBlend_2D_3D;
-                    s.source.rolloffMode = (AudioRolloffMode)s.rolloffMode;
-                    s.source.minDistance = s.minDistance;
-                    s.source.maxDistance = s.maxDistance;
-                    s.source.loop = s.loop;
-                    s.source.Play();
-                    if (!s.source.loop) {
-                        Destroy(soundAtLocationGO, s.clip.length);
-                    }
-                    return;
-                }
-            }
-        } catch (System.NullReferenceException) {
-            Debug.LogWarning("The audio with name '" + name + "' could not be found in list. Is it spelled correctly? (NullReferenceException)");
+            AudioNotFound(name);
         }
     }
 
@@ -178,10 +129,125 @@ public class AudioController : MonoBehaviour {
                 }
             }
         } catch (System.NullReferenceException) {
-            Debug.LogWarning("The audio with name '" + name + "' could not be found in list. Is it spelled correctly? (NullReferenceException)");
+            AudioNotFound(name);
         }
     }
 
+    public void Stop(string name) {
+        try {
+            foreach (Sound s in allSounds) {
+                if (s.name == name) {
+                    s.source.Stop();
+                    return;
+                }
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+    #endregion
 
+    #region PlayRandomPitch
+    public void Play_RandomPitch(string name, float minPitch, float maxPitch) {
+        try {
+            foreach (Sound s in allSounds) {
+                if (s.name == name) {
+                    s.source.pitch = Random.Range(minPitch, maxPitch);
+                    s.source.Play();
+                    return;
+                }
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+
+    public void Play_RandomPitch_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
+        try {
+            foreach (Sound s in allSounds) {
+                if (s.name == name) {
+                    GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
+                    s.source = soundAtLocationGO.GetComponent<AudioSource>();
+                    s.source.clip = s.clip;
+                    s.source.volume = s.volume;
+                    s.source.pitch = Random.Range(minPitch, maxPitch);
+                    s.source.spatialBlend = s.spatialBlend_2D_3D;
+                    s.source.rolloffMode = (AudioRolloffMode)s.rolloffMode;
+                    s.source.minDistance = s.minDistance;
+                    s.source.maxDistance = s.maxDistance;
+                    s.source.loop = s.loop;
+                    s.source.Play();
+                    if (!s.source.loop) {
+                        Destroy(soundAtLocationGO, s.clip.length);
+                    }
+                    return;
+                }
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+    #endregion
+
+    #region FadeIn/Out Methods
+    public void FadeIn(string name, float fadeDuration, float soundVolume) {
+        try {
+            foreach (Sound s in allSounds) {
+                if (s.name == name) {
+                    s.source.volume = 0;
+                    s.source.Play();
+                    StartCoroutine(FadeInAudio(name, fadeDuration, soundVolume, s));
+                    return;
+                }
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+
+    }
+
+    public void FadeOut(string name, float fadeDuration, float soundVolume) {
+        try {
+            foreach (Sound s in allSounds) {
+                if (s.name == name) {
+                    StartCoroutine(FadeOutAudio(name, fadeDuration, soundVolume, s));
+                    return;
+                }
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+
+    private IEnumerator FadeInAudio(string name, float fadeDuration, float soundVolume, Sound sound) {
+        continueFadeIn = true;
+        continueFadeOut = false;
+        float startSoundValue = 0;
+        if (continueFadeIn) {
+            for (float time = 0f; time < fadeDuration; time += Time.deltaTime) {
+                float normalizedTime = time / fadeDuration;
+                sound.source.volume = Mathf.Lerp(startSoundValue, soundVolume, normalizedTime);
+                yield return null;
+            }
+        }
+    }
+
+    private IEnumerator FadeOutAudio(string name, float fadeDuration, float soundVolume, Sound sound) {
+        continueFadeIn = false;
+        continueFadeOut = true;
+        float startSoundValue = sound.source.volume;
+        if (continueFadeOut) {
+            for (float time = 0f; time < fadeDuration; time += Time.deltaTime) {
+                float normalizedTime = time / fadeDuration;
+                sound.source.volume = Mathf.Lerp(startSoundValue, soundVolume, normalizedTime);
+                yield return null;
+            }
+        }
+    }
+    #endregion
+
+    private void AudioNotFound(string name) {
+        Debug.LogWarning("The audio with name '" + name + "' could not be found in list. Is it spelled correctly? (NullReferenceException)");
+    }
 
 }
