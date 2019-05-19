@@ -102,9 +102,15 @@ public class CameraShake : MonoBehaviour {
 
     private IEnumerator ShakeCameraDistance(float distance) {
         isShaking = true;
+        float shaking = 0;
 
         while (shakeDuration > 0.01f) {
-            Vector3 rotationAmount = Random.insideUnitSphere * (shakeValue - (distance/10));
+            if (shakeValue-distance <= 1) {
+                shaking = 1;
+            } else {
+                shaking = shakeValue - distance;
+            }
+            Vector3 rotationAmount = Random.insideUnitSphere * shaking;
             rotationAmount.z = 0;//
 
             shakePercentage = shakeDuration / startDuration;
