@@ -51,6 +51,7 @@ public class OpenDoorsAnimated : MonoBehaviour
                 anim.SetBool("isOpen", false);
                 
             }
+            
             isBlack = !isBlack;
             //green.SetActive(!green.activeSelf);
             //red.SetActive(!red.activeSelf);
