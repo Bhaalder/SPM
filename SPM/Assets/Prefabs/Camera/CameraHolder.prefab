@@ -24,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5748626916445290005}
-  m_LocalRotation: {x: 0.19076046, y: 0.22917593, z: -0.04585417, w: 0.9534077}
+  m_LocalRotation: {x: 0.19076069, y: 0.22917463, z: -0.045853935, w: 0.953408}
   m_LocalPosition: {x: -5.81, y: 4.53, z: 31.82}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 22.701788, y: 22.124306, z: 25.744137}
   m_Children:
   - {fileID: 8133223519051762236}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 22.629002, y: 27.032001, z: 0}
 --- !u!114 &5748626916445290007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,21 +116,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4546447645410128225, guid: aecc93db92635344b917b3f7ac7cf647,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4546447645410128225, guid: aecc93db92635344b917b3f7ac7cf647,
-        type: 3}
-      propertyPath: cameraTarget
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4546447645410128225, guid: aecc93db92635344b917b3f7ac7cf647,
-        type: 3}
-      propertyPath: cameraClamp.x
-      value: -85
-      objectReference: {fileID: 0}
     - target: {fileID: 6986928774325122745, guid: aecc93db92635344b917b3f7ac7cf647,
         type: 3}
       propertyPath: antialiasingMode
@@ -138,22 +123,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6876904868842787257, guid: aecc93db92635344b917b3f7ac7cf647,
         type: 3}
-      propertyPath: smooth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876904868842787257, guid: aecc93db92635344b917b3f7ac7cf647,
-        type: 3}
-      propertyPath: smoothAmount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6876904868842787257, guid: aecc93db92635344b917b3f7ac7cf647,
-        type: 3}
       propertyPath: isSmooth
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4546447645410128225, guid: aecc93db92635344b917b3f7ac7cf647, type: 3}
-    - {fileID: 4967734859713525763, guid: aecc93db92635344b917b3f7ac7cf647, type: 3}
+    - target: {fileID: 4546447645410128224, guid: aecc93db92635344b917b3f7ac7cf647,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aecc93db92635344b917b3f7ac7cf647, type: 3}
 --- !u!4 &8133223519051762236 stripped
 Transform:
