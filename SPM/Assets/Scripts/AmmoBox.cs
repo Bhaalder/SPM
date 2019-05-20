@@ -16,7 +16,7 @@ public class AmmoBox : MonoBehaviour
             {
                 weapon.IncreaseTotalAmmoLeft(weapon.GetMaxAmmoInClip() * clipIncrease);
             }
-            GameController.Instance.UpdateSelectedWeaponAmmoText();
+            GameController.Instance.UpdateSelectedWeapon_AmmoText();
             GetComponentInParent<PowerUpSpawner>().Respawner();
         }
         Destroy(gameObject);

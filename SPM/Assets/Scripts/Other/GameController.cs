@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour {
 
     public Slider HealthSlider, ArmorSlider, SlowmotionSlider, ReloadSlider;
     public Text weaponNameText, weaponAmmoText;
+    public GameObject weaponImage;
 
     public int playerHP, playerArmor;
 
@@ -64,16 +65,33 @@ public class GameController : MonoBehaviour {
         playerWeapons.Add(rocketLaucher);
 
         selectedWeapon = playerWeapons[0];
-        UpdateSelectedWeaponText();
+        UpdateSelectedWeapon();
         
     }
 
-    public void UpdateSelectedWeaponText() {
+    public void UpdateSelectedWeapon() {
         weaponNameText.text = selectedWeapon.GetName();
-        UpdateSelectedWeaponAmmoText();
+        //TEMPORÄR SNABB LÖSNING
+        if(selectedWeapon.GetName() == "Rifle") {
+            weaponImage.transform.GetChild(2).GetComponent<Image>().enabled = false;
+            weaponImage.transform.GetChild(1).GetComponent<Image>().enabled = false;
+            weaponImage.transform.GetChild(0).GetComponent<Image>().enabled = true;
+        }
+        if (selectedWeapon.GetName() == "Shotgun") {
+            weaponImage.transform.GetChild(2).GetComponent<Image>().enabled = false;
+            weaponImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
+            weaponImage.transform.GetChild(1).GetComponent<Image>().enabled = true;     
+        }
+        if (selectedWeapon.GetName() == "Rocket Launcher") {            
+            weaponImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
+            weaponImage.transform.GetChild(1).GetComponent<Image>().enabled = false;
+            weaponImage.transform.GetChild(2).GetComponent<Image>().enabled = true;
+        }
+        //TEMPORÄR SNABB LÖSNING
+        UpdateSelectedWeapon_AmmoText();
     }
 
-    public void UpdateSelectedWeaponAmmoText() {
+    public void UpdateSelectedWeapon_AmmoText() {
         weaponAmmoText.text = selectedWeapon.GetAmmoInClip() + "/" + selectedWeapon.GetTotalAmmoLeft();
     }
 

@@ -80,7 +80,6 @@ public class PlayerInput : MonoBehaviour {
         if (ammoInClip != maxAmmoInClip && totalAmmoLeft > 0 && !isReloading) {
             int ammoSpent = maxAmmoInClip - ammoInClip;
             GameController.Instance.ReloadSlider.gameObject.SetActive(true);
-            Debug.Log("Reloading " + selectedWeapon.GetName());
             GameController.Instance.ReloadSlider.maxValue = selectedWeapon.GetReloadTime();
             isReloading = true;
         }
@@ -101,7 +100,7 @@ public class PlayerInput : MonoBehaviour {
             int ammoSpent = maxAmmoInClip - ammoInClip;
             GameController.Instance.ReloadSlider.value = 0;
             FinishReload(ammoInClip, totalAmmoLeft, ammoSpent);
-            GameController.Instance.UpdateSelectedWeaponAmmoText();
+            GameController.Instance.UpdateSelectedWeapon_AmmoText();
             GameController.Instance.ReloadSlider.gameObject.SetActive(false);
             isReloading = false;
         }
@@ -164,7 +163,7 @@ public class PlayerInput : MonoBehaviour {
             if (selectedWeapon != thirdWeapon) { GameController.Instance.selectedWeapon = thirdWeapon; }
         }
 
-        GameController.Instance.UpdateSelectedWeaponText();
+        GameController.Instance.UpdateSelectedWeapon();
     }
 
     private BaseWeapon GetWeaponFromGameController(ref BaseWeapon weapon, int i) {
@@ -198,7 +197,6 @@ public class PlayerInput : MonoBehaviour {
         if (Input.GetButtonDown("Dash")) {
             playerMovementController.Dash();
             //playerShoot.Melee();
-            Debug.Log("Dash");
         }
     }
     #endregion
