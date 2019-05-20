@@ -21,7 +21,7 @@ public class WeaponPickup : MonoBehaviour {
         if (other.gameObject.tag == "InteractionPlayer") {
             BaseWeapon weaponPickup = null;
             if (weaponPickupPrefab.name == "Weapon_Rifle") {
-                weaponPickup = WeaponController.Instance.GetRifle();
+                weaponPickup = WeaponController.Instance.GetRifle();             
             }
             if (weaponPickupPrefab.name == "Weapon_Shotgun") {
                 weaponPickup = WeaponController.Instance.GetShotgun();
@@ -37,6 +37,8 @@ public class WeaponPickup : MonoBehaviour {
                     }
                 }
                 GameController.Instance.playerWeapons.Add(weaponPickup);
+                GameController.Instance.selectedWeapon = weaponPickup;
+                GameController.Instance.UpdateSelectedWeapon();
             }
             Destroy(gameObject);
         }
