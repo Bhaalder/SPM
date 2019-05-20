@@ -6,15 +6,17 @@ using UnityEngine.UI;
 public class PlayerShoot : MonoBehaviour{
     //Author: Patrik Ahlgren
 
+
+        /*
+         * MUZZLEFLASH BORDE LIGGA TILLSAMMANS MED VAPEN OCH DET HÄR BORDE BARA SÄGA TILL VAPNEN ATT SPELA ANIMATION
+         * */
     public LayerMask layerMask;
-
-    [SerializeField] public Transform weaponFocus;
-
+    
     [SerializeField] private GameObject bulletImpactMetalGO;
 
     [SerializeField] private GameObject bulletImpactAlienGO;
 
-    [SerializeField] private ParticleSystem muzzleFlash;
+    [SerializeField] private ParticleSystem muzzleFlash;//------------
 
     public float shotgunRecoil = 4;// TA BORT SEN
     public float shotgunRecoilDuration = 0.3f; // TA BORT SEN
@@ -24,12 +26,7 @@ public class PlayerShoot : MonoBehaviour{
     private float alienWoundTimer = 0.2f;
 
     private void Start(){
-        weaponFocus = GameObject.Find("WeaponFocus").transform;
         camShake = Camera.main.GetComponent<CameraShake>();
-    }
-
-    void Update(){
-        transform.LookAt(weaponFocus);
     }
 
     public void Melee() {
@@ -64,11 +61,10 @@ public class PlayerShoot : MonoBehaviour{
         if (weapon.GetAmmoInClip() != 0) {
             camShake.Shake(1f, 0.4f);
             AudioController.Instance.Play_RandomPitch("Rifle", 0.92f, 1f);
-            muzzleFlash.Play();
+            muzzleFlash.Play();//----------------Animation
             weapon.DecreaseAmmoInClip();
-            bool hitTarget = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, weapon.GetRange(), layerMask);
+            bool hitTarget = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, weapon.GetRange(), layerMask);
 
-            // få in spread på något sätt
             if (hitTarget) {
                 if (hit.rigidbody != null && hit.collider.gameObject.layer != 2) {
                     hit.rigidbody.AddForce(-hit.normal * weapon.GetImpactForce());
@@ -90,13 +86,13 @@ public class PlayerShoot : MonoBehaviour{
         if (weapon.GetAmmoInClip() != 0){
             camShake.RecoilShake(shotgunRecoil, shotgunRecoilDuration);
             AudioController.Instance.Play_RandomPitch("Shotgun", 0.95f, 1f);
-            muzzleFlash.Play();
+            muzzleFlash.Play();//------------Animation
             weapon.DecreaseAmmoInClip();
             bool[] hitTarget = new bool[5];
             RaycastHit[] hits = new RaycastHit[5];
             for(int i = 0; i < hitTarget.Length; i++){
                 float rndX = Random.Range(-0.1f, 0.1f), rndY = Random.Range(-0.1f, 0.1f);
-                hitTarget[i] = Physics.Raycast(transform.position, transform.forward + new Vector3(rndX, rndY, 0), out hits[i], weapon.GetRange(), layerMask);
+                hitTarget[i] = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(rndX, rndY, 0), out hits[i], weapon.GetRange(), layerMask);
             }
             for(int x = 0; x < hitTarget.Length; x++){
                 if (hitTarget[x]){
@@ -128,8 +124,7 @@ public class PlayerShoot : MonoBehaviour{
             camShake.RecoilShake(4, 0.3f);
             weapon.DecreaseAmmoInClip();
 
-            GameObject rocketProj = Instantiate(weapon.GetProjectile(), transform.position + transform.forward * 2, Quaternion.identity);
-            rocketProj.transform.LookAt(weaponFocus);
+            GameObject rocketProj = Instantiate(weapon.GetProjectile(), Camera.main.transform.position + Camera.main.transform.forward * 2, Camera.main.transform.rotation);
             rocketProj.GetComponent<RocketProjectile>().SetProjectileSpeed(weapon.GetProjectileSpeed());
             rocketProj.GetComponent<RocketProjectile>().SetProjectileForce(weapon.GetImpactForce());
             rocketProj.GetComponent<RocketProjectile>().SetProjectileDamage(weapon.GetDamage());
