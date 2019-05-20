@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c9604d9c5e9734c9b67a557b50e699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPickup: 1
+  isGlobe: 0
 --- !u!65 &4182543917830541582
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -162,7 +164,7 @@ Light:
   serializedVersion: 9
   m_Type: 2
   m_Color: {r: 0.46724558, g: 1, b: 0, a: 1}
-  m_Intensity: 10
+  m_Intensity: 1.56
   m_Range: 2
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -293,6 +295,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: d2b641128c630e94dba9d2454a3e828c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a3a1dec04edac4444bb87a056fb4049a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b641128c630e94dba9d2454a3e828c, type: 3}
 --- !u!4 &4965644439998992142 stripped

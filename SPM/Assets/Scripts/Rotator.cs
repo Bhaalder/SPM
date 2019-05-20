@@ -5,11 +5,17 @@ using UnityEngine;
 public class Rotator : MonoBehaviour {
     //Author: Teo
 
-
+    public bool isPickup;
+    public bool isGlobe;
     // Update is called once per frame
     void Update () {
-
-        transform.Rotate(new Vector3(0, 60, 0) * Time.deltaTime);
-
+        if (isPickup)
+        {
+            transform.Rotate(new Vector3(0, 60, 0) * Time.deltaTime);
+        }
+        if (isGlobe)
+        {
+            transform.Rotate(new Vector3(0, 0, 30) * Time.deltaTime);
+        }
 	}
 }

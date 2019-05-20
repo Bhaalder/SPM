@@ -42,7 +42,7 @@ Light:
   serializedVersion: 9
   m_Type: 2
   m_Color: {r: 0, g: 0.8013716, b: 1, a: 1}
-  m_Intensity: 10
+  m_Intensity: 1.5
   m_Range: 2
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -153,7 +153,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f30fbb775c1eecc4a9479c96dd20b17a, type: 2}
+  - {fileID: 2100000, guid: 76e7cd27bcc3b4b429a6fc9098428502, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -211,6 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c9604d9c5e9734c9b67a557b50e699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPickup: 1
+  isGlobe: 0
 --- !u!1001 &8274082778256568971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -297,7 +299,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 73220a8530a81c842989814e27d08d1a, type: 2}
+      objectReference: {fileID: 2100000, guid: 76e7cd27bcc3b4b429a6fc9098428502, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bf900e488c20894794c5943703876d8, type: 3}
 --- !u!4 &4010955455679519121 stripped
