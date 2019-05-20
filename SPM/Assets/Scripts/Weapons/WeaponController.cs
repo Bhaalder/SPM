@@ -29,7 +29,7 @@ public class WeaponController : MonoBehaviour{
     }
 
     public BaseWeapon GetShotgun() {
-        BaseWeapon shotgun = new BaseWeapon("Shotgun", 30, 30, 2f, 2f, 0.1f, 30, 8, 8, 200, null, null, null);
+        BaseWeapon shotgun = new BaseWeapon("Shotgun", 20, 30, 2f, 2f, 0.1f, 30, 8, 8, 200, null, null, null);
         return shotgun;
     }
 

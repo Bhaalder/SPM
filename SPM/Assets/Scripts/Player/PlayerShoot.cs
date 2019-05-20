@@ -100,13 +100,17 @@ public class PlayerShoot : MonoBehaviour{
                         hits[x].rigidbody.AddForce(-hits[x].normal * weapon.GetImpactForce());
                     }
                     if (hits[x].collider.gameObject.layer == 9){
-                        float fallOff = (hits[x].distance * (hits[x].distance / 2)) / 6;
-                        Debug.Log(weapon.GetDamage() - fallOff);
+
+                        float fallOff = Vector3.Distance(GameController.Instance.player.transform.position, hits[x].point);
+                        
                         if(fallOff > weapon.GetDamage()){
                             fallOff = weapon.GetDamage();
+                        } else if (weapon.GetDamage() - fallOff < 0) {
+                            fallOff = (weapon.GetDamage());
                         }
-                        
-                        hits[x].transform.GetComponent<EnemyController>().TakeDamage(weapon.GetDamage() - fallOff);
+                        float damage = weapon.GetDamage() - fallOff;
+                        Debug.Log(damage);
+                        hits[x].transform.GetComponent<EnemyController>().TakeDamage(damage);
                         InstantiateMultipleBulletHits(bulletImpactAlienGO, hits, x, alienWoundTimer);                       
                     } else {
                         InstantiateMultipleBulletHits(bulletImpactMetalGO, hits, x, 2.0f);
