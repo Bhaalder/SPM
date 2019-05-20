@@ -120,6 +120,9 @@ public class AudioController : MonoBehaviour {
             AudioNotFound(name);
         }
     }
+
+
+
     #endregion
 
     #region PlayRandomPitch
@@ -197,6 +200,74 @@ public class AudioController : MonoBehaviour {
         foreach (Sound s in allSounds) {
             s.source.volume *= f;
         }
+    }
+    #endregion
+
+    #region Pause Methods
+    public void Pause(string name, bool pause) {
+        try {
+            if (pause) {
+                foreach (Sound s in allSounds) {
+                    if (s.name == name) {
+                        s.source.Pause();
+                        return;
+                    }
+                }
+            } else if (!pause) {
+                foreach (Sound s in allSounds) {
+                    if (s.name == name) {
+                        s.source.UnPause();
+                        return;
+                    }
+                }
+            }           
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+
+    public void PauseAllSFX(bool pause) {
+        if (pause) {
+            foreach (Sound s in sfxList) {
+                try {
+                    s.source.Pause();
+                } catch (System.Exception) {
+
+                }
+            }
+
+        } else if (!pause) {
+            foreach (Sound s in sfxList) {
+                try {
+                    s.source.UnPause();
+                } catch (System.Exception) {
+
+                }
+            }
+        }
+    }
+
+    public void PauseAllSound(bool pause) {
+        if (pause) {
+            foreach (Sound s in allSounds) {
+                try {
+                    s.source.Pause();
+                } catch (System.Exception) {
+
+                }                
+            }
+                     
+        } else if (!pause) {
+            foreach (Sound s in allSounds) {
+
+                try {
+                    s.source.UnPause();
+                } catch (System.Exception) {
+
+                }
+            }
+        }
+
     }
     #endregion
 

@@ -17,14 +17,14 @@ public class RocketProjectile : MonoBehaviour{
     }
 
     private void Update(){
-        transform.position += Camera.main.transform.forward * projectileSpeed * 0.03f;
+        transform.position += Camera.main.transform.forward * projectileSpeed * Time.deltaTime;
         IncreaseSpeed();
     }
 
     private void IncreaseSpeed(){
         if (projectileSpeed < 30)
         {
-            projectileSpeed *= 1.01f;
+            projectileSpeed *= 1.05f;
         }
     }
 
