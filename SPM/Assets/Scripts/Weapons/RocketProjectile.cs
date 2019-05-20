@@ -9,9 +9,15 @@ public class RocketProjectile : MonoBehaviour{
     private float projectileSpeed;
     private float projectileDamage;
     private float projectileForce;
+    private GameObject rocketSound;
+
+    private void Awake() {
+        rocketSound = AudioController.Instance.Play_RandomPitch_InWorldspace("RocketLauncher_Rocket", gameObject, 0.95f, 1f);
+        rocketSound.transform.SetParent(gameObject.transform);
+    }
 
     private void Update(){
-        transform.position += transform.forward * projectileSpeed * 0.03f;
+        transform.position += Camera.main.transform.forward * projectileSpeed * 0.03f;
         IncreaseSpeed();
     }
 

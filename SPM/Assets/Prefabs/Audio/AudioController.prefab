@@ -64,14 +64,34 @@ MonoBehaviour:
     maxDistance: 0
     loop: 0
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 8300000, guid: 312e2bf96f316194f961ba619390f8a9, type: 3}
+  - name: RocketLauncher_Launch
+    clip: {fileID: 8300000, guid: 5fa5da2de4f7ae54f8fd67436e38e8b1, type: 3}
     volume: 1
     pitch: 1
     spatialBlend_2D_3D: 0
     rolloffMode: 0
     minDistance: 0
     maxDistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: RocketLauncher_Rocket
+    clip: {fileID: 8300000, guid: c053502f4a512e845bd08139bed169c2, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 30
+    loop: 0
+    source: {fileID: 0}
+  - name: Explosion
+    clip: {fileID: 8300000, guid: 9c870e3cb47c8ae47adab037de1c8890, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 100
     loop: 0
     source: {fileID: 0}
   enemySounds: []

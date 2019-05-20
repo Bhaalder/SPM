@@ -81,7 +81,7 @@ public class AudioController : MonoBehaviour {
         }
     }
 
-    public void Play_InWorldspace(string name, GameObject gameObjectLocation) {
+    public GameObject Play_InWorldspace(string name, GameObject gameObjectLocation) {
         try {
             foreach (Sound s in allSounds) {
                 if (s.name == name) {
@@ -99,12 +99,13 @@ public class AudioController : MonoBehaviour {
                     if (!s.source.loop) {
                         Destroy(soundAtLocationGO, s.clip.length);
                     }
-                    return;
+                    return soundAtLocationGO;
                 }
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
+        return null;
     }
 
     public void Stop(string name) {
@@ -138,7 +139,7 @@ public class AudioController : MonoBehaviour {
         }
     }
 
-    public void Play_RandomPitch_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
+    public GameObject Play_RandomPitch_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
         try {
             foreach (Sound s in allSounds) {
                 if (s.name == name) {
@@ -158,24 +159,30 @@ public class AudioController : MonoBehaviour {
                     if (!s.source.loop) {
                         Destroy(soundAtLocationGO, s.clip.length);
                     }
-                    return;
+                    return soundAtLocationGO;
                 }
             }
-        } catch (System.NullReferenceException) {
+        } catch (System.NullReferenceException) {            
             AudioNotFound(name);
         }
+        return null;
     }
     #endregion
 
     #region Volume / Pitch Methods
     public void SFXSetPitch(float f) {
         foreach (Sound s in sfxList) {
-            s.source.pitch = f;
+            try {
+                s.source.pitch = f;
+            } catch (System.Exception) {
+
+            }         
         }
     }
 
     public void SFXSetVolume(float f) {
         foreach (Sound s in sfxList) {
+
             s.source.volume = f;
         }
     }

@@ -88,8 +88,8 @@ public class PlayerShoot : MonoBehaviour{
             AudioController.Instance.Play_RandomPitch("Shotgun", 0.95f, 1f);
             muzzleFlash.Play();//------------Animation
             weapon.DecreaseAmmoInClip();
-            bool[] hitTarget = new bool[5];
-            RaycastHit[] hits = new RaycastHit[5];
+            bool[] hitTarget = new bool[6];
+            RaycastHit[] hits = new RaycastHit[6];
             for(int i = 0; i < hitTarget.Length; i++){
                 float rndX = Random.Range(-0.1f, 0.1f), rndY = Random.Range(-0.1f, 0.1f);
                 hitTarget[i] = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(rndX, rndY, 0), out hits[i], weapon.GetRange(), layerMask);
@@ -122,9 +122,10 @@ public class PlayerShoot : MonoBehaviour{
     private void ShootProjectile(ProjectileWeapon weapon) {
         if (weapon.GetAmmoInClip() != 0) {
             camShake.RecoilShake(4, 0.3f);
+            AudioController.Instance.Play_RandomPitch("RocketLauncher_Launch", 0.95f, 1f);
             weapon.DecreaseAmmoInClip();
 
-            GameObject rocketProj = Instantiate(weapon.GetProjectile(), Camera.main.transform.position + Camera.main.transform.forward * 2, Camera.main.transform.rotation);
+            GameObject rocketProj = Instantiate(weapon.GetProjectile(), Camera.main.transform.position + Camera.main.transform.forward, Camera.main.transform.rotation);
             rocketProj.GetComponent<RocketProjectile>().SetProjectileSpeed(weapon.GetProjectileSpeed());
             rocketProj.GetComponent<RocketProjectile>().SetProjectileForce(weapon.GetImpactForce());
             rocketProj.GetComponent<RocketProjectile>().SetProjectileDamage(weapon.GetDamage());
