@@ -7,8 +7,10 @@ public class Explosion : MonoBehaviour
     //Author: Patrik Ahlgren
     public float explosionRadius;
     public GameObject explosionEffect;
+    public GameObject fireEffect;
 
     private GameObject explosion;
+    private GameObject fire;
     
     public void Explode(float explosionForce, float damage) {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
@@ -26,7 +28,8 @@ public class Explosion : MonoBehaviour
         }
         explosion = Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Camera.main.GetComponent<CameraShake>().ShakeIncreaseDistance(25f, 1.5f, GameController.Instance.player, gameObject);
+        fire = Instantiate(fireEffect, transform.position, Quaternion.identity);
         Destroy(explosion, 3.75f);
-        
+        Destroy(fire, 10f);
     }
 }

@@ -19,12 +19,13 @@ public class PlayerShoot : MonoBehaviour{
     public float shotgunRecoil = 4;// TA BORT SEN
     public float shotgunRecoilDuration = 0.3f; // TA BORT SEN
 
-
+    private CameraShake camShake;
     private GameObject bulletImpact;
     private float alienWoundTimer = 0.2f;
 
     private void Start(){
         weaponFocus = GameObject.Find("WeaponFocus").transform;
+        camShake = Camera.main.GetComponent<CameraShake>();
     }
 
     void Update(){
@@ -61,7 +62,8 @@ public class PlayerShoot : MonoBehaviour{
     private void ShootHitScan(BaseWeapon weapon) {
 
         if (weapon.GetAmmoInClip() != 0) {
-            Camera.main.GetComponent<CameraShake>().Shake(1f, 0.4f);
+            camShake.Shake(1f, 0.4f);
+            AudioController.Instance.Play_RandomPitch("Rifle", 0.92f, 1f);
             muzzleFlash.Play();
             weapon.DecreaseAmmoInClip();
             bool hitTarget = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, weapon.GetRange(), layerMask);
@@ -86,7 +88,7 @@ public class PlayerShoot : MonoBehaviour{
     //TEST
     private void ShootShotgunHitScan(BaseWeapon weapon){
         if (weapon.GetAmmoInClip() != 0){
-            Camera.main.GetComponent<CameraShake>().RecoilShake(shotgunRecoil, shotgunRecoilDuration);
+            camShake.RecoilShake(shotgunRecoil, shotgunRecoilDuration);
             AudioController.Instance.Play_RandomPitch("Shotgun", 0.95f, 1f);
             muzzleFlash.Play();
             weapon.DecreaseAmmoInClip();
@@ -123,6 +125,7 @@ public class PlayerShoot : MonoBehaviour{
 
     private void ShootProjectile(ProjectileWeapon weapon) {
         if (weapon.GetAmmoInClip() != 0) {
+            camShake.RecoilShake(4, 0.3f);
             weapon.DecreaseAmmoInClip();
 
             GameObject rocketProj = Instantiate(weapon.GetProjectile(), transform.position + transform.forward * 2, Quaternion.identity);

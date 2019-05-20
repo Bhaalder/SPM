@@ -27,6 +27,10 @@ public class OpenDoorsAnimated : MonoBehaviour
         
     }
 
+    public void OpenAndClose() {
+
+    }
+
     // Update is called once per frame
     void Update()
     {

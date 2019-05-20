@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GUIInteract : MonoBehaviour{
 
     //Author: Patrik Ahlgren
-	public Text interact;
+	public Text interactText;
     public LayerMask layerMask;
 
     public Transform dir;
@@ -14,7 +14,7 @@ public class GUIInteract : MonoBehaviour{
     private float distanceToTarget = 2f;
 	
     private void Awake(){
-        interact = GameObject.Find("InteractionText").GetComponent<Text>();       
+        interactText = GameObject.Find("InteractionText").GetComponent<Text>();       
     }
 
     private void Start() {
@@ -23,11 +23,11 @@ public class GUIInteract : MonoBehaviour{
     }
 
     private void LateUpdate() {
-        Physics.Raycast(dir.position, Camera.main.transform.forward, out RaycastHit hit, distanceToTarget, layerMask);
-        interact.enabled = false;
+        Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, distanceToTarget, layerMask);
+        interactText.enabled = false;
         try {
             if (hit.transform.gameObject.tag == "InteractableObject") {
-                interact.enabled = true;
+                interactText.enabled = true;
             }
         } catch (System.NullReferenceException) {
 

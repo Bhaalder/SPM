@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 public class CameraShake : MonoBehaviour {
-    //Author: Patrik Ahlgrne
+    //Author: Patrik Ahlgren
     public float shakeValue;
     public float shakeDuration;
 
@@ -13,6 +13,15 @@ public class CameraShake : MonoBehaviour {
     private float startDuration;
 
     bool isShaking = false;
+
+    public float recoilValue;//
+    public float recoilDuration;
+
+    private float recoilPercentage;
+    private float startRecoilValue;
+    private float startRecoilDuration;
+
+    bool isRecoiling = false;//
 
     public bool isSmooth;
     public float smoothValue = 3f;
@@ -40,12 +49,12 @@ public class CameraShake : MonoBehaviour {
     }
 
     public void RecoilShake(float value, float duration) {
-        shakeValue += value;
-        startValue = shakeValue;
-        shakeDuration = duration;
-        startDuration = shakeDuration;
+        recoilValue += value;
+        startRecoilValue = recoilValue;
+        recoilDuration = duration;
+        startRecoilDuration = recoilDuration;
 
-        if (!isShaking) {
+        if (!isRecoiling) {
             StartCoroutine(Recoil());
         }          
     }
@@ -75,15 +84,15 @@ public class CameraShake : MonoBehaviour {
     }
 
     private IEnumerator Recoil() {
-        isShaking = true;
+        isRecoiling = true;
 
-        while (shakeDuration > 0.01f) {
-            Vector3 rotationAmount = new Vector3(-1, 0, 0) * shakeValue;
+        while (recoilDuration > 0.01f) {
+            Vector3 rotationAmount = new Vector3(-1, 0, 0) * recoilValue;
 
-            shakePercentage = shakeDuration / startDuration;
+            recoilPercentage = recoilDuration / startRecoilDuration;
 
-            shakeValue = startValue * shakePercentage;
-            shakeDuration -= 1 * Time.deltaTime;
+            recoilValue = startRecoilValue * recoilPercentage;
+            recoilDuration -= 1 * Time.deltaTime;
 
             if (isSmooth) {//kommer antagligen inte ha smooth på recoil
                 //transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(rotationAmount), Time.deltaTime * 4);
@@ -94,7 +103,7 @@ public class CameraShake : MonoBehaviour {
             yield return null;
         }
         transform.localRotation = Quaternion.identity;
-        isShaking = false;
+        isRecoiling = false;
 
 
         
