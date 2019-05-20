@@ -71,23 +71,15 @@ public class GameController : MonoBehaviour {
 
     public void UpdateSelectedWeapon() {
         weaponNameText.text = selectedWeapon.GetName();
-        //TEMPORÄR SNABB LÖSNING
-        if(selectedWeapon.GetName() == "Rifle") {
-            weaponImage.transform.GetChild(2).GetComponent<Image>().enabled = false;
-            weaponImage.transform.GetChild(1).GetComponent<Image>().enabled = false;
-            weaponImage.transform.GetChild(0).GetComponent<Image>().enabled = true;
+        foreach (Transform child in weaponImage.transform) {
+            child.GetComponent<Image>().enabled = false;
         }
-        if (selectedWeapon.GetName() == "Shotgun") {
-            weaponImage.transform.GetChild(2).GetComponent<Image>().enabled = false;
-            weaponImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
-            weaponImage.transform.GetChild(1).GetComponent<Image>().enabled = true;     
+        for (int weapon = 0; weapon < playerWeapons.Count; weapon++) {
+            if (playerWeapons[weapon] == selectedWeapon) {
+                weaponImage.transform.GetChild(weapon).GetComponent<Image>().enabled = true;
+                break;
+            }
         }
-        if (selectedWeapon.GetName() == "Rocket Launcher") {            
-            weaponImage.transform.GetChild(0).GetComponent<Image>().enabled = false;
-            weaponImage.transform.GetChild(1).GetComponent<Image>().enabled = false;
-            weaponImage.transform.GetChild(2).GetComponent<Image>().enabled = true;
-        }
-        //TEMPORÄR SNABB LÖSNING
         UpdateSelectedWeapon_AmmoText();
     }
 
