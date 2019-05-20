@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour {
 
     public Slider HealthSlider, ArmorSlider, SlowmotionSlider, ReloadSlider;
     public Text weaponNameText, weaponAmmoText;
-    public GameObject weaponImage;
+    public GameObject weaponImage, crossHair;
 
     public int playerHP, playerArmor;
 
@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour {
 
     public float invulnerableStateTime;
     private float invulnerableState;
+
+    
 
     private static GameController instance;
 
@@ -66,7 +68,6 @@ public class GameController : MonoBehaviour {
 
         selectedWeapon = playerWeapons[0];
         UpdateSelectedWeapon();
-        
     }
 
     public void UpdateSelectedWeapon() {
@@ -74,9 +75,13 @@ public class GameController : MonoBehaviour {
         foreach (Transform child in weaponImage.transform) {
             child.GetComponent<Image>().enabled = false;
         }
+        foreach (Transform child in crossHair.transform) {
+            child.GetComponent<Image>().enabled = false;
+        }
         for (int weapon = 0; weapon < playerWeapons.Count; weapon++) {
             if (playerWeapons[weapon] == selectedWeapon) {
                 weaponImage.transform.GetChild(weapon).GetComponent<Image>().enabled = true;
+                crossHair.transform.GetChild(weapon).GetComponent<Image>().enabled = true;
                 break;
             }
         }
@@ -101,6 +106,10 @@ public class GameController : MonoBehaviour {
         Debug.Log("Game event =" + gameEventID);
     }
 
+    public void Hitmark() {
+        //Inget funkar..................
+    }
+
     public void GamePaused() {
         if (gameIsPaused) {
             gameIsPaused = false;
@@ -116,12 +125,11 @@ public class GameController : MonoBehaviour {
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
     }
-    
+
     private void Update() {
         HealthSlider.value = playerHP;
         ArmorSlider.value = playerArmor;
     }
-
 
     public void TakeDamage(int damage){
         if (Time.time >= invulnerableState) {
