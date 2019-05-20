@@ -18,10 +18,10 @@ public class RocketProjectile : MonoBehaviour{
 
     private void Update(){
         if (GameController.Instance.gameIsSlowmotion) {
-            transform.position += Camera.main.transform.forward * (projectileSpeed/2) * Time.unscaledDeltaTime;
+            transform.position += transform.forward * (projectileSpeed/2) * Time.unscaledDeltaTime;
             IncreaseSpeed();
         } else {
-            transform.position += Camera.main.transform.forward * projectileSpeed * Time.deltaTime;
+            transform.position += transform.forward * projectileSpeed * Time.deltaTime;
             IncreaseSpeed();
         }       
     }
