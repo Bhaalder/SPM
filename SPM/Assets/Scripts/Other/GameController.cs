@@ -27,7 +27,7 @@ public class GameController : MonoBehaviour {
     public float invulnerableStateTime;
     private float invulnerableState;
 
-    
+    public Text interactionText;
 
     private static GameController instance;
 

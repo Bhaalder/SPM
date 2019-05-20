@@ -4,73 +4,41 @@ using UnityEngine;
 
 public class OpenDoorsAnimated : MonoBehaviour
 {
-    
-    
     bool isOpen;
     bool isClosed;
 
-    public GameObject redP;
-    public GameObject greenP;
+    public GameObject redPanel;
+    public GameObject greenPanel;
+    public SpawnManager spawnManager;
 
-    
     public Animator anim;
-    //public AnimationClip Close;
-    //public AnimationClip Open;
-    // Start is called before the first frame update
+
+    public bool spawnEnemies;
+
     void Start()
     {
-        greenP.SetActive(false);
-        redP.SetActive(true);
-        
-        
-
-        
+        greenPanel = gameObject.transform.GetChild(0).gameObject;
+        redPanel = gameObject.transform.GetChild(1).gameObject;
+        greenPanel.SetActive(false);
+        redPanel.SetActive(true);  
     }
 
     public void OpenAndClose() {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("InteractionPlayer") && GameController.Instance.playerIsInteracting)
-        {
-
-            isOpen = !isOpen;
-            Debug.Log("F");
-            if (isOpen)
-            {
-                //anim.Play("SlidingDoorsOpen");
-                anim.SetBool("isOpen", true);
-                greenP.SetActive(!greenP.activeSelf);
-                redP.SetActive(!redP.activeSelf);
-
-            }
-            else
-            {
-
-
-                //anim.Play("SlidingDoorsClose");
-                anim.SetBool("isOpen", false);
-                greenP.SetActive(!greenP.activeSelf);
-                redP.SetActive(!redP.activeSelf);
-
-
-
+        isOpen = !isOpen;
+        Debug.Log("F");
+        if (isOpen) {
+            anim.SetBool("isOpen", true);
+            greenPanel.SetActive(!greenPanel.activeSelf);
+            redPanel.SetActive(!redPanel.activeSelf);
+            if (spawnEnemies) {
+                spawnManager.InitializeSpawner();
+                spawnEnemies = false;
             }
 
-
-
-
-
-
+        } else {
+            anim.SetBool("isOpen", false);
+            greenPanel.SetActive(!greenPanel.activeSelf);
+            redPanel.SetActive(!redPanel.activeSelf);
         }
     }
 }

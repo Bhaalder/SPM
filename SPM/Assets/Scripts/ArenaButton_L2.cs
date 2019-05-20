@@ -17,10 +17,7 @@ public class ArenaButton_L2 : MonoBehaviour
     
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("InteractionPlayer") && GameController.Instance.playerIsInteracting)
-        {
+    public void PressButton() {
             sceneManagerScript.buttonIsPressed = true;
             Debug.Log("Knappen tryckt");
             spawnerScript.GetComponent<SpawnManager>().InitializeSpawner();
@@ -28,8 +25,6 @@ public class ArenaButton_L2 : MonoBehaviour
 
             obj1.SetActive(false);
             obj2.SetActive(false);
-         
-
-        }
     }
+
 }

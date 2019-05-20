@@ -28,6 +28,10 @@ public class GUIInteract : MonoBehaviour{
         try {
             if (hit.transform.gameObject.tag == "InteractableObject") {
                 interactText.enabled = true;
+                if (GameController.Instance.playerIsInteracting) {
+                    hit.transform.GetComponent<InteractableObject>().Interact();
+                    GameController.Instance.playerIsInteracting = false;
+                }
             }
         } catch (System.NullReferenceException) {
 

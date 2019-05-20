@@ -8,32 +8,23 @@ public class ArenaButton : MonoBehaviour
     public SpawnManager spawnerScript;
     public SceneManagerScript sceneManagerScript;
 
-    public Level1ArenaDoors aScript;
+    public Level1ArenaDoors level1ArenaDoors;
 
     public GameObject obj1;
     public GameObject obj2;
 
     private void Start() {
         sceneManagerScript = GameObject.Find("SceneManager").GetComponent<SceneManagerScript>();
-        aScript = GameObject.Find("InnerArenaDoors").GetComponent<Level1ArenaDoors>();
+        level1ArenaDoors = GameObject.Find("InnerArenaDoors").GetComponent<Level1ArenaDoors>();
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("InteractionPlayer") && GameController.Instance.playerIsInteracting)
-        {
+    public void PressButton() {
             sceneManagerScript.buttonIsPressed = true;
             Debug.Log("Knappen tryckt");
             spawnerScript.GetComponent<SpawnManager>().InitializeSpawner();
             Destroy(gameObject);
             obj1.SetActive(false);
             obj2.SetActive(false);
-
-            aScript.ArenaChange();
-
-
-
-
-        }
+            level1ArenaDoors.ArenaChange();
     }
 }
