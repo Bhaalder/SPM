@@ -114,7 +114,7 @@ public class CameraShake : MonoBehaviour {
         float shaking = 0;
 
         while (shakeDuration > 0.01f) {
-            if (shakeValue-distance <= 1) {
+            if (shakeValue-(distance*0.65) <= 1) {
                 shaking = 1;
             } else {
                 shaking = shakeValue - distance;

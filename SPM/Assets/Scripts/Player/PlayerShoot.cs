@@ -58,8 +58,7 @@ public class PlayerShoot : MonoBehaviour{
 
     private void ShootHitScan(BaseWeapon weapon) {
 
-        if (weapon.GetAmmoInClip() != 0) {
-            camShake.Shake(1f, 0.4f);
+        if (weapon.GetAmmoInClip() != 0) {           
             AudioController.Instance.Play_RandomPitch("Rifle", 0.92f, 1f);
             muzzleFlash.Play();//----------------Animation
             weapon.DecreaseAmmoInClip();
@@ -79,19 +78,19 @@ public class PlayerShoot : MonoBehaviour{
         } else if (weapon.GetAmmoInClip() <= 0) {
             Debug.Log("Out of Ammo");
         }
+        camShake.Shake(1f, 0.4f);
     }
 
     //TEST
     private void ShootShotgunHitScan(BaseWeapon weapon){
-        if (weapon.GetAmmoInClip() != 0){
-            camShake.RecoilShake(shotgunRecoil, shotgunRecoilDuration);
+        if (weapon.GetAmmoInClip() != 0){           
             AudioController.Instance.Play_RandomPitch("Shotgun", 0.95f, 1f);
             muzzleFlash.Play();//------------Animation
             weapon.DecreaseAmmoInClip();
             bool[] hitTarget = new bool[6];
             RaycastHit[] hits = new RaycastHit[6];
             for(int i = 0; i < hitTarget.Length; i++){
-                float rndX = Random.Range(-0.1f, 0.1f), rndY = Random.Range(-0.1f, 0.1f);
+                float rndX = Random.Range(-0.1f, 0.1f), rndY = Random.Range(-0.03f, 0.03f);
                 hitTarget[i] = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(rndX, rndY, 0), out hits[i], weapon.GetRange(), layerMask);
             }
             for(int x = 0; x < hitTarget.Length; x++){
@@ -100,7 +99,7 @@ public class PlayerShoot : MonoBehaviour{
                         hits[x].rigidbody.AddForce(-hits[x].normal * weapon.GetImpactForce());
                     }
                     if (hits[x].collider.gameObject.layer == 9){
-                        float fallOff = (hits[x].distance * (hits[x].distance / 2)) / 4;
+                        float fallOff = (hits[x].distance * (hits[x].distance / 2)) / 6;
                         Debug.Log(weapon.GetDamage() - fallOff);
                         if(fallOff > weapon.GetDamage()){
                             fallOff = weapon.GetDamage();
@@ -113,6 +112,7 @@ public class PlayerShoot : MonoBehaviour{
                     
                 }
             }
+            camShake.RecoilShake(shotgunRecoil, shotgunRecoilDuration);
         }
         else if (weapon.GetAmmoInClip() <= 0){
             Debug.Log("Out of Ammo");
@@ -121,7 +121,7 @@ public class PlayerShoot : MonoBehaviour{
 
     private void ShootProjectile(ProjectileWeapon weapon) {
         if (weapon.GetAmmoInClip() != 0) {
-            camShake.RecoilShake(4, 0.3f);
+            
             AudioController.Instance.Play_RandomPitch("RocketLauncher_Launch", 0.95f, 1f);
             weapon.DecreaseAmmoInClip();
 
@@ -133,6 +133,7 @@ public class PlayerShoot : MonoBehaviour{
         } else if (weapon.GetAmmoInClip() <= 0) {
             Debug.Log("Out of Ammo");
         }
+        camShake.RecoilShake(4, 0.3f);
     }
     
     private void InstantiateMultipleBulletHits(GameObject impactGO, RaycastHit[] hits, int numberOfHits, float timeUntilDestroy) {
