@@ -18,6 +18,8 @@ public class PlayerShoot : MonoBehaviour{
 
     [SerializeField] private ParticleSystem muzzleFlash;//------------
 
+    //[SerializeField] private Image hitmark;
+
     public float shotgunRecoil = 4;// TA BORT SEN
     public float shotgunRecoilDuration = 0.3f; // TA BORT SEN
 
@@ -69,7 +71,7 @@ public class PlayerShoot : MonoBehaviour{
                     hit.rigidbody.AddForce(-hit.normal * weapon.GetImpactForce());
                 }
                 if (hit.collider.gameObject.layer == 9){
-                    GameController.Instance.Hitmark();
+                    GameController.Instance.Hit(0.2f);
                     hit.transform.GetComponent<EnemyController>().TakeDamage(weapon.GetDamage());
                     InstantiateSingleBulletHit(bulletImpactAlienGO, hit, alienWoundTimer);
                 } else {
@@ -109,7 +111,7 @@ public class PlayerShoot : MonoBehaviour{
                             fallOff = (weapon.GetDamage());
                         }
                         float damage = weapon.GetDamage() - fallOff;
-                        Debug.Log(damage);
+                        GameController.Instance.Hit(0.5f);
                         hits[x].transform.GetComponent<EnemyController>().TakeDamage(damage);
                         InstantiateMultipleBulletHits(bulletImpactAlienGO, hits, x, alienWoundTimer);                       
                     } else {
@@ -150,5 +152,7 @@ public class PlayerShoot : MonoBehaviour{
         bulletImpact = Instantiate(impactGO, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(bulletImpact, timeUntilDestroy);
     }
+
+
 
 }

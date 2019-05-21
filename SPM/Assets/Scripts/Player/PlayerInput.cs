@@ -116,7 +116,7 @@ public class PlayerInput : MonoBehaviour {
         StopAllCoroutines();
     }
 
-    private void AbortReload() {
+    public void AbortReload() { //detta är public för att kunna avbryta reload för typ cutscenes eller när man plockar upp nya vapen, inte bästa lösningen men det funkar
         isReloading = false;
         GameController.Instance.ReloadSlider.value = 0;
         GameController.Instance.ReloadSlider.gameObject.SetActive(false);

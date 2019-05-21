@@ -37,6 +37,7 @@ public class WeaponPickup : MonoBehaviour {
                     }
                 }
                 GameController.Instance.playerWeapons.Add(weaponPickup);
+                GameController.Instance.player.GetComponent<PlayerInput>().AbortReload();
                 GameController.Instance.selectedWeapon = weaponPickup;
                 GameController.Instance.UpdateSelectedWeapon();
             }

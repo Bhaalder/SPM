@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour {
     private float invulnerableState;
 
     public Text interactionText;
-
+    [SerializeField] private Image hitmark;
     private static GameController instance;
 
     public static GameController Instance {
@@ -106,10 +106,6 @@ public class GameController : MonoBehaviour {
         Debug.Log("Game event =" + gameEventID);
     }
 
-    public void Hitmark() {
-        //Inget funkar..................
-    }
-
     public void GamePaused() {
         if (gameIsPaused) {
             gameIsPaused = false;
@@ -138,6 +134,16 @@ public class GameController : MonoBehaviour {
         } else {
             Debug.Log("InvulnerableState active, no damage");
         }
-    } 
+    }
 
+    public void Hit(float hitmarkTimer) {
+        StopAllCoroutines();
+        hitmark.enabled = true;
+        StartCoroutine(Hitmark(hitmarkTimer));
+    }
+
+    private IEnumerator Hitmark(float hitmarkTimer) {
+        yield return new WaitForSecondsRealtime(hitmarkTimer);
+        hitmark.enabled = false;
+    }
 }

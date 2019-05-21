@@ -17,8 +17,8 @@ public class Explosion : MonoBehaviour
 
         foreach (Collider nearbyObject in colliders)
         {
-            if (nearbyObject.gameObject.layer == 9)
-            {
+            if (nearbyObject.gameObject.layer == 9){
+                GameController.Instance.Hit(0.5f);
                 nearbyObject.transform.GetComponent<EnemyController>().TakeDamage(damage);
             }
             Rigidbody rigidBody = nearbyObject.GetComponent<Rigidbody>();
