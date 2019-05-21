@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioController : MonoBehaviour {
     //Author: Patrik Ahlgren
@@ -15,6 +16,9 @@ public class AudioController : MonoBehaviour {
     public Sound[] musicSounds;
     [Header("Sound Object")]
     public GameObject soundObject;
+    [Header("AudioMixer")]
+    public AudioMixer audioMixer;
+    public AudioMixerGroup audioMixerGroup;
 
     private List<Sound> musicList = new List<Sound>();
     private List<Sound> sfxList = new List<Sound>();
@@ -64,6 +68,7 @@ public class AudioController : MonoBehaviour {
             s.source.minDistance = s.minDistance;
             s.source.maxDistance = s.maxDistance;
             s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = audioMixerGroup;
         }
     }
 
@@ -226,8 +231,10 @@ public class AudioController : MonoBehaviour {
     }
 
     public void AllSoundsSetVolume(float f) {
-        foreach (Sound s in allSounds) {
-            s.source.volume *= f;
+        if (f == -80) {
+            audioMixer.SetFloat("MasterVolume", f);
+        } else {
+            audioMixer.SetFloat("MasterVolume", (f / 4)); //denna slide ska gå från -80 till 0;
         }
     }
     #endregion
