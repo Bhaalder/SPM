@@ -36,7 +36,7 @@ public class WeaponController : MonoBehaviour{
     }
 
     public ProjectileWeapon GetRocketLauncher() {
-        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", 30, 100, 1.15f, 3.3f, 0.01f, 20, 20, 3, 3, 15, rocketLaucherProjectileGO, crosshair[2]);
+        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", 30, 100, 1.15f, 3.3f, 0.01f, 20, 15, 3, 3, 15, rocketLaucherProjectileGO, crosshair[2]);
         return rocketLauncher;
     }
 

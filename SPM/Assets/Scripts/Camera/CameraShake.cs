@@ -103,10 +103,7 @@ public class CameraShake : MonoBehaviour {
             yield return null;
         }
         transform.localRotation = Quaternion.identity;
-        isRecoiling = false;
-
-
-        
+        isRecoiling = false;      
     }
 
     private IEnumerator ShakeCameraDistance(float distance) {
@@ -164,5 +161,4 @@ public class CameraShake : MonoBehaviour {
         transform.localRotation = Quaternion.identity;
         isShaking = false;
     }
-
 }

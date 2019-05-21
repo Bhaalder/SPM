@@ -18,8 +18,6 @@ public class PlayerShoot : MonoBehaviour{
 
     [SerializeField] private ParticleSystem muzzleFlash;//------------
 
-    //[SerializeField] private Image hitmark;
-
     public float shotgunRecoil = 4;// TA BORT SEN
     public float shotgunRecoilDuration = 0.3f; // TA BORT SEN
 
@@ -84,7 +82,6 @@ public class PlayerShoot : MonoBehaviour{
         camShake.Shake(1f, 0.4f);
     }
 
-    //TEST
     private void ShootShotgunHitScan(BaseWeapon weapon){
         if (weapon.GetAmmoInClip() != 0){           
             AudioController.Instance.PlaySFX_RandomPitch("Shotgun", 0.95f, 1f);
@@ -116,11 +113,11 @@ public class PlayerShoot : MonoBehaviour{
                         InstantiateMultipleBulletHits(bulletImpactAlienGO, hits, x, alienWoundTimer);                       
                     } else {
                         InstantiateMultipleBulletHits(bulletImpactMetalGO, hits, x, 2.0f);
-                    }
-                    
+                    }               
                 }
             }
             camShake.RecoilShake(shotgunRecoil, shotgunRecoilDuration);
+            camShake.Shake(shotgunRecoil, 0.5f);
         }
         else if (weapon.GetAmmoInClip() <= 0){
             Debug.Log("Out of Ammo");
@@ -133,7 +130,7 @@ public class PlayerShoot : MonoBehaviour{
             AudioController.Instance.PlaySFX_RandomPitch("RocketLauncher_Launch", 0.95f, 1f);
             weapon.DecreaseAmmoInClip();
 
-            GameObject rocketProj = Instantiate(weapon.GetProjectile(), Camera.main.transform.position + (Camera.main.transform.forward*2), Camera.main.transform.rotation);
+            GameObject rocketProj = Instantiate(weapon.GetProjectile(), Camera.main.transform.position + Camera.main.transform.forward, Camera.main.transform.rotation);
             rocketProj.GetComponent<RocketProjectile>().SetProjectileSpeed(weapon.GetProjectileSpeed());
             rocketProj.GetComponent<RocketProjectile>().SetProjectileForce(weapon.GetImpactForce());
             rocketProj.GetComponent<RocketProjectile>().SetProjectileDamage(weapon.GetDamage());
@@ -152,7 +149,5 @@ public class PlayerShoot : MonoBehaviour{
         bulletImpact = Instantiate(impactGO, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(bulletImpact, timeUntilDestroy);
     }
-
-
 
 }
