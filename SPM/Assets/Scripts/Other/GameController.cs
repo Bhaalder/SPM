@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour {
 
     public Slider HealthSlider, ArmorSlider, SlowmotionSlider, ReloadSlider;
     public Text weaponNameText, weaponAmmoText;
-    public GameObject weaponImage, crossHair;
+    public GameObject weaponImage;
 
     public int playerHP, playerArmor;
 
@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour {
     private float invulnerableState;
 
     public Text interactionText;
-    [SerializeField] private Image hitmark;
+    [SerializeField] private Image crosshair, hitmark;
     private static GameController instance;
 
     public static GameController Instance {
@@ -75,16 +75,13 @@ public class GameController : MonoBehaviour {
         foreach (Transform child in weaponImage.transform) {
             child.GetComponent<Image>().enabled = false;
         }
-        foreach (Transform child in crossHair.transform) {
-            child.GetComponent<Image>().enabled = false;
-        }
         for (int weapon = 0; weapon < playerWeapons.Count; weapon++) {
             if (playerWeapons[weapon] == selectedWeapon) {
                 weaponImage.transform.GetChild(weapon).GetComponent<Image>().enabled = true;
-                crossHair.transform.GetChild(weapon).GetComponent<Image>().enabled = true;
                 break;
             }
         }
+        crosshair.sprite = selectedWeapon.GetCrosshair();
         UpdateSelectedWeapon_AmmoText();
     }
 

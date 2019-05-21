@@ -63,16 +63,16 @@ MonoBehaviour:
     type: 3}
   weaponImage: {fileID: 593760641820757135, guid: 5f0975695e5ba194484bc2b401e91dd5,
     type: 3}
-  crossHair: {fileID: 4186964597936257055, guid: 576a51fc4c6630c4d9f990664100c333,
-    type: 3}
-  hitmark: {fileID: 1023811046675278582, guid: 5338c974b8e353b409329804318466d6, type: 3}
-  canvas: {fileID: 29588345265689534, guid: cbf6632aed667634db8eb72d83d70c97, type: 3}
   playerHP: 100
   playerArmor: 100
   gameIsPaused: 0
   playerIsInteracting: 0
   gameIsSlowmotion: 0
   invulnerableStateTime: 0.25
+  interactionText: {fileID: 0}
+  crosshair: {fileID: 1261144990262316387, guid: 576a51fc4c6630c4d9f990664100c333,
+    type: 3}
+  hitmark: {fileID: 296114343725116614, guid: 5338c974b8e353b409329804318466d6, type: 3}
 --- !u!114 &4320215421209216543
 MonoBehaviour:
   m_ObjectHideFlags: 0

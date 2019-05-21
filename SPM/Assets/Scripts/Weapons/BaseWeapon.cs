@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseWeapon{
     //Author: Patrik Ahlgren
@@ -14,12 +15,9 @@ public class BaseWeapon{
     private int ammoInClip;
     private int maxAmmoInClip;
     private int totalAmmoLeft;
-    private AudioClip reloadSound;
-    private AudioClip shootSound;
-    private AudioClip noAmmoSound;
+    private Sprite crosshair;
 
-    public BaseWeapon (string name, float damage, float range, float fireRate, float reloadTime, float impactForce, float spread, int ammoInClip, int maxAmmoInClip, int totalAmmoLeft,
-        AudioClip reloadSound, AudioClip shootSound, AudioClip noAmmoSound) {
+    public BaseWeapon(string name, float damage, float range, float fireRate, float reloadTime, float impactForce, float spread, int ammoInClip, int maxAmmoInClip, int totalAmmoLeft, Sprite crosshair) {
         this.name = name;
         this.damage = damage;
         this.range = range;
@@ -30,9 +28,7 @@ public class BaseWeapon{
         this.ammoInClip = ammoInClip;
         this.maxAmmoInClip = maxAmmoInClip;
         this.totalAmmoLeft = totalAmmoLeft;
-        this.reloadSound = reloadSound;
-        this.shootSound = shootSound;
-        this.noAmmoSound = noAmmoSound;
+        this.crosshair = crosshair;
     }
 
     public string GetName() {
@@ -104,22 +100,12 @@ public class BaseWeapon{
     public void IncreaseTotalAmmoLeft(int i) {
         totalAmmoLeft += i;
     }
-    public AudioClip GetReloadSound() {
-        return reloadSound;
+    public Sprite GetCrosshair() {
+        return crosshair;
     }
-    public void SetReloadSound(AudioClip audio) {
-        reloadSound = audio;
+    public void SetCrosshair(Sprite sprite) {
+        crosshair = sprite;
     }
-    public AudioClip GetShootSound() {
-        return shootSound;
-    }
-    public void SetShootSound(AudioClip audio) {
-        shootSound = audio;
-    }
-    public AudioClip GetNoAmmoSound() {
-        return noAmmoSound;
-    }
-    public void SetNoAmmoSound(AudioClip audio) {
-        noAmmoSound = audio;
-    }
+
+
 }

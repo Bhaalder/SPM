@@ -81,6 +81,19 @@ public class AudioController : MonoBehaviour {
         }
     }
 
+    public void PlaySFX(string name) {
+        try {
+            foreach (Sound s in sfxList) {
+                if (s.name == name) {
+                    s.source.Play();
+                    return;
+                }
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+
     public GameObject Play_InWorldspace(string name, GameObject gameObjectLocation) {
         try {
             foreach (Sound s in allSounds) {
@@ -133,6 +146,22 @@ public class AudioController : MonoBehaviour {
                     if (!GameController.Instance.gameIsSlowmotion) {
                         s.source.pitch = Random.Range(minPitch, maxPitch);
                     }                  
+                    s.source.Play();
+                    return;
+                }
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+
+    public void PlaySFX_RandomPitch(string name, float minPitch, float maxPitch) {
+        try {
+            foreach (Sound s in sfxList) {
+                if (s.name == name) {
+                    if (!GameController.Instance.gameIsSlowmotion) {
+                        s.source.pitch = Random.Range(minPitch, maxPitch);
+                    }
                     s.source.Play();
                     return;
                 }
