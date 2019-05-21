@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GUIInteract : MonoBehaviour{
+public class PlayerInteract : MonoBehaviour{
 
     //Author: Patrik Ahlgren
 	public Text interactText;
