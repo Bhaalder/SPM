@@ -17,8 +17,10 @@ public class Enemy : StateMachine
     [SerializeField]
     protected float damageResistance;
     protected bool dealtDamage;
+    protected bool isDamaged;
 
     private bool isDead;
+
 
     // Methods
     protected override void Awake()
@@ -27,6 +29,7 @@ public class Enemy : StateMachine
         agent = GetComponent<NavMeshAgent>();
         player = (PlayerMovementController)FindObjectOfType(typeof(PlayerMovementController));
         isDead = false;
+        isDamaged = false;
         base.Awake();
     }
 
@@ -54,5 +57,10 @@ public class Enemy : StateMachine
     public void setDealtDamage(bool a)
     {
         dealtDamage = a;
+    }
+
+    public bool getIsDead()
+    {
+        return isDead;
     }
 }

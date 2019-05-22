@@ -21,9 +21,14 @@ public class ChargeEnemy : Enemy
         health = health - (damage - damageResistance);
         if (health <= 0)
         {
+            gameObject.GetComponent<NavMeshAgent>().enabled = false;
             Death();
         }
-        Transition<ChargeChaseState>();
+        if (isDamaged == false)
+        {
+            Transition<ChargeChaseState>();
+            isDamaged = true;
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -33,7 +38,6 @@ public class ChargeEnemy : Enemy
             GameController.Instance.TakeDamage(damage);
             dealtDamage = true;
             Transition<ChargeStunnedState>();
-
         }
     }
 

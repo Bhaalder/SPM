@@ -30,7 +30,7 @@ public class ProjectileAttackState : EnemyBaseState
         Attack();
 
         if (!CanSeePlayer())
-            owner.Transition<ProjectileAlertState>();
+            owner.Transition<ProjectileChaseState>();
         if (Vector3.Distance(owner.transform.position, owner.player.transform.position) > chaseDistance)
             owner.Transition<ProjectileChaseState>();
     }

@@ -14,6 +14,10 @@ public class ProjectileEnemy : Enemy
         {
             Death();
         }
-        Transition<ProjectileAlertState>();
+        if (isDamaged == false)
+        {
+            Transition<ProjectileChaseState>();
+            isDamaged = true;
+        }
     }
 }

@@ -16,6 +16,10 @@ public class MeleeEnemy : Enemy
         {
             Death();
         }
-        Transition<MeleeAlertState>();
+        if (isDamaged == false)
+        {
+            Transition<MeleeChaseState>();
+            isDamaged = true;
+        }
     }
 }

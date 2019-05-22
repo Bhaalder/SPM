@@ -24,7 +24,6 @@ public class ChargeBuildUpState : EnemyBaseState
 
     void BuildUpTime()
     {
-        Debug.Log("I am building up");
         currentCool -= Time.deltaTime;
 
         if (currentCool > 0)

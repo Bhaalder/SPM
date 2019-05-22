@@ -15,6 +15,10 @@ public class ChargeStunnedState : EnemyBaseState
     {
         base.Enter();
         currentCool = stunnedForSeconds;
+    }
+
+    public override void HandleUpdate()
+    {
         Stunned();
     }
 

@@ -139,7 +139,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   states:
   - {fileID: 11400000, guid: f5b8b5076a278b64384aff2a2409b936, type: 2}
-  - {fileID: 11400000, guid: 8e1d8be5dc18eb949b5c0d2886ec1f9d, type: 2}
   - {fileID: 11400000, guid: b9102df13ba0e0749956dece2203d431, type: 2}
   - {fileID: 11400000, guid: b61c9d42d6e770748a2b058d8e570309, type: 2}
   Renderer: {fileID: 0}
@@ -170,5 +169,5 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 1
   m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 3
   m_ObstacleAvoidanceType: 4
