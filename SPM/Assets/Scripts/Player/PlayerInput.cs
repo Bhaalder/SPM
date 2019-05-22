@@ -21,9 +21,9 @@ public class PlayerInput : MonoBehaviour {
         playerShoot = GetComponentInChildren<PlayerShoot>();
         playerMovementController = GetComponent<PlayerMovementController>();
         slowmotion = GameController.Instance.GetComponent<Slowmotion>();
-        GameController.Instance.player = gameObject;
-        
+        GameController.Instance.player = gameObject;       
     }
+
 
     private void Update() {
         selectedWeapon = GameController.Instance.selectedWeapon;

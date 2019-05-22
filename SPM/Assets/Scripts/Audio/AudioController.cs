@@ -75,7 +75,7 @@ public class AudioController : MonoBehaviour {
         }
     }
 
-    #region Play/Stop
+    #region Play/Stop Methods
     public void Play(string name) {
         try {
             foreach (Sound s in allSounds) {
@@ -92,6 +92,19 @@ public class AudioController : MonoBehaviour {
     public void PlaySFX(string name) {
         try {
             foreach (Sound s in sfxList) {
+                if (s.name == name) {
+                    s.source.Play();
+                    return;
+                }
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+
+    public void PlayMusic(string name) {
+        try {
+            foreach (Sound s in musicList) {
                 if (s.name == name) {
                     s.source.Play();
                     return;
