@@ -54,6 +54,16 @@ MonoBehaviour:
     maxDistance: 0
     loop: 0
     source: {fileID: 0}
+  - name: Shotgun_Reload
+    clip: {fileID: 8300000, guid: 54781abc5049ecb4aa711f1bf473fe01, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+    loop: 0
+    source: {fileID: 0}
   - name: Rifle
     clip: {fileID: 8300000, guid: ca0ba8fb48ac162438aa737f39de8b4e, type: 3}
     volume: 1
@@ -75,7 +85,17 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: RocketLauncher_Launch
-    clip: {fileID: 8300000, guid: 5fa5da2de4f7ae54f8fd67436e38e8b1, type: 3}
+    clip: {fileID: 8300000, guid: 84f47ee4d768dc14d823ba444f9a4d45, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: RocketLauncher_Reload
+    clip: {fileID: 8300000, guid: 50534e73de976ce4588eb77073646ce9, type: 3}
     volume: 1
     pitch: 1
     spatialBlend_2D_3D: 0
@@ -95,7 +115,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Explosion
-    clip: {fileID: 8300000, guid: 9c870e3cb47c8ae47adab037de1c8890, type: 3}
+    clip: {fileID: 8300000, guid: 68df36b689f2b18469736533552cdb34, type: 3}
     volume: 1
     pitch: 1
     spatialBlend_2D_3D: 1

@@ -129,11 +129,19 @@ public class PlayerInput : MonoBehaviour {
     public void PlayReloadSound() {
         string name = selectedWeapon.GetName();
         if(name == "Rifle") {
-            AudioController.Instance.Play("Rifle_Reload");
+            AudioController.Instance.PlaySFX_RandomPitch("Rifle_Reload", 0.95f, 1f);
+        }
+        if(name == "Shotgun") {
+            AudioController.Instance.PlaySFX_RandomPitch("Shotgun_Reload", 0.95f, 1f);
+        }
+        if (name == "Rocket Launcher") {
+            AudioController.Instance.PlaySFX_RandomPitch("RocketLauncher_Reload", 0.95f, 1f);
         }
     }
     public void StopReloadSound() {
         AudioController.Instance.Stop("Rifle_Reload");
+        AudioController.Instance.Stop("Shotgun_Reload");
+        AudioController.Instance.Stop("RocketLauncher_Reload");
     }
 
     #endregion
