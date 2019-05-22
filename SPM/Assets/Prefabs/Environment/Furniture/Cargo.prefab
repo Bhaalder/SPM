@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4172456185119050843}
   - component: {fileID: 4952988120651413101}
   - component: {fileID: 1693359092353190548}
-  - component: {fileID: 8455622510672009346}
+  - component: {fileID: 4314877204601986238}
   m_Layer: 0
   m_Name: Cargo
   m_TagString: Untagged
@@ -80,8 +80,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &8455622510672009346
-MeshCollider:
+--- !u!65 &4314877204601986238
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,7 +90,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 8295837641674514350, guid: c50e366221fe77f4297e2e9d142c9554, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.05875, y: 0.12799996, z: 0.05799998}
+  m_Center: {x: 0, y: 0.0000000037252896, z: 0}
