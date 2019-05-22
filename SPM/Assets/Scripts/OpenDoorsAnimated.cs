@@ -33,7 +33,7 @@ public class OpenDoorsAnimated : MonoBehaviour
             greenPanel.SetActive(!greenPanel.activeSelf);
             redPanel.SetActive(!redPanel.activeSelf);
             if (spawnEnemies) {
-                AudioController.Instance.PlayMusic("TestLoop");
+                AudioController.Instance.PlayMusic("TestLoop");///////--------------------------------------
                 spawnManager.InitializeSpawner();
                 spawnEnemies = false;
             }
