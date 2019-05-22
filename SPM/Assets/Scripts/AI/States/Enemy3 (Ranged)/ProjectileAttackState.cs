@@ -8,8 +8,6 @@ public class ProjectileAttackState : EnemyBaseState
 {
     // Attributes
     [SerializeField] private float chaseDistance;
-    [SerializeField] private float minDistance;
-    [SerializeField] private float damage;
 
     private ProjectileWeapon enemyWeapon;
     private float cooldown;
@@ -41,6 +39,8 @@ public class ProjectileAttackState : EnemyBaseState
 
         if (currentCool > 0)
             return;
+
+        owner.transform.LookAt(owner.player.transform, Vector3.up);
 
         GameObject enemyProj = Instantiate(enemyWeapon.GetProjectile(), owner.transform.position + owner.transform.forward * 2, Quaternion.identity);
         enemyProj.GetComponent<EnemyProjectile>().SetProjectileSpeed(enemyWeapon.GetProjectileSpeed());
