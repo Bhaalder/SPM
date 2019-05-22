@@ -54,9 +54,4 @@ public class RocketProjectile : MonoBehaviour{
     public void SetProjectileForce(float force){
         projectileForce = force;
     }
-
-    //private void OnCollisionEnter(Collision collision){
-    //    GetComponent<Explosion>().Explode(projectileForce, projectileDamage);
-    //    Destroy(gameObject);
-    //}
 }

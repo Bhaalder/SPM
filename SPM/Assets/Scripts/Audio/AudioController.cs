@@ -24,6 +24,9 @@ public class AudioController : MonoBehaviour {
     private List<Sound> sfxList = new List<Sound>();
     private List<Sound> allSounds = new List<Sound>();
 
+    private float musicSoundLevel;
+    private float sfxSoundLevel;
+
     private bool continueFadeIn;
     private bool continueFadeOut;
 
@@ -218,23 +221,24 @@ public class AudioController : MonoBehaviour {
     }
 
     public void SFXSetVolume(float f) {
-        foreach (Sound s in sfxList) {
-
-            s.source.volume = f;
+        foreach (Sound s in sfxList) {//denna slider ska gå från 0 till 1
+            sfxSoundLevel = f;
+            s.source.volume = sfxSoundLevel;
         }
     }
 
     public void MusicSetVolume(float f) {
-        foreach (Sound s in musicList) {
-            s.source.volume = f;
+        foreach (Sound s in musicList) { //denna slider ska gå från 0 till 1
+            musicSoundLevel = f;
+            s.source.volume = musicSoundLevel;
         }
     }
 
     public void AllSoundsSetVolume(float f) {
-        if (f == -80) {
+        if (f == -80) { //denna slider ska gå från -80 till 0
             audioMixer.SetFloat("MasterVolume", f);
         } else {
-            audioMixer.SetFloat("MasterVolume", (f / 4)); //denna slide ska gå från -80 till 0;
+            audioMixer.SetFloat("MasterVolume", (f / 4));
         }
     }
     #endregion
@@ -310,10 +314,24 @@ public class AudioController : MonoBehaviour {
     #region FadeIn/Out Methods
     public void FadeIn(string name, float fadeDuration, float soundVolumePercentage) {
         try {
-            foreach (Sound s in allSounds) {
+            foreach (Sound s in musicList) {
                 if (s.name == name) {
                     s.source.volume = 0;
                     s.source.Play();
+                    if(musicSoundLevel < (soundVolumePercentage / 100)) {
+                        soundVolumePercentage = (musicSoundLevel * 100);
+                    }
+                    StartCoroutine(FadeInAudio(name, fadeDuration, (soundVolumePercentage / 100), s));
+                    return;
+                }
+            }
+            foreach (Sound s in sfxList) {
+                if (s.name == name) {
+                    s.source.volume = 0;
+                    s.source.Play();
+                    if (sfxSoundLevel < (soundVolumePercentage / 100)) {
+                        soundVolumePercentage = (sfxSoundLevel * 100);
+                    }
                     StartCoroutine(FadeInAudio(name, fadeDuration, (soundVolumePercentage / 100), s));
                     return;
                 }
@@ -326,8 +344,20 @@ public class AudioController : MonoBehaviour {
 
     public void FadeOut(string name, float fadeDuration, float soundVolumePercentage) {
         try {
-            foreach (Sound s in allSounds) {
+            foreach (Sound s in musicList) {
                 if (s.name == name) {
+                    if (musicSoundLevel < (soundVolumePercentage / 100)) {
+                        soundVolumePercentage = (musicSoundLevel * 100);
+                    }
+                    StartCoroutine(FadeOutAudio(name, fadeDuration, (soundVolumePercentage / 100), s));
+                    return;
+                }
+            }
+            foreach (Sound s in sfxList) {
+                if (s.name == name) {
+                    if (sfxSoundLevel < (soundVolumePercentage / 100)) {
+                        soundVolumePercentage = (sfxSoundLevel * 100);
+                    }
                     StartCoroutine(FadeOutAudio(name, fadeDuration, (soundVolumePercentage / 100), s));
                     return;
                 }
