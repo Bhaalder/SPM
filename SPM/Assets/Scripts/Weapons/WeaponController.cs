@@ -46,7 +46,7 @@ public class WeaponController : MonoBehaviour{
     }
 
     public ProjectileWeapon GetEnemyProjectileWeapon() {
-        ProjectileWeapon enemyWeapon = new ProjectileWeapon("Enemy Projectile", 30, 50, 2f, 0.3f, 0.1f, 20, 5, 99999, 99999, 99999, enemyWeaponProjectileGO, null);
+        ProjectileWeapon enemyWeapon = new ProjectileWeapon("Enemy Projectile", 10, 50, 2f, 0.3f, 0.1f, 20, 5, 99999, 99999, 99999, enemyWeaponProjectileGO, null);
         return enemyWeapon;
     }
 

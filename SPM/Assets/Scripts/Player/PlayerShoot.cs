@@ -13,7 +13,7 @@ public class PlayerShoot : MonoBehaviour{
     public LayerMask layerMask;
     
     [SerializeField] private GameObject bulletImpactMetalGO;
-
+    [SerializeField] private GameObject bulletImpactMetalSGGO;
     [SerializeField] private GameObject bulletImpactAlienGO;
 
     [SerializeField] private ParticleSystem muzzleFlash;//------------
@@ -87,8 +87,8 @@ public class PlayerShoot : MonoBehaviour{
             AudioController.Instance.PlaySFX_RandomPitch("Shotgun", 0.95f, 1f);
             muzzleFlash.Play();//------------Animation
             weapon.DecreaseAmmoInClip();
-            bool[] hitTarget = new bool[5];
-            RaycastHit[] hits = new RaycastHit[5];
+            bool[] hitTarget = new bool[20];
+            RaycastHit[] hits = new RaycastHit[20];
             for(int i = 0; i < hitTarget.Length; i++){
                 float rndX = Random.Range(-0.1f, 0.1f), rndY = Random.Range(-0.03f, 0.03f);
                 hitTarget[i] = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(rndX, rndY, 0), out hits[i], weapon.GetRange(), layerMask);
@@ -112,7 +112,7 @@ public class PlayerShoot : MonoBehaviour{
                         hits[x].transform.GetComponent<EnemyController>().TakeDamage(damage);
                         InstantiateMultipleBulletHits(bulletImpactAlienGO, hits, x, alienWoundTimer);                       
                     } else {
-                        InstantiateMultipleBulletHits(bulletImpactMetalGO, hits, x, 2.0f);
+                        InstantiateMultipleBulletHits(bulletImpactMetalSGGO, hits, x, 2.0f);
                     }               
                 }
             }
@@ -139,6 +139,7 @@ public class PlayerShoot : MonoBehaviour{
             Debug.Log("Out of Ammo");
         }
         camShake.RecoilShake(4, 0.3f);
+        camShake.Shake(2, 0.5f);
     }
     
     private void InstantiateMultipleBulletHits(GameObject impactGO, RaycastHit[] hits, int numberOfHits, float timeUntilDestroy) {
