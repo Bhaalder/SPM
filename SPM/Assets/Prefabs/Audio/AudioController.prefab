@@ -137,25 +137,25 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   musicSounds:
-  - name: MusicLvl1
-    clip: {fileID: 0}
+  - name: TestStart
+    clip: {fileID: 8300000, guid: 6a43e8e96ffab4b4eb7b0e2c1b47dbd5, type: 3}
     volume: 1
-    pitch: 0
+    pitch: 1
     spatialBlend_2D_3D: 0
     rolloffMode: 0
     minDistance: 0
     maxDistance: 0
     loop: 0
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
+  - name: TestLoop
+    clip: {fileID: 8300000, guid: 59f46c67866e22945bdc069330a97623, type: 3}
+    volume: 1
+    pitch: 1
     spatialBlend_2D_3D: 0
     rolloffMode: 0
     minDistance: 0
     maxDistance: 0
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   soundObject: {fileID: 6700177346115011188, guid: ddb2114bbd45c3642aa7a7835618ba84,
     type: 3}
