@@ -8,8 +8,6 @@ public class ProjectileAttackState : EnemyBaseState
 {
     // Attributes
     [SerializeField] private float chaseDistance;
-    [SerializeField] private float minDistance;
-    [SerializeField] private float damage;
 
     private ProjectileWeapon enemyWeapon;
     private float cooldown;
