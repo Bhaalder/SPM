@@ -1,4 +1,4 @@
-﻿// Daniel Fors
+﻿//Marcus Söderberg
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +8,6 @@ public class ProjectileChaseState : EnemyBaseState
 {
     // Attributes
     [SerializeField] private float attackDistance;
-    [SerializeField] private float lostTargetDistance;
 
     // Methods
     public override void HandleUpdate()

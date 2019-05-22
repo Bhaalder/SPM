@@ -1,4 +1,4 @@
-﻿// Daniel Fors
+﻿//Marcus Söderberg
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,10 +27,6 @@ public class ProjectileAttackState : EnemyBaseState
 
     public override void HandleUpdate()
     {
-        //if (Vector3.Distance(owner.transform.position, owner.player.transform.position) > minDistance)
-        //{
-        //    owner.agent.SetDestination(owner.player.transform.position);
-        //}
         Attack();
 
         if (!CanSeePlayer())

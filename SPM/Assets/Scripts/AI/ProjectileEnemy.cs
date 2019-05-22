@@ -1,4 +1,4 @@
-﻿// Daniel Fors
+﻿//Marcus Söderberg
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +6,6 @@ using UnityEngine.AI;
 
 public class ProjectileEnemy : Enemy
 {
-    //Add some Projectile enemy specifics
-
     public override void TakeDamage(float damage)
     {
 

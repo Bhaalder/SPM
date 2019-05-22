@@ -1,4 +1,4 @@
-﻿// Daniel Fors
+﻿//Marcus Söderberg
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +13,6 @@ public class ProjectileIdleState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
-        //owner.agent.SetDestination(owner.player.transform.position);
     }
 
     public override void HandleUpdate()

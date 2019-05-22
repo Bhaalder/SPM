@@ -1,4 +1,4 @@
-﻿// Daniel Fors
+﻿//Marcus Söderberg
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +6,10 @@ using UnityEngine.AI;
 
 public class MeleeEnemy : Enemy
 {
+    // Attributes
     [SerializeField] private int damage;
 
-    //Add some Melee enemy specifics
-
+    // Methods
     public override void TakeDamage(float damage)
     {
 

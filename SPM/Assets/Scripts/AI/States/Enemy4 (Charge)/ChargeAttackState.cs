@@ -1,4 +1,4 @@
-﻿// Daniel Fors
+﻿//Marcus Söderberg
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +10,6 @@ public class ChargeAttackState : EnemyBaseState
     [SerializeField] private float chaseDistance;
     [SerializeField] private float minDistance;
     [SerializeField] private float isChargingForSeconds;
-
 
     private float currentCool;
     private Vector3 chargePoint;
@@ -25,16 +24,7 @@ public class ChargeAttackState : EnemyBaseState
 
     public override void HandleUpdate()
     {
-        //if (Vector3.Distance(owner.transform.position, owner.player.transform.position) > minDistance)
-        //{
-        //    owner.agent.SetDestination(owner.player.transform.position);
-        //}
         Attack();
-
-        //if (!CanSeePlayer())
-        //    owner.Transition<ChargeChaseState>();
-        //if (Vector3.Distance(owner.transform.position, owner.player.transform.position) > chaseDistance)
-        //    owner.Transition<ChargeChaseState>();
     }
 
     private void Attack()
