@@ -6,8 +6,6 @@ using UnityEngine.AI;
 
 public class MeleeEnemy : Enemy
 {
-    // Attributes
-    [SerializeField] private int damage;
 
     // Methods
     public override void TakeDamage(float damage)
