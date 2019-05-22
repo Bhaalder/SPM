@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4430046657957969021}
   - component: {fileID: 4430046657957969022}
   - component: {fileID: 4430046657957969023}
-  - component: {fileID: 4430046657957969017}
   - component: {fileID: 8079019218630940291}
   - component: {fileID: 504566922598439457}
   m_Layer: 9
@@ -126,45 +125,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.1, z: 1}
   m_Center: {x: 0, y: -0.55, z: 0}
---- !u!114 &4430046657957969017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4430046657957968993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7d31cda5a8cbb847b94af0410060cdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 0}
-  health: 100
-  damage: 30
-  MoveSpeed: 5
-  MaxDist: 150
-  MinDist: 1
-  AttackDistance: 7
-  DamageResistance: 5
-  EnterMoveSeconds: 0.5
-  TimeBeforeCharge: 1
-  EnemyStunnedTime: 3
-  TimeBetweenAttacks: 0.5
-  projectileSpeed: 0
-  projectileDamage: 0
-  enemyType: 4
-  gameController: {fileID: 6964004597814307124, guid: a312182574752a14db595d72c94a2952,
-    type: 3}
-  spawnPoint: {fileID: 5251623405000365419, guid: 3c8ab25a3edaef74a84f12853dd205bd,
-    type: 3}
-  player: {fileID: 8279343510140872286, guid: b8a168c850e19644b90513ee279db5d2, type: 3}
-  AttackTrigger: 0
-  Attacking: 0
-  BeingAttacked: 0
-  Charging: 0
-  RecentlyCharged: 0
-  timerRunning: 1
-  isStunned: 0
 --- !u!114 &8079019218630940291
 MonoBehaviour:
   m_ObjectHideFlags: 0
