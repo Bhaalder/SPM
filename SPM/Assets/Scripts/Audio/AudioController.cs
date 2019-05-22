@@ -210,35 +210,35 @@ public class AudioController : MonoBehaviour {
     #endregion
 
     #region Volume / Pitch Methods
-    public void SFXSetPitch(float f) {
+    public void SFXSetPitch(float pitch) {
         foreach (Sound s in sfxList) {
             try {
-                s.source.pitch = f;
+                s.source.pitch = pitch;
             } catch (System.Exception) {
 
             }         
         }
     }
 
-    public void SFXSetVolume(float f) {
-        foreach (Sound s in sfxList) {//denna slider ska gå från 0 till 1
-            sfxSoundLevel = f;
+    public void SFXSetVolume(float volume) {
+        foreach (Sound s in sfxList) {
+            sfxSoundLevel = volume;
             s.source.volume = sfxSoundLevel;
         }
     }
 
-    public void MusicSetVolume(float f) {
-        foreach (Sound s in musicList) { //denna slider ska gå från 0 till 1
-            musicSoundLevel = f;
+    public void MusicSetVolume(float volume) {
+        foreach (Sound s in musicList) {
+            musicSoundLevel = volume;
             s.source.volume = musicSoundLevel;
         }
     }
 
-    public void AllSoundsSetVolume(float f) {
-        if (f == -80) { //denna slider ska gå från -80 till 0
-            audioMixer.SetFloat("MasterVolume", f);
+    public void AllSoundsSetVolume(float volume) {
+        if (volume == -80) {
+            audioMixer.SetFloat("MasterVolume", volume);
         } else {
-            audioMixer.SetFloat("MasterVolume", (f / 4));
+            audioMixer.SetFloat("MasterVolume", (volume / 4));
         }
     }
     #endregion
@@ -372,7 +372,7 @@ public class AudioController : MonoBehaviour {
         continueFadeOut = false;
         float startSoundValue = 0;
         if (continueFadeIn) {
-            for (float time = 0f; time < fadeDuration; time += Time.deltaTime) {
+            for (float time = 0f; time < fadeDuration; time += Time.unscaledDeltaTime) {
                 float normalizedTime = time / fadeDuration;
                 sound.source.volume = Mathf.Lerp(startSoundValue, soundVolume, normalizedTime);
                 yield return null;
@@ -385,7 +385,7 @@ public class AudioController : MonoBehaviour {
         continueFadeOut = true;
         float startSoundValue = sound.source.volume;
         if (continueFadeOut) {
-            for (float time = 0f; time < fadeDuration; time += Time.deltaTime) {
+            for (float time = 0f; time < fadeDuration; time += Time.unscaledDeltaTime) {
                 float normalizedTime = time / fadeDuration;
                 sound.source.volume = Mathf.Lerp(startSoundValue, soundVolume, normalizedTime);
                 yield return null;

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileWeapon : BaseWeapon
-{
+public class ProjectileWeapon : BaseWeapon{
     //Author: Patrik Ahlgren
     private float projectileSpeed;
     private GameObject projectile;

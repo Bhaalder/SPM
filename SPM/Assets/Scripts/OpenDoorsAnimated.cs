@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class OpenDoorsAnimated : MonoBehaviour
 {
+    //Main Author: Teo
+    //Secondary Author: Patrik Ahlgren
     bool isOpen;
     bool isClosed;
 

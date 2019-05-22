@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketProjectile : MonoBehaviour{
-    //Main author: Fredrik
-    //Secondary author: Patrik Ahlgren
+    //Main author: Patrik Ahlgren
+    //Secondary author: Fredrik
     public LayerMask layerMask;
 
     private float projectileSpeed;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    
+    //Author: Patrik Ahlgren
     public enum Object {OpenDoorsAnimated, ArenaButton, ArenaButtonLV2};
     public Object obj;
 

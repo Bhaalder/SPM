@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSounds:
   - name: Shotgun
-    clip: {fileID: 8300000, guid: 0be4c418e912157479e66b121502e3ed, type: 3}
+    clip: {fileID: 8300000, guid: 109366313f737214cb20497f152c552f, type: 3}
     volume: 1
     pitch: 1
     spatialBlend_2D_3D: 0
@@ -55,8 +55,18 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Rifle
-    clip: {fileID: 8300000, guid: 8561484a19f24324f9040636f77467af, type: 3}
-    volume: 0.2
+    clip: {fileID: 8300000, guid: ca0ba8fb48ac162438aa737f39de8b4e, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Rifle_Reload
+    clip: {fileID: 8300000, guid: fc699f6b9370c0547b72611ca81007a6, type: 3}
+    volume: 1
     pitch: 1
     spatialBlend_2D_3D: 0
     rolloffMode: 0
@@ -96,16 +106,6 @@ MonoBehaviour:
     source: {fileID: 0}
   enemySounds: []
   environmentSounds:
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
-    spatialBlend_2D_3D: 0
-    rolloffMode: 0
-    minDistance: 0
-    maxDistance: 0
-    loop: 0
-    source: {fileID: 0}
   - name: 
     clip: {fileID: 0}
     volume: 0

@@ -22,6 +22,7 @@ public class PlayerInput : MonoBehaviour {
         playerMovementController = GetComponent<PlayerMovementController>();
         slowmotion = GameController.Instance.GetComponent<Slowmotion>();
         GameController.Instance.player = gameObject;
+        
     }
 
     private void Update() {
@@ -78,6 +79,7 @@ public class PlayerInput : MonoBehaviour {
         int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
 
         if (ammoInClip != maxAmmoInClip && totalAmmoLeft > 0 && !isReloading) {
+            PlayReloadSound();
             int ammoSpent = maxAmmoInClip - ammoInClip;
             GameController.Instance.ReloadSlider.gameObject.SetActive(true);
             GameController.Instance.ReloadSlider.maxValue = selectedWeapon.GetReloadTime();
@@ -91,6 +93,7 @@ public class PlayerInput : MonoBehaviour {
 
             } else {
                 GameController.Instance.ReloadSlider.value += 1 * Time.unscaledDeltaTime;
+                
             }          
         }
         if (GameController.Instance.ReloadSlider.value >= selectedWeapon.GetReloadTime()) {
@@ -120,7 +123,19 @@ public class PlayerInput : MonoBehaviour {
         isReloading = false;
         GameController.Instance.ReloadSlider.value = 0;
         GameController.Instance.ReloadSlider.gameObject.SetActive(false);
+        StopReloadSound();
     }
+
+    public void PlayReloadSound() {
+        string name = selectedWeapon.GetName();
+        if(name == "Rifle") {
+            AudioController.Instance.Play("Rifle_Reload");
+        }
+    }
+    public void StopReloadSound() {
+        AudioController.Instance.Stop("Rifle_Reload");
+    }
+
     #endregion
 
     #region Shoot Method
