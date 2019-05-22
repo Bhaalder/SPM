@@ -127,13 +127,13 @@ public class GameController : MonoBehaviour {
     public void TakeDamage(int damage){
         if (Time.time >= invulnerableState) {
             invulnerableState = Time.time + invulnerableStateTime;
-            if (playerArmor <= 0) { playerHP -= damage; Debug.Log("damage has arrived"); } else { playerArmor -= damage; }
+            if (playerArmor <= 0) { playerHP -= damage; Debug.Log("Player took: "+damage + " to health"); } else { playerArmor -= damage; }
         } else {
             Debug.Log("InvulnerableState active, no damage");
         }
     }
 
-    public void Hit(float hitmarkTimer) {
+    public void ShowHitmark(float hitmarkTimer) {
         StopAllCoroutines();
         hitmark.enabled = true;
         StartCoroutine(Hitmark(hitmarkTimer));

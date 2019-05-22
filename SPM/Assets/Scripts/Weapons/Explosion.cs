@@ -18,8 +18,14 @@ public class Explosion : MonoBehaviour
         foreach (Collider nearbyObject in colliders)
         {
             if (nearbyObject.gameObject.layer == 9){
-                GameController.Instance.Hit(0.5f);
-                nearbyObject.transform.GetComponent<EnemyController>().TakeDamage(damage);
+                GameController.Instance.ShowHitmark(0.5f);
+                float damageDropoff = Vector3.Distance(transform.position, nearbyObject.transform.position)*2.5f;
+                if (damageDropoff > damage || damage - damageDropoff < 0) {
+                    damageDropoff = damage;
+                }
+                float finalDamage = damage - damageDropoff;
+                nearbyObject.transform.GetComponent<EnemyController>().TakeDamage(finalDamage);
+                Debug.Log(finalDamage);
             }
             Rigidbody rigidBody = nearbyObject.GetComponent<Rigidbody>();
             if (rigidBody != null){

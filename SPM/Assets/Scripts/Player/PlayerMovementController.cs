@@ -69,8 +69,12 @@ public class PlayerMovementController : MonoBehaviour{
         if (Input.GetButtonDown("Jump")) {          
             if (jumpCount>0 || IsGrounded()) {
                 jumpCount--;
-                velocity.y = 0;
-                rigidBody.AddRelativeForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                if(rigidBody.velocity.y > 0) {
+                    rigidBody.velocity = new Vector3(0, rigidBody.velocity.y, 0);
+                } else {
+                    rigidBody.velocity = new Vector3(0, 0, 0);
+                }               
+                rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
             IsGrounded();
         }

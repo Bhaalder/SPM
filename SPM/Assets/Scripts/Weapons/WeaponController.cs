@@ -9,6 +9,11 @@ public class WeaponController : MonoBehaviour{
     public GameObject enemyWeaponProjectileGO;
     public Sprite[] crosshair;
 
+    public float RifleDmg;
+    public float ShotgunDmg;
+    public float RocketLDmg;
+
+
     private static WeaponController instance;
 
     public static WeaponController Instance {
@@ -26,17 +31,17 @@ public class WeaponController : MonoBehaviour{
     }
 
     public BaseWeapon GetRifle() {
-        BaseWeapon rifle = new BaseWeapon("Rifle", 7.5f, 150, 9f, 1.6f, 0.1f, 15, 50, 50, 500, crosshair[0]);
+        BaseWeapon rifle = new BaseWeapon("Rifle", RifleDmg, 150, 9f, 1.6f, 0.1f, 15, 50, 50, 500, crosshair[0]);
         return rifle;
     }
 
     public BaseWeapon GetShotgun() {
-        BaseWeapon shotgun = new BaseWeapon("Shotgun", 25, 30, 2f, 2f, 0.1f, 30, 8, 8, 200, crosshair[1]);
+        BaseWeapon shotgun = new BaseWeapon("Shotgun", ShotgunDmg, 30, 2f, 2f, 0.1f, 30, 8, 8, 200, crosshair[1]);
         return shotgun;
     }
 
     public ProjectileWeapon GetRocketLauncher() {
-        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", 30, 100, 1.15f, 3.3f, 0.01f, 20, 15, 3, 3, 15, rocketLaucherProjectileGO, crosshair[2]);
+        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", RocketLDmg, 100, 1.15f, 3.3f, 0.01f, 20, 15, 3, 3, 15, rocketLaucherProjectileGO, crosshair[2]);
         return rocketLauncher;
     }
 
