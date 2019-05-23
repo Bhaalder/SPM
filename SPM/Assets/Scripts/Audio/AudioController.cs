@@ -76,14 +76,9 @@ public class AudioController : MonoBehaviour {
     }
 
     #region Play/Stop Methods
-    public void Play(string name) {
+    public void Play(string name) {       
         try {
-            foreach (Sound s in allSounds) {
-                if (s.name == name) {
-                    s.source.Play();
-                    return;
-                }
-            }
+            FindSound(name).source.Play();
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
@@ -91,12 +86,7 @@ public class AudioController : MonoBehaviour {
 
     public void PlaySFX(string name) {
         try {
-            foreach (Sound s in sfxList) {
-                if (s.name == name) {
-                    s.source.Play();
-                    return;
-                }
-            }
+            FindSFX(name).source.Play();
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
@@ -104,12 +94,7 @@ public class AudioController : MonoBehaviour {
 
     public void PlayMusic(string name) {
         try {
-            foreach (Sound s in musicList) {
-                if (s.name == name) {
-                    s.source.Play();
-                    return;
-                }
-            }
+            FindMusic(name).source.Play();
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
@@ -144,15 +129,10 @@ public class AudioController : MonoBehaviour {
 
     public void Stop(string name) {
         try {
-            foreach (Sound s in allSounds) {
-                if (s.name == name) {
-                    s.source.Stop();
-                    return;
-                }
-            }
+            FindSound(name).source.Stop();
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
-        }
+        }       
     }
 
 
@@ -161,35 +141,27 @@ public class AudioController : MonoBehaviour {
 
     #region PlayRandomPitch
     public void Play_RandomPitch(string name, float minPitch, float maxPitch) {
+        Sound s = FindSound(name);
         try {
-            foreach (Sound s in allSounds) {
-                if (s.name == name) {
-                    if (!GameController.Instance.gameIsSlowmotion) {
-                        s.source.pitch = Random.Range(minPitch, maxPitch);
-                    }                  
-                    s.source.Play();
-                    return;
-                }
+            if (!GameController.Instance.gameIsSlowmotion) {
+                s.source.pitch = Random.Range(minPitch, maxPitch);
             }
+            s.source.Play();
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
     }
 
     public void PlaySFX_RandomPitch(string name, float minPitch, float maxPitch) {
+        Sound s = FindSFX(name);
         try {
-            foreach (Sound s in sfxList) {
-                if (s.name == name) {
-                    if (!GameController.Instance.gameIsSlowmotion) {
-                        s.source.pitch = Random.Range(minPitch, maxPitch);
-                    }
-                    s.source.Play();
-                    return;
-                }
+            if (!GameController.Instance.gameIsSlowmotion) {
+                s.source.pitch = Random.Range(minPitch, maxPitch);
             }
+            s.source.Play();
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
-        }
+        }       
     }
 
     public GameObject Play_RandomPitch_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
@@ -260,19 +232,9 @@ public class AudioController : MonoBehaviour {
     public void Pause(string name, bool pause) {
         try {
             if (pause) {
-                foreach (Sound s in allSounds) {
-                    if (s.name == name) {
-                        s.source.Pause();
-                        return;
-                    }
-                }
+                FindSound(name).source.Pause();
             } else if (!pause) {
-                foreach (Sound s in allSounds) {
-                    if (s.name == name) {
-                        s.source.UnPause();
-                        return;
-                    }
-                }
+                FindSound(name).source.UnPause();
             }           
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
@@ -288,7 +250,6 @@ public class AudioController : MonoBehaviour {
 
                 }
             }
-
         } else if (!pause) {
             foreach (Sound s in sfxList) {
                 try {
@@ -308,8 +269,7 @@ public class AudioController : MonoBehaviour {
                 } catch (System.Exception) {
 
                 }                
-            }
-                     
+            }                    
         } else if (!pause) {
             foreach (Sound s in allSounds) {
 
@@ -327,27 +287,25 @@ public class AudioController : MonoBehaviour {
     #region FadeIn/Out Methods
     public void FadeIn(string name, float fadeDuration, float soundVolumePercentage) {
         try {
-            foreach (Sound s in musicList) {
-                if (s.name == name) {
-                    s.source.volume = 0;
-                    s.source.Play();
-                    if(musicSoundLevel < (soundVolumePercentage / 100)) {
-                        soundVolumePercentage = (musicSoundLevel * 100);
-                    }
-                    StartCoroutine(FadeInAudio(name, fadeDuration, (soundVolumePercentage / 100), s));
-                    return;
+            Sound sound = FindMusic(name);
+            if (sound != null) {
+                sound.source.volume = 0;
+                sound.source.Play();
+                if (musicSoundLevel < (soundVolumePercentage / 100)) {
+                    soundVolumePercentage = (musicSoundLevel * 100);
                 }
+                StartCoroutine(FadeInAudio(name, fadeDuration, (soundVolumePercentage / 100), sound));
+                return;
             }
-            foreach (Sound s in sfxList) {
-                if (s.name == name) {
-                    s.source.volume = 0;
-                    s.source.Play();
-                    if (sfxSoundLevel < (soundVolumePercentage / 100)) {
-                        soundVolumePercentage = (sfxSoundLevel * 100);
-                    }
-                    StartCoroutine(FadeInAudio(name, fadeDuration, (soundVolumePercentage / 100), s));
-                    return;
+            sound = FindSFX(name);
+            if (sound != null) {
+                sound.source.volume = 0;
+                sound.source.Play();
+                if (sfxSoundLevel < (soundVolumePercentage / 100)) {
+                    soundVolumePercentage = (sfxSoundLevel * 100);
                 }
+                StartCoroutine(FadeInAudio(name, fadeDuration, (soundVolumePercentage / 100), sound));
+                return;
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
@@ -357,23 +315,21 @@ public class AudioController : MonoBehaviour {
 
     public void FadeOut(string name, float fadeDuration, float soundVolumePercentage) {
         try {
-            foreach (Sound s in musicList) {
-                if (s.name == name) {
-                    if (musicSoundLevel < (soundVolumePercentage / 100)) {
-                        soundVolumePercentage = (musicSoundLevel * 100);
-                    }
-                    StartCoroutine(FadeOutAudio(name, fadeDuration, (soundVolumePercentage / 100), s));
-                    return;
+            Sound sound = FindMusic(name);
+            if(sound != null) {
+                if (musicSoundLevel < (soundVolumePercentage / 100)) {
+                    soundVolumePercentage = (musicSoundLevel * 100);
                 }
+                StartCoroutine(FadeOutAudio(name, fadeDuration, (soundVolumePercentage / 100), sound));
+                return;
             }
-            foreach (Sound s in sfxList) {
-                if (s.name == name) {
-                    if (sfxSoundLevel < (soundVolumePercentage / 100)) {
-                        soundVolumePercentage = (sfxSoundLevel * 100);
-                    }
-                    StartCoroutine(FadeOutAudio(name, fadeDuration, (soundVolumePercentage / 100), s));
-                    return;
+            sound = FindSFX(name);
+            if(sound != null) {
+                if (sfxSoundLevel < (soundVolumePercentage / 100)) {
+                    soundVolumePercentage = (sfxSoundLevel * 100);
                 }
+                StartCoroutine(FadeOutAudio(name, fadeDuration, (soundVolumePercentage / 100), sound));
+                return;
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
@@ -407,8 +363,39 @@ public class AudioController : MonoBehaviour {
     }
     #endregion
 
+    #region FindSound Methods
+
+    private Sound FindSound(string name) {
+        foreach (Sound s in allSounds) {
+            if (s.name == name) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    private Sound FindMusic(string name) {
+        foreach (Sound s in musicList) {
+            if (s.name == name) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    private Sound FindSFX(string name) {
+        foreach (Sound s in sfxList) {
+            if (s.name == name) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    #endregion
+
     private void AudioNotFound(string name) {
-        Debug.LogWarning("The audio with name '" + name + "' could not be found in list. Is it spelled correctly? (NullReferenceException)");
+        Debug.LogWarning("The sound with name '" + name + "' could not be found in list. Is it spelled correctly? (NullReferenceException)");
     }
 
 }

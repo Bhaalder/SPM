@@ -17,6 +17,8 @@ public class PlayerInput : MonoBehaviour {
     private float nextTimeToFire = 0f;
     private bool isReloading = false;
 
+    private bool skipShootDelayToSlowmotion;
+
     private void Start() {
         playerShoot = GetComponentInChildren<PlayerShoot>();
         playerMovementController = GetComponent<PlayerMovementController>();
@@ -152,6 +154,13 @@ public class PlayerInput : MonoBehaviour {
             if (Input.GetButton("Fire1") && GameController.Instance.selectedWeapon.GetAmmoInClip() == 0) {
                 ReloadWeapon();
                 return;
+            }
+            if (!GameController.Instance.gameIsSlowmotion) {
+                skipShootDelayToSlowmotion = true;
+            }
+            if (GameController.Instance.gameIsSlowmotion && Time.time <= nextTimeToFire && skipShootDelayToSlowmotion) {
+                nextTimeToFire = Time.time + 1f / selectedWeapon.GetFireRate();
+                skipShootDelayToSlowmotion = false;
             }
             if (Input.GetButton("Fire1") && Time.time >= nextTimeToFire) {
                 nextTimeToFire = Time.time + 1f / selectedWeapon.GetFireRate();
