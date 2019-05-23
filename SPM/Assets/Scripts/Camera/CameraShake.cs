@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CameraShake : MonoBehaviour {
     //Author: Patrik Ahlgren
+    [Header("Shake")]
     public float shakeValue;
     public float shakeDuration;
 
@@ -12,17 +13,19 @@ public class CameraShake : MonoBehaviour {
     private float startValue;
     private float startDuration;
 
-    bool isShaking = false;
+    private bool isShaking = false;
 
-    public float recoilValue;//
+    [Header("Recoil")]
+    public float recoilValue;
     public float recoilDuration;
 
     private float recoilPercentage;
     private float startRecoilValue;
     private float startRecoilDuration;
 
-    bool isRecoiling = false;//
+    private bool isRecoiling = false;
 
+    [Header("Smooth")]
     public bool isSmooth;
     public float smoothValue = 3f;
 
@@ -91,12 +94,8 @@ public class CameraShake : MonoBehaviour {
             recoilValue = startRecoilValue * recoilPercentage;
             recoilDuration -= 1 * Time.deltaTime;
 
-            if (isSmooth) {//kommer antagligen inte ha smooth på recoil
-                //transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(rotationAmount), Time.deltaTime * 4);
-                transform.localRotation = Quaternion.Euler(rotationAmount);
-            } else {
-                transform.localRotation = Quaternion.Euler(rotationAmount);
-            }
+            transform.localRotation = Quaternion.Euler(rotationAmount);
+
             yield return null;
         }
         transform.localRotation = Quaternion.identity;
@@ -114,7 +113,6 @@ public class CameraShake : MonoBehaviour {
                 shaking = shakeValue - distance;
             }
             Vector3 rotationAmount = Random.insideUnitSphere * shaking;
-            //rotationAmount.z = 0;//
 
             shakePercentage = shakeDuration / startDuration;
 
@@ -139,7 +137,7 @@ public class CameraShake : MonoBehaviour {
 
         while (shakeDuration > 0.01f) {
             Vector3 rotationAmount = Random.insideUnitSphere * shakeValue;
-            rotationAmount.z = 0;//
+            rotationAmount.z = 0;
 
             shakePercentage = shakeDuration / startDuration;
 

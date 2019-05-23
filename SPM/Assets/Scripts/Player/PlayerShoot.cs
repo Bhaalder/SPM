@@ -43,12 +43,10 @@ public class PlayerShoot : MonoBehaviour{
             ShootProjectile((ProjectileWeapon) weapon);
         }
         else if (weapon.GetName().Equals("Shotgun")){
-            ShootShotgunHitScan(weapon);
-            
+            ShootShotgunHitScan(weapon);         
         }            
         else {
-            ShootHitScan(weapon);
-            
+            ShootHitScan(weapon);           
         }            
     }
 

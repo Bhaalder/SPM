@@ -121,14 +121,14 @@ public class PlayerInput : MonoBehaviour {
         StopAllCoroutines();
     }
 
-    public void AbortReload() { //detta är public för att kunna avbryta reload för typ cutscenes eller när man plockar upp nya vapen, inte bästa lösningen men det funkar
+    public void AbortReload() {
         isReloading = false;
         GameController.Instance.ReloadSlider.value = 0;
         GameController.Instance.ReloadSlider.gameObject.SetActive(false);
         StopReloadSound();
     }
 
-    public void PlayReloadSound() {
+    private void PlayReloadSound() {
         string name = selectedWeapon.GetName();
         if(name == "Rifle") {
             AudioController.Instance.PlaySFX_RandomPitch("Rifle_Reload", 0.95f, 1f);
@@ -140,7 +140,7 @@ public class PlayerInput : MonoBehaviour {
             AudioController.Instance.PlaySFX_RandomPitch("RocketLauncher_Reload", 0.95f, 1f);
         }
     }
-    public void StopReloadSound() {
+    private void StopReloadSound() {
         AudioController.Instance.Stop("Rifle_Reload");
         AudioController.Instance.Stop("Shotgun_Reload");
         AudioController.Instance.Stop("RocketLauncher_Reload");

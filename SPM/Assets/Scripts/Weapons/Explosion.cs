@@ -20,8 +20,8 @@ public class Explosion : MonoBehaviour
             if (nearbyObject.gameObject.layer == 9){
                 GameController.Instance.ShowHitmark(0.5f);
                 float damageDropoff = Vector3.Distance(transform.position, nearbyObject.transform.position)*2.5f;
-                if (damageDropoff > damage || damage - damageDropoff < 0) {
-                    damageDropoff = damage;
+                if (damageDropoff > damage) {
+                    damageDropoff = (damage-1);
                 }
                 float finalDamage = damage - damageDropoff;
                 nearbyObject.transform.GetComponent<Enemy>().TakeDamage(finalDamage);

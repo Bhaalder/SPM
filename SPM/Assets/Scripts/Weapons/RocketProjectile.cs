@@ -27,6 +27,7 @@ public class RocketProjectile : MonoBehaviour{
         if (hitTarget) {
             distanceToTarget = Vector3.Distance(transform.position, hit.point);
         } else if (!hitTarget) {
+            GetComponent<Explosion>().Explode(projectileForce, projectileDamage);
             Destroy(gameObject, 10f);
         }
         if (GameController.Instance.gameIsSlowmotion) {
