@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 public class ChargeEnemy : Enemy
 {
+    [Tooltip("Damage done to Player if hit by the charge.")]
     [SerializeField] private int damage;
 
     protected override void Awake()

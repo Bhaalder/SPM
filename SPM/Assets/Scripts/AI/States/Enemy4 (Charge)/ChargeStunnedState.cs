@@ -7,6 +7,7 @@ using UnityEngine;
 public class ChargeStunnedState : EnemyBaseState
 {
     // Attributes
+    [Tooltip("Time in Seconds the Enemy is stunned for.")]
     [SerializeField] private float stunnedForSeconds;
     private float currentCool;
 
@@ -24,15 +25,15 @@ public class ChargeStunnedState : EnemyBaseState
 
     void Stunned()
     {
-        Debug.Log("I am stunned");
-
         currentCool -= Time.deltaTime;
 
         if (currentCool > 0)
+        {
             return;
+        }
+
         currentCool = stunnedForSeconds;
         owner.setDealtDamage(false);
-        Debug.Log("I am no longer stunned");
 
         owner.Transition<ChargeChaseState>();
     }

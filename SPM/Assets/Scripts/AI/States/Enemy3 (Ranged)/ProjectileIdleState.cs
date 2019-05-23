@@ -7,6 +7,7 @@ using UnityEngine;
 public class ProjectileIdleState : EnemyBaseState
 {
     // Attributes
+    [Tooltip("Distance at which the Enemy starts chasing the Player if it can see the Player.")]
     [SerializeField] private float chaseDistance;
 
     // Methods

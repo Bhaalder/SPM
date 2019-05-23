@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Enemy/ChargeBuildUpState")]
 public class ChargeBuildUpState : EnemyBaseState
 {
+    [Tooltip("Time in Seconds before the Enemy charges at the Player.")]
     [SerializeField] private float buildUpTime;
     private float currentCool;
 

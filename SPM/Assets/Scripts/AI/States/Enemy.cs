@@ -12,10 +12,9 @@ public class Enemy : StateMachine
     [HideInInspector] public NavMeshAgent agent;
     public LayerMask visionMask;
     public PlayerMovementController player;
-    [SerializeField]
-    protected float health;
-    [SerializeField]
-    protected float damageResistance;
+
+    [SerializeField] protected float health;
+    [SerializeField] protected float damageResistance;
     protected bool dealtDamage;
     protected bool isDamaged;
 
