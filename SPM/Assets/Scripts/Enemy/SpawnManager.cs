@@ -42,7 +42,7 @@ public class SpawnManager : MonoBehaviour
         currentWave = -1; // avoid off by 1
         totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
         isRoomCleared = false;
-        // StartNextWave();        
+        // StartNextWave(); //used for testing
     }
 
 
@@ -62,11 +62,9 @@ public class SpawnManager : MonoBehaviour
 
         enemycount = Waves[currentWave].Numberofenemy;
 
-
         for (int i = 0; i < enemycount.Length; i++)
         {
             totalEnemiesInCurrentWave += enemycount[i];
-
         }
 
         enemiesInWaveLeft = 0;
@@ -117,14 +115,13 @@ public class SpawnManager : MonoBehaviour
         if (enemiesInWaveLeft == 0 && spawnedEnemies == totalEnemiesInCurrentWave)
         {
 
-            // win condition
+            // Check to see if the last enemy was killed from the last wave
             if (currentWave == totalWaves && enemiesInWaveLeft == 0 && spawnedEnemies == totalEnemiesInCurrentWave)
             {
                 Debug.Log("clear condition has been reached");
                 StopCoroutine(SpawnEnemies());
                 if (isArenaSpawner)
                 {
-                    Debug.Log("Du har vunnit!!");
                     GameController.Instance.SceneCompletedSequence();
                     GameObject sceneManager = GameObject.Find("SceneManager");
                     sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
