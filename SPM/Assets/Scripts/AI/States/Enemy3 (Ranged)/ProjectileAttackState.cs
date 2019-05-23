@@ -28,9 +28,16 @@ public class ProjectileAttackState : EnemyBaseState
         Attack();
 
         if (!CanSeePlayer())
+        {
+            Debug.Log("Can't see player, starting chase");
             owner.Transition<ProjectileChaseState>();
+        }
+
         if (Vector3.Distance(owner.transform.position, owner.player.transform.position) > chaseDistance)
+        {
+            Debug.Log("Outside of attack distance, starting chase");
             owner.Transition<ProjectileChaseState>();
+        }
     }
 
     private void Attack()

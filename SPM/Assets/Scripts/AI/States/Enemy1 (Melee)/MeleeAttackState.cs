@@ -8,7 +8,6 @@ public class MeleeAttackState : EnemyBaseState
 {
     // Attributes
     [SerializeField] private float chaseDistance;
-    [SerializeField] private float minDistance;
     [SerializeField] private float cooldown;
     [SerializeField] private float damage;
 
@@ -25,16 +24,19 @@ public class MeleeAttackState : EnemyBaseState
     {
         if (owner.getIsDead() == false)
         {
-            if (Vector3.Distance(owner.transform.position, owner.player.transform.position) > minDistance)
-            {
-                owner.agent.SetDestination(owner.player.transform.position);
-            }
             Attack();
-
+            Debug.Log("Melee Attack!");
             if (!CanSeePlayer())
+            {
+                Debug.Log("Can't see player, starting chase");
                 owner.Transition<MeleeChaseState>();
+            }
+
             if (Vector3.Distance(owner.transform.position, owner.player.transform.position) > chaseDistance)
+            {
+                Debug.Log("Outside of attack distance, starting chase");
                 owner.Transition<MeleeChaseState>();
+            }
         }
     }
 

@@ -18,6 +18,8 @@ public class MeleeIdleState : EnemyBaseState
     public override void HandleUpdate()
     {
         if (CanSeePlayer() && Vector3.Distance(owner.transform.position, owner.player.transform.position) < chaseDistance)
+        {
             owner.Transition<MeleeChaseState>();
+        }
     }
 }

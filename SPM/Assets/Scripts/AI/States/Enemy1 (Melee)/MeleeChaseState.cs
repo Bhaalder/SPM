@@ -16,6 +16,7 @@ public class MeleeChaseState : EnemyBaseState
 
         if (Vector3.Distance(owner.transform.position, owner.player.transform.position) < attackDistance)
         {
+            Debug.Log("Inside of attack distance, starting attack!");
             owner.Transition<MeleeAttackState>();
         }
     }

@@ -1,6 +1,7 @@
 ﻿//Marcus Söderberg
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Enemy/ProjectileChaseState")]
@@ -12,7 +13,11 @@ public class ProjectileChaseState : EnemyBaseState
     // Methods
     public override void HandleUpdate()
     {
-        owner.agent.SetDestination(owner.player.transform.position);
+        try
+        {
+            owner.agent.SetDestination(owner.player.transform.position);
+        }
+        catch (Exception e){ Debug.Log("Set Destination Error: " + e); }
 
         if (Vector3.Distance(owner.transform.position, owner.player.transform.position) < attackDistance)
         {
