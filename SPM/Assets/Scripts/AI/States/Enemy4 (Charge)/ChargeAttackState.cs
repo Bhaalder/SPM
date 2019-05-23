@@ -7,8 +7,7 @@ using UnityEngine;
 public class ChargeAttackState : EnemyBaseState
 {
     // Attributes
-    [SerializeField] private float chaseDistance;
-    [SerializeField] private float minDistance;
+    [Tooltip("Time in Seconds the charge will last for.")]
     [SerializeField] private float isChargingForSeconds;
 
     private float currentCool;
@@ -31,15 +30,25 @@ public class ChargeAttackState : EnemyBaseState
     {
         currentCool += Time.deltaTime;
 
-        if (currentCool < isChargingForSeconds)
+        if (CanSeePlayer() == true)
         {
-            owner.agent.SetDestination(chargePoint);
+            if (owner.transform.position == chargePoint)
+            {
+                currentCool = 0;
+                owner.Transition<ChargeStunnedState>();
+            }
+
+            if (currentCool < isChargingForSeconds)
+            {
+                owner.agent.SetDestination(chargePoint);
+            }
+            else
+            {
+                currentCool = 0;
+                owner.Transition<ChargeStunnedState>();
+            }
         }
-        else
-        {
-            currentCool = 0;
-            owner.Transition<ChargeStunnedState>();
-        }
+
 
     }
 }

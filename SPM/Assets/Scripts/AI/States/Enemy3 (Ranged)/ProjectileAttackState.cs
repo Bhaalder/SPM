@@ -7,11 +7,11 @@ using UnityEngine;
 public class ProjectileAttackState : EnemyBaseState
 {
     // Attributes
+    [Tooltip("Distance at which the Enemy stops trying to attack and starts chasing the Player.")]
     [SerializeField] private float chaseDistance;
 
     private ProjectileWeapon enemyWeapon;
     private float cooldown;
-
     private float currentCool;
 
     // Methods
@@ -27,15 +27,8 @@ public class ProjectileAttackState : EnemyBaseState
     {
         Attack();
 
-        if (!CanSeePlayer())
+        if (Vector3.Distance(owner.transform.position, owner.player.transform.position) > chaseDistance || CanSeePlayer() == false)
         {
-            Debug.Log("Can't see player, starting chase");
-            owner.Transition<ProjectileChaseState>();
-        }
-
-        if (Vector3.Distance(owner.transform.position, owner.player.transform.position) > chaseDistance)
-        {
-            Debug.Log("Outside of attack distance, starting chase");
             owner.Transition<ProjectileChaseState>();
         }
     }
@@ -45,14 +38,19 @@ public class ProjectileAttackState : EnemyBaseState
         currentCool -= Time.deltaTime;
 
         if (currentCool > 0)
+        {
             return;
+        }
 
-        owner.transform.LookAt(owner.player.transform, Vector3.up);
+        if (CanSeePlayer() == true)
+        {
+            owner.transform.LookAt(owner.player.transform, Vector3.up);
 
-        GameObject enemyProj = Instantiate(enemyWeapon.GetProjectile(), owner.transform.position + owner.transform.forward * 2, Quaternion.identity);
-        enemyProj.GetComponent<EnemyProjectile>().SetProjectileSpeed(enemyWeapon.GetProjectileSpeed());
-        enemyProj.GetComponent<EnemyProjectile>().SetProjectileTravelDistance(enemyWeapon.GetRange());
-        enemyProj.GetComponent<EnemyProjectile>().SetProjectileDamage(enemyWeapon.GetDamage());
+            GameObject enemyProj = Instantiate(enemyWeapon.GetProjectile(), owner.transform.position + owner.transform.forward * 2, Quaternion.identity);
+            enemyProj.GetComponent<EnemyProjectile>().SetProjectileSpeed(enemyWeapon.GetProjectileSpeed());
+            enemyProj.GetComponent<EnemyProjectile>().SetProjectileTravelDistance(enemyWeapon.GetRange());
+            enemyProj.GetComponent<EnemyProjectile>().SetProjectileDamage(enemyWeapon.GetDamage());
+        }
 
         currentCool = cooldown;
     }

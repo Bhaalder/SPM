@@ -7,9 +7,12 @@ using UnityEngine;
 public class MeleeAttackState : EnemyBaseState
 {
     // Attributes
+    [Tooltip("Distance at which the Enemy stops trying to attack and starts chasing the Player.")]
     [SerializeField] private float chaseDistance;
+    [Tooltip("Time in Seconds between Attacks.")]
     [SerializeField] private float cooldown;
-    [SerializeField] private float damage;
+    [Tooltip("Damage done to Player with each Attack.")]
+    [SerializeField] private int damage;
 
 
     private float currentCool;
@@ -25,16 +28,9 @@ public class MeleeAttackState : EnemyBaseState
         if (owner.getIsDead() == false)
         {
             Attack();
-            Debug.Log("Melee Attack!");
-            if (!CanSeePlayer())
-            {
-                Debug.Log("Can't see player, starting chase");
-                owner.Transition<MeleeChaseState>();
-            }
 
-            if (Vector3.Distance(owner.transform.position, owner.player.transform.position) > chaseDistance)
+            if (Vector3.Distance(owner.transform.position, owner.player.transform.position) > chaseDistance || CanSeePlayer() == false)
             {
-                Debug.Log("Outside of attack distance, starting chase");
                 owner.Transition<MeleeChaseState>();
             }
         }
@@ -45,9 +41,14 @@ public class MeleeAttackState : EnemyBaseState
         currentCool -= Time.deltaTime;
 
         if (currentCool > 0)
+        {
             return;
+        }
 
-        GameController.Instance.TakeDamage((int)damage);
+        if (CanSeePlayer() == true)
+        {
+            GameController.Instance.TakeDamage(damage);
+        }
 
         currentCool = cooldown;
     }
