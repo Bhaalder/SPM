@@ -6,10 +6,6 @@ using UnityEngine.UI;
 public class PlayerShoot : MonoBehaviour{
     //Author: Patrik Ahlgren
 
-
-        /*
-         * MUZZLEFLASH BORDE LIGGA TILLSAMMANS MED VAPEN OCH DET HÄR BORDE BARA SÄGA TILL VAPNEN ATT SPELA ANIMATION
-         * */
     public LayerMask layerMask;
     
     [SerializeField] private GameObject bulletImpactMetalGO;
@@ -29,18 +25,18 @@ public class PlayerShoot : MonoBehaviour{
         camShake = Camera.main.GetComponent<CameraShake>();
     }
 
-    public void Melee() {
-        bool hitTarget = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 5f, layerMask);
-        if (hitTarget) {
-            if (hit.rigidbody != null) {
-                hit.rigidbody.AddForce(-hit.normal * 10f);
-            }
-            if (hit.collider.gameObject.layer == 9) {
-                hit.transform.GetComponent<Enemy>().TakeDamage(100f);
-            }
-            InstantiateSingleBulletHit(bulletImpactMetalGO, hit, 2.0f);
-        }
-    }
+    //public void Melee() {
+    //    bool hitTarget = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 5f, layerMask);
+    //    if (hitTarget) {
+    //        if (hit.rigidbody != null) {
+    //            hit.rigidbody.AddForce(-hit.normal * 10f);
+    //        }
+    //        if (hit.collider.gameObject.layer == 9) {
+    //            hit.transform.GetComponent<Enemy>().TakeDamage(100f);
+    //        }
+    //        InstantiateSingleBulletHit(bulletImpactMetalGO, hit, 2.0f);
+    //    }
+    //}
 
     public void StartShooting(BaseWeapon weapon) {
         if (weapon is ProjectileWeapon) {

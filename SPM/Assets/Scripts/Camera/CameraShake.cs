@@ -37,11 +37,7 @@ public class CameraShake : MonoBehaviour {
     }
 
     public void Shake(float value, float duration) {
-
-        shakeValue += value;
-        startValue = shakeValue;
-        shakeDuration = duration;
-        startDuration = shakeDuration;
+        ShakeValueAndDuration(value, duration);
 
         if (!isShaking) {
             StartCoroutine(ShakeCamera());
@@ -60,10 +56,7 @@ public class CameraShake : MonoBehaviour {
     }
 
     public void ShakeIncrease(float value, float duration) {
-        shakeValue += value;
-        startValue = shakeValue;
-        shakeDuration = duration;
-        startDuration = shakeDuration;
+        ShakeValueAndDuration(value, duration);
 
         if (!isShaking) {
             StartCoroutine(ShakeCamera());
@@ -71,16 +64,20 @@ public class CameraShake : MonoBehaviour {
     }
 
     public void ShakeIncreaseDistance(float value, float duration, GameObject player, GameObject explosion) {
-        shakeValue += value;
-        startValue = shakeValue;
-        shakeDuration = duration;
-        startDuration = shakeDuration;
+        ShakeValueAndDuration(value, duration);
 
         float distance = Vector3.Distance(player.transform.position, explosion.transform.position);
 
         if (!isShaking) {
             StartCoroutine(ShakeCameraDistance(distance));
         }
+    }
+
+    private void ShakeValueAndDuration(float value, float duration) {
+        shakeValue += value;
+        startValue = shakeValue;
+        shakeDuration = duration;
+        startDuration = shakeDuration;
     }
 
     private IEnumerator Recoil() {
@@ -117,7 +114,7 @@ public class CameraShake : MonoBehaviour {
                 shaking = shakeValue - distance;
             }
             Vector3 rotationAmount = Random.insideUnitSphere * shaking;
-            rotationAmount.z = 0;//
+            //rotationAmount.z = 0;//
 
             shakePercentage = shakeDuration / startDuration;
 
