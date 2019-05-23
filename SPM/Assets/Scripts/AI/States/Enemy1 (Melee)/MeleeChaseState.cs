@@ -28,7 +28,7 @@ public class MeleeChaseState : EnemyBaseState
 
         if (distanceToPlayer < stopChaseDistance && CanSeePlayer() == false)
         {
-            owner.Transition<ChargeIdleState>();
+            owner.Transition<MeleeIdleState>();
         }
     }
 }

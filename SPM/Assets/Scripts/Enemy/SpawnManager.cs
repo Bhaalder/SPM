@@ -16,40 +16,38 @@ public class Wave
 public class SpawnManager : MonoBehaviour
 {
     //Author: Marcus Söderberg
-    public Wave[] Waves; // class to hold information per wave
-    public Transform[] SpawnPoints;
+    [SerializeField] private Wave[] Waves; // class to hold information per wave
+    [SerializeField] private Transform[] SpawnPoints;
     public float TimeBetweenEnemies = 2f;
 
-    private int _totalEnemiesInCurrentWave;
-    private int _enemiesInWaveLeft;
-    private int _spawnedEnemies;
+    private int totalEnemiesInCurrentWave;
+    private int enemiesInWaveLeft;
+    private int spawnedEnemies;
 
-    private int _currentWave;
-    private int _totalWaves;
+    private int currentWave;
+    private int totalWaves;
     private int spawnPointIndex = 0;
-    public bool isRoomCleared;
-    public bool isArenaSpawner;
-    public bool isCommandoRoom;
 
-    public GameObject door;
+
+    // Designer input
+    [SerializeField] private bool isRoomCleared;
+    [SerializeField] private bool isArenaSpawner;
+    [SerializeField] private bool isCommandoRoom;
+    [SerializeField] private GameObject door;
 
 
 
     void Start()
     {
-        _currentWave = -1; // avoid off by 1
-        _totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
+        currentWave = -1; // avoid off by 1
+        totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
         isRoomCleared = false;
-        // StartNextWave();
-        
+        // StartNextWave();        
     }
 
 
     public void InitializeSpawner()
     {
-        _currentWave = -1; // avoid off by 1
-        _totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
-        isRoomCleared = false;
         StartNextWave();
     }
 
@@ -57,27 +55,22 @@ public class SpawnManager : MonoBehaviour
     {
         Debug.Log("Next wave started");
 
-        _currentWave++;
+        currentWave++;
 
         int[] enemycount;
         enemycount = null;
 
-        enemycount = Waves[_currentWave].Numberofenemy;
+        enemycount = Waves[currentWave].Numberofenemy;
 
 
         for (int i = 0; i < enemycount.Length; i++)
         {
-            _totalEnemiesInCurrentWave += enemycount[i];
+            totalEnemiesInCurrentWave += enemycount[i];
 
         }
 
-        //_totalEnemiesInCurrentWave = Waves[_currentWave].EnemiesPerWave;
-
-
-        Debug.Log("Total Enemies in Current Wave: " + _totalEnemiesInCurrentWave);
-        _enemiesInWaveLeft = 0;
-        _spawnedEnemies = 0;
-
+        enemiesInWaveLeft = 0;
+        spawnedEnemies = 0;
 
         StartCoroutine(SpawnEnemies());
     }
@@ -85,38 +78,31 @@ public class SpawnManager : MonoBehaviour
     // Coroutine to spawn all of our enemies
     IEnumerator SpawnEnemies()
     {
-        int enemiesCount = Waves[_currentWave].Enemies.Length;
-        GameObject[] enemies = Waves[_currentWave].Enemies;
+        int enemiesCount = Waves[currentWave].Enemies.Length;
+        GameObject[] enemies = Waves[currentWave].Enemies;
 
-        while (_spawnedEnemies < _totalEnemiesInCurrentWave)
+        while (spawnedEnemies < totalEnemiesInCurrentWave)
         {
 
             foreach (GameObject enemy in enemies)
             {
                 int place = System.Array.IndexOf(enemies, enemy);
-                Debug.Log("Place in array: " + place);
-                int numberofenemytospawn = Waves[_currentWave].Numberofenemy[place];
+                int numberofenemytospawn = Waves[currentWave].Numberofenemy[place];
 
                 for (int i = 0; i < numberofenemytospawn; i++)
                 {
-                    _spawnedEnemies++;
-                    _enemiesInWaveLeft++;
+                    spawnedEnemies++;
+                    enemiesInWaveLeft++;
                     spawnPointIndex++;
-                    Debug.Log("Creating enemy number: " + i);
-                    var newEnemy1 = Instantiate(enemies[place], SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
+
+                    GameObject newEnemy1 = Instantiate(enemies[place], SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
                     newEnemy1.transform.parent = gameObject.transform;
                     if (spawnPointIndex == SpawnPoints.Length - 1) { spawnPointIndex = 0; }
                     yield return new WaitForSeconds(TimeBetweenEnemies);
                 }
             }
 
-            /*var newEnemy1 = Instantiate(enemy1, SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
-            newEnemy1.transform.parent = gameObject.transform;
-            if (spawnPointIndex == SpawnPoints.Length - 1) { spawnPointIndex = 0; }    
-            yield return new WaitForSeconds(TimeBetweenEnemies);*/
-
         }
-        Debug.Log("Enemies in wave left: " + _enemiesInWaveLeft);
         yield return null;
     }
 
@@ -125,15 +111,14 @@ public class SpawnManager : MonoBehaviour
     // called by an enemy when they're defeated
     public void EnemyDefeated()
     {
-        _enemiesInWaveLeft--;
-        Debug.Log("Enemy Dead");
+        enemiesInWaveLeft--;
 
         // We start the next wave once we have spawned and defeated them all
-        if (_enemiesInWaveLeft == 0 && _spawnedEnemies == _totalEnemiesInCurrentWave)
+        if (enemiesInWaveLeft == 0 && spawnedEnemies == totalEnemiesInCurrentWave)
         {
 
             // win condition
-            if (_currentWave == _totalWaves && _enemiesInWaveLeft == 0 && _spawnedEnemies == _totalEnemiesInCurrentWave)
+            if (currentWave == totalWaves && enemiesInWaveLeft == 0 && spawnedEnemies == totalEnemiesInCurrentWave)
             {
                 Debug.Log("clear condition has been reached");
                 StopCoroutine(SpawnEnemies());
@@ -144,7 +129,6 @@ public class SpawnManager : MonoBehaviour
                     GameObject sceneManager = GameObject.Find("SceneManager");
                     sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
                     door.SetActive(false);
-
                 }
                 if (isCommandoRoom)
                 {
@@ -155,7 +139,7 @@ public class SpawnManager : MonoBehaviour
                 return;
             }
             else {
-                _totalEnemiesInCurrentWave = 0;
+                totalEnemiesInCurrentWave = 0;
                 StartNextWave();
             }
 
