@@ -55,17 +55,20 @@ public class PlayerMovementController : MonoBehaviour{
 
     private void Move() {
         Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        if (IsGrounded()) {
-            movementInput *= (movementSpeed * (1 + speedMultiplier)) * Time.deltaTime;
+        if (IsGrounded() && movementInput.magnitude > 0) {
+            //AudioController.Instance.PlaySFX_RandomPitch("Dash", 0.90f, 1f);
+            Debug.Log("Walking!");
         } else {
-            movementInput *= (movementSpeed * (1 + speedMultiplier)) * Time.deltaTime;
+            
         }
-        
+        movementInput *= (movementSpeed * (1 + speedMultiplier)) * Time.deltaTime;
 
         velocity = movementInput;
 
         transform.Translate(new Vector3(velocity.x, 0f, velocity.y));
     }
+
+
     private void Jump() {
         if (Input.GetButtonDown("Jump")) {          
             if (jumpCount>0 || IsGrounded()) {
@@ -84,6 +87,7 @@ public class PlayerMovementController : MonoBehaviour{
     public void Dash() {
         isDashing = true;
         if(Time.time >= timeToDash+nextTimeToDash) {
+            AudioController.Instance.PlaySFX_RandomPitch("Dash", 0.93f, 1f);
             timeToDash = Time.time + dashDuration;
         }
     }

@@ -294,7 +294,7 @@ public class AudioController : MonoBehaviour {
                 if (musicSoundLevel < (soundVolumePercentage / 100)) {
                     soundVolumePercentage = (musicSoundLevel * 100);
                 }
-                StartCoroutine(FadeInAudio(name, fadeDuration, (soundVolumePercentage / 100), sound));
+                StartCoroutine(FadeInAudio(fadeDuration, (soundVolumePercentage / 100), sound));
                 return;
             }
             sound = FindSFX(name);
@@ -304,7 +304,7 @@ public class AudioController : MonoBehaviour {
                 if (sfxSoundLevel < (soundVolumePercentage / 100)) {
                     soundVolumePercentage = (sfxSoundLevel * 100);
                 }
-                StartCoroutine(FadeInAudio(name, fadeDuration, (soundVolumePercentage / 100), sound));
+                StartCoroutine(FadeInAudio(fadeDuration, (soundVolumePercentage / 100), sound));
                 return;
             }
         } catch (System.NullReferenceException) {
@@ -320,7 +320,7 @@ public class AudioController : MonoBehaviour {
                 if (musicSoundLevel < (soundVolumePercentage / 100)) {
                     soundVolumePercentage = (musicSoundLevel * 100);
                 }
-                StartCoroutine(FadeOutAudio(name, fadeDuration, (soundVolumePercentage / 100), sound));
+                StartCoroutine(FadeOutAudio(fadeDuration, (soundVolumePercentage / 100), sound));
                 return;
             }
             sound = FindSFX(name);
@@ -328,7 +328,7 @@ public class AudioController : MonoBehaviour {
                 if (sfxSoundLevel < (soundVolumePercentage / 100)) {
                     soundVolumePercentage = (sfxSoundLevel * 100);
                 }
-                StartCoroutine(FadeOutAudio(name, fadeDuration, (soundVolumePercentage / 100), sound));
+                StartCoroutine(FadeOutAudio(fadeDuration, (soundVolumePercentage / 100), sound));
                 return;
             }
         } catch (System.NullReferenceException) {
@@ -336,7 +336,7 @@ public class AudioController : MonoBehaviour {
         }
     }
 
-    private IEnumerator FadeInAudio(string name, float fadeDuration, float soundVolume, Sound sound) {
+    private IEnumerator FadeInAudio(float fadeDuration, float soundVolume, Sound sound) {
         continueFadeIn = true;
         continueFadeOut = false;
         float startSoundValue = 0;
@@ -349,7 +349,7 @@ public class AudioController : MonoBehaviour {
         }
     }
 
-    private IEnumerator FadeOutAudio(string name, float fadeDuration, float soundVolume, Sound sound) {
+    private IEnumerator FadeOutAudio(float fadeDuration, float soundVolume, Sound sound) {
         continueFadeIn = false;
         continueFadeOut = true;
         float startSoundValue = sound.source.volume;
@@ -391,6 +391,12 @@ public class AudioController : MonoBehaviour {
         }
         return null;
     }
+
+    #endregion
+
+    #region WaitForFinish Methods
+
+
 
     #endregion
 

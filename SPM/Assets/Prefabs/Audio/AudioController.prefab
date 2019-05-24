@@ -44,6 +44,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSounds:
+  - name: Dash
+    clip: {fileID: 8300000, guid: e4c31565c7a79084fb03d4fd6a59eb71, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+    loop: 0
+    source: {fileID: 0}
   - name: Shotgun
     clip: {fileID: 8300000, guid: 109366313f737214cb20497f152c552f, type: 3}
     volume: 1
