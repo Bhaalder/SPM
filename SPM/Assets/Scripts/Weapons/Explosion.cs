@@ -25,7 +25,7 @@ public class Explosion : MonoBehaviour
                 }
                 float finalDamage = damage - damageDropoff;
                 nearbyObject.transform.GetComponent<Enemy>().TakeDamage(finalDamage);
-                Debug.Log(finalDamage);
+                //Debug.Log(finalDamage);
             }
             Rigidbody rigidBody = nearbyObject.GetComponent<Rigidbody>();
             if (rigidBody != null){
