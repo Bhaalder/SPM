@@ -20,14 +20,14 @@ public class RocketProjectile : MonoBehaviour{
 
     private void Update(){
         bool hitTarget = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, distanceToTarget, layerMask);
+
         if (distanceToTarget <= 0.5f) {
-            GetComponent<Explosion>().Explode(projectileForce, projectileDamage);
             Destroy(gameObject);
+            GetComponent<Explosion>().Explode(projectileForce, projectileDamage);
         }
         if (hitTarget) {
             distanceToTarget = Vector3.Distance(transform.position, hit.point);
-        } else if (!hitTarget) {
-            GetComponent<Explosion>().Explode(projectileForce, projectileDamage);
+        } else if (distanceToTarget == 10000) {
             Destroy(gameObject, 10f);
         }
         if (GameController.Instance.gameIsSlowmotion) {
