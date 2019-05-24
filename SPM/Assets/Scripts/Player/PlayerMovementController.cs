@@ -46,6 +46,7 @@ public class PlayerMovementController : MonoBehaviour{
         }                    
         FakeExtraGravity();
         if (Time.time <= timeToDash) {
+            rigidBody.velocity = new Vector3(0, 0, 0);
             transform.position += (Camera.main.transform.forward * (dashForce * (1+speedMultiplier))) * Time.deltaTime;
         } else {
             isDashing = false;
