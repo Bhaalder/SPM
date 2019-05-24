@@ -113,6 +113,7 @@ public class CameraShake : MonoBehaviour {
                 shaking = shakeValue - distance;
             }
             Vector3 rotationAmount = Random.insideUnitSphere * shaking;
+            rotationAmount.z = 0;
 
             shakePercentage = shakeDuration / startDuration;
 
