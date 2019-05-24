@@ -14,8 +14,8 @@ public class Level1ArenaDoors : MonoBehaviour
         doors[1] = transform.GetChild(1).gameObject;
         doors[2] = transform.GetChild(2).gameObject;
 
-        doors[0].SetActive(false);
-        doors[1].SetActive(false);
+        doors[0].SetActive(true);
+        doors[1].SetActive(true);
         doors[2].SetActive(false);
     }
 
@@ -28,9 +28,8 @@ public class Level1ArenaDoors : MonoBehaviour
     {
 
 
-        doors[0].SetActive(true);
-        doors[1].SetActive(true);
         doors[2].SetActive(true);
+        
        
     }
 }
