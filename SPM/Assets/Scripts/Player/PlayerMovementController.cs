@@ -89,7 +89,7 @@ public class PlayerMovementController : MonoBehaviour{
     }
 
     private void JumpSound() {
-        int i = Random.Range(1, 5);
+        int i = Random.Range(1, 3);
         int soundChance = Random.Range(1, 100);
         if (soundChance <= jumpSoundPercentChance) {
             switch (i) {
