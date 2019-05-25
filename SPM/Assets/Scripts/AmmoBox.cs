@@ -5,14 +5,14 @@ using UnityEngine;
 public class AmmoBox : MonoBehaviour
 {
     //Author: Patrik Ahlgren
-    public int clipIncrease;
+    [SerializeField] private int clipIncrease;
 
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "InteractionPlayer")
         {
-            foreach (BaseWeapon weapon in GameController.Instance.playerWeapons)
+            foreach (BaseWeapon weapon in GameController.Instance.PlayerWeapons)
             {
                 weapon.IncreaseTotalAmmoLeft(weapon.GetMaxAmmoInClip() * clipIncrease);
             }

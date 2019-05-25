@@ -5,8 +5,8 @@ using UnityEngine;
 public class InteractableObject : MonoBehaviour
 {
     //Author: Patrik Ahlgren
-    public enum Object {OpenDoorsAnimated, ArenaButton, ArenaButtonLV2};
-    public Object obj;
+    [SerializeField] private enum Object {OpenDoorsAnimated, ArenaButton, ArenaButtonLV2};
+    [SerializeField] private Object obj;
 
     public void Interact() {
         switch (obj) {

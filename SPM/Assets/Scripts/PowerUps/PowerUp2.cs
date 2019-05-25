@@ -13,7 +13,7 @@ public class PowerUp2 : MonoBehaviour
     {
         if (other.gameObject.tag == "InteractionPlayer")
         {
-            GameController.Instance.GetComponent<GameController>().playerHP = 100;
+            GameController.Instance.GetComponent<GameController>().PlayerHP = 100;
             GetComponentInParent<PowerUpSpawner>().Respawner();
             Destroy(gameObject);
             //StartCoroutine(UsedBoost());

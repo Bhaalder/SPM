@@ -14,8 +14,8 @@ public class PlayerShoot : MonoBehaviour{
 
     [SerializeField] private ParticleSystem muzzleFlash;//------------
 
-    public float shotgunRecoil = 4;// TA BORT SEN
-    public float shotgunRecoilDuration = 0.3f; // TA BORT SEN
+    [SerializeField] private float shotgunRecoil = 4;// TA BORT SEN
+    [SerializeField] private float shotgunRecoilDuration = 0.3f; // TA BORT SEN
 
     private CameraShake camShake;
     private GameObject bulletImpact;
@@ -94,7 +94,7 @@ public class PlayerShoot : MonoBehaviour{
                     }
                     if (hits[x].collider.gameObject.layer == 9){
 
-                        float fallOff = Vector3.Distance(GameController.Instance.player.transform.position, hits[x].point);
+                        float fallOff = Vector3.Distance(GameController.Instance.Player.transform.position, hits[x].point);
                         
                         if(fallOff > weapon.GetDamage()){
                             fallOff = weapon.GetDamage();

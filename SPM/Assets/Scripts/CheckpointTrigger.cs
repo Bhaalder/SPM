@@ -23,7 +23,7 @@ public class CheckpointTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameController.Instance.gameEventID = spawnPoint;
+            GameController.Instance.GameEventID = spawnPoint;
             Debug.Log("Spawnpoint: " + spawnPoint);
         }
     }

@@ -5,19 +5,19 @@ using UnityEngine;
 public class Slowmotion:MonoBehaviour{
     //Author: Patrik Ahlgren
 
-    public float slowdownAmount;
+    [SerializeField] private float slowdownAmount;
     private bool canSlowmo = true;
     
     public void SlowTime() {
-        if (!GameController.Instance.gameIsPaused) {
-            if (!GameController.Instance.gameIsSlowmotion && canSlowmo) {               
+        if (!GameController.Instance.GameIsPaused) {
+            if (!GameController.Instance.GameIsSlowmotion && canSlowmo) {               
                 Time.timeScale = slowdownAmount;
                 AudioController.Instance.SFXSetPitch(0.5f);
-                GameController.Instance.gameIsSlowmotion = true;
-            } else if (GameController.Instance.gameIsSlowmotion) {
+                GameController.Instance.GameIsSlowmotion = true;
+            } else if (GameController.Instance.GameIsSlowmotion) {
                 Time.timeScale = 1f;
                 AudioController.Instance.SFXSetPitch(1f);
-                GameController.Instance.gameIsSlowmotion = false;
+                GameController.Instance.GameIsSlowmotion = false;
             }
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
@@ -29,8 +29,8 @@ public class Slowmotion:MonoBehaviour{
         } else {
             canSlowmo = false;
         }
-        if (GameController.Instance.gameIsSlowmotion && GameController.Instance.SlowmotionSlider.value == 0) {
-            GameController.Instance.gameIsSlowmotion = false;
+        if (GameController.Instance.GameIsSlowmotion && GameController.Instance.SlowmotionSlider.value == 0) {
+            GameController.Instance.GameIsSlowmotion = false;
             Time.timeScale = 1f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
             AudioController.Instance.SFXSetPitch(1f);
@@ -39,10 +39,10 @@ public class Slowmotion:MonoBehaviour{
     }
 
     private void SlowmotionSlider() {
-        if (!GameController.Instance.gameIsPaused) {
-            if (!GameController.Instance.gameIsSlowmotion && GameController.Instance.SlowmotionSlider.value < 100) {
+        if (!GameController.Instance.GameIsPaused) {
+            if (!GameController.Instance.GameIsSlowmotion && GameController.Instance.SlowmotionSlider.value < 100) {
                 GameController.Instance.SlowmotionSlider.value += 10 * Time.unscaledDeltaTime; //10sek
-            } else if (GameController.Instance.gameIsSlowmotion) {
+            } else if (GameController.Instance.GameIsSlowmotion) {
                 GameController.Instance.SlowmotionSlider.value -= 20 * Time.unscaledDeltaTime; //5sek
             }
         }

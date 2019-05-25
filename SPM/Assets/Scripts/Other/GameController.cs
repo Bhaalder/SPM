@@ -5,26 +5,26 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
     //Author: Patrik Ahlgren
-    public List<MonoBehaviour> subscribedScripts = new List<MonoBehaviour>();
-    public List<BaseWeapon> playerWeapons = new List<BaseWeapon>();
-    public int gameEventID = 1;
-    public bool sceneCompleted;
-    public Text winText;
+    public List<MonoBehaviour> SubscribedScripts = new List<MonoBehaviour>();
+    public List<BaseWeapon> PlayerWeapons = new List<BaseWeapon>();
+    public int GameEventID = 1;
+    public bool SceneCompleted;
+    public Text WinText;
 
-    public GameObject player;
+    public GameObject Player;
 
-    public BaseWeapon selectedWeapon;
+    public BaseWeapon SelectedWeapon;
 
     public Slider HealthSlider, ArmorSlider, SlowmotionSlider, ReloadSlider;
-    public Text weaponNameText, weaponAmmoText;
-    public GameObject weaponImage;
+    public Text WeaponNameText, WeaponAmmoText;
+    public GameObject WeaponImage;
 
-    public int playerHP, playerArmor;
+    public int PlayerHP, PlayerArmor;
 
-    public bool gameIsPaused, playerIsInteracting;
-    public bool gameIsSlowmotion = false;
+    public bool GameIsPaused, PlayerIsInteracting;
+    public bool GameIsSlowmotion = false;
 
-    public float invulnerableStateTime;
+    [SerializeField] private float invulnerableStateTime;
     private float invulnerableState;
 
     public Text interactionText;
@@ -54,80 +54,84 @@ public class GameController : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         DontDestroyOnLoad(gameObject);
 
-        HealthSlider.value = playerHP;
-        ArmorSlider.value = playerArmor;
+        HealthSlider.value = PlayerHP;
+        ArmorSlider.value = PlayerArmor;
         SlowmotionSlider.value = SlowmotionSlider.maxValue;
         ReloadSlider.value = 0;
 
-        BaseWeapon rifle = WeaponController.Instance.GetRifle();
-        playerWeapons.Add(rifle);
-        //BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
-        //playerWeapons.Add(shotgun);
-        //BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
-        //playerWeapons.Add(rocketLaucher);
+        WeaponNameText = GameObject.Find("WeaponText").GetComponent<Text>();
+        WeaponAmmoText = GameObject.Find("AmmunitionText").GetComponent<Text>();
+        WeaponImage = GameObject.Find("Weapon Image");
 
-        selectedWeapon = playerWeapons[0];
+        BaseWeapon rifle = WeaponController.Instance.GetRifle();
+        PlayerWeapons.Add(rifle);
+        //BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
+        //PlayerWeapons.Add(shotgun);
+        //BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
+        //PlayerWeapons.Add(rocketLaucher);
+
+        SelectedWeapon = PlayerWeapons[0];
         UpdateSelectedWeapon();
     }
 
     public void UpdateSelectedWeapon() {
-        weaponNameText.text = selectedWeapon.GetName();
-        foreach (Transform child in weaponImage.transform) {
+        WeaponNameText.text = SelectedWeapon.GetName();
+        foreach (Transform child in WeaponImage.transform) {
             child.GetComponent<Image>().enabled = false;
         }
-        for (int weapon = 0; weapon < playerWeapons.Count; weapon++) {
-            if (playerWeapons[weapon] == selectedWeapon) {
-                weaponImage.transform.GetChild(weapon).GetComponent<Image>().enabled = true;
+        for (int weapon = 0; weapon < PlayerWeapons.Count; weapon++) {
+            if (PlayerWeapons[weapon] == SelectedWeapon) {
+                WeaponImage.transform.GetChild(weapon).GetComponent<Image>().enabled = true;
                 break;
             }
         }
-        crosshair.sprite = selectedWeapon.GetCrosshair();
+        crosshair.sprite = SelectedWeapon.GetCrosshair();
         UpdateSelectedWeapon_AmmoText();
     }
 
     public void UpdateSelectedWeapon_AmmoText() {
-        weaponAmmoText.text = selectedWeapon.GetAmmoInClip() + "/" + selectedWeapon.GetTotalAmmoLeft();
+        WeaponAmmoText.text = SelectedWeapon.GetAmmoInClip() + "/" + SelectedWeapon.GetTotalAmmoLeft();
     }
 
     public void SceneCompletedSequence() {
-        winText.gameObject.SetActive(true);
-        sceneCompleted = true;
+        WinText.gameObject.SetActive(true);
+        SceneCompleted = true;
     }
     public void SceneNotCompletedSequence() {
-        winText.gameObject.SetActive(false);
-        sceneCompleted = false;
+        WinText.gameObject.SetActive(false);
+        SceneCompleted = false;
     }
 
     public void PlayerPassedEvent() {
-        gameEventID++;
-        Debug.Log("Game event =" + gameEventID);
+        GameEventID++;
+        Debug.Log("Game event =" + GameEventID);
     }
 
     public void GamePaused() {
-        if (gameIsPaused) {
-            gameIsPaused = false;
-            if (gameIsSlowmotion) {
+        if (GameIsPaused) {
+            GameIsPaused = false;
+            if (GameIsSlowmotion) {
                 GetComponent<Slowmotion>().SlowTime();
             } else {
                 Time.timeScale = 1f;
                 Time.fixedDeltaTime = Time.timeScale * 0.02f;
             }
         } else {
-            gameIsPaused = true;
+            GameIsPaused = true;
             Time.timeScale = 0f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
     }
 
     private void Update() {
-        HealthSlider.value = playerHP;
-        ArmorSlider.value = playerArmor;
+        HealthSlider.value = PlayerHP;
+        ArmorSlider.value = PlayerArmor;
     }
 
     public void TakeDamage(int damage){
         if (Time.time >= invulnerableState) {
             invulnerableState = Time.time + invulnerableStateTime;
-            if (playerArmor <= 0) { playerHP -= damage; Debug.Log("Player took: "+damage + " to health"); } else { playerArmor -= damage; }
+            if (PlayerArmor <= 0) { PlayerHP -= damage; Debug.Log("Player took: "+damage + " to health"); } else { PlayerArmor -= damage; }
         } else {
             Debug.Log("InvulnerableState active, no damage");
         }

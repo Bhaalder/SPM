@@ -47,7 +47,7 @@ public class SceneManagerScript : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("InteractionPlayer") && GameController.Instance.playerIsInteracting && GameController.Instance.sceneCompleted)
+        if (other.gameObject.CompareTag("InteractionPlayer") && GameController.Instance.PlayerIsInteracting && GameController.Instance.SceneCompleted)
         {
             SceneManager.LoadScene("Level2WhiteBox");
             GameController.Instance.SceneNotCompletedSequence();
@@ -56,11 +56,11 @@ public class SceneManagerScript : MonoBehaviour
         {
             Debug.Log("Du måste låsa upp dörren!!");
         }
-        if (!GameController.Instance.playerIsInteracting)
+        if (!GameController.Instance.PlayerIsInteracting)
         {
             Debug.Log("Klicka E!");
         }
-        if (!GameController.Instance.sceneCompleted)
+        if (!GameController.Instance.SceneCompleted)
         {
             Debug.Log("Rensa rummet från fiender!!");
         }

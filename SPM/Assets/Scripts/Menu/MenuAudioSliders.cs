@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class MenuAudioSliders : MonoBehaviour{
     //Author: Patrik Ahlgren
 
-    public Slider masterVolumeSlider;
-    public Slider musicVolumeSlider;
-    public Slider sfxVolumeSlider;
+    [SerializeField] private Slider masterVolumeSlider;
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider sfxVolumeSlider;
 
     void Start()
     {

@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class WeaponController : MonoBehaviour{
     //Author: Patrik Ahlgren
-    public GameObject rocketLaucherProjectileGO;
-    public GameObject enemyWeaponProjectileGO;
-    public Sprite[] crosshair;
+    [SerializeField] private GameObject rocketLaucherProjectileGO;
+    [SerializeField] private GameObject enemyWeaponProjectileGO;
+    [SerializeField] private Sprite[] crosshair;
 
-    public float RifleDmg;
-    public float ShotgunDmg;
-    public float RocketLDmg;
+    [SerializeField] private float RifleDmg;
+    [SerializeField] private float ShotgunDmg;
+    [SerializeField] private float RocketLDmg;
 
 
     private static WeaponController instance;

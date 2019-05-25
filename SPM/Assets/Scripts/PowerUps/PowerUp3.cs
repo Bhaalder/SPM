@@ -13,7 +13,7 @@ public class PowerUp3 : MonoBehaviour
     {
         if (other.gameObject.tag == "InteractionPlayer")
         {
-            GameController.Instance.GetComponent<GameController>().playerArmor = 100;
+            GameController.Instance.GetComponent<GameController>().PlayerArmor = 100;
             GetComponentInParent<PowerUpSpawner>().Respawner();
             Destroy(gameObject);//
             //StartCoroutine(UsedBoost());

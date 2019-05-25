@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class PlayerInteract : MonoBehaviour{
 
     //Author: Patrik Ahlgren
-	public Text interactText;
-    public LayerMask layerMask;
+    [SerializeField] private Text interactText;
+    [SerializeField] private LayerMask layerMask;
 
-    public Transform dir;
+    [SerializeField] private Transform interaction;
 
     private float distanceToTarget = 2f;
 	
@@ -18,8 +18,8 @@ public class PlayerInteract : MonoBehaviour{
     }
 
     private void Start() {
-        dir = GameObject.Find("Player").transform.GetChild(2);
-        dir.position -= new Vector3(0, 0, 0.1f);
+        interaction = GameObject.Find("Player").transform.GetChild(2);
+        interaction.position -= new Vector3(0, 0, 0.1f);
     }
 
     private void LateUpdate() {
@@ -28,16 +28,16 @@ public class PlayerInteract : MonoBehaviour{
         try {
             if (hit.transform.gameObject.tag == "InteractableObject") {
                 interactText.enabled = true;
-                if (GameController.Instance.playerIsInteracting) {
+                if (GameController.Instance.PlayerIsInteracting) {
                     hit.transform.GetComponent<InteractableObject>().Interact();
-                    GameController.Instance.playerIsInteracting = false;
+                    GameController.Instance.PlayerIsInteracting = false;
                 }
             }
         } catch (System.NullReferenceException) {
 
         }
 
-        Debug.DrawLine(dir.position, hit.point, Color.green);
+        Debug.DrawLine(interaction.position, hit.point, Color.green);
     }
 
 }

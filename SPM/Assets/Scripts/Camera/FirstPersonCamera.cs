@@ -22,7 +22,7 @@ public class FirstPersonCamera: MonoBehaviour {
     }
 
     private void Update() {
-        if (GameController.Instance.gameIsPaused) {
+        if (GameController.Instance.GameIsPaused) {
 
         } else {
             CameraControl();
@@ -31,7 +31,7 @@ public class FirstPersonCamera: MonoBehaviour {
     }
 
     private void CameraControl() {
-        if (GameController.Instance.gameIsPaused) {
+        if (GameController.Instance.GameIsPaused) {
 
         } else {
             mouseX += Input.GetAxis("Mouse X") * mouseSensitivity * Time.unscaledDeltaTime;

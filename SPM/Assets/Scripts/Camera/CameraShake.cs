@@ -6,8 +6,8 @@ using UnityEngine;
 public class CameraShake : MonoBehaviour {
     //Author: Patrik Ahlgren
     [Header("Shake")]
-    public float shakeValue;
-    public float shakeDuration;
+    [SerializeField] private float shakeValue;
+    [SerializeField] private float shakeDuration;
 
     private float shakePercentage;
     private float startValue;
@@ -16,8 +16,8 @@ public class CameraShake : MonoBehaviour {
     private bool isShaking = false;
 
     [Header("Recoil")]
-    public float recoilValue;
-    public float recoilDuration;
+    [SerializeField] private float recoilValue;
+    [SerializeField] private float recoilDuration;
 
     private float recoilPercentage;
     private float startRecoilValue;
@@ -26,8 +26,8 @@ public class CameraShake : MonoBehaviour {
     private bool isRecoiling = false;
 
     [Header("Smooth")]
-    public bool isSmooth;
-    public float smoothValue = 3f;
+    [SerializeField] private bool isSmooth;
+    [SerializeField] private float smoothValue = 3f;
 
     void Shake() {
 

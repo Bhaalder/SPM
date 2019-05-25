@@ -26,7 +26,7 @@ public class KillZoneScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameController.Instance.playerHP = 0;
+            GameController.Instance.PlayerHP = 0;
             
         }
         if (other.gameObject.CompareTag("Enemy")){

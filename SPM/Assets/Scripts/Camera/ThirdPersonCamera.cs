@@ -30,7 +30,7 @@ public class ThirdPersonCamera : MonoBehaviour {
     }
 
     private void Update() {
-        if (GameController.Instance.gameIsPaused){
+        if (GameController.Instance.GameIsPaused){
 
         }
         else{
@@ -41,7 +41,7 @@ public class ThirdPersonCamera : MonoBehaviour {
     }
 
     private void CameraControl() {
-        if (GameController.Instance.gameIsPaused) {
+        if (GameController.Instance.GameIsPaused) {
 
         } else {
             mouseX += Input.GetAxis("Mouse X") * mouseSensitivity * Time.unscaledDeltaTime;

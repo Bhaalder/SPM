@@ -9,13 +9,13 @@ public class OpenDoorsAnimated : MonoBehaviour
     bool isOpen;
     bool isClosed;
 
-    public GameObject redPanel;
-    public GameObject greenPanel;
-    public SpawnManager spawnManager;
+    [SerializeField] private GameObject redPanel;
+    [SerializeField] private GameObject greenPanel;
+    [SerializeField] private SpawnManager spawnManager;
 
-    public Animator anim;
+    [SerializeField] private Animator anim;
 
-    public bool spawnEnemies;
+    [SerializeField] private bool spawnEnemies;
 
     void Start()
     {

@@ -7,23 +7,25 @@ public class AudioController : MonoBehaviour {
     //Author: Patrik Ahlgren
 
     [Header("Player")]
-    public Sound[] playerSounds;
+    [SerializeField] private Sound[] playerSounds;
     [Header("Enemies")]
-    public Sound[] enemySounds;
+    [SerializeField] private Sound[] enemySounds;
     [Header("Environment")]
-    public Sound[] environmentSounds;
+    [SerializeField] private Sound[] environmentSounds;
     [Header("Music")]
-    public Sound[] musicSounds;
+    [SerializeField] private Sound[] musicSounds;
     [Header("Sound Object")]
-    public GameObject soundObject;
+    [SerializeField] private GameObject soundObject;
     [Header("AudioMixer")]
-    public AudioMixer audioMixer;
-    public AudioMixerGroup audioMixerGroup;
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private AudioMixerGroup audioMixerGroup;
+    
 
-    private List<Sound> musicList = new List<Sound>();
-    private List<Sound> sfxList = new List<Sound>();
-    private List<Sound> allSounds = new List<Sound>();
-    private Dictionary<string, float> soundTimerDictonary;
+    private Dictionary<string, Sound> musicList = new Dictionary<string, Sound>();
+    private Dictionary<string, Sound> sfxList = new Dictionary<string, Sound>();
+    private Dictionary<string, Sound> allSounds = new Dictionary<string, Sound>();
+
+    private Dictionary<string, float> soundTimerDictonary = new Dictionary<string, float>();
 
     private float musicSoundLevel = 1;
     private float sfxSoundLevel = 1;
@@ -57,24 +59,23 @@ public class AudioController : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
-        foreach (Sound player_S in playerSounds) { allSounds.Add(player_S); sfxList.Add(player_S); }
-        foreach (Sound enemy_S in enemySounds) { allSounds.Add(enemy_S); sfxList.Add(enemy_S); }
-        foreach (Sound environment_S in environmentSounds) { allSounds.Add(environment_S); sfxList.Add(environment_S); }
-        foreach (Sound music_S in musicSounds) { allSounds.Add(music_S); musicList.Add(music_S); }
+        foreach (Sound player_S in playerSounds) { allSounds[player_S.name] = player_S; sfxList[player_S.name] = player_S; }
+        foreach (Sound enemy_S in enemySounds) { allSounds[enemy_S.name] = enemy_S; sfxList[enemy_S.name] = enemy_S; }
+        foreach (Sound environment_S in environmentSounds) { allSounds[environment_S.name] = environment_S; sfxList[environment_S.name] = environment_S; }
+        foreach (Sound music_S in musicSounds) { allSounds[music_S.name] = music_S; musicList[music_S.name] = music_S; }
 
-        foreach (Sound s in allSounds) {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.spatialBlend = s.spatialBlend_2D_3D;
-            s.source.rolloffMode = (AudioRolloffMode)s.rolloffMode;
-            s.source.minDistance = s.minDistance;
-            s.source.maxDistance = s.maxDistance;
-            s.source.loop = s.loop;
-            s.source.outputAudioMixerGroup = audioMixerGroup;
+        foreach (KeyValuePair<string, Sound> s in allSounds) {
+            s.Value.source = gameObject.AddComponent<AudioSource>();
+            s.Value.source.clip = s.Value.clip;
+            s.Value.source.volume = s.Value.volume;
+            s.Value.source.pitch = s.Value.pitch;
+            s.Value.source.spatialBlend = s.Value.spatialBlend_2D_3D;
+            s.Value.source.rolloffMode = (AudioRolloffMode)s.Value.rolloffMode;
+            s.Value.source.minDistance = s.Value.minDistance;
+            s.Value.source.maxDistance = s.Value.maxDistance;
+            s.Value.source.loop = s.Value.loop;
+            s.Value.source.outputAudioMixerGroup = audioMixerGroup;
         }
-        soundTimerDictonary = new Dictionary<string, float>();
         
     }
 
@@ -105,24 +106,24 @@ public class AudioController : MonoBehaviour {
 
     public GameObject Play_InWorldspace(string name, GameObject gameObjectLocation) {
         try {
-            foreach (Sound s in allSounds) {
-                if (s.name == name) {
-                    GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
-                    s.source = soundAtLocationGO.GetComponent<AudioSource>();
-                    s.source.clip = s.clip;
-                    s.source.volume = s.volume;
-                    s.source.pitch = s.pitch;
-                    s.source.spatialBlend = s.spatialBlend_2D_3D;
-                    s.source.rolloffMode = (AudioRolloffMode)s.rolloffMode;
-                    s.source.minDistance = s.minDistance;
-                    s.source.maxDistance = s.maxDistance;
-                    s.source.loop = s.loop;
-                    s.source.Play();
-                    if (!s.source.loop) {
-                        Destroy(soundAtLocationGO, s.clip.length);
-                    }
-                    return soundAtLocationGO;
+
+            if (allSounds.ContainsKey(name)) {
+                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
+                Sound s = allSounds[name];
+                s.source = soundAtLocationGO.GetComponent<AudioSource>();
+                s.source.clip = s.clip;
+                s.source.volume = s.volume;
+                s.source.pitch = s.pitch;
+                s.source.spatialBlend = s.spatialBlend_2D_3D;
+                s.source.rolloffMode = (AudioRolloffMode)s.rolloffMode;
+                s.source.minDistance = s.minDistance;
+                s.source.maxDistance = s.maxDistance;
+                s.source.loop = s.loop;
+                s.source.Play();
+                if (!s.source.loop) {
+                    Destroy(soundAtLocationGO, s.clip.length);
                 }
+                return soundAtLocationGO;
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
@@ -146,7 +147,7 @@ public class AudioController : MonoBehaviour {
     public void Play_RandomPitch(string name, float minPitch, float maxPitch) {
         Sound s = FindSound(name);
         try {
-            if (!GameController.Instance.gameIsSlowmotion) {
+            if (!GameController.Instance.GameIsSlowmotion) {
                 s.source.pitch = Random.Range(minPitch, maxPitch);
             }
             s.source.Play();
@@ -158,7 +159,7 @@ public class AudioController : MonoBehaviour {
     public void PlaySFX_RandomPitch(string name, float minPitch, float maxPitch) {
         Sound s = FindSFX(name);
         try {
-            if (!GameController.Instance.gameIsSlowmotion) {
+            if (!GameController.Instance.GameIsSlowmotion) {
                 s.source.pitch = Random.Range(minPitch, maxPitch);
             }
             s.source.Play();
@@ -169,26 +170,25 @@ public class AudioController : MonoBehaviour {
 
     public GameObject Play_RandomPitch_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
         try {
-            foreach (Sound s in allSounds) {
-                if (s.name == name) {
-                    GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
-                    s.source = soundAtLocationGO.GetComponent<AudioSource>();
-                    s.source.clip = s.clip;
-                    s.source.volume = s.volume;
-                    if (!GameController.Instance.gameIsSlowmotion) {
-                        s.source.pitch = Random.Range(minPitch, maxPitch);
-                    }
-                    s.source.spatialBlend = s.spatialBlend_2D_3D;
-                    s.source.rolloffMode = (AudioRolloffMode)s.rolloffMode;
-                    s.source.minDistance = s.minDistance;
-                    s.source.maxDistance = s.maxDistance;
-                    s.source.loop = s.loop;
-                    s.source.Play();
-                    if (!s.source.loop) {
-                        Destroy(soundAtLocationGO, s.clip.length);
-                    }
-                    return soundAtLocationGO;
+            if (allSounds.ContainsKey(name)) {
+                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
+                Sound s = allSounds[name];
+                s.source = soundAtLocationGO.GetComponent<AudioSource>();
+                s.source.clip = s.clip;
+                s.source.volume = s.volume;
+                if (!GameController.Instance.GameIsSlowmotion) {
+                    s.source.pitch = Random.Range(minPitch, maxPitch);
                 }
+                s.source.spatialBlend = s.spatialBlend_2D_3D;
+                s.source.rolloffMode = (AudioRolloffMode)s.rolloffMode;
+                s.source.minDistance = s.minDistance;
+                s.source.maxDistance = s.maxDistance;
+                s.source.loop = s.loop;
+                s.source.Play();
+                if (!s.source.loop) {
+                    Destroy(soundAtLocationGO, s.clip.length);
+                }
+                return soundAtLocationGO;
             }
         } catch (System.NullReferenceException) {            
             AudioNotFound(name);
@@ -199,9 +199,9 @@ public class AudioController : MonoBehaviour {
 
     #region Volume / Pitch Methods
     public void SFXSetPitch(float pitch) {
-        foreach (Sound s in sfxList) {
+        foreach (KeyValuePair<string, Sound> s in sfxList) {
             try {
-                s.source.pitch = pitch;
+                s.Value.source.pitch = pitch;
             } catch (System.Exception) {
 
             }         
@@ -209,16 +209,16 @@ public class AudioController : MonoBehaviour {
     }
 
     public void SFXSetVolume(float volume) {
-        foreach (Sound s in sfxList) {
+        foreach (KeyValuePair<string, Sound> s in sfxList) {
             sfxSoundLevel = volume;
-            s.source.volume = sfxSoundLevel;
+            s.Value.source.volume = sfxSoundLevel;
         }
     }
 
     public void MusicSetVolume(float volume) {
-        foreach (Sound s in musicList) {
+        foreach (KeyValuePair<string, Sound> s in musicList) {
             musicSoundLevel = volume;
-            s.source.volume = musicSoundLevel;
+            s.Value.source.volume = musicSoundLevel;
         }
     }
 
@@ -246,17 +246,17 @@ public class AudioController : MonoBehaviour {
 
     public void PauseAllSFX(bool pause) {
         if (pause) {
-            foreach (Sound s in sfxList) {
+            foreach (KeyValuePair<string, Sound> s in sfxList) {
                 try {
-                    s.source.Pause();
+                    s.Value.source.Pause();
                 } catch (System.Exception) {
 
                 }
             }
         } else if (!pause) {
-            foreach (Sound s in sfxList) {
+            foreach (KeyValuePair<string, Sound> s in sfxList) {
                 try {
-                    s.source.UnPause();
+                    s.Value.source.UnPause();
                 } catch (System.Exception) {
 
                 }
@@ -266,18 +266,18 @@ public class AudioController : MonoBehaviour {
 
     public void PauseAllSound(bool pause) {
         if (pause) {
-            foreach (Sound s in allSounds) {
+            foreach (KeyValuePair<string, Sound> s in allSounds) {
                 try {
-                    s.source.Pause();
+                    s.Value.source.Pause();
                 } catch (System.Exception) {
 
                 }                
             }                    
         } else if (!pause) {
-            foreach (Sound s in allSounds) {
+            foreach (KeyValuePair<string, Sound> s in allSounds) {
 
                 try {
-                    s.source.UnPause();
+                    s.Value.source.UnPause();
                 } catch (System.Exception) {
 
                 }
@@ -369,28 +369,22 @@ public class AudioController : MonoBehaviour {
     #region FindSound Methods
 
     private Sound FindSound(string name) {
-        foreach (Sound s in allSounds) {
-            if (s.name == name) {
-                return s;
-            }
+        if (allSounds.ContainsKey(name)) {
+            return allSounds[name];
         }
         return null;
     }
 
     private Sound FindMusic(string name) {
-        foreach (Sound s in musicList) {
-            if (s.name == name) {
-                return s;
-            }
+        if (musicList.ContainsKey(name)) {
+            return musicList[name];
         }
         return null;
     }
 
     private Sound FindSFX(string name) {
-        foreach (Sound s in sfxList) {
-            if (s.name == name) {
-                return s;
-            }
+        if (sfxList.ContainsKey(name)) {
+            return sfxList[name];
         }
         return null;
     }
@@ -405,7 +399,7 @@ public class AudioController : MonoBehaviour {
             if (!soundTimerDictonary.ContainsKey(s.name)) {
                 soundTimerDictonary[s.name] = 0f;
             }
-            if (!GameController.Instance.gameIsSlowmotion) {
+            if (!GameController.Instance.GameIsSlowmotion) {
                 s.source.pitch = Random.Range(minPitch, maxPitch);
                 s.source.volume = Random.Range(sfxSoundLevel * 0.6f, sfxSoundLevel);
             }

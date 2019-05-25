@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;//TA BORT SEN
 
 public class PlayerInput : MonoBehaviour {
     //Author: Patrik Ahlgren
-    public Slowmotion slowmotion;
+    [SerializeField] private Slowmotion slowmotion;
 
-    public GameObject startTeleport;
-    public GameObject secondTeleport;
-    public GameObject thirdTeleport;
+    [SerializeField] private GameObject startTeleport;//TA BORT SEN
+    [SerializeField] private GameObject secondTeleport;//TA BORT SEN
+    [SerializeField] private GameObject thirdTeleport;//TA BORT SEN
 
     private PlayerShoot playerShoot;
     private PlayerMovementController playerMovementController;
@@ -23,12 +23,12 @@ public class PlayerInput : MonoBehaviour {
         playerShoot = GetComponentInChildren<PlayerShoot>();
         playerMovementController = GetComponent<PlayerMovementController>();
         slowmotion = GameController.Instance.GetComponent<Slowmotion>();
-        GameController.Instance.player = gameObject;       
+        GameController.Instance.Player = gameObject;       
     }
 
 
     private void Update() {
-        selectedWeapon = GameController.Instance.selectedWeapon;
+        selectedWeapon = GameController.Instance.SelectedWeapon;
         ReloadWeaponInput();
         ReloadSequence();
         ShootWeaponInput();
@@ -91,7 +91,7 @@ public class PlayerInput : MonoBehaviour {
 
     private void ReloadSequence() {
         if (isReloading) {
-            if (GameController.Instance.gameIsPaused) {
+            if (GameController.Instance.GameIsPaused) {
 
             } else {
                 GameController.Instance.ReloadSlider.value += 1 * Time.unscaledDeltaTime;
@@ -151,14 +151,14 @@ public class PlayerInput : MonoBehaviour {
     #region Shoot Method
     private void ShootWeaponInput() {
         if (!isReloading) {
-            if (Input.GetButton("Fire1") && GameController.Instance.selectedWeapon.GetAmmoInClip() == 0) {
+            if (Input.GetButton("Fire1") && GameController.Instance.SelectedWeapon.GetAmmoInClip() == 0) {
                 ReloadWeapon();
                 return;
             }
-            if (!GameController.Instance.gameIsSlowmotion) {
+            if (!GameController.Instance.GameIsSlowmotion) {
                 skipShootDelayToSlowmotion = true;
             }
-            if (GameController.Instance.gameIsSlowmotion && Time.time <= nextTimeToFire && skipShootDelayToSlowmotion) {
+            if (GameController.Instance.GameIsSlowmotion && Time.time <= nextTimeToFire && skipShootDelayToSlowmotion) {
                 nextTimeToFire = Time.time + 1f / selectedWeapon.GetFireRate();
                 skipShootDelayToSlowmotion = false;
             }
@@ -184,23 +184,23 @@ public class PlayerInput : MonoBehaviour {
         }
         if (Input.GetButtonDown("Weapon1") && firstWeapon != null) {
             AbortReload();
-            if (selectedWeapon != firstWeapon) { GameController.Instance.selectedWeapon = firstWeapon; }
+            if (selectedWeapon != firstWeapon) { GameController.Instance.SelectedWeapon = firstWeapon; }
         }
         if (Input.GetButtonDown("Weapon2") && secondWeapon != null) {
             AbortReload();
-            if (selectedWeapon != secondWeapon) { GameController.Instance.selectedWeapon = secondWeapon; }
+            if (selectedWeapon != secondWeapon) { GameController.Instance.SelectedWeapon = secondWeapon; }
         }
         if (Input.GetButtonDown("Weapon3") && thirdWeapon != null) {
             AbortReload();
-            if (selectedWeapon != thirdWeapon) { GameController.Instance.selectedWeapon = thirdWeapon; }
+            if (selectedWeapon != thirdWeapon) { GameController.Instance.SelectedWeapon = thirdWeapon; }
         }
 
         GameController.Instance.UpdateSelectedWeapon();
     }
 
     private BaseWeapon GetWeaponFromGameController(ref BaseWeapon weapon, int i) {
-        if (GameController.Instance.playerWeapons[i] != null) {
-            return weapon = GameController.Instance.playerWeapons[i];
+        if (GameController.Instance.PlayerWeapons[i] != null) {
+            return weapon = GameController.Instance.PlayerWeapons[i];
         } else {
             return null;
         }
@@ -218,9 +218,9 @@ public class PlayerInput : MonoBehaviour {
     #region Interaction Method
     private void InteractInput() {
         if (Input.GetButtonDown("Interact")) {
-            GameController.Instance.playerIsInteracting = true;
+            GameController.Instance.PlayerIsInteracting = true;
             Debug.Log("Player tried to interact");
-        } else { GameController.Instance.playerIsInteracting = false; }
+        } else { GameController.Instance.PlayerIsInteracting = false; }
     }
     #endregion
 

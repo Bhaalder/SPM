@@ -5,7 +5,7 @@ using UnityEngine;
 public class RocketProjectile : MonoBehaviour{
     //Main author: Patrik Ahlgren
     //Secondary author: Fredrik
-    public LayerMask layerMask;
+    [SerializeField] private LayerMask layerMask;
 
     private float projectileSpeed;
     private float projectileDamage;
@@ -30,7 +30,7 @@ public class RocketProjectile : MonoBehaviour{
         } else if (distanceToTarget == 10000) {
             Destroy(gameObject, 10f);
         }
-        if (GameController.Instance.gameIsSlowmotion) {
+        if (GameController.Instance.GameIsSlowmotion) {
             transform.position += transform.forward * (projectileSpeed/2f) * Time.unscaledDeltaTime;
             IncreaseSpeed();
         } else {

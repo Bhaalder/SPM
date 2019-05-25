@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49676c7f452b02f40851a42692271f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 12
+  movementSpeed: 14
   speedMultiplier: 0
   jumpForce: 10
   extraJumps: 1
@@ -284,7 +284,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 3895
-  dir: {fileID: 3047494121147921276}
+  interaction: {fileID: 0}
 --- !u!1001 &1735180317396804386
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,18 +6,18 @@ public class PlayerMovementController : MonoBehaviour{
     //Author: Patrik Ahlgren
 
     [Header("Movementspeeds")]
-    public float movementSpeed = 12;
-    public float speedMultiplier; //denna används för att öka movmentspeed med pickups, per 0,1 ökas 10%
+    [SerializeField] private float movementSpeed = 14;
+    [SerializeField] private float speedMultiplier; //denna används för att öka movmentspeed med pickups, per 0,1 ökas 10%
 
     [Header("Jumping")]
-    public float jumpForce = 10;
-    public float extraJumps;
-    public float fakeExtraGravity = 5;
+    [SerializeField] private float jumpForce = 10;
+    [SerializeField] private float extraJumps = 1;
+    [SerializeField] private float fakeExtraGravity = 15;
 
     [Header("Dash")]
-    public float dashForce = 10;
-    public float nextTimeToDash = 2;
-    public float dashDuration = 0.5f;
+    [SerializeField] private float dashForce = 10;
+    [SerializeField] private float nextTimeToDash = 2;
+    [SerializeField] private float dashDuration = 0.5f;
 
     private float timeToDash;
     private bool isDashing;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponPickup : MonoBehaviour {
     //Author: Patrik Ahlgren
 
-    public GameObject weaponPickupPrefab;
+    [SerializeField] private GameObject weaponPickupPrefab;
     private MeshFilter meshFilter;
     private Mesh mesh;
 
@@ -30,15 +30,15 @@ public class WeaponPickup : MonoBehaviour {
                 weaponPickup = WeaponController.Instance.GetRocketLauncher();                
             }
             if (weaponPickup != null) {
-                foreach(BaseWeapon weapon in GameController.Instance.playerWeapons) {
+                foreach(BaseWeapon weapon in GameController.Instance.PlayerWeapons) {
                     if(weaponPickup.GetName() == weapon.GetName()) {
                         Destroy(gameObject);
                         return;
                     }
                 }
-                GameController.Instance.playerWeapons.Add(weaponPickup);
-                GameController.Instance.player.GetComponent<PlayerInput>().AbortReload();
-                GameController.Instance.selectedWeapon = weaponPickup;
+                GameController.Instance.PlayerWeapons.Add(weaponPickup);
+                GameController.Instance.Player.GetComponent<PlayerInput>().AbortReload();
+                GameController.Instance.SelectedWeapon = weaponPickup;
                 GameController.Instance.UpdateSelectedWeapon();
             }
             Destroy(gameObject);
