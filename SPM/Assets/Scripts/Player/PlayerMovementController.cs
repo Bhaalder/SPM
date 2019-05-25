@@ -13,9 +13,11 @@ public class PlayerMovementController : MonoBehaviour{
     [SerializeField] private float jumpForce = 10;
     [SerializeField] private float extraJumps = 1;
     [SerializeField] private float fakeExtraGravity = 15;
+    [Tooltip("The chance to play a jumpgrunt sound 1-100")]
+    [SerializeField] private float jumpSoundPercentChance = 25;
 
     [Header("Dash")]
-    [SerializeField] private float dashForce = 10;
+    [SerializeField] private float dashForce = 20;
     [SerializeField] private float nextTimeToDash = 2;
     [SerializeField] private float dashDuration = 0.5f;
 
@@ -58,8 +60,8 @@ public class PlayerMovementController : MonoBehaviour{
         Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         bool isIdle = movementInput.magnitude == 0;
         if (IsGrounded() && !isIdle) {
-            AudioController.Instance.PlaySFX_RandomPitchAndVolume_Finish("Walking", 0.9f, 1f);
-            Debug.Log("Walking!");
+            AudioController.Instance.PlaySFX_RandomPitchAndVolume_Finish("Walking", 0.9f, 1f, 0);
+            //Debug.Log("Walking!");
         } else {
         }
         movementInput *= (movementSpeed * (1 + speedMultiplier)) * Time.deltaTime;
@@ -71,8 +73,9 @@ public class PlayerMovementController : MonoBehaviour{
 
 
     private void Jump() {
-        if (Input.GetButtonDown("Jump")) {          
+        if (Input.GetButtonDown("Jump")) {           
             if (jumpCount>0 || IsGrounded()) {
+                JumpSound();
                 jumpCount--;
                 if(rigidBody.velocity.y > 0) {
                     rigidBody.velocity = new Vector3(0, rigidBody.velocity.y, 0);
@@ -83,6 +86,27 @@ public class PlayerMovementController : MonoBehaviour{
             }
             IsGrounded();
         }
+    }
+
+    private void JumpSound() {
+        int i = Random.Range(1, 5);
+        int soundChance = Random.Range(1, 100);
+        if (soundChance <= jumpSoundPercentChance) {
+            switch (i) {
+                case 1:
+                    AudioController.Instance.PlaySFX_RandomPitch("Jump1", 0.95f, 1f);
+                    break;
+                case 2:
+                    AudioController.Instance.PlaySFX_RandomPitch("Jump2", 0.95f, 1f);
+                    break;
+                case 3:
+                    AudioController.Instance.PlaySFX_RandomPitch("Jump3", 0.95f, 1f);
+                    break;
+                default:
+                    Debug.LogWarning("JumpSound did not execute correctly, i out of range");
+                    break;
+            }
+        }     
     }
 
     public void Dash() {

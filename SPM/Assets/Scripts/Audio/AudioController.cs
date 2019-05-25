@@ -28,9 +28,6 @@ public class AudioController : MonoBehaviour {
 
     private Dictionary<string, float> soundTimerDictonary = new Dictionary<string, float>();
 
-    private float musicSoundLevel = 1;
-    private float sfxSoundLevel = 1;
-
     private bool continueFadeIn;
     private bool continueFadeOut;
 
@@ -368,17 +365,32 @@ public class AudioController : MonoBehaviour {
 
     #region WaitForFinish Methods
 
-    public void PlaySFX_RandomPitchAndVolume_Finish(string name, float minPitch, float maxPitch) {
+    public void Play_ThenPlay(string name, string otherName) {           
+        try {
+            Sound firstSound = FindSound(name);
+            Sound secondSound = FindSound(otherName);
+            firstSound.source.Play();
+            StartCoroutine(WaitToPlay(secondSound, firstSound.source.clip.length));
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+
+    private IEnumerator WaitToPlay(Sound sound, float waitTime) {
+        yield return new WaitForSecondsRealtime(waitTime);
+        sound.source.Play();
+        yield return null;
+    }
+
+    public void PlaySFX_RandomPitchAndVolume_Finish(string name, float minPitch, float maxPitch, float extraTimeIntervall) {
         sound = FindSFX(name);
         try {
             if (!soundTimerDictonary.ContainsKey(sound.name)) {
                 soundTimerDictonary[sound.name] = 0f;
             }
-            if (!GameController.Instance.GameIsSlowmotion) {
-                sound.source.pitch = Random.Range(minPitch, maxPitch);
-                sound.source.volume = Random.Range(sfxSoundLevel * 0.6f, sfxSoundLevel);
-            }
-            if (CanPlaySound(sound)) {
+            sound.source.pitch = Random.Range(minPitch, maxPitch);
+            sound.source.volume = Random.Range(0.6f, 1f);
+            if (CanPlaySound(sound, extraTimeIntervall)) {
                 sound.source.Play();
             }
         } catch (System.NullReferenceException) {
@@ -386,11 +398,11 @@ public class AudioController : MonoBehaviour {
         }
     }
 
-    private bool CanPlaySound(Sound sound) {
+    private bool CanPlaySound(Sound sound, float extraTime) {
         if (soundTimerDictonary.ContainsKey(sound.name)) {
             float lastTimePlayed = soundTimerDictonary[sound.name];
-            float playerMoveTimerMax = sound.source.clip.length;
-            if (lastTimePlayed + playerMoveTimerMax < Time.time) {
+            float soundTime = sound.source.clip.length;
+            if (lastTimePlayed + soundTime + extraTime < Time.time) {
                 soundTimerDictonary[sound.name] = Time.time;
                 return true;
             } else {
