@@ -14,6 +14,7 @@ public class ChargeIdleState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
+        //Animation Idle
     }
 
     public override void HandleUpdate()

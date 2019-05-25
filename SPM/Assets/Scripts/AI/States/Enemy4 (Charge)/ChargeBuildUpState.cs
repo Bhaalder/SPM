@@ -15,7 +15,7 @@ public class ChargeBuildUpState : EnemyBaseState
     {
         base.Enter();
         currentCool = buildUpTime;
-
+        //Animation Idle
     }
 
     public override void HandleUpdate()

@@ -19,6 +19,7 @@ public class ChargeChaseState : EnemyBaseState
     {
         base.Enter();
         isChasing = true;
+        //Animation Chase
     }
     public override void HandleUpdate()
     {

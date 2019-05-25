@@ -16,6 +16,7 @@ public class ChargeStunnedState : EnemyBaseState
     {
         base.Enter();
         currentCool = stunnedForSeconds;
+        //Animation Idle
     }
 
     public override void HandleUpdate()

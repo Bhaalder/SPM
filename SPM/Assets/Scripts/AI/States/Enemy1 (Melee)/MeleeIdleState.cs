@@ -14,6 +14,7 @@ public class MeleeIdleState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
+        //Animation
     }
 
     public override void HandleUpdate()

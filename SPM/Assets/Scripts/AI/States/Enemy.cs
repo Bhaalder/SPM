@@ -10,11 +10,13 @@ public class Enemy : StateMachine
     // Attributes
     [HideInInspector] public MeshRenderer Renderer;
     [HideInInspector] public NavMeshAgent agent;
+    public Animator animator;
     public LayerMask visionMask;
     public PlayerMovementController player;
 
     [SerializeField] protected float health;
     [SerializeField] protected float damageResistance;
+    
     protected bool dealtDamage;
     protected bool isDamaged;
 

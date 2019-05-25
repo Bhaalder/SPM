@@ -47,6 +47,7 @@ public class MeleeAttackState : EnemyBaseState
 
         if (CanSeePlayer() == true)
         {
+            //owner.animator.Play("Attack");
             GameController.Instance.TakeDamage(damage);
         }
 

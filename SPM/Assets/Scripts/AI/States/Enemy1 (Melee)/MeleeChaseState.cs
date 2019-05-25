@@ -15,6 +15,12 @@ public class MeleeChaseState : EnemyBaseState
     private float distanceToPlayer;
 
     // Methods
+
+    public override void Enter() {
+        base.Enter();
+        owner.animator.Play("Enemy4Run");
+    }
+
     public override void HandleUpdate()
     {
         owner.agent.SetDestination(owner.player.transform.position);

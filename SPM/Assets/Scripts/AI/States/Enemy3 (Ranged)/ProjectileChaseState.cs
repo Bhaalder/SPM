@@ -14,6 +14,10 @@ public class ProjectileChaseState : EnemyBaseState
     [SerializeField] private float stopChaseDistance;
 
     // Methods
+    public override void Enter() {
+        base.Enter();
+        //Animation
+    }
     public override void HandleUpdate()
     {
         owner.agent.SetDestination(owner.player.transform.position);
