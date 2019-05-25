@@ -293,17 +293,9 @@ public class AudioController : MonoBehaviour {
     #region FadeIn/Out Methods
     public void FadeIn(string name, float fadeDuration, float soundVolumePercentage) {
         try {
-            sound = FindMusic(name);
+            sound = FindSound(name);
             if (sound != null) {
-                soundVolumePercentage = FadeInStartAndSoundLevelCheck(name, musicSoundLevel, soundVolumePercentage);
-                StartCoroutine(FadeInAudio(fadeDuration, (soundVolumePercentage), sound));
-                return;
-            }
-            sound = FindSFX(name);
-            if (sound != null) {
-                soundVolumePercentage = FadeInStartAndSoundLevelCheck(name, sfxSoundLevel, soundVolumePercentage);
-                StartCoroutine(FadeInAudio(fadeDuration, (soundVolumePercentage), sound));
-                return;
+                StartCoroutine(FadeInAudio(fadeDuration, (soundVolumePercentage/100), sound));
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
@@ -313,38 +305,13 @@ public class AudioController : MonoBehaviour {
 
     public void FadeOut(string name, float fadeDuration, float soundVolumePercentage) {
         try {
-            sound = FindMusic(name);
+            sound = FindSound(name);
             if(sound != null) {
-                soundVolumePercentage = FadeOutStartAndSoundLevelCheck(name, musicSoundLevel, soundVolumePercentage);
-                StartCoroutine(FadeOutAudio(fadeDuration, (soundVolumePercentage), sound));
-                return;
-            }
-            sound = FindSFX(name);
-            if(sound != null) {
-                soundVolumePercentage = FadeOutStartAndSoundLevelCheck(name, musicSoundLevel, soundVolumePercentage);
-                StartCoroutine(FadeOutAudio(fadeDuration, (soundVolumePercentage), sound));
-                return;
+                StartCoroutine(FadeOutAudio(fadeDuration, (soundVolumePercentage/100), sound));
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
-    }
-
-    private float FadeInStartAndSoundLevelCheck(string name, float soundLevel, float soundVolumePercentage) {
-        sound.source.volume = 0;
-        sound.source.Play();
-        if (soundLevel < (soundVolumePercentage / 100)) {
-            return soundVolumePercentage = (soundLevel * 100);
-        }
-        return soundVolumePercentage / 100;
-    }
-
-    private float FadeOutStartAndSoundLevelCheck(string name, float soundLevel, float soundVolumePercentage) {
-        if (soundLevel < (soundVolumePercentage / 100)) {
-            soundVolumePercentage = (soundLevel * 100);
-            Debug.LogWarning("Could not fade out audio '" + name + "' because the sound was already lower than intended fade");
-        }
-        return soundVolumePercentage / 100;
     }
 
     private IEnumerator FadeInAudio(float fadeDuration, float soundVolume, Sound sound) {
