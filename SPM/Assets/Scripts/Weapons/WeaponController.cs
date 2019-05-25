@@ -14,19 +14,19 @@ public class WeaponController : MonoBehaviour{
     [SerializeField] private float RocketLDmg;
 
 
-    private static WeaponController instance;
+    private static WeaponController _instance;
 
     public static WeaponController Instance {
         get {
-            if (instance == null) {
-                instance = FindObjectOfType<WeaponController>();
+            if (_instance == null) {
+                _instance = FindObjectOfType<WeaponController>();
 #if UNITY_EDITOR
                 if (FindObjectsOfType<WeaponController>().Length > 1) {
                     Debug.LogError("Found more than one weaponcontroller");
                 }
 #endif
             }
-            return instance;
+            return _instance;
         }
     }
 

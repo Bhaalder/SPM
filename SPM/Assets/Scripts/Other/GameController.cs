@@ -16,8 +16,8 @@ public class GameController : MonoBehaviour {
     public BaseWeapon SelectedWeapon;
 
     public Slider HealthSlider, ArmorSlider, SlowmotionSlider, ReloadSlider;
-    public Text WeaponNameText, WeaponAmmoText;
-    public GameObject WeaponImage;
+    [SerializeField] private Text weaponNameText, weaponAmmoText;
+    [SerializeField] private GameObject weaponImage;
 
     public int PlayerHP, PlayerArmor;
 
@@ -27,26 +27,27 @@ public class GameController : MonoBehaviour {
     [SerializeField] private float invulnerableStateTime;
     private float invulnerableState;
 
-    public Text interactionText;
+    [SerializeField] private Text interactionText;
     [SerializeField] private Image crosshair, hitmark;
-    private static GameController instance;
+
+    private static GameController _instance;
 
     public static GameController Instance {
         get {
-            if (instance == null) {
-                instance = FindObjectOfType<GameController>();
+            if (_instance == null) {
+                _instance = FindObjectOfType<GameController>();
 #if UNITY_EDITOR
                 if (FindObjectsOfType<GameController>().Length > 1) {
                     Debug.LogError("Found more than one gamecontroller");
                 }
 #endif
             }
-            return instance;
+            return _instance;
         }
     }
 
     private void Start() {
-        if (instance != null && instance != this) {
+        if (_instance != null && _instance != this) {
             Destroy(gameObject);
             Debug.LogWarning("Destroyed other Singleton with name: " + gameObject.name);
         }
@@ -59,29 +60,29 @@ public class GameController : MonoBehaviour {
         SlowmotionSlider.value = SlowmotionSlider.maxValue;
         ReloadSlider.value = 0;
 
-        WeaponNameText = GameObject.Find("WeaponText").GetComponent<Text>();
-        WeaponAmmoText = GameObject.Find("AmmunitionText").GetComponent<Text>();
-        WeaponImage = GameObject.Find("Weapon Image");
+        weaponNameText = GameObject.Find("WeaponText").GetComponent<Text>();
+        weaponAmmoText = GameObject.Find("AmmunitionText").GetComponent<Text>();
+        weaponImage = GameObject.Find("Weapon Image");
 
         BaseWeapon rifle = WeaponController.Instance.GetRifle();
         PlayerWeapons.Add(rifle);
-        //BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
-        //PlayerWeapons.Add(shotgun);
-        //BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
-        //PlayerWeapons.Add(rocketLaucher);
+        BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
+        PlayerWeapons.Add(shotgun);
+        BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
+        PlayerWeapons.Add(rocketLaucher);
 
         SelectedWeapon = PlayerWeapons[0];
         UpdateSelectedWeapon();
     }
 
     public void UpdateSelectedWeapon() {
-        WeaponNameText.text = SelectedWeapon.GetName();
-        foreach (Transform child in WeaponImage.transform) {
+        weaponNameText.text = SelectedWeapon.GetName();
+        foreach (Transform child in weaponImage.transform) {
             child.GetComponent<Image>().enabled = false;
         }
         for (int weapon = 0; weapon < PlayerWeapons.Count; weapon++) {
             if (PlayerWeapons[weapon] == SelectedWeapon) {
-                WeaponImage.transform.GetChild(weapon).GetComponent<Image>().enabled = true;
+                weaponImage.transform.GetChild(weapon).GetComponent<Image>().enabled = true;
                 break;
             }
         }
@@ -90,7 +91,7 @@ public class GameController : MonoBehaviour {
     }
 
     public void UpdateSelectedWeapon_AmmoText() {
-        WeaponAmmoText.text = SelectedWeapon.GetAmmoInClip() + "/" + SelectedWeapon.GetTotalAmmoLeft();
+        weaponAmmoText.text = SelectedWeapon.GetAmmoInClip() + "/" + SelectedWeapon.GetTotalAmmoLeft();
     }
 
     public void SceneCompletedSequence() {

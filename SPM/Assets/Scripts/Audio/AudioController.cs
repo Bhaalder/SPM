@@ -33,26 +33,28 @@ public class AudioController : MonoBehaviour {
     private bool continueFadeIn;
     private bool continueFadeOut;
 
-    private static AudioController instance;
+    private Sound sound;
+
+    private static AudioController _instance;
 
     public static AudioController Instance {
         get {
-            if (instance == null) {
-                instance = FindObjectOfType<AudioController>();
+            if (_instance == null) {
+                _instance = FindObjectOfType<AudioController>();
 #if UNITY_EDITOR
                 if (FindObjectsOfType<AudioController>().Length > 1) {
                     Debug.LogError("There is more than one AudioController in the scene");
                 }
 #endif
             }
-            return instance;
+            return _instance;
         }
     }
 
 
 
     private void Awake() {
-        if (instance != null && instance != this) {
+        if (_instance != null && _instance != this) {
             Destroy(gameObject);
             Debug.LogWarning("Destroyed other Singleton with name: " + gameObject.name);
         }
@@ -109,19 +111,19 @@ public class AudioController : MonoBehaviour {
 
             if (allSounds.ContainsKey(name)) {
                 GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
-                Sound s = allSounds[name];
-                s.source = soundAtLocationGO.GetComponent<AudioSource>();
-                s.source.clip = s.clip;
-                s.source.volume = s.volume;
-                s.source.pitch = s.pitch;
-                s.source.spatialBlend = s.spatialBlend_2D_3D;
-                s.source.rolloffMode = (AudioRolloffMode)s.rolloffMode;
-                s.source.minDistance = s.minDistance;
-                s.source.maxDistance = s.maxDistance;
-                s.source.loop = s.loop;
-                s.source.Play();
-                if (!s.source.loop) {
-                    Destroy(soundAtLocationGO, s.clip.length);
+                sound = allSounds[name];
+                sound.source = soundAtLocationGO.GetComponent<AudioSource>();
+                sound.source.clip = sound.clip;
+                sound.source.volume = sound.volume;
+                sound.source.pitch = sound.pitch;
+                sound.source.spatialBlend = sound.spatialBlend_2D_3D;
+                sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
+                sound.source.minDistance = sound.minDistance;
+                sound.source.maxDistance = sound.maxDistance;
+                sound.source.loop = sound.loop;
+                sound.source.Play();
+                if (!sound.source.loop) {
+                    Destroy(soundAtLocationGO, sound.clip.length);
                 }
                 return soundAtLocationGO;
             }
@@ -145,24 +147,24 @@ public class AudioController : MonoBehaviour {
 
     #region PlayRandomPitch
     public void Play_RandomPitch(string name, float minPitch, float maxPitch) {
-        Sound s = FindSound(name);
+        sound = FindSound(name);
         try {
             if (!GameController.Instance.GameIsSlowmotion) {
-                s.source.pitch = Random.Range(minPitch, maxPitch);
+                sound.source.pitch = Random.Range(minPitch, maxPitch);
             }
-            s.source.Play();
+            sound.source.Play();
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
     }
 
     public void PlaySFX_RandomPitch(string name, float minPitch, float maxPitch) {
-        Sound s = FindSFX(name);
+        sound = FindSFX(name);
         try {
             if (!GameController.Instance.GameIsSlowmotion) {
-                s.source.pitch = Random.Range(minPitch, maxPitch);
+                sound.source.pitch = Random.Range(minPitch, maxPitch);
             }
-            s.source.Play();
+            sound.source.Play();
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }       
@@ -172,21 +174,21 @@ public class AudioController : MonoBehaviour {
         try {
             if (allSounds.ContainsKey(name)) {
                 GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
-                Sound s = allSounds[name];
-                s.source = soundAtLocationGO.GetComponent<AudioSource>();
-                s.source.clip = s.clip;
-                s.source.volume = s.volume;
+                sound = allSounds[name];
+                sound.source = soundAtLocationGO.GetComponent<AudioSource>();
+                sound.source.clip = sound.clip;
+                sound.source.volume = sound.volume;
                 if (!GameController.Instance.GameIsSlowmotion) {
-                    s.source.pitch = Random.Range(minPitch, maxPitch);
+                    sound.source.pitch = Random.Range(minPitch, maxPitch);
                 }
-                s.source.spatialBlend = s.spatialBlend_2D_3D;
-                s.source.rolloffMode = (AudioRolloffMode)s.rolloffMode;
-                s.source.minDistance = s.minDistance;
-                s.source.maxDistance = s.maxDistance;
-                s.source.loop = s.loop;
-                s.source.Play();
-                if (!s.source.loop) {
-                    Destroy(soundAtLocationGO, s.clip.length);
+                sound.source.spatialBlend = sound.spatialBlend_2D_3D;
+                sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
+                sound.source.minDistance = sound.minDistance;
+                sound.source.maxDistance = sound.maxDistance;
+                sound.source.loop = sound.loop;
+                sound.source.Play();
+                if (!sound.source.loop) {
+                    Destroy(soundAtLocationGO, sound.clip.length);
                 }
                 return soundAtLocationGO;
             }
@@ -290,7 +292,7 @@ public class AudioController : MonoBehaviour {
     #region FadeIn/Out Methods
     public void FadeIn(string name, float fadeDuration, float soundVolumePercentage) {
         try {
-            Sound sound = FindMusic(name);
+            sound = FindMusic(name);
             if (sound != null) {
                 sound.source.volume = 0;
                 sound.source.Play();
@@ -316,9 +318,17 @@ public class AudioController : MonoBehaviour {
 
     }
 
+    private float FadeInAudioLevelCheck(float soundLevel, float soundVolumePercentage) {
+        return 1;//Ska fixa en sen
+    }
+
+    private float FadeOutAudioLevelCheck(float soundLevel, float soundVolumePercentage) {
+        return 1;//Ska fixa en sen
+    }
+
     public void FadeOut(string name, float fadeDuration, float soundVolumePercentage) {
         try {
-            Sound sound = FindMusic(name);
+            sound = FindMusic(name);
             if(sound != null) {
                 if (musicSoundLevel < (soundVolumePercentage / 100)) {
                     soundVolumePercentage = (musicSoundLevel * 100);
@@ -394,17 +404,17 @@ public class AudioController : MonoBehaviour {
     #region WaitForFinish Methods
 
     public void PlaySFX_RandomPitchAndVolume_Finish(string name, float minPitch, float maxPitch) {
-        Sound s = FindSFX(name);
+        sound = FindSFX(name);
         try {
-            if (!soundTimerDictonary.ContainsKey(s.name)) {
-                soundTimerDictonary[s.name] = 0f;
+            if (!soundTimerDictonary.ContainsKey(sound.name)) {
+                soundTimerDictonary[sound.name] = 0f;
             }
             if (!GameController.Instance.GameIsSlowmotion) {
-                s.source.pitch = Random.Range(minPitch, maxPitch);
-                s.source.volume = Random.Range(sfxSoundLevel * 0.6f, sfxSoundLevel);
+                sound.source.pitch = Random.Range(minPitch, maxPitch);
+                sound.source.volume = Random.Range(sfxSoundLevel * 0.6f, sfxSoundLevel);
             }
-            if (CanPlaySound(s)) {
-                s.source.Play();
+            if (CanPlaySound(sound)) {
+                sound.source.Play();
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
