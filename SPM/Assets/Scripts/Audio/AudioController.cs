@@ -23,9 +23,10 @@ public class AudioController : MonoBehaviour {
     private List<Sound> musicList = new List<Sound>();
     private List<Sound> sfxList = new List<Sound>();
     private List<Sound> allSounds = new List<Sound>();
+    private Dictionary<string, float> soundTimerDictonary;
 
-    private float musicSoundLevel;
-    private float sfxSoundLevel;
+    private float musicSoundLevel = 1;
+    private float sfxSoundLevel = 1;
 
     private bool continueFadeIn;
     private bool continueFadeOut;
@@ -73,6 +74,8 @@ public class AudioController : MonoBehaviour {
             s.source.loop = s.loop;
             s.source.outputAudioMixerGroup = audioMixerGroup;
         }
+        soundTimerDictonary = new Dictionary<string, float>();
+        
     }
 
     #region Play/Stop Methods
@@ -396,7 +399,38 @@ public class AudioController : MonoBehaviour {
 
     #region WaitForFinish Methods
 
+    public void PlaySFX_RandomPitchAndVolume_Finish(string name, float minPitch, float maxPitch) {
+        Sound s = FindSFX(name);
+        try {
+            if (!soundTimerDictonary.ContainsKey(s.name)) {
+                soundTimerDictonary[s.name] = 0f;
+            }
+            if (!GameController.Instance.gameIsSlowmotion) {
+                s.source.pitch = Random.Range(minPitch, maxPitch);
+                s.source.volume = Random.Range(sfxSoundLevel * 0.6f, sfxSoundLevel);
+            }
+            if (CanPlaySound(s)) {
+                s.source.Play();
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
 
+    private bool CanPlaySound(Sound sound) {
+        if (soundTimerDictonary.ContainsKey(sound.name)) {
+            float lastTimePlayed = soundTimerDictonary[sound.name];
+            float playerMoveTimerMax = sound.source.clip.length;
+            if (lastTimePlayed + playerMoveTimerMax < Time.time) {
+                soundTimerDictonary[sound.name] = Time.time;
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return true;
+
+    }
 
     #endregion
 

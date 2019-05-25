@@ -34,6 +34,7 @@ public class PlayerMovementController : MonoBehaviour{
         capsuleCollider = GetComponent<CapsuleCollider>();
         groundCheck = GetComponent<BoxCollider>();
         distanceToGround = groundCheck.bounds.extents.y;
+        
     }
 
     private void Update() {
@@ -55,11 +56,11 @@ public class PlayerMovementController : MonoBehaviour{
 
     private void Move() {
         Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        if (IsGrounded() && movementInput.magnitude > 0) {
-            //AudioController.Instance.PlaySFX_RandomPitch("Dash", 0.90f, 1f);
+        bool isIdle = movementInput.magnitude == 0;
+        if (IsGrounded() && !isIdle) {
+            AudioController.Instance.PlaySFX_RandomPitchAndVolume_Finish("Walking", 0.9f, 1f);
             Debug.Log("Walking!");
         } else {
-            
         }
         movementInput *= (movementSpeed * (1 + speedMultiplier)) * Time.deltaTime;
 
