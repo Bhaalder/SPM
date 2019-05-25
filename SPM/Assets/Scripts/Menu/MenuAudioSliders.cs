@@ -16,16 +16,16 @@ public class MenuAudioSliders : MonoBehaviour{
         musicVolumeSlider.onValueChanged.AddListener(delegate { MusicValueChangeCheck(); });
         sfxVolumeSlider.onValueChanged.AddListener(delegate { SFXValueChangeCheck(); });
     }
-
+    //alla sliders ska vara mellan -80 till 0 i valuerange
     public void MasterValueChangeCheck() {
-        AudioController.Instance.AllSoundsSetVolume(masterVolumeSlider.value);//denna slider ska vara mellan -80 till 0
+        AudioController.Instance.AllSoundsSetVolume(masterVolumeSlider.value);
     }
 
     public void MusicValueChangeCheck() {
-        AudioController.Instance.MusicSetVolume(musicVolumeSlider.value);//denna slider ska vara mellan 0 till 1;
+        AudioController.Instance.MusicSetVolume(musicVolumeSlider.value);
     }
 
     public void SFXValueChangeCheck() {
-        AudioController.Instance.SFXSetVolume(sfxVolumeSlider.value);//denna slider ska vara mellan 0 till 1;
+        AudioController.Instance.SFXSetVolume(sfxVolumeSlider.value);
     }
 }

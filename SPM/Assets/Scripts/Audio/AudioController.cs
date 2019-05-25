@@ -18,12 +18,13 @@ public class AudioController : MonoBehaviour {
     [SerializeField] private GameObject soundObject;
     [Header("AudioMixer")]
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private AudioMixerGroup audioMixerGroup;
-    
+    [SerializeField] private AudioMixerGroup masterMixerGroup;
+    [SerializeField] private AudioMixerGroup sfxMixerGroup;
+    [SerializeField] private AudioMixerGroup musicMixerGroup;
 
-    private Dictionary<string, Sound> musicList = new Dictionary<string, Sound>();
-    private Dictionary<string, Sound> sfxList = new Dictionary<string, Sound>();
-    private Dictionary<string, Sound> allSounds = new Dictionary<string, Sound>();
+    private Dictionary<string, Sound> musicDictionary = new Dictionary<string, Sound>();
+    private Dictionary<string, Sound> sfxDictionary = new Dictionary<string, Sound>();
+    private Dictionary<string, Sound> allSoundsDictionary = new Dictionary<string, Sound>();
 
     private Dictionary<string, float> soundTimerDictonary = new Dictionary<string, float>();
 
@@ -61,12 +62,14 @@ public class AudioController : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
-        foreach (Sound player_S in playerSounds) { allSounds[player_S.name] = player_S; sfxList[player_S.name] = player_S; }
-        foreach (Sound enemy_S in enemySounds) { allSounds[enemy_S.name] = enemy_S; sfxList[enemy_S.name] = enemy_S; }
-        foreach (Sound environment_S in environmentSounds) { allSounds[environment_S.name] = environment_S; sfxList[environment_S.name] = environment_S; }
-        foreach (Sound music_S in musicSounds) { allSounds[music_S.name] = music_S; musicList[music_S.name] = music_S; }
+        foreach (Sound player_S in playerSounds) { allSoundsDictionary[player_S.name] = player_S; sfxDictionary[player_S.name] = player_S; }
+        foreach (Sound enemy_S in enemySounds) { allSoundsDictionary[enemy_S.name] = enemy_S; sfxDictionary[enemy_S.name] = enemy_S; }
+        foreach (Sound environment_S in environmentSounds) { allSoundsDictionary[environment_S.name] = environment_S; sfxDictionary[environment_S.name] = environment_S; }
+        foreach (Sound music_S in musicSounds) { allSoundsDictionary[music_S.name] = music_S; musicDictionary[music_S.name] = music_S; }
 
-        foreach (KeyValuePair<string, Sound> s in allSounds) {
+        
+
+        foreach (KeyValuePair<string, Sound> s in allSoundsDictionary) {
             s.Value.source = gameObject.AddComponent<AudioSource>();
             s.Value.source.clip = s.Value.clip;
             s.Value.source.volume = s.Value.volume;
@@ -76,9 +79,17 @@ public class AudioController : MonoBehaviour {
             s.Value.source.minDistance = s.Value.minDistance;
             s.Value.source.maxDistance = s.Value.maxDistance;
             s.Value.source.loop = s.Value.loop;
-            s.Value.source.outputAudioMixerGroup = audioMixerGroup;
+            s.Value.source.outputAudioMixerGroup = masterMixerGroup;
         }
-        
+
+        foreach (KeyValuePair<string, Sound> s in sfxDictionary) {
+            s.Value.source.outputAudioMixerGroup = sfxMixerGroup;
+        }
+
+        foreach (KeyValuePair<string, Sound> s in musicDictionary) {
+            s.Value.source.outputAudioMixerGroup = musicMixerGroup;
+        }
+
     }
 
     #region Play/Stop Methods
@@ -109,9 +120,9 @@ public class AudioController : MonoBehaviour {
     public GameObject Play_InWorldspace(string name, GameObject gameObjectLocation) {
         try {
 
-            if (allSounds.ContainsKey(name)) {
+            if (allSoundsDictionary.ContainsKey(name)) {
                 GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
-                sound = allSounds[name];
+                sound = allSoundsDictionary[name];
                 sound.source = soundAtLocationGO.GetComponent<AudioSource>();
                 sound.source.clip = sound.clip;
                 sound.source.volume = sound.volume;
@@ -149,9 +160,7 @@ public class AudioController : MonoBehaviour {
     public void Play_RandomPitch(string name, float minPitch, float maxPitch) {
         sound = FindSound(name);
         try {
-            if (!GameController.Instance.GameIsSlowmotion) {
-                sound.source.pitch = Random.Range(minPitch, maxPitch);
-            }
+            sound.source.pitch = Random.Range(minPitch, maxPitch);
             sound.source.Play();
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
@@ -161,9 +170,7 @@ public class AudioController : MonoBehaviour {
     public void PlaySFX_RandomPitch(string name, float minPitch, float maxPitch) {
         sound = FindSFX(name);
         try {
-            if (!GameController.Instance.GameIsSlowmotion) {
-                sound.source.pitch = Random.Range(minPitch, maxPitch);
-            }
+            sound.source.pitch = Random.Range(minPitch, maxPitch);
             sound.source.Play();
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
@@ -172,15 +179,13 @@ public class AudioController : MonoBehaviour {
 
     public GameObject Play_RandomPitch_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
         try {
-            if (allSounds.ContainsKey(name)) {
+            if (allSoundsDictionary.ContainsKey(name)) {
                 GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
-                sound = allSounds[name];
+                sound = allSoundsDictionary[name];
                 sound.source = soundAtLocationGO.GetComponent<AudioSource>();
                 sound.source.clip = sound.clip;
                 sound.source.volume = sound.volume;
-                if (!GameController.Instance.GameIsSlowmotion) {
-                    sound.source.pitch = Random.Range(minPitch, maxPitch);
-                }
+                sound.source.pitch = Random.Range(minPitch, maxPitch);
                 sound.source.spatialBlend = sound.spatialBlend_2D_3D;
                 sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
                 sound.source.minDistance = sound.minDistance;
@@ -201,26 +206,22 @@ public class AudioController : MonoBehaviour {
 
     #region Volume / Pitch Methods
     public void SFXSetPitch(float pitch) {
-        foreach (KeyValuePair<string, Sound> s in sfxList) {
-            try {
-                s.Value.source.pitch = pitch;
-            } catch (System.Exception) {
-
-            }         
-        }
+        audioMixer.SetFloat("SFXPitch", pitch);
     }
 
     public void SFXSetVolume(float volume) {
-        foreach (KeyValuePair<string, Sound> s in sfxList) {
-            sfxSoundLevel = volume;
-            s.Value.source.volume = sfxSoundLevel;
+        if (volume == -80) {
+            audioMixer.SetFloat("SFXVolume", volume);
+        } else {
+            audioMixer.SetFloat("SFXVolume", (volume / 4));
         }
     }
 
     public void MusicSetVolume(float volume) {
-        foreach (KeyValuePair<string, Sound> s in musicList) {
-            musicSoundLevel = volume;
-            s.Value.source.volume = musicSoundLevel;
+        if (volume == -80) {
+            audioMixer.SetFloat("MusicVolume", volume);
+        } else {
+            audioMixer.SetFloat("MusicVolume", (volume / 4));
         }
     }
 
@@ -248,7 +249,7 @@ public class AudioController : MonoBehaviour {
 
     public void PauseAllSFX(bool pause) {
         if (pause) {
-            foreach (KeyValuePair<string, Sound> s in sfxList) {
+            foreach (KeyValuePair<string, Sound> s in sfxDictionary) {
                 try {
                     s.Value.source.Pause();
                 } catch (System.Exception) {
@@ -256,7 +257,7 @@ public class AudioController : MonoBehaviour {
                 }
             }
         } else if (!pause) {
-            foreach (KeyValuePair<string, Sound> s in sfxList) {
+            foreach (KeyValuePair<string, Sound> s in sfxDictionary) {
                 try {
                     s.Value.source.UnPause();
                 } catch (System.Exception) {
@@ -268,7 +269,7 @@ public class AudioController : MonoBehaviour {
 
     public void PauseAllSound(bool pause) {
         if (pause) {
-            foreach (KeyValuePair<string, Sound> s in allSounds) {
+            foreach (KeyValuePair<string, Sound> s in allSoundsDictionary) {
                 try {
                     s.Value.source.Pause();
                 } catch (System.Exception) {
@@ -276,7 +277,7 @@ public class AudioController : MonoBehaviour {
                 }                
             }                    
         } else if (!pause) {
-            foreach (KeyValuePair<string, Sound> s in allSounds) {
+            foreach (KeyValuePair<string, Sound> s in allSoundsDictionary) {
 
                 try {
                     s.Value.source.UnPause();
@@ -294,59 +295,56 @@ public class AudioController : MonoBehaviour {
         try {
             sound = FindMusic(name);
             if (sound != null) {
-                sound.source.volume = 0;
-                sound.source.Play();
-                if (musicSoundLevel < (soundVolumePercentage / 100)) {
-                    soundVolumePercentage = (musicSoundLevel * 100);
-                }
-                StartCoroutine(FadeInAudio(fadeDuration, (soundVolumePercentage / 100), sound));
+                soundVolumePercentage = FadeInStartAndSoundLevelCheck(name, musicSoundLevel, soundVolumePercentage);
+                StartCoroutine(FadeInAudio(fadeDuration, (soundVolumePercentage), sound));
                 return;
             }
             sound = FindSFX(name);
             if (sound != null) {
-                sound.source.volume = 0;
-                sound.source.Play();
-                if (sfxSoundLevel < (soundVolumePercentage / 100)) {
-                    soundVolumePercentage = (sfxSoundLevel * 100);
-                }
-                StartCoroutine(FadeInAudio(fadeDuration, (soundVolumePercentage / 100), sound));
+                soundVolumePercentage = FadeInStartAndSoundLevelCheck(name, sfxSoundLevel, soundVolumePercentage);
+                StartCoroutine(FadeInAudio(fadeDuration, (soundVolumePercentage), sound));
                 return;
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
 
-    }
-
-    private float FadeInAudioLevelCheck(float soundLevel, float soundVolumePercentage) {
-        return 1;//Ska fixa en sen
-    }
-
-    private float FadeOutAudioLevelCheck(float soundLevel, float soundVolumePercentage) {
-        return 1;//Ska fixa en sen
     }
 
     public void FadeOut(string name, float fadeDuration, float soundVolumePercentage) {
         try {
             sound = FindMusic(name);
             if(sound != null) {
-                if (musicSoundLevel < (soundVolumePercentage / 100)) {
-                    soundVolumePercentage = (musicSoundLevel * 100);
-                }
-                StartCoroutine(FadeOutAudio(fadeDuration, (soundVolumePercentage / 100), sound));
+                soundVolumePercentage = FadeOutStartAndSoundLevelCheck(name, musicSoundLevel, soundVolumePercentage);
+                StartCoroutine(FadeOutAudio(fadeDuration, (soundVolumePercentage), sound));
                 return;
             }
             sound = FindSFX(name);
             if(sound != null) {
-                if (sfxSoundLevel < (soundVolumePercentage / 100)) {
-                    soundVolumePercentage = (sfxSoundLevel * 100);
-                }
-                StartCoroutine(FadeOutAudio(fadeDuration, (soundVolumePercentage / 100), sound));
+                soundVolumePercentage = FadeOutStartAndSoundLevelCheck(name, musicSoundLevel, soundVolumePercentage);
+                StartCoroutine(FadeOutAudio(fadeDuration, (soundVolumePercentage), sound));
                 return;
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
+    }
+
+    private float FadeInStartAndSoundLevelCheck(string name, float soundLevel, float soundVolumePercentage) {
+        sound.source.volume = 0;
+        sound.source.Play();
+        if (soundLevel < (soundVolumePercentage / 100)) {
+            return soundVolumePercentage = (soundLevel * 100);
+        }
+        return soundVolumePercentage / 100;
+    }
+
+    private float FadeOutStartAndSoundLevelCheck(string name, float soundLevel, float soundVolumePercentage) {
+        if (soundLevel < (soundVolumePercentage / 100)) {
+            soundVolumePercentage = (soundLevel * 100);
+            Debug.LogWarning("Could not fade out audio '" + name + "' because the sound was already lower than intended fade");
+        }
+        return soundVolumePercentage / 100;
     }
 
     private IEnumerator FadeInAudio(float fadeDuration, float soundVolume, Sound sound) {
@@ -379,22 +377,22 @@ public class AudioController : MonoBehaviour {
     #region FindSound Methods
 
     private Sound FindSound(string name) {
-        if (allSounds.ContainsKey(name)) {
-            return allSounds[name];
+        if (allSoundsDictionary.ContainsKey(name)) {
+            return allSoundsDictionary[name];
         }
         return null;
     }
 
     private Sound FindMusic(string name) {
-        if (musicList.ContainsKey(name)) {
-            return musicList[name];
+        if (musicDictionary.ContainsKey(name)) {
+            return musicDictionary[name];
         }
         return null;
     }
 
     private Sound FindSFX(string name) {
-        if (sfxList.ContainsKey(name)) {
-            return sfxList[name];
+        if (sfxDictionary.ContainsKey(name)) {
+            return sfxDictionary[name];
         }
         return null;
     }

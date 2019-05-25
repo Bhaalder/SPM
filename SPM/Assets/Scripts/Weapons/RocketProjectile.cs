@@ -30,7 +30,7 @@ public class RocketProjectile : MonoBehaviour{
         } else if (distanceToTarget == 10000) {
             Destroy(gameObject, 10f);
         }
-        if (GameController.Instance.GameIsSlowmotion) {
+        if (GameController.Instance.GameIsSlowmotion && !GameController.Instance.GameIsPaused) {
             transform.position += transform.forward * (projectileSpeed/2f) * Time.unscaledDeltaTime;
             IncreaseSpeed();
         } else {
