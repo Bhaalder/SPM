@@ -176,15 +176,15 @@ MonoBehaviour:
     source: {fileID: 0}
   enemySounds: []
   environmentSounds:
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
+  - name: Space Ambience
+    clip: {fileID: 8300000, guid: dfdbba5d3499bb64aab00b8dad47de3e, type: 3}
+    volume: 1
     pitch: 0
     spatialBlend_2D_3D: 0
     rolloffMode: 0
     minDistance: 0
     maxDistance: 0
-    loop: 0
+    loop: 1
     source: {fileID: 0}
   musicSounds:
   - name: Song4Start
