@@ -20,6 +20,9 @@ public class ChargeChaseState : EnemyBaseState
         base.Enter();
         isChasing = true;
         //Animation Chase
+        owner.animator.SetBool("isIdle", false);
+        owner.animator.SetBool("isRunning", true);
+        owner.animator.SetBool("isAttacking", false);
     }
     public override void HandleUpdate()
     {

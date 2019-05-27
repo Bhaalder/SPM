@@ -15,6 +15,9 @@ public class ChargeIdleState : EnemyBaseState
     {
         base.Enter();
         //Animation Idle
+        owner.animator.SetBool("isIdle", true);
+        owner.animator.SetBool("isRunning", false);
+        owner.animator.SetBool("isAttacking", false);
     }
 
     public override void HandleUpdate()
