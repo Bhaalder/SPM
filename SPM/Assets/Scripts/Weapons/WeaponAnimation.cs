@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponAnimation : MonoBehaviour{
 
     [SerializeField] private GameObject rifle, shotgun, rocketLauncher;
-
+    private string weaponName;
 
     private void Start()
     {
@@ -14,9 +14,22 @@ public class WeaponAnimation : MonoBehaviour{
         rocketLauncher = Camera.main.transform.GetChild(0).GetChild(2).gameObject;
     }
 
-    public void RaiseWeapon() {
-        Debug.Log("Penis!");
-        rifle.transform.position += new Vector3(0, 0, 0.4f);
+    public void RaiseWeapon(BaseWeapon weapon) {
+        weaponName = "";
+        switch(weaponName){
+            case "Rifle":
+                break;
+            case "Shotgun":
+                break;
+            case "Rocket Launcher":
+                break;
+        }
+
+        Debug.Log("Raising "+ weaponName + "!");
+    }
+
+    public void LowerWeapon() {
+        Debug.Log("Lowering");
     }
 
     public void ReloadWeapon() {

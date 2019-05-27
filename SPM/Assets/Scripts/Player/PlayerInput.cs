@@ -15,6 +15,7 @@ public class PlayerInput : MonoBehaviour {
     private PlayerShoot playerShoot;
     private PlayerMovementController playerMovementController;
     private BaseWeapon selectedWeapon;
+    private BaseWeapon lastSelectedWeapon;
     private float nextTimeToFire = 0f;
     private bool isReloading = false;
 
@@ -22,16 +23,21 @@ public class PlayerInput : MonoBehaviour {
 
     private void Start() {
         playerShoot = GetComponentInChildren<PlayerShoot>();
+
         playerMovementController = GetComponent<PlayerMovementController>();
+
         weaponCamera = Camera.main.transform.GetChild(0);
+        selectedWeapon = GameController.Instance.SelectedWeapon;
+        lastSelectedWeapon = GameController.Instance.SelectedWeapon;
+        ActivateSelectedWeaponGameObject(GameController.Instance.SelectedWeapon);
+
         slowmotion = GameController.Instance.GetComponent<Slowmotion>();
         GameController.Instance.Player = gameObject;
-        ActivateSelectedWeaponGameObject(GameController.Instance.SelectedWeapon);
+          
     }
 
 
-    private void Update() {
-        selectedWeapon = GameController.Instance.SelectedWeapon;
+    private void Update() {       
         ReloadWeaponInput();
         ReloadSequence();
         ShootWeaponInput();
@@ -178,6 +184,10 @@ public class PlayerInput : MonoBehaviour {
         BaseWeapon firstWeapon = null;
         BaseWeapon secondWeapon = null;
         BaseWeapon thirdWeapon = null;
+
+        lastSelectedWeapon = null;
+
+        selectedWeapon = GameController.Instance.SelectedWeapon;
         try {
             GetWeaponFromGameController(ref firstWeapon, 0);
             GetWeaponFromGameController(ref secondWeapon, 1);
@@ -186,9 +196,9 @@ public class PlayerInput : MonoBehaviour {
 
         }
         if (Input.GetButtonDown("Weapon1") && firstWeapon != null) {
-            AbortReload();
-            WeaponController.Instance.GetComponent<WeaponAnimation>().RaiseWeapon();
+            AbortReload();          
             if (selectedWeapon != firstWeapon){
+                WeaponController.Instance.GetComponent<WeaponAnimation>().RaiseWeapon(firstWeapon);
                 GameController.Instance.SelectedWeapon = firstWeapon;
                 ActivateSelectedWeaponGameObject(firstWeapon);
             }
@@ -221,9 +231,9 @@ public class PlayerInput : MonoBehaviour {
     private void ActivateSelectedWeaponGameObject(BaseWeapon selectedWeapon) {
         foreach(Transform weapon in weaponCamera) {
             if(weapon.name == selectedWeapon.GetName()) {
-                //weapon.transform.position = new Vector3(0, 0, 0f);
+                
             } else {
-                //weapon.transform.position = new Vector3(0, 0, -50f);
+                
             }
         }
     }
