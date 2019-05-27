@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6964004597814307124}
   - component: {fileID: 6168297538791629986}
   - component: {fileID: 4320215421209216543}
+  - component: {fileID: 892545276}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -44,35 +45,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92e769a15bbd8cd4baacb28296b17bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subscribedScripts: []
-  gameEventID: 0
-  sceneCompleted: 0
-  winText: {fileID: 0}
-  player: {fileID: 3047494120657483824, guid: a2430e923db05a34289d30ce89414eab, type: 3}
-  HealthSlider: {fileID: 318113743869654137, guid: bfbfda9e93581eb468cb06ea044cff23,
-    type: 3}
-  ArmorSlider: {fileID: 8308551033358625794, guid: 625b8b08046b80648a9172cc4648d408,
-    type: 3}
-  SlowmotionSlider: {fileID: 5165223131323716453, guid: 78ccbfc7cf7852d43baed628b13f9896,
-    type: 3}
-  ReloadSlider: {fileID: 6870294362126429544, guid: 1f9970ac15a73fc4eb342f53e670ff86,
-    type: 3}
-  weaponNameText: {fileID: 3275281485500089788, guid: e257edcb4e567f745a6dcbdc7e01bbf1,
-    type: 3}
-  weaponAmmoText: {fileID: 5772566862144742516, guid: 98caf9531ab85be44a30768bca1e694a,
-    type: 3}
-  weaponImage: {fileID: 593760641820757135, guid: 5f0975695e5ba194484bc2b401e91dd5,
-    type: 3}
-  playerHP: 100
-  playerArmor: 100
-  gameIsPaused: 0
-  playerIsInteracting: 0
-  gameIsSlowmotion: 0
+  SubscribedScripts: []
+  GameEventID: 1
+  SceneCompleted: 0
+  WinText: {fileID: 0}
+  Player: {fileID: 0}
+  HealthSlider: {fileID: 0}
+  ArmorSlider: {fileID: 0}
+  SlowmotionSlider: {fileID: 0}
+  ReloadSlider: {fileID: 0}
+  weaponNameText: {fileID: 0}
+  weaponAmmoText: {fileID: 0}
+  weaponImage: {fileID: 0}
+  PlayerHP: 0
+  PlayerArmor: 0
+  GameIsPaused: 0
+  PlayerIsInteracting: 0
+  GameIsSlowmotion: 0
   invulnerableStateTime: 0.25
   interactionText: {fileID: 0}
-  crosshair: {fileID: 1261144990262316387, guid: 576a51fc4c6630c4d9f990664100c333,
-    type: 3}
-  hitmark: {fileID: 296114343725116614, guid: 5338c974b8e353b409329804318466d6, type: 3}
+  crosshair: {fileID: 0}
+  hitmark: {fileID: 0}
 --- !u!114 &4320215421209216543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,3 +79,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowdownAmount: 0.1
+--- !u!114 &892545276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814260381439902556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8d1e38b34549724dabb27a894eb6a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
