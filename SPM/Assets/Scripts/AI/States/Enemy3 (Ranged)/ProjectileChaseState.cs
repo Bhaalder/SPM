@@ -17,6 +17,9 @@ public class ProjectileChaseState : EnemyBaseState
     public override void Enter() {
         base.Enter();
         //Animation
+        owner.animator.SetBool("isIdle", false);
+        owner.animator.SetBool("isRunning", true);
+        owner.animator.SetBool("isAttacking", false);
     }
     public override void HandleUpdate()
     {

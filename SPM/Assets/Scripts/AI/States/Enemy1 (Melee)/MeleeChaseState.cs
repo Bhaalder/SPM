@@ -18,7 +18,9 @@ public class MeleeChaseState : EnemyBaseState
 
     public override void Enter() {
         base.Enter();
-        owner.animator.Play("Enemy4Run");
+        owner.animator.SetBool("isIdle", false);
+        owner.animator.SetBool("isRunning", true);
+        owner.animator.SetBool("isAttacking", false);
     }
 
     public override void HandleUpdate()

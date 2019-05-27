@@ -15,6 +15,9 @@ public class ProjectileIdleState : EnemyBaseState
     {
         base.Enter();
         //Animation
+        owner.animator.SetBool("isIdle", true);
+        owner.animator.SetBool("isRunning", false);
+        owner.animator.SetBool("isAttacking", false);
     }
 
     public override void HandleUpdate()

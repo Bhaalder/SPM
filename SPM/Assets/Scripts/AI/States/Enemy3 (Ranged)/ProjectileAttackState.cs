@@ -46,6 +46,9 @@ public class ProjectileAttackState : EnemyBaseState
         {
             owner.transform.LookAt(owner.player.transform, Vector3.up);
             //Animation
+            owner.animator.SetBool("isIdle", false);
+            owner.animator.SetBool("isRunning", false);
+            owner.animator.SetBool("isAttacking", true);
             GameObject enemyProj = Instantiate(enemyWeapon.GetProjectile(), owner.transform.position + owner.transform.forward * 2, Quaternion.identity);
             enemyProj.GetComponent<EnemyProjectile>().SetProjectileSpeed(enemyWeapon.GetProjectileSpeed());
             enemyProj.GetComponent<EnemyProjectile>().SetProjectileTravelDistance(enemyWeapon.GetRange());

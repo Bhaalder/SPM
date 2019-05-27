@@ -9,12 +9,14 @@ public class MeleeIdleState : EnemyBaseState
     // Attributes
     [Tooltip("Distance at which the Enemy starts chasing the Player if it can see the Player.")]
     [SerializeField] private float chaseDistance;
-
+    
     // Methods
     public override void Enter()
     {
         base.Enter();
-        //Animation
+        owner.animator.SetBool("isIdle", true);
+        owner.animator.SetBool("isRunning", false);
+        owner.animator.SetBool("isAttacking", false);
     }
 
     public override void HandleUpdate()
