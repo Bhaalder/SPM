@@ -211,6 +211,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rifle
       objectReference: {fileID: 0}
+    - target: {fileID: 5746963235346531637, guid: aecc93db92635344b917b3f7ac7cf647,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6453935548704719590, guid: aecc93db92635344b917b3f7ac7cf647,
         type: 3}
       propertyPath: m_Name
@@ -235,6 +240,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289084315000745260, guid: aecc93db92635344b917b3f7ac7cf647,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.244
+      objectReference: {fileID: 0}
+    - target: {fileID: 5289084315000745260, guid: aecc93db92635344b917b3f7ac7cf647,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.149
       objectReference: {fileID: 0}
     - target: {fileID: 9168699858551529279, guid: aecc93db92635344b917b3f7ac7cf647,
         type: 3}
