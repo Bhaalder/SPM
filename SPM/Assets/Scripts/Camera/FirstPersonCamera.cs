@@ -7,16 +7,19 @@ public class FirstPersonCamera: MonoBehaviour {
 
     public float MouseSensitivity = 60;
     [SerializeField] private Transform cameraTarget, player;
-
     [SerializeField] private Vector2 cameraClamp = new Vector2(-85, 85);
+    [SerializeField] private Transform weaponCamera;
+
 
     private float mouseX;
     private float mouseY;
     private Vector3 targetRotation;
+    private Vector3 velocity = Vector3.zero;
 
     private void Start() {
         player = GameObject.Find("Player").transform;
         cameraTarget = GameObject.Find("CameraTarget").transform;
+        weaponCamera = transform.GetChild(0).GetChild(0);
     }
 
     private void Update() {
@@ -34,6 +37,11 @@ public class FirstPersonCamera: MonoBehaviour {
         } else {
             mouseX += Input.GetAxis("Mouse X") * MouseSensitivity * Time.unscaledDeltaTime;
             mouseY -= Input.GetAxis("Mouse Y") * MouseSensitivity * Time.unscaledDeltaTime;
+            //foreach (Transform weapon in weaponCamera) {
+
+            //    weapon.transform.position = Vector3.SmoothDamp(weapon.transform.position, transform.position, ref velocity, 1);
+                
+            //}
         }
         mouseY = Mathf.Clamp(mouseY, cameraClamp.x, cameraClamp.y);
 

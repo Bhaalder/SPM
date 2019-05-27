@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;//TA BORT SEN
 public class PlayerInput : MonoBehaviour {
     //Author: Patrik Ahlgren
     [SerializeField] private Slowmotion slowmotion;
+    [SerializeField] private Transform weaponCamera;
 
     [SerializeField] private GameObject startTeleport;//TA BORT SEN
     [SerializeField] private GameObject secondTeleport;//TA BORT SEN
@@ -22,8 +23,10 @@ public class PlayerInput : MonoBehaviour {
     private void Start() {
         playerShoot = GetComponentInChildren<PlayerShoot>();
         playerMovementController = GetComponent<PlayerMovementController>();
+        weaponCamera = Camera.main.transform.GetChild(0);
         slowmotion = GameController.Instance.GetComponent<Slowmotion>();
-        GameController.Instance.Player = gameObject;       
+        GameController.Instance.Player = gameObject;
+        ActivateSelectedWeaponGameObject(GameController.Instance.SelectedWeapon);
     }
 
 
@@ -184,17 +187,25 @@ public class PlayerInput : MonoBehaviour {
         }
         if (Input.GetButtonDown("Weapon1") && firstWeapon != null) {
             AbortReload();
-            if (selectedWeapon != firstWeapon) { GameController.Instance.SelectedWeapon = firstWeapon; }
+            if (selectedWeapon != firstWeapon){
+                GameController.Instance.SelectedWeapon = firstWeapon;
+                ActivateSelectedWeaponGameObject(firstWeapon);
+            }
         }
         if (Input.GetButtonDown("Weapon2") && secondWeapon != null) {
             AbortReload();
-            if (selectedWeapon != secondWeapon) { GameController.Instance.SelectedWeapon = secondWeapon; }
+            if (selectedWeapon != secondWeapon) {
+                GameController.Instance.SelectedWeapon = secondWeapon;
+                ActivateSelectedWeaponGameObject(secondWeapon);
+            }
         }
         if (Input.GetButtonDown("Weapon3") && thirdWeapon != null) {
             AbortReload();
-            if (selectedWeapon != thirdWeapon) { GameController.Instance.SelectedWeapon = thirdWeapon; }
+            if (selectedWeapon != thirdWeapon) {
+                GameController.Instance.SelectedWeapon = thirdWeapon;
+                ActivateSelectedWeaponGameObject(thirdWeapon);
+            }
         }
-
         GameController.Instance.UpdateSelectedWeapon();
     }
 
@@ -205,6 +216,17 @@ public class PlayerInput : MonoBehaviour {
             return null;
         }
     }
+
+    private void ActivateSelectedWeaponGameObject(BaseWeapon selectedWeapon) {
+        foreach(Transform weapon in weaponCamera) {
+            if(weapon.name == selectedWeapon.GetName()) {
+                //weapon.transform.position = new Vector3(0, 0, 0f);
+            } else {
+                //weapon.transform.position = new Vector3(0, 0, -50f);
+            }
+        }
+    }
+
     #endregion
 
     #region Slowmotion Method

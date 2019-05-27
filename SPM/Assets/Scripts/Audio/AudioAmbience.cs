@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class AudioAmbience : MonoBehaviour
 {
-    public GameObject ting;
-    // Start is called before the first frame update
+
     void Start()
     {
-        AudioController.Instance.Play_InWorldspace("Space Ambience",ting);
+        AudioController.Instance.Play("Space Ambience");
     }
 
     // Update is called once per frame
