@@ -33,7 +33,6 @@ public class OpenDoorsAnimated : MonoBehaviour
             greenPanel.SetActive(!greenPanel.activeSelf);
             redPanel.SetActive(!redPanel.activeSelf);
             if (spawnEnemies) {
-                AudioController.Instance.Play_ThenPlay("Song4Start", "Song4Loop");
                 spawnManager.InitializeSpawner();
                 spawnEnemies = false;
             }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3365157521189228802}
   - component: {fileID: 1977375461835904690}
+  - component: {fileID: -4835157186327209583}
   m_Layer: 0
   m_Name: WeaponController
   m_TagString: Untagged
@@ -54,3 +55,18 @@ MonoBehaviour:
   RifleDmg: 7.5
   ShotgunDmg: 19
   RocketLDmg: 25
+--- !u!114 &-4835157186327209583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757674643375919205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 393cb5e0973ab1d46aef4d5bf7f26d0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rifle: {fileID: 0}
+  shotgun: {fileID: 0}
+  rocketLauncher: {fileID: 0}

@@ -18,11 +18,17 @@ public class PlayerShoot : MonoBehaviour{
     [SerializeField] private float shotgunRecoilDuration = 0.3f; // TA BORT SEN
 
     private CameraShake camShake;
+    [SerializeField] private Transform weaponCamera;
+    [SerializeField] private ParticleSystem rifleFlash, shotgunFlash, rocketFlash;
     private GameObject bulletImpact;
     private float alienWoundTimer = 0.2f;
 
     private void Start(){
         camShake = Camera.main.GetComponent<CameraShake>();
+        weaponCamera = Camera.main.transform.GetChild(0);
+        rifleFlash = weaponCamera.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
+        shotgunFlash = weaponCamera.GetChild(1).GetChild(0).GetComponent<ParticleSystem>();
+        rocketFlash = weaponCamera.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
     }
 
     //public void Melee() {
@@ -55,6 +61,7 @@ public class PlayerShoot : MonoBehaviour{
         if (weapon.GetAmmoInClip() != 0) {           
             AudioController.Instance.PlaySFX_RandomPitch("Rifle", 0.92f, 1f);
             muzzleFlash.Play();//----------------Animation
+            rifleFlash.Play();
             weapon.DecreaseAmmoInClip();
             bool hitTarget = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, weapon.GetRange(), layerMask);
 
@@ -80,6 +87,7 @@ public class PlayerShoot : MonoBehaviour{
         if (weapon.GetAmmoInClip() != 0){           
             AudioController.Instance.PlaySFX_RandomPitch("Shotgun", 0.95f, 1f);
             muzzleFlash.Play();//------------Animation
+            shotgunFlash.Play();
             weapon.DecreaseAmmoInClip();
             bool[] hitTarget = new bool[15];
             RaycastHit[] hits = new RaycastHit[15];
@@ -120,7 +128,7 @@ public class PlayerShoot : MonoBehaviour{
 
     private void ShootProjectile(ProjectileWeapon weapon) {
         if (weapon.GetAmmoInClip() != 0) {
-            
+            rocketFlash.Play();
             AudioController.Instance.PlaySFX_RandomPitch("RocketLauncher_Launch", 0.95f, 1f);
             weapon.DecreaseAmmoInClip();
 

@@ -187,6 +187,7 @@ public class PlayerInput : MonoBehaviour {
         }
         if (Input.GetButtonDown("Weapon1") && firstWeapon != null) {
             AbortReload();
+            WeaponController.Instance.GetComponent<WeaponAnimation>().RaiseWeapon();
             if (selectedWeapon != firstWeapon){
                 GameController.Instance.SelectedWeapon = firstWeapon;
                 ActivateSelectedWeaponGameObject(firstWeapon);
