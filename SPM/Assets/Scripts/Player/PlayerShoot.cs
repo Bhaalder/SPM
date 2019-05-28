@@ -25,13 +25,12 @@ public class PlayerShoot : MonoBehaviour{
     private float alienWoundTimer = 0.2f;
 
     private void Start(){
-        camShake = Camera.main.GetComponent<CameraShake>();
-        weaponCamera = Camera.main.transform.GetChild(0);
-        rifleFlash = weaponCamera.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
-        shotgunFlash = weaponCamera.GetChild(1).GetChild(0).GetComponent<ParticleSystem>();
-        rocketFlash = weaponCamera.GetChild(2).GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
+        camShake = Camera.main.GetComponent<CameraShake>();       
         muzzleFlash = transform.GetChild(0).GetComponent<ParticleSystem>();
         weaponAnimation = WeaponController.Instance.GetComponent<WeaponAnimation>();
+        rifleFlash = weaponAnimation.Rifle.transform.GetChild(0).GetComponent<ParticleSystem>();
+        shotgunFlash = weaponAnimation.Shotgun.transform.GetChild(0).GetComponent<ParticleSystem>();
+        rocketFlash = weaponAnimation.RocketLauncher.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
     }
 
     //public void Melee() {
@@ -138,7 +137,7 @@ public class PlayerShoot : MonoBehaviour{
             AudioController.Instance.PlaySFX_RandomPitch("RocketLauncher_Launch", 0.95f, 1f);
             weapon.DecreaseAmmoInClip();
 
-            GameObject rocketProj = Instantiate(weapon.GetProjectile(), Camera.main.transform.position+new Vector3(1, 0, 0) + (Camera.main.transform.forward*0.1f), Camera.main.transform.rotation);
+            GameObject rocketProj = Instantiate(weapon.GetProjectile(), transform.position + (Camera.main.transform.forward*0.1f), Camera.main.transform.rotation);
             rocketProj.GetComponent<RocketProjectile>().SetProjectileSpeed(weapon.GetProjectileSpeed());
             rocketProj.GetComponent<RocketProjectile>().SetProjectileForce(weapon.GetImpactForce());
             rocketProj.GetComponent<RocketProjectile>().SetProjectileDamage(weapon.GetDamage());

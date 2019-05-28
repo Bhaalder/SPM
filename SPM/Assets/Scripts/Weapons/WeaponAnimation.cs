@@ -4,39 +4,35 @@ using UnityEngine;
 
 public class WeaponAnimation : MonoBehaviour{
 
-    [Header("Shake")]
-    [SerializeField] private float shakeValue;
-    [SerializeField] private float shakeDuration;
-
+    private float shakeValue;
+    private float shakeDuration;
     private float shakePercentage;
     private float startValue;
     private float startDuration;
 
     private bool isShaking = false;
 
-    [Header("Recoil")]
-    [SerializeField] private float recoilValue;
-    [SerializeField] private float recoilDuration;
-
+    private float recoilValue;
+    private float recoilDuration;
     private float recoilPercentage;
     private float startRecoilValue;
     private float startRecoilDuration;
 
     private bool isRecoiling = false;
 
-    [Header("Smooth")]
+    [Header("Smooth Recoil")]
     [SerializeField] private bool isSmooth;
     [SerializeField] private float smoothValue = 3f;
 
     [Header("Weapons")]
-    [SerializeField] private GameObject rifle, shotgun, rocketLauncher;
+    public GameObject Rifle, Shotgun, RocketLauncher;
     private string weaponName;
 
-    private void Start()
+    private void Awake()
     {
-        rifle = Camera.main.transform.GetChild(0).GetChild(0).gameObject;
-        shotgun = Camera.main.transform.GetChild(0).GetChild(1).gameObject;
-        rocketLauncher = Camera.main.transform.GetChild(0).GetChild(2).GetChild(0).gameObject;
+        Rifle = Camera.main.transform.GetChild(0).GetChild(0).gameObject;
+        Shotgun = Camera.main.transform.GetChild(0).GetChild(1).gameObject;
+        RocketLauncher = Camera.main.transform.GetChild(0).GetChild(2).gameObject;
     }
 
     public void RaiseWeaponAnimation(BaseWeapon weapon) {
@@ -54,7 +50,7 @@ public class WeaponAnimation : MonoBehaviour{
     }
 
     public void LowerWeaponAnimation(BaseWeapon weapon) {
-        weaponName = "";
+        weaponName = weapon.GetName();
         switch (weaponName) {
             case "Rifle":
                 break;
@@ -68,7 +64,7 @@ public class WeaponAnimation : MonoBehaviour{
     }
 
     public void ReloadWeaponAnimation(BaseWeapon weapon) {
-        weaponName = "";
+        weaponName = weapon.GetName();
         switch (weaponName) {
             case "Rifle":
                 break;
@@ -85,13 +81,25 @@ public class WeaponAnimation : MonoBehaviour{
         weaponName = weapon.GetName();
         switch (weaponName) {
             case "Rifle":
-                RecoilShake(1f, 0.15f, rifle);
+                if (GameController.Instance.GameIsSlowmotion) {
+                    RecoilShake(0.4f, 0.1f, Rifle);
+                } else {
+                    RecoilShake(1f, 0.15f, Rifle);
+                }           
                 break;
             case "Shotgun":
-                RecoilShake(5f, 0.3f, shotgun);
+                if (GameController.Instance.GameIsSlowmotion) {
+                    RecoilShake(2.2f, 0.15f, Shotgun);
+                } else {
+                    RecoilShake(5f, 0.3f, Shotgun);
+                }           
                 break;
             case "Rocket Launcher":
-                RecoilShake(0.1f, 0.1f, rocketLauncher);
+                if (GameController.Instance.GameIsSlowmotion) {
+                    RecoilShake(3.4f, 0.3f, RocketLauncher);
+                } else {
+                    RecoilShake(7f, 0.7f, RocketLauncher);
+                }         
                 break;
             default:
                 Debug.LogWarning("ShootWeaponAnimation, weaponName not found");
@@ -111,26 +119,17 @@ public class WeaponAnimation : MonoBehaviour{
         }
     }
 
-    private void Shake(float value, float duration, GameObject weapon) {
-        ShakeValueAndDuration(value, duration);
-
-        if (!isShaking) {
-            StartCoroutine(ShakeWeapon(weapon));
-        }
-    }
-
-    private void ShakeValueAndDuration(float value, float duration) {
-        shakeValue += value;
-        startValue = shakeValue;
-        shakeDuration = duration;
-        startDuration = shakeDuration;
-    }
-
     private IEnumerator Recoil(GameObject weapon) {
         isRecoiling = true;
-        Vector3 originalPosition = weapon.transform.localPosition;
+        Vector3 rotationAmount;
+
         while (recoilDuration > 0.01f) {
-            Vector3 rotationAmount = new Vector3(-1, 0, -1) * recoilValue;
+            if (weapon == RocketLauncher) {
+                rotationAmount = new Vector3(-1, 0, 0) * recoilValue;
+            } else {
+                rotationAmount = new Vector3(-1, 0, -1) * recoilValue;
+            }
+            
 
             recoilPercentage = recoilDuration / startRecoilDuration;
 
@@ -145,30 +144,4 @@ public class WeaponAnimation : MonoBehaviour{
         
         isRecoiling = false;
     }
-
-    private IEnumerator ShakeWeapon(GameObject weapon) {
-        isShaking = true;
-
-        while (shakeDuration > 0.01f) {
-            Vector3 rotationAmount = Random.insideUnitSphere * shakeValue;
-            rotationAmount.z = 0;
-
-            shakePercentage = shakeDuration / startDuration;
-
-            shakeValue = startValue * shakePercentage;
-            //shakeDuration = Mathf.Lerp(shakeDuration, 0, Time.deltaTime);//lerpa eller inte?
-            shakeDuration -= 1 * Time.deltaTime;
-
-            if (isSmooth) {
-                weapon.transform.localRotation = Quaternion.Lerp(transform.localRotation, Quaternion.Euler(rotationAmount), Time.deltaTime * smoothValue);
-            } else {
-                weapon.transform.localRotation = Quaternion.Euler(rotationAmount);
-            }
-
-            yield return null;
-        }
-        weapon.transform.localRotation = Quaternion.identity;
-        isShaking = false;
-    }
-
 }
