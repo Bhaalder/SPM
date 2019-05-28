@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class WeaponAnimation : MonoBehaviour{
 
-    private float shakeValue;
-    private float shakeDuration;
-    private float shakePercentage;
-    private float startValue;
-    private float startDuration;
-
-    private bool isShaking = false;
-
     private float recoilValue;
     private float recoilDuration;
     private float recoilPercentage;
@@ -39,6 +31,7 @@ public class WeaponAnimation : MonoBehaviour{
         weaponName = "";
         switch(weaponName){
             case "Rifle":
+
                 break;
             case "Shotgun":
                 break;
