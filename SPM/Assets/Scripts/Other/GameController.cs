@@ -60,6 +60,7 @@ public class GameController : MonoBehaviour {
         SlowmotionSlider.value = SlowmotionSlider.maxValue;
         ReloadSlider.value = 0;
 
+        WinText = GameObject.Find("WinText").GetComponent<Text>();
         weaponNameText = GameObject.Find("WeaponText").GetComponent<Text>();
         weaponAmmoText = GameObject.Find("AmmunitionText").GetComponent<Text>();
         weaponImage = GameObject.Find("Weapon Image");
