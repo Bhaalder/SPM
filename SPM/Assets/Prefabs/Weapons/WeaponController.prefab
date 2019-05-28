@@ -54,7 +54,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 46728143cdec4fd4380e7ca6e4ae0ed9, type: 3}
   RifleDmg: 7.5
   ShotgunDmg: 19
-  RocketLDmg: 40
+  RocketLDmg: 35
 --- !u!114 &-4835157186327209583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +67,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393cb5e0973ab1d46aef4d5bf7f26d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeValue: 0
+  shakeDuration: 0
+  recoilValue: 0
+  recoilDuration: 0
+  isSmooth: 0
+  smoothValue: 3
   rifle: {fileID: 0}
   shotgun: {fileID: 0}
   rocketLauncher: {fileID: 0}

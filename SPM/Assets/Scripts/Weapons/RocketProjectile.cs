@@ -16,11 +16,13 @@ public class RocketProjectile : MonoBehaviour{
     private void Awake() {
         rocketSound = AudioController.Instance.Play_RandomPitch_InWorldspace("RocketLauncher_Rocket", gameObject, 0.95f, 1f);
         rocketSound.transform.SetParent(gameObject.transform);
+        Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, distanceToTarget, layerMask);
+        gameObject.transform.LookAt(hit.point);
     }
 
     private void Update(){
         bool hitTarget = Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, distanceToTarget, layerMask);
-
+        
         if (distanceToTarget <= 0.5f) {
             Destroy(gameObject);
             GetComponent<Explosion>().Explode(projectileForce, projectileDamage);
