@@ -23,7 +23,9 @@ public class EnemyBaseState : State
 
     protected bool CanSeePlayer()
     {
-        return !Physics.Linecast(owner.transform.position, owner.player.transform.position, owner.visionMask);
+        bool lineHit = Physics.Linecast(owner.transform.position, owner.player.transform.position, out RaycastHit hit, owner.visionMask);
+        Debug.DrawLine(owner.transform.position, hit.point, Color.red);
+        return !lineHit;
     }
 
     protected float DistanceToPlayer()

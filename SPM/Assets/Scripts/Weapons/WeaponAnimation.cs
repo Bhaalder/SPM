@@ -128,7 +128,7 @@ public class WeaponAnimation : MonoBehaviour{
 
     private IEnumerator Recoil(GameObject weapon) {
         isRecoiling = true;
-
+        Vector3 originalPosition = weapon.transform.localPosition;
         while (recoilDuration > 0.01f) {
             Vector3 rotationAmount = new Vector3(-1, 0, -1) * recoilValue;
 
@@ -141,7 +141,8 @@ public class WeaponAnimation : MonoBehaviour{
 
             yield return null;
         }
-        transform.localRotation = Quaternion.identity;
+        weapon.transform.localRotation = Quaternion.identity;
+        
         isRecoiling = false;
     }
 
@@ -166,7 +167,7 @@ public class WeaponAnimation : MonoBehaviour{
 
             yield return null;
         }
-        transform.localRotation = Quaternion.identity;
+        weapon.transform.localRotation = Quaternion.identity;
         isShaking = false;
     }
 
