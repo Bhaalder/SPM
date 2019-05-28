@@ -132,7 +132,14 @@ public class GameController : MonoBehaviour {
     public void TakeDamage(int damage){
         if (Time.time >= invulnerableState) {
             invulnerableState = Time.time + invulnerableStateTime;
-            if (PlayerArmor <= 0) { PlayerHP -= damage; Debug.Log("Player took: "+damage + " to health"); AudioController.Instance.Play_RandomPitch("Hurt", 0.8f,1.0f); } else { PlayerArmor -= damage; }
+            if (PlayerArmor <= 0) {
+                PlayerHP -= damage;
+                Debug.Log("Player took: "+damage + " to health");
+                AudioController.Instance.Play_RandomPitch("Hurt", 0.8f,1.0f);
+            } else {
+                PlayerArmor -= damage;
+
+            }
         } else {
             Debug.Log("InvulnerableState active, no damage");
         }

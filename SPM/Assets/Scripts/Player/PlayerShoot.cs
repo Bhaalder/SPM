@@ -29,6 +29,7 @@ public class PlayerShoot : MonoBehaviour{
         rifleFlash = weaponCamera.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
         shotgunFlash = weaponCamera.GetChild(1).GetChild(0).GetComponent<ParticleSystem>();
         rocketFlash = weaponCamera.GetChild(2).GetChild(0).GetComponent<ParticleSystem>();
+        muzzleFlash = transform.GetChild(0).GetComponent<ParticleSystem>();
     }
 
     //public void Melee() {
