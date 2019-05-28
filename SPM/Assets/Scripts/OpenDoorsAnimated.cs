@@ -32,7 +32,7 @@ public class OpenDoorsAnimated : MonoBehaviour
             greenPanel.SetActive(!greenPanel.activeSelf);
             redPanel.SetActive(!redPanel.activeSelf);
 
-          // AudioController.Instance.Play_InWorldspace("Button", gameObject);
+           AudioController.Instance.Play_InWorldspace("Button", gameObject);
 
             if (spawnEnemies) {
                 spawnManager.InitializeSpawner();
