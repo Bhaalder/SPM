@@ -37,7 +37,7 @@ public class ChargeStunnedState : EnemyBaseState
         }
 
         currentCool = stunnedForSeconds;
-        owner.setDealtDamage(false);
+        owner.DealtDamage = false;
         if (DistanceToPlayer() > meleeAttackDistance)
         {
             owner.Transition<ChargeChaseState>();

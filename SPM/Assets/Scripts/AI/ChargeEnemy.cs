@@ -14,7 +14,7 @@ public class ChargeEnemy : Enemy
 
     protected override void Awake()
     {
-        dealtDamage = false;
+        DealtDamage = false;
         HasRecentlyCharged = false;
         currentCooldown = chargeDowntime;
         base.Awake();
@@ -48,10 +48,10 @@ public class ChargeEnemy : Enemy
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" && !dealtDamage)
+        if (collision.gameObject.tag == "Player" && !DealtDamage)
         {
             GameController.Instance.TakeDamage(damage);
-            dealtDamage = true;
+            DealtDamage = true;
             Transition<ChargeStunnedState>();
         }
     }

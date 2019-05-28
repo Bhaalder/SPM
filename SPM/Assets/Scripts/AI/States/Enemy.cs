@@ -18,8 +18,10 @@ public class Enemy : StateMachine
 
     [SerializeField] protected float health;
     [SerializeField] protected float damageResistance;
+    public int EnemyMeleeDamage { get; set; }
     
-    protected bool dealtDamage;
+    public bool DealtDamage { get; set; }
+    public bool CanDamage { get; set; }
     protected bool isDamaged;
 
     private bool isDead;
@@ -33,6 +35,7 @@ public class Enemy : StateMachine
         player = (PlayerMovementController)FindObjectOfType(typeof(PlayerMovementController));
         isDead = false;
         isDamaged = false;
+        CanDamage = false;
         base.Awake();
     }
 
@@ -62,13 +65,25 @@ public class Enemy : StateMachine
         Destroy(gameObject);
     }
 
-    public void setDealtDamage(bool a)
-    {
-        dealtDamage = a;
-    }
-
     public bool getIsDead()
     {
         return isDead;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player" && animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack")) //Change "MeleeAttack" to the tag name of the attack!
+        {
+            GameController.Instance.TakeDamage(EnemyMeleeDamage);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (CanDamage && collision.gameObject.tag == "Player" && animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack")) //Change "MeleeAttack" to the tag name of the attack!
+        {
+            GameController.Instance.TakeDamage(EnemyMeleeDamage);
+            CanDamage = false;
+        }
     }
 }

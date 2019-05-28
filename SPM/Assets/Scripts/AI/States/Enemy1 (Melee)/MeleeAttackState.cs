@@ -11,16 +11,17 @@ public class MeleeAttackState : EnemyBaseState
     [SerializeField] private float chaseDistance;
     [Tooltip("Time in Seconds between Attacks.")]
     [SerializeField] private float cooldown;
-    [Tooltip("Damage done to Player with each Attack.")]
+    [Tooltip("Damage done to Player with each MeleeAttack.")]
     [SerializeField] private int damage;
 
 
-    private float currentCool;
+    private float currentCooldown;
 
     // Methods
     public override void Enter()
     {
         base.Enter();
+        owner.EnemyMeleeDamage = damage;
     }
 
     public override void HandleUpdate()
@@ -38,19 +39,19 @@ public class MeleeAttackState : EnemyBaseState
 
     private void Attack()
     {
-        currentCool -= Time.deltaTime;
+        currentCooldown -= Time.deltaTime;
 
-        if (currentCool > 0)
+        if (currentCooldown > 0)
         {
             return;
         }
 
         if (CanSeePlayer() == true)
         {
-            //owner.animator.Play("Attack");
-            GameController.Instance.TakeDamage(damage);
+            //owner.animator.Play("MeleeAttack");
+            owner.CanDamage = true;
         }
-
-        currentCool = cooldown;
+        currentCooldown = cooldown;
     }
+    
 }

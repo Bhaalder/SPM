@@ -12,8 +12,6 @@ public class MeleeChaseState : EnemyBaseState
     [Tooltip("Distance at which Enemy will stop chasing the Player if it can no longer see the Player")]
     [SerializeField] private float stopChaseDistance;
 
-    private float distanceToPlayer;
-
     // Methods
 
     public override void Enter() {
@@ -27,14 +25,13 @@ public class MeleeChaseState : EnemyBaseState
     {
         owner.agent.SetDestination(owner.player.transform.position);
 
-        distanceToPlayer = Vector3.Distance(owner.transform.position, owner.player.transform.position);
 
-        if (distanceToPlayer < attackDistance)
+        if (DistanceToPlayer() < attackDistance)
         {
             owner.Transition<MeleeAttackState>();
         }
 
-        if (distanceToPlayer < stopChaseDistance && CanSeePlayer() == false)
+        if (DistanceToPlayer() < stopChaseDistance && CanSeePlayer() == false)
         {
             owner.Transition<MeleeIdleState>();
         }
