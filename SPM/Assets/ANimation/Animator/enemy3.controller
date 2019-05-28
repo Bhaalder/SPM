@@ -11,13 +11,13 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 7539164158318569540}
-    m_Position: {x: 410, y: 290, z: 0}
+    m_Position: {x: 390, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3825788063918246994}
-    m_Position: {x: 410, y: 120, z: 0}
+    m_Position: {x: 390, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -817026267508856903}
-    m_Position: {x: 220, y: 200, z: 0}
+    m_Position: {x: 190, y: 220, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -77,7 +77,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -203655887218126122, guid: 765d5311412092b4aba801ed1878b4c4,
     type: 3}
-  m_Tag: 
+  m_Tag: ProjectileAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -106,7 +106,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -203655887218126122, guid: e7dbd8e19682ba7429792afee738da9b,
     type: 3}
-  m_Tag: 
+  m_Tag: Idle
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
@@ -297,7 +297,7 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: 1827226128182048838, guid: d5e4744be4a75874093603fff1d13324,
     type: 3}
-  m_Tag: 
+  m_Tag: Chasing
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
