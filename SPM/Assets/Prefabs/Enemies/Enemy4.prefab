@@ -885,7 +885,7 @@ Animator:
   m_GameObject: {fileID: 3766647485882138130}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 2b52b3e338b2ed24ab917b3374226990, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4b9641bc956b1634f963093ae9643b2e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1032,6 +1032,7 @@ GameObject:
   - component: {fileID: 4430046657957969020}
   - component: {fileID: 4430046657957969021}
   - component: {fileID: 4430046657957969022}
+  - component: {fileID: 4430046657957969023}
   - component: {fileID: 354900360512239622}
   - component: {fileID: 8685818141277929481}
   - component: {fileID: 7057308873038740785}
@@ -1132,6 +1133,19 @@ CapsuleCollider:
   m_Height: 4.0699835
   m_Direction: 1
   m_Center: {x: 0, y: 1.5349917, z: 0.09420347}
+--- !u!65 &4430046657957969023
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4430046657957968993}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.1, z: 1}
+  m_Center: {x: 0, y: -0.55, z: 0}
 --- !u!114 &354900360512239622
 MonoBehaviour:
   m_ObjectHideFlags: 0
