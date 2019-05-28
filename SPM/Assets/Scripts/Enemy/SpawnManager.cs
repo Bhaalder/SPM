@@ -122,7 +122,7 @@ public class SpawnManager : MonoBehaviour
                 StopCoroutine(SpawnEnemies());
                 if (isArenaSpawner)
                 {
-                    GameController.Instance.SceneCompletedSequence();
+                    GameController.Instance.SceneCompletedSequence(true);
                     GameObject sceneManager = GameObject.Find("SceneManager");
                     sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
                     door.SetActive(false);
