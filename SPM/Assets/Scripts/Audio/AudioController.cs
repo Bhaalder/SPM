@@ -173,8 +173,41 @@ public class AudioController : MonoBehaviour {
             AudioNotFound(name);
         }       
     }
-
-    public GameObject Play_RandomPitch_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
+    
+    public void PlayRandomSFX_RandomPitch(int numberOfSounds, string name, string name2, string name3, string name4, string name5) {
+        int i = Random.Range(1, numberOfSounds);
+        switch (i) {
+            case 1:
+                sound = FindSFX(name);
+                sound.source.pitch = Random.Range(0.95f, 1f);
+                sound.source.Play();
+                break;
+            case 2:
+                sound = FindSFX(name2);
+                sound.source.pitch = Random.Range(0.95f, 1f);
+                sound.source.Play();
+                break;
+            case 3:
+                sound = FindSFX(name3);
+                sound.source.pitch = Random.Range(0.95f, 1f);
+                sound.source.Play();
+                break;
+            case 4:
+                sound = FindSFX(name4);
+                sound.source.pitch = Random.Range(0.95f, 1f);
+                sound.source.Play();
+                break;
+            case 5:
+                sound = FindSFX(name5);
+                sound.source.pitch = Random.Range(0.95f, 1f);
+                sound.source.Play();
+                break;
+            default:
+                Debug.LogError("RandomSound did not execute correctly, i out of range");
+                break;
+        }
+    }
+        public GameObject Play_RandomPitch_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
         try {
             if (allSoundsDictionary.ContainsKey(name)) {
                 GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
