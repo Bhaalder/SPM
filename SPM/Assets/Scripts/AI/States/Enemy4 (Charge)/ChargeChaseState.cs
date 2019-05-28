@@ -27,7 +27,7 @@ public class ChargeChaseState : EnemyBaseState
     public override void HandleUpdate()
     {
 
-        if (Vector3.Distance(owner.transform.position, owner.player.transform.position) < attackDistance && isChasing)
+        if (DistanceToPlayer() < attackDistance && isChasing && owner.HasRecentlyCharged == false)
         {
             isChasing = false;
             
@@ -36,7 +36,12 @@ public class ChargeChaseState : EnemyBaseState
         }
         owner.agent.SetDestination(owner.player.transform.position);
 
-        if (Vector3.Distance(owner.transform.position, owner.player.transform.position) < stopChaseDistance && CanSeePlayer() == false)
+        if (owner.HasRecentlyCharged == true)
+        {
+            owner.Transition<ChargeMeleeAttackState>();
+        }
+
+        if (DistanceToPlayer() < stopChaseDistance && CanSeePlayer() == false)
         {
             owner.Transition<ChargeIdleState>();
         }

@@ -14,6 +14,8 @@ public class Enemy : StateMachine
     public LayerMask visionMask;
     public PlayerMovementController player;
 
+    public bool HasRecentlyCharged { get; set; }
+
     [SerializeField] protected float health;
     [SerializeField] protected float damageResistance;
     
@@ -32,6 +34,11 @@ public class Enemy : StateMachine
         isDead = false;
         isDamaged = false;
         base.Awake();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
     }
 
     public virtual void TakeDamage(float damage)

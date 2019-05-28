@@ -8,11 +8,26 @@ public class ChargeEnemy : Enemy
 {
     [Tooltip("Damage done to Player if hit by the charge.")]
     [SerializeField] private int damage;
+    [Tooltip("Time in Seconds between two seperate charges.")]
+    [SerializeField] private float chargeDowntime;
+    private float currentCooldown;
 
     protected override void Awake()
     {
         dealtDamage = false;
+        HasRecentlyCharged = false;
+        currentCooldown = chargeDowntime;
         base.Awake();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if(HasRecentlyCharged == true)
+        {
+            RecentlyCharged();
+        }
+        
     }
 
     public override void TakeDamage(float damage)
@@ -40,5 +55,19 @@ public class ChargeEnemy : Enemy
             Transition<ChargeStunnedState>();
         }
     }
+
+    private void RecentlyCharged()
+    {
+        currentCooldown -= Time.deltaTime;
+
+        if (currentCooldown > 0)
+        {
+            return;
+        }
+
+        HasRecentlyCharged = false;
+        currentCooldown = chargeDowntime;
+    }
+
 
 }

@@ -10,7 +10,7 @@ public class ChargeAttackState : EnemyBaseState
     [Tooltip("Time in Seconds the charge will last for.")]
     [SerializeField] private float isChargingForSeconds;
 
-    private float currentCool;
+    private float currentCooldown;
     private Vector3 chargePoint;
 
     // Methods
@@ -18,7 +18,7 @@ public class ChargeAttackState : EnemyBaseState
     {
         base.Enter();
         chargePoint = owner.player.transform.position;
-        currentCool = 0;
+        currentCooldown = 0;
     }
 
     public override void HandleUpdate()
@@ -28,23 +28,25 @@ public class ChargeAttackState : EnemyBaseState
 
     private void Attack()
     {
-        currentCool += Time.deltaTime;
+        currentCooldown += Time.deltaTime;
 
         if (CanSeePlayer() == true)
         {
             if (owner.transform.position == chargePoint)
             {
-                currentCool = 0;
+                currentCooldown = 0;
+                owner.HasRecentlyCharged = true;
                 owner.Transition<ChargeStunnedState>();
             }
 
-            if (currentCool < isChargingForSeconds)
+            if (currentCooldown < isChargingForSeconds)
             {
                 owner.agent.SetDestination(chargePoint);
             }
             else
             {
-                currentCool = 0;
+                currentCooldown = 0;
+                owner.HasRecentlyCharged = true;
                 owner.Transition<ChargeStunnedState>();
             }
         }
