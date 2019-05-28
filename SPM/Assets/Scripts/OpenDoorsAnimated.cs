@@ -14,7 +14,6 @@ public class OpenDoorsAnimated : MonoBehaviour
     [SerializeField] private SpawnManager spawnManager;
 
     [SerializeField] private Animator anim;
-
     [SerializeField] private bool spawnEnemies;
 
     void Start()
@@ -36,6 +35,7 @@ public class OpenDoorsAnimated : MonoBehaviour
                 spawnManager.InitializeSpawner();
                 spawnEnemies = false;
             }
+        
 
         } else {
             anim.SetBool("isOpen", false);
