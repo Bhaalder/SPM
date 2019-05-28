@@ -174,6 +174,16 @@ MonoBehaviour:
     maxDistance: 100
     loop: 0
     source: {fileID: 0}
+  - name: Hurt
+    clip: {fileID: 8300000, guid: d14faddb93df79b4eaf7cb5f3c5663f7, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 100
+    loop: 0
+    source: {fileID: 0}
   enemySounds: []
   environmentSounds:
   - name: Space Ambience
