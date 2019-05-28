@@ -89,23 +89,9 @@ public class PlayerMovementController : MonoBehaviour{
     }
 
     private void JumpSound() {
-        int i = Random.Range(1, 3);
         int soundChance = Random.Range(1, 100);
         if (soundChance <= jumpSoundPercentChance) {
-            switch (i) {
-                case 1:
-                    AudioController.Instance.PlaySFX_RandomPitch("Jump1", 0.95f, 1f);
-                    break;
-                case 2:
-                    AudioController.Instance.PlaySFX_RandomPitch("Jump2", 0.95f, 1f);
-                    break;
-                case 3:
-                    AudioController.Instance.PlaySFX_RandomPitch("Jump3", 0.95f, 1f);
-                    break;
-                default:
-                    Debug.LogWarning("JumpSound did not execute correctly, i out of range");
-                    break;
-            }
+            AudioController.Instance.PlayRandomSFX_RandomPitch(3, "Jump1", "Jump2", "Jump3", null, null);
         }     
     }
 
