@@ -1150,6 +1150,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8990a6b889d32d64390eda1424acfe2b, type: 2}
   - {fileID: 11400000, guid: 4ca5e68f251dc49478e3fcf4d11da826, type: 2}
   - {fileID: 11400000, guid: 9dee778ebf62c9248926fe22b49ec879, type: 2}
+  - {fileID: 11400000, guid: 8b644b1ea39ffd04bad257435293496c, type: 2}
   Renderer: {fileID: 0}
   agent: {fileID: 0}
   animator: {fileID: 7057308873038740785}
@@ -1160,6 +1161,7 @@ MonoBehaviour:
   health: 100
   damageResistance: 5
   damage: 90
+  chargeDowntime: 0
 --- !u!195 &8685818141277929481
 NavMeshAgent:
   m_ObjectHideFlags: 0

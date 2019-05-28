@@ -9,6 +9,9 @@ public class ChargeStunnedState : EnemyBaseState
     // Attributes
     [Tooltip("Time in Seconds the Enemy is stunned for.")]
     [SerializeField] private float stunnedForSeconds;
+    [Tooltip("Distance at which the tries to attack with Melee Attack")]
+    [SerializeField] private float meleeAttackDistance;
+
     private float currentCool;
 
     // Methods
@@ -35,8 +38,15 @@ public class ChargeStunnedState : EnemyBaseState
 
         currentCool = stunnedForSeconds;
         owner.setDealtDamage(false);
+        if (DistanceToPlayer() > meleeAttackDistance)
+        {
+            owner.Transition<ChargeChaseState>();
+        }
+        if (DistanceToPlayer() <= meleeAttackDistance)
+        {
+            owner.Transition<ChargeMeleeAttackState>();
+        }
 
-        owner.Transition<ChargeChaseState>();
     }
 
 }

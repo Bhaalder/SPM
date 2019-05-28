@@ -8,6 +8,7 @@ public class EnemyBaseState : State
     // Attributes
     [SerializeField] protected float moveSpeed;
     protected Enemy owner;
+    private float distanceToPlayer;
 
     // Methods
     public override void Enter()
@@ -24,4 +25,11 @@ public class EnemyBaseState : State
     {
         return !Physics.Linecast(owner.transform.position, owner.player.transform.position, owner.visionMask);
     }
+
+    protected float DistanceToPlayer()
+    {
+        distanceToPlayer = Vector3.Distance(owner.transform.position, owner.player.transform.position);
+        return distanceToPlayer;
+    }
+
 }
