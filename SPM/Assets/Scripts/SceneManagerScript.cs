@@ -50,7 +50,7 @@ public class SceneManagerScript : MonoBehaviour
         if (other.gameObject.CompareTag("InteractionPlayer") && GameController.Instance.PlayerIsInteracting && GameController.Instance.SceneCompleted)
         {
             SceneManager.LoadScene("Level2WhiteBox");
-            GameController.Instance.SceneNotCompletedSequence();
+            GameController.Instance.SceneCompletedSequence(false);
         }
         if(!buttonIsPressed)
         {

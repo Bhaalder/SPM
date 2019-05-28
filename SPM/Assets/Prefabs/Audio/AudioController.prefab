@@ -200,11 +200,11 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f62b8418022b0154b8e6f631d6b60d8e, type: 3}
     volume: 1
     pitch: 1
-    spatialBlend_2D_3D: 0
-    rolloffMode: 0
-    minDistance: 0
-    maxDistance: 0
-    loop: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 50
+    loop: 0
     source: {fileID: 0}
   musicSounds:
   - name: Song4Start

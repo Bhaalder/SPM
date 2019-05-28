@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
     public List<BaseWeapon> PlayerWeapons = new List<BaseWeapon>();
     public int GameEventID = 1;
     public bool SceneCompleted;
-    public Text WinText;
+    public GameObject WinText;
 
     public GameObject Player;
 
@@ -60,7 +60,8 @@ public class GameController : MonoBehaviour {
         SlowmotionSlider.value = SlowmotionSlider.maxValue;
         ReloadSlider.value = 0;
 
-        WinText = GameObject.Find("WinText").GetComponent<Text>();
+        WinText = GameObject.Find("WinText");
+        WinText.SetActive(false);
         weaponNameText = GameObject.Find("WeaponText").GetComponent<Text>();
         weaponAmmoText = GameObject.Find("AmmunitionText").GetComponent<Text>();
         weaponImage = GameObject.Find("Weapon Image");
@@ -95,13 +96,9 @@ public class GameController : MonoBehaviour {
         weaponAmmoText.text = SelectedWeapon.GetAmmoInClip() + "/" + SelectedWeapon.GetTotalAmmoLeft();
     }
 
-    public void SceneCompletedSequence() {
-        WinText.gameObject.SetActive(true);
-        SceneCompleted = true;
-    }
-    public void SceneNotCompletedSequence() {
-        WinText.gameObject.SetActive(false);
-        SceneCompleted = false;
+    public void SceneCompletedSequence(bool b) {
+        WinText.SetActive(b);
+        SceneCompleted = b;
     }
 
     public void PlayerPassedEvent() {

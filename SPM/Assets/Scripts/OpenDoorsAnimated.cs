@@ -27,19 +27,15 @@ public class OpenDoorsAnimated : MonoBehaviour
     public void OpenAndClose() {
         isOpen = !isOpen;
         Debug.Log("F");
+        AudioController.Instance.Play_InWorldspace("Button", gameObject);
         if (isOpen) {
             anim.SetBool("isOpen", true);
             greenPanel.SetActive(!greenPanel.activeSelf);
             redPanel.SetActive(!redPanel.activeSelf);
-
-          // AudioController.Instance.Play_InWorldspace("Button", gameObject);
-
             if (spawnEnemies) {
                 spawnManager.InitializeSpawner();
                 spawnEnemies = false;
             }
-        
-
         } else {
             anim.SetBool("isOpen", false);
             greenPanel.SetActive(!greenPanel.activeSelf);
