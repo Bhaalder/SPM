@@ -48,7 +48,7 @@ public class ChargeEnemy : Enemy
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" && !DealtDamage)
+        if (collision.gameObject.tag == "Player" && !DealtDamage && animator.GetCurrentAnimatorStateInfo(0).IsTag("Charging"))
         {
             GameController.Instance.TakeDamage(damage);
             DealtDamage = true;

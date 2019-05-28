@@ -70,11 +70,16 @@ public class Enemy : StateMachine
         return isDead;
     }
 
+    private void DoMeleeDamage()
+    {
+        GameController.Instance.TakeDamage(EnemyMeleeDamage);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player" && animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack")) //Change "MeleeAttack" to the tag name of the attack!
         {
-            GameController.Instance.TakeDamage(EnemyMeleeDamage);
+            DoMeleeDamage();
         }
     }
 
@@ -82,7 +87,7 @@ public class Enemy : StateMachine
     {
         if (CanDamage && collision.gameObject.tag == "Player" && animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack")) //Change "MeleeAttack" to the tag name of the attack!
         {
-            GameController.Instance.TakeDamage(EnemyMeleeDamage);
+            DoMeleeDamage();
             CanDamage = false;
         }
     }
