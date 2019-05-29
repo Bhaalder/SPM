@@ -7,7 +7,13 @@ public class Slowmotion:MonoBehaviour{
 
     [SerializeField] private float slowdownAmount;
     private bool canSlowmo = true;
-    
+    private Animator anim;
+
+    private void Start()
+    {
+        anim = GameObject.Find("SliderSlowmotion").GetComponent<Animator>();
+    }
+
     public void SlowTime() {
         if (!GameController.Instance.GameIsPaused) {
             if (!GameController.Instance.GameIsSlowmotion && canSlowmo) {               
@@ -26,8 +32,11 @@ public class Slowmotion:MonoBehaviour{
     private void Update() {
         if (GameController.Instance.SlowmotionSlider.value == 100) {
             canSlowmo = true;
+            anim.SetBool("IsFull", true);
+
         } else {
             canSlowmo = false;
+            anim.SetBool("IsFull",false);
         }
         if (GameController.Instance.GameIsSlowmotion && GameController.Instance.SlowmotionSlider.value == 0) {
             GameController.Instance.GameIsSlowmotion = false;
