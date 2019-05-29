@@ -10,6 +10,8 @@ public class SceneManagerScript : MonoBehaviour
     public bool buttonIsPressed;
     public GameObject menuController;
 
+    private Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class SceneManagerScript : MonoBehaviour
         //DontDestroyOnLoad(gameObject);
         menuController = GameObject.Find("MenuController");
 
+        anim = GameObject.Find("Canvas").GetComponent<Animator>();
 
 
     }
@@ -31,6 +34,7 @@ public class SceneManagerScript : MonoBehaviour
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+       
     }
 
     public void StartLevelOne()
