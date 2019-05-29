@@ -9,12 +9,14 @@ public class PlayerDeathController : MonoBehaviour
     [SerializeField] private GameObject respawnManager;
     [SerializeField] private GameObject player;
 
-    private Vector3 deathLocation;
+    [SerializeField] private Vector3 deathLocation;
+    [SerializeField] private bool isDead;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        isDead = false;
         if (GameController.Instance.PlayerHP == 0)
         {
             GameController.Instance.PlayerHP = 10;
@@ -25,8 +27,9 @@ public class PlayerDeathController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameController.Instance.PlayerHP <= 0)
+        if (GameController.Instance.PlayerHP <= 0 && isDead == false)
         {
+            isDead = true;
             OnPlayerDeath(player.transform.position);
         }
     }
@@ -45,6 +48,7 @@ public class PlayerDeathController : MonoBehaviour
         respawnManager.GetComponent<PlayerRespawner>().RespawnMethod();
         DisableCursor();
         PauseAndUnpauseGame();
+        isDead = false;
         deathPanel.SetActive(false);
     }
 
@@ -69,6 +73,7 @@ public class PlayerDeathController : MonoBehaviour
     {
         GameController.Instance.PlayerHP = 100;
         GameController.Instance.PlayerArmor = 100;
+        isDead = false;
     }
 
     private void DisableCursor()

@@ -19,9 +19,9 @@ public class PlayerRespawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameController.Instance.PlayerHP < 1) {
-            RespawnMethod();
-        }
+        //if (GameController.Instance.PlayerHP < 1) {
+        //    RespawnMethod();
+        //}
     }
 
 
