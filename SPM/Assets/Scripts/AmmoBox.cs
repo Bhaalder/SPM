@@ -7,12 +7,6 @@ public class AmmoBox : MonoBehaviour
     //Author: Patrik Ahlgren
     [SerializeField] private int clipIncrease;
 
-    private Animator anim;
-
-    private void Start()
-    {
-        anim = GameObject.Find("AmmunitionText").GetComponent<Animator>();
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,9 +18,7 @@ public class AmmoBox : MonoBehaviour
             }
             GameController.Instance.UpdateSelectedWeapon_AmmoText();
             GetComponentInParent<PowerUpSpawner>().Respawner();
-            anim.SetTrigger("AmmunitionPickUp");
         }
-        
         Destroy(gameObject);
     }
     
