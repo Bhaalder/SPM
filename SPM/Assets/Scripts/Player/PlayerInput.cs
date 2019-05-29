@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;//TA BORT SEN
 public class PlayerInput : MonoBehaviour {
     //Author: Patrik Ahlgren
     [SerializeField] private Slowmotion slowmotion;
-    [SerializeField] private Transform weaponCamera;
 
     [SerializeField] private GameObject startTeleport;//TA BORT SEN
     [SerializeField] private GameObject secondTeleport;//TA BORT SEN
@@ -14,10 +13,13 @@ public class PlayerInput : MonoBehaviour {
 
     private PlayerShoot playerShoot;
     private PlayerMovementController playerMovementController;
+
+    private WeaponAnimation weaponAnimation;
     private BaseWeapon selectedWeapon;
     private BaseWeapon lastSelectedWeapon;
+    private BaseWeapon firstWeapon, secondWeapon, thirdWeapon;
     private float nextTimeToFire = 0f;
-    private bool isReloading = false;
+    public bool IsReloading = false;
 
     private bool skipShootDelayToSlowmotion;
 
@@ -26,10 +28,9 @@ public class PlayerInput : MonoBehaviour {
 
         playerMovementController = GetComponent<PlayerMovementController>();
 
-        weaponCamera = Camera.main.transform.GetChild(0);
+        weaponAnimation = WeaponController.Instance.GetComponent<WeaponAnimation>();
         selectedWeapon = GameController.Instance.SelectedWeapon;
-        lastSelectedWeapon = GameController.Instance.SelectedWeapon;
-        ActivateSelectedWeaponGameObject(GameController.Instance.SelectedWeapon);
+        lastSelectedWeapon = selectedWeapon;
 
         slowmotion = GameController.Instance.GetComponent<Slowmotion>();
         GameController.Instance.Player = gameObject;
@@ -37,14 +38,17 @@ public class PlayerInput : MonoBehaviour {
     }
 
 
-    private void Update() {       
-        ReloadWeaponInput();
-        ReloadSequence();
-        ShootWeaponInput();
-        SwitchWeaponInput();
-        SlowmotionInput();
-        InteractInput();
-        DashInput();
+    private void Update() {
+        if (!GameController.Instance.GameIsPaused) {
+            ReloadWeaponInput();
+            ReloadSequence();
+            ShootWeaponInput();
+            SwitchWeaponInput();
+            SlowmotionInput();
+            InteractInput();
+            DashInput();
+        }      
+
         InGameMenu();
 
         Teleport();//TA BORT SEN
@@ -89,17 +93,17 @@ public class PlayerInput : MonoBehaviour {
         int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
         int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
 
-        if (ammoInClip != maxAmmoInClip && totalAmmoLeft > 0 && !isReloading) {
+        if (ammoInClip != maxAmmoInClip && totalAmmoLeft > 0 && !IsReloading) {
             PlayReloadSound();
             int ammoSpent = maxAmmoInClip - ammoInClip;
             GameController.Instance.ReloadSlider.gameObject.SetActive(true);
             GameController.Instance.ReloadSlider.maxValue = selectedWeapon.GetReloadTime();
-            isReloading = true;
+            IsReloading = true;
         }
     }
 
     private void ReloadSequence() {
-        if (isReloading) {
+        if (IsReloading) {
             if (GameController.Instance.GameIsPaused) {
 
             } else {
@@ -116,7 +120,7 @@ public class PlayerInput : MonoBehaviour {
             FinishReload(ammoInClip, totalAmmoLeft, ammoSpent);
             GameController.Instance.UpdateSelectedWeapon_AmmoText();
             GameController.Instance.ReloadSlider.gameObject.SetActive(false);
-            isReloading = false;
+            IsReloading = false;
         }
     }
     private void FinishReload(int ammoInClip, int totalAmmoLeft, int ammoSpent) {
@@ -131,7 +135,7 @@ public class PlayerInput : MonoBehaviour {
     }
 
     public void AbortReload() {
-        isReloading = false;
+        IsReloading = false;
         GameController.Instance.ReloadSlider.value = 0;
         GameController.Instance.ReloadSlider.gameObject.SetActive(false);
         StopReloadSound();
@@ -159,7 +163,7 @@ public class PlayerInput : MonoBehaviour {
 
     #region Shoot Method
     private void ShootWeaponInput() {
-        if (!isReloading) {
+        if (!IsReloading) {
             if (Input.GetButton("Fire1") && GameController.Instance.SelectedWeapon.GetAmmoInClip() == 0) {
                 ReloadWeapon();
                 return;
@@ -181,12 +185,6 @@ public class PlayerInput : MonoBehaviour {
 
     #region SwitchWeapon Methods
     private void SwitchWeaponInput() {
-        BaseWeapon firstWeapon = null;
-        BaseWeapon secondWeapon = null;
-        BaseWeapon thirdWeapon = null;
-
-        lastSelectedWeapon = null;
-
         selectedWeapon = GameController.Instance.SelectedWeapon;
         try {
             GetWeaponFromGameController(ref firstWeapon, 0);
@@ -198,23 +196,22 @@ public class PlayerInput : MonoBehaviour {
         if (Input.GetButtonDown("Weapon1") && firstWeapon != null) {
             AbortReload();          
             if (selectedWeapon != firstWeapon){
-                WeaponController.Instance.GetComponent<WeaponAnimation>().RaiseWeaponAnimation(firstWeapon);
+                SwitchWeapon(firstWeapon);       
                 GameController.Instance.SelectedWeapon = firstWeapon;
-                ActivateSelectedWeaponGameObject(firstWeapon);
             }
         }
         if (Input.GetButtonDown("Weapon2") && secondWeapon != null) {
             AbortReload();
             if (selectedWeapon != secondWeapon) {
+                SwitchWeapon(secondWeapon);
                 GameController.Instance.SelectedWeapon = secondWeapon;
-                ActivateSelectedWeaponGameObject(secondWeapon);
             }
         }
         if (Input.GetButtonDown("Weapon3") && thirdWeapon != null) {
             AbortReload();
             if (selectedWeapon != thirdWeapon) {
+                SwitchWeapon(thirdWeapon);
                 GameController.Instance.SelectedWeapon = thirdWeapon;
-                ActivateSelectedWeaponGameObject(thirdWeapon);
             }
         }
         GameController.Instance.UpdateSelectedWeapon();
@@ -228,14 +225,10 @@ public class PlayerInput : MonoBehaviour {
         }
     }
 
-    private void ActivateSelectedWeaponGameObject(BaseWeapon selectedWeapon) {
-        foreach(Transform weapon in weaponCamera) {
-            if(weapon.name == selectedWeapon.GetName()) {
-                
-            } else {
-                
-            }
-        }
+    private void SwitchWeapon(BaseWeapon switchedWeapon) {
+        weaponAnimation.LowerWeaponAnimation(lastSelectedWeapon.GetName());
+        weaponAnimation.RaiseWeaponAnimation(switchedWeapon.GetName());
+        lastSelectedWeapon = switchedWeapon;
     }
 
     #endregion

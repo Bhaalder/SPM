@@ -40,20 +40,23 @@ public class PlayerMovementController : MonoBehaviour{
     }
 
     private void Update() {
-        Jump();
-
+        if (!GameController.Instance.GameIsPaused) {
+            Jump();
+        }    
     }
     private void FixedUpdate(){
-        if (!isDashing) {
-            Move();
-        }                    
-        FakeExtraGravity();
-        if (Time.time <= timeToDash) {
-            rigidBody.velocity = new Vector3(0, 0, 0);
-            transform.position += (Camera.main.transform.forward * (dashForce * (1+speedMultiplier))) * Time.deltaTime;
-        } else {
-            isDashing = false;
-        }
+        if (!GameController.Instance.GameIsPaused) {
+            if (!isDashing) {
+                Move();
+            }
+            FakeExtraGravity();
+            if (Time.time <= timeToDash) {
+                rigidBody.velocity = new Vector3(0, 0, 0);
+                transform.position += (Camera.main.transform.forward * (dashForce * (1 + speedMultiplier))) * Time.deltaTime;
+            } else {
+                isDashing = false;
+            }
+        }      
     }
 
     private void Move() {

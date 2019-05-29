@@ -23,9 +23,7 @@ public class FirstPersonCamera: MonoBehaviour {
     }
 
     private void Update() {
-        if (GameController.Instance.GameIsPaused) {
-
-        } else {
+        if (!GameController.Instance.GameIsPaused) {
             CameraControl();
         }
 
@@ -37,15 +35,6 @@ public class FirstPersonCamera: MonoBehaviour {
         } else {
             mouseX += Input.GetAxis("Mouse X") * MouseSensitivity * Time.unscaledDeltaTime;
             mouseY -= Input.GetAxis("Mouse Y") * MouseSensitivity * Time.unscaledDeltaTime;
-            foreach (Transform weapon in weaponCamera) {
-                if (weapon.name == GameController.Instance.SelectedWeapon.GetName()) {
-                    weapon.gameObject.SetActive(true);
-                } else {
-                    weapon.gameObject.SetActive(false);
-                }
-                //weapon.transform.position = Vector3.SmoothDamp(weapon.transform.position, transform.position, ref velocity, 1);
-
-            }
         }
         mouseY = Mathf.Clamp(mouseY, cameraClamp.x, cameraClamp.y);
 

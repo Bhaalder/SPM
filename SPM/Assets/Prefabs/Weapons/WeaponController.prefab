@@ -67,12 +67,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 393cb5e0973ab1d46aef4d5bf7f26d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeValue: 0
-  shakeDuration: 0
-  recoilValue: 0
-  recoilDuration: 0
-  isSmooth: 0
-  smoothValue: 3
-  rifle: {fileID: 0}
-  shotgun: {fileID: 0}
-  rocketLauncher: {fileID: 0}
+  switchWeaponTime: 0.2
+  swayAmount: 0.01
+  maxSwayAmount: 0.03
+  smoothAmount: 10
+  Rifle: {fileID: 0}
+  Shotgun: {fileID: 0}
+  RocketLauncher: {fileID: 0}
+  rifleOutOfScreen: {fileID: 0}
+  shotgunOutOfScreen: {fileID: 0}
+  rocketLauncherOutOfScreen: {fileID: 0}
+  rifleInScreen: {fileID: 0}
+  shotgunInScreen: {fileID: 0}
+  rocketLauncherInScreen: {fileID: 0}
+  rifleFlash: {fileID: 0}
+  shotgunFlash: {fileID: 0}
+  rocketFlash: {fileID: 0}
