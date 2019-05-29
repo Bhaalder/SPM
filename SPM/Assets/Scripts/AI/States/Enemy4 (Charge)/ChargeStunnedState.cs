@@ -20,6 +20,12 @@ public class ChargeStunnedState : EnemyBaseState
         base.Enter();
         currentCool = stunnedForSeconds;
         //Animation Idle
+        owner.animator.SetBool("isRunning", false);
+        owner.animator.SetBool("isIdle", false);
+        owner.animator.SetBool("isAttacking", false);
+        owner.animator.SetBool("isBuilding", false);
+        owner.animator.SetBool("isCharging", false);
+        owner.animator.SetBool("isStunned", true);
     }
 
     public override void HandleUpdate()

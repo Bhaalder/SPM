@@ -22,6 +22,12 @@ public class ChargeMeleeAttackState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
+        owner.animator.SetBool("isRunning", false);
+        owner.animator.SetBool("isIdle", false);
+        owner.animator.SetBool("isAttacking", true);
+        owner.animator.SetBool("isBuilding", false);
+        owner.animator.SetBool("isCharging", false);
+        owner.animator.SetBool("isStunned", false);
     }
 
     public override void HandleUpdate()

@@ -19,6 +19,12 @@ public class ChargeAttackState : EnemyBaseState
         base.Enter();
         chargePoint = owner.player.transform.position;
         currentCooldown = 0;
+        owner.animator.SetBool("isRunning", false);
+        owner.animator.SetBool("isIdle", false);
+        owner.animator.SetBool("isAttacking", false);
+        owner.animator.SetBool("isBuilding", false);
+        owner.animator.SetBool("isCharging", true);
+        owner.animator.SetBool("isStunned", false);
     }
 
     public override void HandleUpdate()
