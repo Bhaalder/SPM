@@ -5,9 +5,13 @@ using UnityEngine;
 public class PlayerMovementController : MonoBehaviour{
     //Author: Patrik Ahlgren
 
+    public bool IsIdle;
+    public bool Jumped;
+
     [Header("Movementspeeds")]
     [SerializeField] private float movementSpeed = 14;
-    [SerializeField] private float speedMultiplier; //denna används för att öka movmentspeed med pickups, per 0,1 ökas 10%
+    [Tooltip("Denna används för att öka movmentspeed med pickups, per 0,1 ökas 10%")]
+    [SerializeField] private float speedMultiplier;
 
     [Header("Jumping")]
     [SerializeField] private float jumpForce = 10;
@@ -22,9 +26,9 @@ public class PlayerMovementController : MonoBehaviour{
     [SerializeField] private float dashDuration = 0.5f;
 
     private float timeToDash;
-    private bool isDashing;
     private float jumpCount;
-    private float distanceToGround;   
+    private float distanceToGround;
+    private bool isDashing;
 
     private Rigidbody rigidBody;
     private CapsuleCollider capsuleCollider;
@@ -35,8 +39,7 @@ public class PlayerMovementController : MonoBehaviour{
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         groundCheck = GetComponent<BoxCollider>();
-        distanceToGround = groundCheck.bounds.extents.y;
-        
+        distanceToGround = groundCheck.bounds.extents.y;       
     }
 
     private void Update() {
@@ -60,9 +63,12 @@ public class PlayerMovementController : MonoBehaviour{
     }
 
     private void Move() {
+        if (IsGrounded()) {
+            Jumped = false;
+        }
         Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        bool isIdle = movementInput.magnitude == 0;
-        if (IsGrounded() && !isIdle) {
+        IsIdle = movementInput.magnitude == 0;
+        if (IsGrounded() && !IsIdle) {
             AudioController.Instance.PlaySFX_RandomPitchAndVolume_Finish("Walking", 0.9f, 1f, 0);
             //Debug.Log("Walking!");
         } else {
@@ -77,7 +83,7 @@ public class PlayerMovementController : MonoBehaviour{
 
     private void Jump() {
         if (Input.GetButtonDown("Jump")) {           
-            if (jumpCount>0 || IsGrounded()) {
+            if (jumpCount>0 || IsGrounded()) {             
                 JumpSound();
                 jumpCount--;
                 if(rigidBody.velocity.y > 0) {
@@ -88,6 +94,7 @@ public class PlayerMovementController : MonoBehaviour{
                 rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             }
             IsGrounded();
+            Jumped = true;
         }
     }
 
@@ -106,6 +113,13 @@ public class PlayerMovementController : MonoBehaviour{
         }
     }
 
+    public bool IsGrounded() {
+        if (Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f)) {
+            jumpCount = extraJumps;
+            return true;
+        } else return false;
+    }
+
     public void SpeedMultiplier(float speedDuration, float speedChange) {
         StartCoroutine(SpeedChange(speedDuration, speedChange));
     }
@@ -122,10 +136,5 @@ public class PlayerMovementController : MonoBehaviour{
         }      
     }
 
-    private bool IsGrounded() {
-        if (Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f)) {           
-            jumpCount = extraJumps;
-            return true;
-        } else return false;
-    }
+
 }

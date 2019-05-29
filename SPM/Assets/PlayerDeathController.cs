@@ -7,7 +7,7 @@ public class PlayerDeathController : MonoBehaviour
 
     [SerializeField] private GameObject deathPanel;
     [SerializeField] private GameObject respawnManager;
-    [SerializeField] private GameObject player;
+    private GameObject player;
 
     [SerializeField] private Vector3 deathLocation;
     [SerializeField] private bool isDead;
@@ -16,12 +16,9 @@ public class PlayerDeathController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameController.Instance.Player;
+
         isDead = false;
-        if (GameController.Instance.PlayerHP == 0)
-        {
-            GameController.Instance.PlayerHP = 10;
-            GameController.Instance.PlayerArmor = 10;
-        }
     }
 
     // Update is called once per frame

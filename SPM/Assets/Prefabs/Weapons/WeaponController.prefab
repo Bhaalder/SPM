@@ -70,7 +70,9 @@ MonoBehaviour:
   switchWeaponTime: 0.2
   swayAmount: 0.01
   maxSwayAmount: 0.03
-  smoothAmount: 10
+  swaySmoothAmount: 10
+  bobbingSpeed: 0.2
+  bobbingAmount: 0.05
   Rifle: {fileID: 0}
   Shotgun: {fileID: 0}
   RocketLauncher: {fileID: 0}

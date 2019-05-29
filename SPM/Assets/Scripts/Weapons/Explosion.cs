@@ -12,8 +12,6 @@ public class Explosion : MonoBehaviour
     private GameObject explosion;
     private GameObject fire;
 
-    public bool InstantiateFire;
-
     public void Explode(float explosionForce, float damage) {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
@@ -39,8 +37,6 @@ public class Explosion : MonoBehaviour
         AudioController.Instance.Play_RandomPitch_InWorldspace("Explosion", gameObject, 0.95f, 1f);
         fire = Instantiate(fireEffect, transform.position, Quaternion.identity);
         Destroy(explosion, 3.75f);
-        if (InstantiateFire) {
-            Destroy(fire, 10f);
-        }
+        Destroy(fire, 10f);
     }
 }

@@ -23,6 +23,9 @@ public class PlayerInput : MonoBehaviour {
 
     private bool skipShootDelayToSlowmotion;
 
+    private void Awake() {
+        GameController.Instance.Player = gameObject;
+    }
     private void Start() {
         playerShoot = GetComponentInChildren<PlayerShoot>();
 
@@ -33,7 +36,7 @@ public class PlayerInput : MonoBehaviour {
         lastSelectedWeapon = selectedWeapon;
 
         slowmotion = GameController.Instance.GetComponent<Slowmotion>();
-        GameController.Instance.Player = gameObject;
+        
           
     }
 

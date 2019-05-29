@@ -11,15 +11,26 @@ public class WeaponAnimation : MonoBehaviour{
     [Header("Weapon Sway")]
     [SerializeField] private float swayAmount = 0.01f;
     [SerializeField] private float maxSwayAmount = 0.05f;
-    [SerializeField] private float smoothAmount = 10f;
+    [SerializeField] private float swaySmoothAmount = 10f;
+
+    [Header("Weapon Bobbing")]  
+    [SerializeField] private float bobbingSpeed = 0.2f;
+    [SerializeField] private float bobbingAmount = 0.1f;
+
+    private float xOffset, yOffset;
+    private float xInit, yInit;
+    private float timer = 0.0f;
 
     [Header("Weapons")]
-    public GameObject Rifle, Shotgun, RocketLauncher;
+    public GameObject Rifle;
+    public GameObject Shotgun;
+    public GameObject RocketLauncher;
     [SerializeField] private Transform rifleOutOfScreen, shotgunOutOfScreen, rocketLauncherOutOfScreen;
     [SerializeField] private Transform rifleInScreen, shotgunInScreen, rocketLauncherInScreen;
     [SerializeField] private ParticleSystem rifleFlash, shotgunFlash, rocketFlash;
     private Transform weaponCamera;
     private GameObject selectedWeapon;
+    private PlayerMovementController playerMovementController;
 
     private float recoilValue;
     private float recoilDuration;
@@ -28,7 +39,6 @@ public class WeaponAnimation : MonoBehaviour{
     private float startRecoilDuration;
 
     private bool isRecoiling = false;
-
    
 
     private void Awake() {
@@ -57,6 +67,7 @@ public class WeaponAnimation : MonoBehaviour{
         Rifle.transform.localRotation = rifleOutOfScreen.localRotation;
         Shotgun.transform.localRotation = shotgunOutOfScreen.localRotation;
         RocketLauncher.transform.localRotation = rocketLauncherOutOfScreen.localRotation;
+    
     }
 
     private void Start() {
@@ -66,20 +77,96 @@ public class WeaponAnimation : MonoBehaviour{
             }
         }
         RaiseWeaponAnimation(selectedWeapon.name);
+        playerMovementController = GameController.Instance.Player.GetComponent<PlayerMovementController>();
+        //BOBBING
+        xInit = InitialPositionOfWeapon().x;
+        yInit = InitialPositionOfWeapon().y;
 
+        xOffset = xInit;
+        yOffset = yInit;
     }
 
     private void Update() {
         if (!GameController.Instance.GameIsPaused) {
-            float swayX = Input.GetAxis("Mouse X") * swayAmount;
-            float swayY = Input.GetAxis("Mouse Y") * swayAmount;
-
-            swayX = Mathf.Clamp(swayX, -maxSwayAmount, maxSwayAmount);
-            swayY = Mathf.Clamp(swayY, -maxSwayAmount, maxSwayAmount);
-
-            Vector3 finalPosition = new Vector3(swayX, swayY, 0);
-            selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, finalPosition + InitialPositionOfWeapon(), Time.deltaTime * smoothAmount);
+            WeaponSway();
+            if (playerMovementController.Jumped && playerMovementController.IsGrounded()) {
+                selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, new Vector3(0.02f, -0.1f, -0.01f) + InitialPositionOfWeapon(), Time.deltaTime);
+            }
+            if (playerMovementController.Jumped) {
+                selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, new Vector3(-0.01f, 0.05f, 0) + InitialPositionOfWeapon(), Time.deltaTime * swaySmoothAmount);
+            }
+            WeaponBobbing();
         }      
+    }
+
+    private void WeaponBobbing() {
+        if (!playerMovementController.IsGrounded()) {
+            return;
+        }
+        float xPlayerMovement = 0.0f;
+        float yPlayerMovement = 0.0f;
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        Vector3 calculatePosition = InitialPositionOfWeapon();
+
+        if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0) {
+            timer = 0.0f;
+        } else {
+            xPlayerMovement = Mathf.Sin(timer) / 2;
+            yPlayerMovement = -Mathf.Sin(timer);
+
+            if (!playerMovementController.IsIdle) {
+                timer += bobbingSpeed * 1.2f;
+                xPlayerMovement *= 1.5f;
+                yPlayerMovement *= 1.5f;
+            } else {
+                timer += bobbingSpeed;
+            }
+
+            if (timer > Mathf.PI * 2) {
+                timer = timer - (Mathf.PI * 2);
+            }
+        }
+
+        if (xPlayerMovement != 0) {
+            float translateChange = xPlayerMovement * bobbingAmount;
+            float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
+            totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
+            translateChange = totalAxes * translateChange;
+
+            calculatePosition.x = xOffset + translateChange;
+        } else {
+            calculatePosition.x = xOffset;
+        }
+        if (yPlayerMovement != 0) {
+            float translateChange = yPlayerMovement * bobbingAmount;
+            float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
+            totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
+            translateChange = totalAxes * translateChange;
+
+            calculatePosition.y = yOffset + translateChange;
+        } else {
+            calculatePosition.y = yOffset;
+        }
+        selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, calculatePosition, Time.deltaTime);
+    }
+
+    //BOBBING
+    //public void Reset() {
+    //    xOffset = xInit;
+    //    yOffset = yInit;
+    //}
+
+    private void WeaponSway() {
+        float swayX = Input.GetAxis("Mouse X") * swayAmount;
+        float swayY = Input.GetAxis("Mouse Y") * swayAmount;
+
+        swayX = Mathf.Clamp(swayX, -maxSwayAmount, maxSwayAmount);
+        swayY = Mathf.Clamp(swayY, -maxSwayAmount, maxSwayAmount);
+
+        Vector3 finalPosition = new Vector3(swayX, swayY, 0);
+        selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, finalPosition + InitialPositionOfWeapon(), Time.deltaTime * swaySmoothAmount);
     }
 
     private Vector3 InitialPositionOfWeapon() {

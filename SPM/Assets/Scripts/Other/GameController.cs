@@ -51,10 +51,13 @@ public class GameController : MonoBehaviour {
             Destroy(gameObject);
             Debug.LogWarning("Destroyed other Singleton with name: " + gameObject.name);
         }
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         DontDestroyOnLoad(gameObject);
 
+        PlayerHP = 100;
+        PlayerArmor = 100;
         HealthSlider.value = PlayerHP;
         ArmorSlider.value = PlayerArmor;
         SlowmotionSlider.value = SlowmotionSlider.maxValue;

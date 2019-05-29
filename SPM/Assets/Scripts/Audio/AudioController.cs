@@ -422,7 +422,7 @@ public class AudioController : MonoBehaviour {
                 soundTimerDictonary[sound.name] = 0f;
             }
             sound.source.pitch = Random.Range(minPitch, maxPitch);
-            sound.source.volume = Random.Range(0.6f, 1f);
+            sound.source.volume = Random.Range(0.3f, 0.4f);
             if (CanPlaySound(sound, extraTimeIntervall)) {
                 sound.source.Play();
             }
