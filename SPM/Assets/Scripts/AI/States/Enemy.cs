@@ -46,8 +46,14 @@ public class Enemy : StateMachine
 
     public virtual void TakeDamage(float damage)
     {
+        if (damage - damageResistance < 0)
+        {
 
-        health = health - (damage - damageResistance);
+        }
+        else
+        {
+            health -= (damage - damageResistance);
+        }
         if (health <= 0)
         {
             Death();

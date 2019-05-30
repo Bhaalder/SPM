@@ -33,7 +33,14 @@ public class ChargeEnemy : Enemy
     public override void TakeDamage(float damage)
     {
 
-        health = health - (damage - damageResistance);
+        if (damage - damageResistance < 0)
+        {
+
+        }
+        else
+        {
+            health -= (damage - damageResistance);
+        }
         if (health <= 0)
         {
             gameObject.GetComponent<NavMeshAgent>().enabled = false;
