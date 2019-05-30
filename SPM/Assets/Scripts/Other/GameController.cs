@@ -136,7 +136,11 @@ public class GameController : MonoBehaviour {
             if (PlayerArmor <= 0) {
                 PlayerHP -= damage;
                 Debug.Log("Player took: "+damage + " to health");
-                AudioController.Instance.Play_RandomPitch("Hurt", 0.8f,1.0f);
+                if(damage > PlayerHP) {
+                    AudioController.Instance.PlayRandomSFX_RandomPitch(1, "Die1", "Die2", "Die3", null, null);
+                } else {
+                    AudioController.Instance.PlayRandomSFX_RandomPitch(3, "Hurt1", "Hurt2", "Hurt3", null, null);
+                }            
             } else {
                 PlayerArmor -= damage;
 
