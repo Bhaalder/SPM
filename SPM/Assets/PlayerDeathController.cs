@@ -17,7 +17,7 @@ public class PlayerDeathController : MonoBehaviour
     void Start()
     {
         player = GameController.Instance.Player;
-
+        respawnManager = GameObject.FindObjectOfType<PlayerRespawner>().gameObject;
         isDead = false;
     }
 
@@ -50,11 +50,12 @@ public class PlayerDeathController : MonoBehaviour
     }
 
     public void RespawnAtDeathLocation()
-    {
+    {        
         resetStatus();
         DisableCursor();
         PauseAndUnpauseGame();
         deathPanel.SetActive(false);
+        player.transform.position = player.transform.position + player.transform.up *5;
     }
 
     public void SaveAndExit()
