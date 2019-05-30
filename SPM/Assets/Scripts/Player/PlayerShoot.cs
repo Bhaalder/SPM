@@ -72,6 +72,7 @@ public class PlayerShoot : MonoBehaviour{
                     hit.transform.GetComponent<Enemy>().TakeDamage(weapon.GetDamage());
                     InstantiateSingleBulletHit(bulletImpactAlienGO, hit, alienWoundTimer);
                 } else if(hit.collider.gameObject.layer == 13) {
+                    hit.transform.GetComponent<DestructibleObject>().TakeDamage(weapon.GetDamage());
                     InstantiateSingleBulletHit(bulletImpactMetalGO, hit, 0.2f);
                 } else {
                     InstantiateSingleBulletHit(bulletImpactMetalGO, hit, 2.0f);

@@ -197,23 +197,23 @@ public class PlayerInput : MonoBehaviour {
 
         }
         if (Input.GetButtonDown("Weapon1") && firstWeapon != null) {
-            AbortReload();          
+            AbortReload();
             if (selectedWeapon != firstWeapon){
-                SwitchWeapon(firstWeapon);       
+                SwitchWeaponAnimation(firstWeapon);       
                 GameController.Instance.SelectedWeapon = firstWeapon;
             }
         }
         if (Input.GetButtonDown("Weapon2") && secondWeapon != null) {
             AbortReload();
             if (selectedWeapon != secondWeapon) {
-                SwitchWeapon(secondWeapon);
+                SwitchWeaponAnimation(secondWeapon);
                 GameController.Instance.SelectedWeapon = secondWeapon;
             }
         }
         if (Input.GetButtonDown("Weapon3") && thirdWeapon != null) {
             AbortReload();
             if (selectedWeapon != thirdWeapon) {
-                SwitchWeapon(thirdWeapon);
+                SwitchWeaponAnimation(thirdWeapon);
                 GameController.Instance.SelectedWeapon = thirdWeapon;
             }
         }
@@ -228,7 +228,7 @@ public class PlayerInput : MonoBehaviour {
         }
     }
 
-    private void SwitchWeapon(BaseWeapon switchedWeapon) {
+    private void SwitchWeaponAnimation(BaseWeapon switchedWeapon) {
         weaponAnimation.LowerWeaponAnimation(lastSelectedWeapon.GetName());
         weaponAnimation.RaiseWeaponAnimation(switchedWeapon.GetName());
         lastSelectedWeapon = switchedWeapon;

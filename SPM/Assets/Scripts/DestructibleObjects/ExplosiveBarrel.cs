@@ -7,7 +7,7 @@ public class ExplosiveBarrel : DestructibleObject{
 
     public override void Destroy() {
         if (!IsDestroyed) {
-            GetComponent<Explosion>().Explode(10, 35);
+            GetComponent<Explosion>().Explode(5, 35);
             Destroy(gameObject);
             IsDestroyed = true;
         }
