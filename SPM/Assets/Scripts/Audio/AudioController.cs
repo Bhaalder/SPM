@@ -363,6 +363,9 @@ public class AudioController : MonoBehaviour {
         float startSoundValue = sound.source.volume;
         if (continueFadeOut) {
             for (float time = 0f; time < fadeDuration; time += Time.unscaledDeltaTime) {
+                if (sound.source.volume <= 0.01) {
+                    sound.source.Stop();
+                }
                 float normalizedTime = time / fadeDuration;
                 sound.source.volume = Mathf.Lerp(startSoundValue, soundVolume, normalizedTime);
                 yield return null;

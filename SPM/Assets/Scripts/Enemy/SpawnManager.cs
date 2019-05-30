@@ -123,6 +123,7 @@ public class SpawnManager : MonoBehaviour
                 if (isArenaSpawner)
                 {
                     GameController.Instance.SceneCompletedSequence(true);
+                    AudioController.Instance.FadeOut("Song4Loop", 5, 0);
                     GameObject sceneManager = GameObject.Find("SceneManager");
                     sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
                     door.SetActive(false);

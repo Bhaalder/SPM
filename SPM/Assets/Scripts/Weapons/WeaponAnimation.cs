@@ -114,7 +114,18 @@ public class WeaponAnimation : MonoBehaviour{
         return Vector3.zero;
     }
 
-    #region WeaponBobbing and Sway Methods
+    #region WeaponSway and Bobbing Methods
+    private void WeaponSway() {
+        float swayX = Input.GetAxis("Mouse X") * swayAmount;
+        float swayY = Input.GetAxis("Mouse Y") * swayAmount;
+
+        swayX = Mathf.Clamp(swayX, -maxSwayAmount, maxSwayAmount);
+        swayY = Mathf.Clamp(swayY, -maxSwayAmount, maxSwayAmount);
+
+        Vector3 finalPosition = new Vector3(swayX, swayY, 0);
+        selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, finalPosition + InitialPositionOfWeapon(), Time.deltaTime * swaySmoothAmount);
+    }
+
     private void WeaponBobbing() {
         if (!playerMovementController.IsGrounded()) {
             return;
@@ -168,16 +179,6 @@ public class WeaponAnimation : MonoBehaviour{
         selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, calculatePosition, Time.deltaTime);
     }
 
-    private void WeaponSway() {
-        float swayX = Input.GetAxis("Mouse X") * swayAmount;
-        float swayY = Input.GetAxis("Mouse Y") * swayAmount;
-
-        swayX = Mathf.Clamp(swayX, -maxSwayAmount, maxSwayAmount);
-        swayY = Mathf.Clamp(swayY, -maxSwayAmount, maxSwayAmount);
-
-        Vector3 finalPosition = new Vector3(swayX, swayY, 0);
-        selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, finalPosition + InitialPositionOfWeapon(), Time.deltaTime * swaySmoothAmount);
-    }
     #endregion
 
     #region Raise/Lower Weapon Methods

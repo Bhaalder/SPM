@@ -26,6 +26,7 @@ public class ArenaButton : MonoBehaviour
             obj1.SetActive(false);
             obj2.SetActive(false);
             level1ArenaDoors.ArenaChange();
+        AudioController.Instance.Play_ThenPlay("Song4Start", "Song4Loop");
             Destroy(gameObject);
     }
 }
