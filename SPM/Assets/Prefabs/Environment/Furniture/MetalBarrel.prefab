@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 2451468729564536436}
   - component: {fileID: 8158786093129917069}
   - component: {fileID: 7598320656930895950}
-  m_Layer: 0
+  - component: {fileID: 7892150656655463419}
+  - component: {fileID: 8463563093689833559}
+  m_Layer: 13
   m_Name: MetalBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,3 +94,32 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 4168533753742039702, guid: 4efb8ca03f8b402478e7a5a2e5086f17, type: 3}
+--- !u!114 &7892150656655463419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7567457728683431505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd84be9725389fd42973d031e9fc263e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  durability: 10
+--- !u!114 &8463563093689833559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7567457728683431505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc2a279d43bbd064dad442e43fd770a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionRadius: 10
+  explosionEffect: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b,
+    type: 3}
+  fireEffect: {fileID: 1000010823978654, guid: 3228a22491941734bb83ad691d17fcb9, type: 3}

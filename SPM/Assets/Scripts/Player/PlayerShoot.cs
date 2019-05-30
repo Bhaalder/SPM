@@ -71,6 +71,8 @@ public class PlayerShoot : MonoBehaviour{
                     GameController.Instance.ShowHitmark(0.2f);
                     hit.transform.GetComponent<Enemy>().TakeDamage(weapon.GetDamage());
                     InstantiateSingleBulletHit(bulletImpactAlienGO, hit, alienWoundTimer);
+                } else if(hit.collider.gameObject.layer == 13) {
+                    InstantiateSingleBulletHit(bulletImpactMetalGO, hit, 0.2f);
                 } else {
                     InstantiateSingleBulletHit(bulletImpactMetalGO, hit, 2.0f);
                 }
@@ -99,17 +101,12 @@ public class PlayerShoot : MonoBehaviour{
                         hits[x].rigidbody.AddForce(-hits[x].normal * weapon.GetImpactForce());
                     }
                     if (hits[x].collider.gameObject.layer == 9){
-
-                        float damageFallOff = Vector3.Distance(GameController.Instance.Player.transform.position, hits[x].point);
-                        
-                        if (damageFallOff > weapon.GetDamage()) {
-                            damageFallOff = (weapon.GetDamage() - 1);
-                        }
-                        float damage = weapon.GetDamage() - damageFallOff;
                         GameController.Instance.ShowHitmark(0.5f);
-                        hits[x].transform.GetComponent<Enemy>().TakeDamage(damage);
-                        //Debug.Log(damage);
+                        hits[x].transform.GetComponent<Enemy>().TakeDamage(ShotGunHits(hits, x, weapon.GetDamage()));
                         InstantiateMultipleBulletHits(bulletImpactAlienGO, hits, x, alienWoundTimer);                       
+                    } else if (hits[x].collider.gameObject.layer == 13) {
+                        hits[x].transform.GetComponent<ExplosiveBarrel>().TakeDamage(ShotGunHits(hits, x, weapon.GetDamage()));
+                        InstantiateMultipleBulletHits(bulletImpactMetalSGGO, hits, x, 0.2f);
                     } else {
                         InstantiateMultipleBulletHits(bulletImpactMetalSGGO, hits, x, 2.0f);
                     }               
@@ -121,6 +118,15 @@ public class PlayerShoot : MonoBehaviour{
         else if (weapon.GetAmmoInClip() <= 0){
             Debug.Log("Out of Ammo");
         }
+    }
+
+    private float ShotGunHits(RaycastHit[] hits, int hit, float damage) {
+        float damageFallOff = Vector3.Distance(GameController.Instance.Player.transform.position, hits[hit].point);
+        if (damageFallOff > damage) {
+            damageFallOff = (damage - 1);
+        }
+        float finalDamage = damage - damageFallOff;
+        return finalDamage;
     }
 
     private void ShootProjectile(ProjectileWeapon weapon) {

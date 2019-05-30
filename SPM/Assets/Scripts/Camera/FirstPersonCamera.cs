@@ -26,7 +26,6 @@ public class FirstPersonCamera: MonoBehaviour {
         if (!GameController.Instance.GameIsPaused) {
             CameraControl();
         }
-
     }
 
     private void CameraControl() {

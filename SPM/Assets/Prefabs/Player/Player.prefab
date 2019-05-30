@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49676c7f452b02f40851a42692271f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsIdle: 0
+  Jumped: 0
   movementSpeed: 14
   speedMultiplier: 0
   jumpForce: 10
@@ -165,10 +167,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowmotion: {fileID: 0}
-  weaponCamera: {fileID: 0}
   startTeleport: {fileID: 0}
   secondTeleport: {fileID: 0}
   thirdTeleport: {fileID: 0}
+  IsReloading: 0
 --- !u!1 &3047494121147921277
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerMask:
     serializedVersion: 2
-    m_Bits: 1585
+    m_Bits: 9777
   bulletImpactMetalGO: {fileID: 1000010355441670, guid: 02a509a7fa70ed740ba4197e20c5d32d,
     type: 3}
   bulletImpactMetalSGGO: {fileID: 1000010355441670, guid: 0ec414f8eef3ddc498aa453a60e700d0,
@@ -226,9 +228,6 @@ MonoBehaviour:
   shotgunRecoil: 4
   shotgunRecoilDuration: 0.3
   weaponCamera: {fileID: 0}
-  rifleFlash: {fileID: 0}
-  shotgunFlash: {fileID: 0}
-  rocketFlash: {fileID: 0}
 --- !u!1 &3549527072420538944
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour {
     [SerializeField] private Text weaponNameText, weaponAmmoText;
     [SerializeField] private GameObject weaponImage;
 
-    public int PlayerHP, PlayerArmor;
+    public float PlayerHP, PlayerArmor;
 
     public bool GameIsPaused, PlayerIsInteracting;
     public bool GameIsSlowmotion = false;
@@ -130,7 +130,7 @@ public class GameController : MonoBehaviour {
         ArmorSlider.value = PlayerArmor;
     }
 
-    public void TakeDamage(int damage){
+    public void TakeDamage(float damage){
         if (Time.time >= invulnerableState) {
             invulnerableState = Time.time + invulnerableStateTime;
             if (PlayerArmor <= 0) {
