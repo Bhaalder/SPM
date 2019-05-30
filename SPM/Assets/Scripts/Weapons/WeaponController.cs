@@ -9,10 +9,17 @@ public class WeaponController : MonoBehaviour{
     [SerializeField] private GameObject enemyWeaponProjectileGO;
     [SerializeField] private Sprite[] crosshair;
 
-    [SerializeField] private float RifleDmg;
-    [SerializeField] private float ShotgunDmg;
-    [SerializeField] private float RocketLDmg;
-
+    [Header ("Weapon Damage")]
+    [SerializeField] private float rifleDmg = 7.5f;
+    [SerializeField] private float shotgunDmg = 19f;
+    [SerializeField] private float rocketLDmg = 35f;
+    [Header("Weapon Ammo")]
+    [SerializeField] private int rifleClipMaxAmmo = 50;
+    [SerializeField] private int shotgunClipMaxAmmo = 8;
+    [SerializeField] private int rocketLClipMaxAmmo = 3;
+    [SerializeField] private int rifleTotalAmmoStart = 500;
+    [SerializeField] private int shotgunTotalAmmoStart = 80;
+    [SerializeField] private int rocketLTotalAmmoStart = 9;
 
     private static WeaponController _instance;
 
@@ -31,17 +38,17 @@ public class WeaponController : MonoBehaviour{
     }
 
     public BaseWeapon GetRifle() {
-        BaseWeapon rifle = new BaseWeapon("Rifle", RifleDmg, 150, 9f, 1.6f, 0.1f, 15, 50, 50, 500, crosshair[0]);
+        BaseWeapon rifle = new BaseWeapon("Rifle", rifleDmg, 150, 9f, 1.6f, 0.1f, 15, rifleClipMaxAmmo, rifleClipMaxAmmo, rifleTotalAmmoStart, crosshair[0]);
         return rifle;
     }
 
     public BaseWeapon GetShotgun() {
-        BaseWeapon shotgun = new BaseWeapon("Shotgun", ShotgunDmg, 30, 2f, 2f, 0.1f, 30, 8, 8, 200, crosshair[1]);
+        BaseWeapon shotgun = new BaseWeapon("Shotgun", shotgunDmg, 20, 2f, 2f, 0.1f, 30, shotgunClipMaxAmmo, shotgunClipMaxAmmo, shotgunTotalAmmoStart, crosshair[1]);
         return shotgun;
     }
 
     public ProjectileWeapon GetRocketLauncher() {
-        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", RocketLDmg, 100, 1.15f, 3.3f, 0.01f, 20, 15, 3, 3, 15, rocketLaucherProjectileGO, crosshair[2]);
+        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", rocketLDmg, 100, 1.15f, 3.3f, 0.01f, 20, 15, rocketLClipMaxAmmo, rocketLClipMaxAmmo, rocketLTotalAmmoStart, rocketLaucherProjectileGO, crosshair[2]);
         return rocketLauncher;
     }
 

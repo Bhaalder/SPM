@@ -104,6 +104,7 @@ public class PlayerShoot : MonoBehaviour{
                     if (hits[x].collider.gameObject.layer == 9){
                         GameController.Instance.ShowHitmark(0.5f);
                         hits[x].transform.GetComponent<Enemy>().TakeDamage(ShotGunHits(hits, x, weapon.GetDamage()));
+                        Debug.Log(ShotGunHits(hits, x, weapon.GetDamage()));
                         InstantiateMultipleBulletHits(bulletImpactAlienGO, hits, x, alienWoundTimer);                       
                     } else if (hits[x].collider.gameObject.layer == 13) {
                         hits[x].transform.GetComponent<ExplosiveBarrel>().TakeDamage(ShotGunHits(hits, x, weapon.GetDamage()));
@@ -123,8 +124,8 @@ public class PlayerShoot : MonoBehaviour{
 
     private float ShotGunHits(RaycastHit[] hits, int hit, float damage) {
         float damageFallOff = Vector3.Distance(GameController.Instance.Player.transform.position, hits[hit].point);
-        if (damageFallOff > damage) {
-            damageFallOff = (damage - 1);
+        if (damageFallOff > (damage-5)) {
+            damageFallOff = (damage - 5.1f);
         }
         float finalDamage = damage - damageFallOff;
         return finalDamage;

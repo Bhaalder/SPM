@@ -52,9 +52,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 27bd57c3d6936ab4a80e2cc0e16fe856, type: 3}
   - {fileID: 21300000, guid: af0d78a039069af4a838fe7438346926, type: 3}
   - {fileID: 21300000, guid: 46728143cdec4fd4380e7ca6e4ae0ed9, type: 3}
-  RifleDmg: 7.5
-  ShotgunDmg: 19
-  RocketLDmg: 35
+  rifleDmg: 7.5
+  shotgunDmg: 19
+  rocketLDmg: 35
+  rifleClipMaxAmmo: 50
+  shotgunClipMaxAmmo: 8
+  rocketLClipMaxAmmo: 3
+  rifleTotalAmmoStart: 500
+  shotgunTotalAmmoStart: 80
+  rocketLTotalAmmoStart: 9
 --- !u!114 &-4835157186327209583
 MonoBehaviour:
   m_ObjectHideFlags: 0
