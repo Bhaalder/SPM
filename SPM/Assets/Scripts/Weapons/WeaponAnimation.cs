@@ -78,7 +78,7 @@ public class WeaponAnimation : MonoBehaviour{
         }
         RaiseWeaponAnimation(selectedWeapon.name);
         playerMovementController = GameController.Instance.Player.GetComponent<PlayerMovementController>();
-        //BOBBING
+
         xInit = InitialPositionOfWeapon().x;
         yInit = InitialPositionOfWeapon().y;
 
@@ -99,6 +99,22 @@ public class WeaponAnimation : MonoBehaviour{
         }      
     }
 
+    private Vector3 InitialPositionOfWeapon() {
+        switch (selectedWeapon.name) {
+            case "Rifle":
+                return rifleInScreen.transform.localPosition;
+            case "Shotgun":
+                return shotgunInScreen.transform.localPosition;
+            case "Rocket Launcher":
+                return rocketLauncherInScreen.transform.localPosition;
+            default:
+                Debug.LogWarning("InitialPositionOfWeapon, weaponName not found");
+                break;
+        }
+        return Vector3.zero;
+    }
+
+    #region WeaponBobbing and Sway Methods
     private void WeaponBobbing() {
         if (!playerMovementController.IsGrounded()) {
             return;
@@ -152,12 +168,6 @@ public class WeaponAnimation : MonoBehaviour{
         selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, calculatePosition, Time.deltaTime);
     }
 
-    //BOBBING
-    //public void Reset() {
-    //    xOffset = xInit;
-    //    yOffset = yInit;
-    //}
-
     private void WeaponSway() {
         float swayX = Input.GetAxis("Mouse X") * swayAmount;
         float swayY = Input.GetAxis("Mouse Y") * swayAmount;
@@ -168,36 +178,23 @@ public class WeaponAnimation : MonoBehaviour{
         Vector3 finalPosition = new Vector3(swayX, swayY, 0);
         selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, finalPosition + InitialPositionOfWeapon(), Time.deltaTime * swaySmoothAmount);
     }
+    #endregion
 
-    private Vector3 InitialPositionOfWeapon() {
-        switch (selectedWeapon.name) {
-            case "Rifle":
-                return rifleInScreen.transform.localPosition;
-            case "Shotgun":
-                return shotgunInScreen.transform.localPosition;
-            case "Rocket Launcher":
-                return rocketLauncherInScreen.transform.localPosition;
-            default:
-                Debug.LogWarning("InitialPositionOfWeapon, weaponName not found");
-                break;
-        }
-        return Vector3.zero;
-    }
-
+    #region Raise/Lower Weapon Methods
     public void RaiseWeaponAnimation(string weapon) {
         string weaponName = weapon;
         switch (weaponName){
             case "Rifle":
                 selectedWeapon = Rifle;
-                WeaponPosition(Rifle, switchWeaponTime, rifleOutOfScreen, rifleInScreen);         
+                MoveWeaponPosition(Rifle, switchWeaponTime, rifleOutOfScreen, rifleInScreen);         
                 break;
             case "Shotgun":
                 selectedWeapon = Shotgun;
-                WeaponPosition(Shotgun, switchWeaponTime, shotgunOutOfScreen, shotgunInScreen);             
+                MoveWeaponPosition(Shotgun, switchWeaponTime, shotgunOutOfScreen, shotgunInScreen);             
                 break;
             case "Rocket Launcher":
                 selectedWeapon = RocketLauncher;
-                WeaponPosition(RocketLauncher, switchWeaponTime, rocketLauncherOutOfScreen, rocketLauncherInScreen);               
+                MoveWeaponPosition(RocketLauncher, switchWeaponTime, rocketLauncherOutOfScreen, rocketLauncherInScreen);               
                 break;
             default:
                 Debug.LogWarning("RaiseWeaponAnimation, weaponName not found");
@@ -211,13 +208,13 @@ public class WeaponAnimation : MonoBehaviour{
         string weaponName = weapon;
         switch (weaponName) {
             case "Rifle":
-                WeaponPosition(Rifle, switchWeaponTime, Rifle.transform, rifleOutOfScreen);
+                MoveWeaponPosition(Rifle, switchWeaponTime, Rifle.transform, rifleOutOfScreen);
                 break;
             case "Shotgun":
-                WeaponPosition(Shotgun, switchWeaponTime, Shotgun.transform, shotgunOutOfScreen);
+                MoveWeaponPosition(Shotgun, switchWeaponTime, Shotgun.transform, shotgunOutOfScreen);
                 break;
             case "Rocket Launcher":
-                WeaponPosition(RocketLauncher, switchWeaponTime, RocketLauncher.transform, rocketLauncherOutOfScreen);
+                MoveWeaponPosition(RocketLauncher, switchWeaponTime, RocketLauncher.transform, rocketLauncherOutOfScreen);
                 break;
             default:
                 Debug.LogWarning("LowerWeaponAnimation, weaponName not found");
@@ -226,7 +223,9 @@ public class WeaponAnimation : MonoBehaviour{
 
         //Debug.Log("Lowering " + weaponName + "!");
     }
+    #endregion
 
+    #region Reload/Shoot Weapon Methods
     public void ReloadWeaponAnimation(string weapon) {
         string weaponName = weapon;
         switch (weaponName) {
@@ -278,7 +277,9 @@ public class WeaponAnimation : MonoBehaviour{
 
         //Debug.Log("Shooting " + weaponName + "!");
     }
+    #endregion
 
+    #region Recoil Methods
     private void RecoilShake(float value, float duration, GameObject weapon) {
         recoilValue += value;
         startRecoilValue = recoilValue;
@@ -288,10 +289,6 @@ public class WeaponAnimation : MonoBehaviour{
         if (!isRecoiling) {
             StartCoroutine(Recoil(weapon));
         }
-    }
-
-    private void WeaponPosition(GameObject weapon, float moveDuration, Transform startPos, Transform endPos) {
-        StartCoroutine(MoveWeapon(weapon, moveDuration, startPos, endPos));
     }
 
     private IEnumerator Recoil(GameObject weapon) {
@@ -317,6 +314,12 @@ public class WeaponAnimation : MonoBehaviour{
 
         isRecoiling = false;
     }
+    #endregion
+
+    #region MoveWeapon Methods
+    private void MoveWeaponPosition(GameObject weapon, float moveDuration, Transform startPos, Transform endPos) {
+        StartCoroutine(MoveWeapon(weapon, moveDuration, startPos, endPos));
+    }
 
     private IEnumerator MoveWeapon(GameObject weapon, float moveDuration, Transform startPos, Transform endPos) {
         Quaternion startRot = startPos.transform.localRotation;
@@ -332,6 +335,5 @@ public class WeaponAnimation : MonoBehaviour{
         weapon.transform.localRotation = Quaternion.identity;
         weapon.transform.localPosition = endPos.localPosition;
     }
-
-
+    #endregion
 }
