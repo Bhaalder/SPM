@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c945d68d8853f4e9bf748733798d38, type: 3}
   m_Name: ChargeMeleeAttackState
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  chaseDistance: 40
+  moveSpeed: 0
+  chaseDistance: 5
   cooldown: 2
   damage: 30
-  attackDistance: 10
+  attackDistance: 5

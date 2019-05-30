@@ -22,9 +22,10 @@ public class ArenaButton : MonoBehaviour
             sceneManagerScript.buttonIsPressed = true;
             Debug.Log("Knappen tryckt");
             spawnerScript.GetComponent<SpawnManager>().InitializeSpawner();
-            Destroy(gameObject);
+            
             obj1.SetActive(false);
             obj2.SetActive(false);
             level1ArenaDoors.ArenaChange();
+            Destroy(gameObject);
     }
 }
