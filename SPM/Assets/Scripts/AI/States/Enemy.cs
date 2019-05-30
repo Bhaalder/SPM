@@ -83,9 +83,10 @@ public class Enemy : StateMachine
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" && animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack")) //Change "MeleeAttack" to the tag name of the attack!
+        if (CanDamage && collision.gameObject.tag == "Player" && animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack")) //Change "MeleeAttack" to the tag name of the attack!
         {
             DoMeleeDamage();
+            CanDamage = false;
         }
     }
 
