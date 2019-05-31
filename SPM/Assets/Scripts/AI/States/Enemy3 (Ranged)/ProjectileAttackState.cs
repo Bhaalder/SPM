@@ -21,15 +21,13 @@ public class ProjectileAttackState : EnemyBaseState
         base.Enter();
         enemyWeapon = WeaponController.Instance.GetEnemyProjectileWeapon();
         //Animation
-        owner.animator.SetBool("isIdle", false);
-        owner.animator.SetBool("isRunning", false);
-        owner.animator.SetBool("isAttacking", true);
+        
         cooldown = enemyWeapon.GetFireRate();
         currentCool = cooldown;
     }
 
     public override void HandleUpdate()
-    {
+    { 
         Attack();
 
         if (DistanceToPlayer() > chaseDistance || CanSeePlayer() == false)
@@ -50,8 +48,10 @@ public class ProjectileAttackState : EnemyBaseState
         if (CanSeePlayer() == true)
         {
             owner.transform.LookAt(owner.player.transform, Vector3.up);
-            
-            ProjectileAttack(timeBeforeAttack);
+            owner.animator.SetBool("isIdle", false);
+            owner.animator.SetBool("isRunning", false);
+            owner.animator.SetBool("isAttacking", true);
+
 
         }
 
