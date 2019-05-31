@@ -7,7 +7,7 @@ public class PlayerDeathController : MonoBehaviour
 
     [SerializeField] private GameObject deathPanel;
     [SerializeField] private GameObject respawnManager;
-    private GameObject player;
+    [SerializeField] private GameObject player;
 
     [SerializeField] private Vector3 deathLocation;
     [SerializeField] private bool isDead;
@@ -16,8 +16,7 @@ public class PlayerDeathController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameController.Instance.Player;
-        respawnManager = GameObject.FindObjectOfType<PlayerRespawner>().gameObject;
+        LoadGameObjectReferences();
         isDead = false;
     }
 
@@ -27,6 +26,7 @@ public class PlayerDeathController : MonoBehaviour
         if (GameController.Instance.PlayerHP <= 0 && isDead == false)
         {
             isDead = true;
+            LoadGameObjectReferences();
             OnPlayerDeath(player.transform.position);
         }
     }
@@ -78,6 +78,12 @@ public class PlayerDeathController : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void LoadGameObjectReferences()
+    {
+        player = GameController.Instance.Player;
+        respawnManager = GameObject.FindObjectOfType<PlayerRespawner>().gameObject;
     }
 
 
