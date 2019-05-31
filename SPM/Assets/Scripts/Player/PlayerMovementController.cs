@@ -86,10 +86,10 @@ public class PlayerMovementController : MonoBehaviour{
         if (Input.GetButtonDown("Jump")) {
             if (jumpCount>0 || IsGrounded()) {
                 jumpCount--;
-                --checkJumpSound;
+                checkJumpSound--;
                 if (checkJumpSound == 0) {
                     AudioController.Instance.PlayRandomSFX_RandomPitch(3, "Jump1", "Jump2", "Jump3", null, null);
-                    checkJumpSound = 2;
+                    checkJumpSound = 1;
                 }
                 if (rigidBody.velocity.y > 0) {
                     rigidBody.velocity = new Vector3(0, rigidBody.velocity.y, 0);
@@ -122,7 +122,7 @@ public class PlayerMovementController : MonoBehaviour{
         if (Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f)) {
             jumpCount = extraJumps;
             return true;
-        } else return false;
+        } else return false;           
     }
 
     public void SpeedMultiplier(float speedDuration, float speedChange) {

@@ -112,6 +112,7 @@ public class GameController : MonoBehaviour {
     public void GamePaused() {
         if (GameIsPaused) {
             GameIsPaused = false;
+            AudioController.Instance.PauseAllSound(false);
             if (GameIsSlowmotion) {
                 GetComponent<Slowmotion>().SlowTime();
             } else {
@@ -120,6 +121,7 @@ public class GameController : MonoBehaviour {
             }
         } else {
             GameIsPaused = true;
+            AudioController.Instance.PauseAllSound(true);
             Time.timeScale = 0f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }

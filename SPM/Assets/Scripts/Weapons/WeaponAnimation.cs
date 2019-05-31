@@ -89,13 +89,14 @@ public class WeaponAnimation : MonoBehaviour{
     private void Update() {
         if (!GameController.Instance.GameIsPaused) {
             WeaponSway();
+            WeaponBobbing();
             if (playerMovementController.Jumped && playerMovementController.IsGrounded()) {
                 selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, new Vector3(0.02f, -0.1f, -0.01f) + InitialPositionOfWeapon(), Time.deltaTime);
             }
             if (playerMovementController.Jumped) {
                 selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, new Vector3(-0.01f, 0.05f, 0) + InitialPositionOfWeapon(), Time.deltaTime * swaySmoothAmount);
             }
-            WeaponBobbing();
+            
         }      
     }
 
@@ -187,15 +188,15 @@ public class WeaponAnimation : MonoBehaviour{
         switch (weaponName){
             case "Rifle":
                 selectedWeapon = Rifle;
-                MoveWeaponPosition(Rifle, switchWeaponTime, rifleOutOfScreen, rifleInScreen);         
+                MoveWeaponPosition(Rifle, switchWeaponTime, Rifle.transform, rifleInScreen);         
                 break;
             case "Shotgun":
                 selectedWeapon = Shotgun;
-                MoveWeaponPosition(Shotgun, switchWeaponTime, shotgunOutOfScreen, shotgunInScreen);             
+                MoveWeaponPosition(Shotgun, switchWeaponTime, Shotgun.transform, shotgunInScreen);             
                 break;
             case "Rocket Launcher":
                 selectedWeapon = RocketLauncher;
-                MoveWeaponPosition(RocketLauncher, switchWeaponTime, rocketLauncherOutOfScreen, rocketLauncherInScreen);               
+                MoveWeaponPosition(RocketLauncher, switchWeaponTime, RocketLauncher.transform, rocketLauncherInScreen);               
                 break;
             default:
                 Debug.LogWarning("RaiseWeaponAnimation, weaponName not found");
@@ -226,24 +227,7 @@ public class WeaponAnimation : MonoBehaviour{
     }
     #endregion
 
-    #region Reload/Shoot Weapon Methods
-    public void ReloadWeaponAnimation(string weapon) {
-        string weaponName = weapon;
-        switch (weaponName) {
-            case "Rifle":
-                break;
-            case "Shotgun":
-                break;
-            case "Rocket Launcher":
-                break;
-            default:
-                Debug.LogWarning("ReloadWeaponAnimation, weaponName not found");
-                break;
-        }
-
-        //Debug.Log("Reloading " + weaponName + "!");
-    }
-
+    #region Shoot/Reload Weapon Methods
     public void ShootWeaponAnimation(string weapon) {
         string weaponName = weapon;
         switch (weaponName) {
@@ -278,6 +262,72 @@ public class WeaponAnimation : MonoBehaviour{
 
         //Debug.Log("Shooting " + weaponName + "!");
     }
+
+    public void ReloadWeaponAnimation(string weapon) {
+        string weaponName = weapon;
+        switch (weaponName) {
+            case "Rifle":
+                
+                StartCoroutine(ReloadAnimationSequence(Rifle, GameController.Instance.ReloadSlider.maxValue, Rifle.transform, rifleOutOfScreen));
+                break;
+            case "Shotgun":
+                
+                StartCoroutine(ReloadAnimationSequence(Shotgun, GameController.Instance.ReloadSlider.maxValue, Shotgun.transform, shotgunOutOfScreen));
+                break;
+            case "Rocket Launcher":
+                
+                StartCoroutine(ReloadAnimationSequence(RocketLauncher, GameController.Instance.ReloadSlider.maxValue, RocketLauncher.transform, rocketLauncherOutOfScreen));
+                break;
+            default:
+                Debug.LogWarning("ReloadWeaponAnimation, weaponName not found");
+                break;
+        }
+
+        //Debug.Log("Reloading " + weaponName + "!");
+    }
+
+
+
+    #endregion
+
+    #region MoveWeapon Methods
+    private void MoveWeaponPosition(GameObject weapon, float moveDuration, Transform startPos, Transform endPos) {
+        StartCoroutine(MoveWeaponSequence(weapon, moveDuration, startPos, endPos));
+    }
+
+    private IEnumerator MoveWeaponSequence(GameObject weapon, float moveDuration, Transform startPos, Transform endPos) {
+        Quaternion startRot = startPos.transform.localRotation;
+        Quaternion endRot = endPos.transform.localRotation;
+
+        for (float time = 0f; time < moveDuration; time += Time.unscaledDeltaTime) {
+            float normalizedTime = time / moveDuration;
+            weapon.transform.localRotation = Quaternion.Lerp(startRot, endRot, normalizedTime);
+            weapon.transform.localPosition = Vector3.Lerp(startPos.localPosition, endPos.localPosition, normalizedTime);
+            yield return null;
+        }
+
+        weapon.transform.localRotation = Quaternion.identity;
+        weapon.transform.localPosition = endPos.localPosition;
+    }
+
+    private IEnumerator ReloadAnimationSequence(GameObject weapon, float moveDuration, Transform startPos, Transform endPos) {
+        Quaternion startRot = startPos.transform.localRotation;
+        Quaternion endRot = endPos.transform.localRotation * new Quaternion(-0.4f, 1, 1, 1);
+
+        for (float time = 0f; time < moveDuration; time += Time.unscaledDeltaTime) {
+            if (!GameController.Instance.Player.GetComponent<PlayerInput>().IsReloading) {
+                time += 10;
+            }
+            float normalizedTime = time / moveDuration;
+            weapon.transform.localRotation = Quaternion.Lerp(startRot, endRot, normalizedTime);
+            weapon.transform.localPosition = Vector3.Lerp(startPos.localPosition, endPos.localPosition/2, normalizedTime);
+            yield return null;
+        }
+
+        weapon.transform.localRotation = Quaternion.identity;
+        weapon.transform.localPosition = endPos.localPosition;
+    }
+
     #endregion
 
     #region Recoil Methods
@@ -288,11 +338,11 @@ public class WeaponAnimation : MonoBehaviour{
         startRecoilDuration = recoilDuration;
 
         if (!isRecoiling) {
-            StartCoroutine(Recoil(weapon));
+            StartCoroutine(RecoilSequence(weapon));
         }
     }
 
-    private IEnumerator Recoil(GameObject weapon) {
+    private IEnumerator RecoilSequence(GameObject weapon) {
         isRecoiling = true;
         Vector3 rotationAmount;
 
@@ -317,24 +367,5 @@ public class WeaponAnimation : MonoBehaviour{
     }
     #endregion
 
-    #region MoveWeapon Methods
-    private void MoveWeaponPosition(GameObject weapon, float moveDuration, Transform startPos, Transform endPos) {
-        StartCoroutine(MoveWeapon(weapon, moveDuration, startPos, endPos));
-    }
 
-    private IEnumerator MoveWeapon(GameObject weapon, float moveDuration, Transform startPos, Transform endPos) {
-        Quaternion startRot = startPos.transform.localRotation;
-        Quaternion endRot = endPos.transform.localRotation;
-
-        for (float time = 0f; time < moveDuration; time += Time.unscaledDeltaTime) {
-            float normalizedTime = time / moveDuration;        
-            weapon.transform.localRotation = Quaternion.Lerp(startRot, endRot, normalizedTime);
-            weapon.transform.localPosition = Vector3.Lerp(startPos.localPosition, endPos.localPosition, normalizedTime);
-            yield return null;
-        }
-
-        weapon.transform.localRotation = Quaternion.identity;
-        weapon.transform.localPosition = endPos.localPosition;
-    }
-    #endregion
 }

@@ -25,6 +25,7 @@ public class PlayerInput : MonoBehaviour {
 
     private void Awake() {
         GameController.Instance.Player = gameObject;
+        IsReloading = false;
     }
     private void Start() {
         playerShoot = GetComponentInChildren<PlayerShoot>();
@@ -97,11 +98,12 @@ public class PlayerInput : MonoBehaviour {
         int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
 
         if (ammoInClip != maxAmmoInClip && totalAmmoLeft > 0 && !IsReloading) {
-            PlayReloadSound();
+            PlayReloadSound();          
             int ammoSpent = maxAmmoInClip - ammoInClip;
             GameController.Instance.ReloadSlider.gameObject.SetActive(true);
             GameController.Instance.ReloadSlider.maxValue = selectedWeapon.GetReloadTime();
             IsReloading = true;
+            weaponAnimation.ReloadWeaponAnimation(selectedWeapon.GetName());
         }
     }
 
@@ -115,6 +117,7 @@ public class PlayerInput : MonoBehaviour {
             }          
         }
         if (GameController.Instance.ReloadSlider.value >= selectedWeapon.GetReloadTime()) {
+            weaponAnimation.RaiseWeaponAnimation(selectedWeapon.GetName());
             int ammoInClip = selectedWeapon.GetAmmoInClip();
             int maxAmmoInClip = selectedWeapon.GetMaxAmmoInClip();
             int totalAmmoLeft = selectedWeapon.GetTotalAmmoLeft();
