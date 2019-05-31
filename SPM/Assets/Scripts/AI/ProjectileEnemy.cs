@@ -27,4 +27,11 @@ public class ProjectileEnemy : Enemy
             isDamaged = true;
         }
     }
+    public void ProjectileAttack()
+    {
+        GameObject enemyProj = Instantiate(enemyWeapon.GetProjectile(), owner.transform.position + owner.transform.forward * 2 + projectileOffset, Quaternion.identity);
+        enemyProj.GetComponent<EnemyProjectile>().SetProjectileSpeed(enemyWeapon.GetProjectileSpeed());
+        enemyProj.GetComponent<EnemyProjectile>().SetProjectileTravelDistance(enemyWeapon.GetRange());
+        enemyProj.GetComponent<EnemyProjectile>().SetProjectileDamage(enemyWeapon.GetDamage());
+    }
 }
