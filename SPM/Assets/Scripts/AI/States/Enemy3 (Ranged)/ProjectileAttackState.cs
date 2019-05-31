@@ -10,7 +10,6 @@ public class ProjectileAttackState : EnemyBaseState
     [Tooltip("Distance at which the Enemy stops trying to attack and starts chasing the Player.")]
     [SerializeField] private float chaseDistance;
     [SerializeField] private Vector3 projectileOffset;
-    [SerializeField] private float timeBeforeAttack;
 
     private ProjectileWeapon enemyWeapon;
     private float cooldown;
@@ -58,12 +57,8 @@ public class ProjectileAttackState : EnemyBaseState
         currentCool = cooldown;
     }
 
-    private void ProjectileAttack(float timeBeforeAttack)
+    private void ProjectileAttack()
     {
-        while (timeBeforeAttack > 0)
-        {
-            timeBeforeAttack -= Time.deltaTime;
-        }
         GameObject enemyProj = Instantiate(enemyWeapon.GetProjectile(), owner.transform.position + owner.transform.forward * 2 + projectileOffset, Quaternion.identity);
         enemyProj.GetComponent<EnemyProjectile>().SetProjectileSpeed(enemyWeapon.GetProjectileSpeed());
         enemyProj.GetComponent<EnemyProjectile>().SetProjectileTravelDistance(enemyWeapon.GetRange());
