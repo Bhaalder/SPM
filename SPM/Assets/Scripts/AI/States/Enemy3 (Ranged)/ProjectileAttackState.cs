@@ -26,7 +26,6 @@ public class ProjectileAttackState : EnemyBaseState
         owner.animator.SetBool("isRunning", false);
         owner.animator.SetBool("isAttacking", true);
         cooldown = enemyWeapon.GetFireRate();
-        currentCool = cooldown;
     }
 
     public override void HandleUpdate()
