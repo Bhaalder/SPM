@@ -39,7 +39,11 @@ public class WeaponAnimation : MonoBehaviour{
     private float startRecoilDuration;
 
     private bool isRecoiling = false;
-   
+
+    public float x;
+    public float y;
+    public float z;
+    public float w;
 
     private void Awake() {
         weaponCamera = Camera.main.transform.GetChild(0);
@@ -320,8 +324,8 @@ public class WeaponAnimation : MonoBehaviour{
             }
             float normalizedTime = time / moveDuration;
             if(GameController.Instance.SelectedWeapon.GetName() == "Rifle") {
-                weapon.transform.localRotation = Quaternion.Lerp(startRot, endRot * new Quaternion(-0.5f, -0.5f, -0.5f, 4f), normalizedTime);
-                weapon.transform.localPosition = Vector3.Lerp(startPos.localPosition, endPos.localPosition / 2.6f + new Vector3(0, 0, 0.4f), normalizedTime);
+                weapon.transform.localRotation = Quaternion.Lerp(startRot, endRot * new Quaternion(0, 0, 0.5f, -1), normalizedTime);
+                weapon.transform.localPosition = Vector3.Lerp(startPos.localPosition, endPos.localPosition / 2.6f + new Vector3(0, 0.05f, 0.4f), normalizedTime);
             } else {
                 weapon.transform.localRotation = Quaternion.Lerp(startRot, endRot * new Quaternion(-0.4f, -0.3f, 0.5f, 4f), normalizedTime);
                 weapon.transform.localPosition = Vector3.Lerp(startPos.localPosition, endPos.localPosition / 2.4f + new Vector3(0f, 0, 0.3f), normalizedTime);
