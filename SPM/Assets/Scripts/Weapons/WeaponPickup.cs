@@ -27,9 +27,8 @@ public class WeaponPickup : MonoBehaviour {
             }
             GameController.Instance.PlayerWeapons.Add(weaponPickup);
             GameController.Instance.Player.GetComponent<PlayerInput>().AbortReload();
-            WeaponController.Instance.GetComponent<WeaponAnimation>().LowerWeaponAnimation(GameController.Instance.SelectedWeapon.GetName());
+            GameController.Instance.Player.GetComponent<PlayerInput>().SwitchWeaponAnimation(weaponPickup);
             GameController.Instance.SelectedWeapon = weaponPickup;
-            WeaponController.Instance.GetComponent<WeaponAnimation>().RaiseWeaponAnimation(weaponName);
             GameController.Instance.UpdateSelectedWeapon();
         }
         Destroy(gameObject);

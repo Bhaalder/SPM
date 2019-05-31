@@ -239,7 +239,7 @@ public class PlayerInput : MonoBehaviour {
         }
     }
 
-    private void SwitchWeaponAnimation(BaseWeapon switchedWeapon) {
+    public void SwitchWeaponAnimation(BaseWeapon switchedWeapon) {
         weaponAnimation.LowerWeaponAnimation(lastSelectedWeapon.GetName());
         weaponAnimation.RaiseWeaponAnimation(switchedWeapon.GetName());
         lastSelectedWeapon = switchedWeapon;
