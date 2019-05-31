@@ -83,7 +83,7 @@ public class PlayerDeathController : MonoBehaviour
     public void LoadGameObjectReferences()
     {
         player = GameController.Instance.Player;
-        respawnManager = GameObject.FindObjectOfType<PlayerRespawner>().gameObject;
+        respawnManager = FindObjectOfType<PlayerRespawner>().gameObject;
     }
 
 

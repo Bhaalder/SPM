@@ -145,17 +145,25 @@ public class PlayerInput : MonoBehaviour {
     }
 
     private void PlayReloadSound() {
-        string name = selectedWeapon.GetName();
-        if(name == "Rifle") {
-            AudioController.Instance.PlaySFX_RandomPitch("Rifle_Reload", 0.95f, 1f);
-        }
-        if(name == "Shotgun") {
-            AudioController.Instance.PlaySFX_RandomPitch("Shotgun_Reload", 0.95f, 1f);
-        }
-        if (name == "Rocket Launcher") {
-            AudioController.Instance.PlaySFX_RandomPitch("RocketLauncher_Reload", 0.95f, 1f);
+        if (!GameController.Instance.GameIsSlowmotion) {
+            string name = selectedWeapon.GetName();
+            switch (name) {
+                case "Rifle":
+                    AudioController.Instance.PlaySFX_RandomPitch("Rifle_Reload", 0.95f, 1f);
+                    break;
+                case "Shotgun":
+                    AudioController.Instance.PlaySFX_RandomPitch("Shotgun_Reload", 0.95f, 1f);
+                    break;
+                case "Rocket Launcher":
+                    AudioController.Instance.PlaySFX_RandomPitch("RocketLauncher_Reload", 0.95f, 1f);
+                    break;
+                default:
+                    Debug.LogWarning("Couldn't find reload sound for weapon: " + name + "!");
+                    break;
+            }
         }
     }
+
     private void StopReloadSound() {
         AudioController.Instance.Stop("Rifle_Reload");
         AudioController.Instance.Stop("Shotgun_Reload");
