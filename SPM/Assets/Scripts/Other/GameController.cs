@@ -168,6 +168,8 @@ public class GameController : MonoBehaviour {
 
     public void SaveEnemyData()
     {
+        SaveSystem.DeleteSaveFile();
+
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject target in gameObjects)
         {
