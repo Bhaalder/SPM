@@ -140,7 +140,7 @@ public class AudioController : MonoBehaviour {
         return null;
     }
 
-    public GameObject Play_InWorldspace_WithTag(string name, string tag) {
+    public void Play_InWorldspace_WithTag(string name, string tag) {
         try {
             if (allSoundsDictionary.ContainsKey(name)) {
                 GameObject[] gameObjectLocation = GameObject.FindGameObjectsWithTag(tag);
@@ -160,13 +160,11 @@ public class AudioController : MonoBehaviour {
                     if (!sound.source.loop) {
                         Destroy(soundAtLocationGO, sound.clip.length);
                     }
-                    return soundAtLocationGO;
                 }               
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
-        return null;
     }
 
     public void Stop(string name) {

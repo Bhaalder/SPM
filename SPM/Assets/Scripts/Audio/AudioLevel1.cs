@@ -5,7 +5,7 @@ using UnityEngine;
 public class AudioLevel1 : MonoBehaviour{
 
     void Start(){
-        AudioController.Instance.Play_InWorldspace_WithTag("Hej", "Pipe");
+        AudioController.Instance.Play_InWorldspace_WithTag("Button2", "SuperHuman");
     }
 
 
