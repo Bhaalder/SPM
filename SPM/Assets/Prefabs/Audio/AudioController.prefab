@@ -275,6 +275,16 @@ MonoBehaviour:
     maxDistance: 30
     loop: 0
     source: {fileID: 0}
+  - name: Enemy1Attack
+    clip: {fileID: 8300000, guid: 9a145cf3bb32a7048a7ce03edc4ef26b, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 30
+    loop: 0
+    source: {fileID: 0}
   environmentSounds:
   - name: Space Ambience
     clip: {fileID: 8300000, guid: dfdbba5d3499bb64aab00b8dad47de3e, type: 3}

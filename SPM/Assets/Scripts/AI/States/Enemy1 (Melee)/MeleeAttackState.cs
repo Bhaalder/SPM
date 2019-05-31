@@ -48,7 +48,9 @@ public class MeleeAttackState : EnemyBaseState
 
         if (CanSeePlayer() == true)
         {
-            //owner.animator.Play("MeleeAttack");
+            owner.animator.SetBool("isRunning", false);
+            owner.animator.SetBool("isIdle", false);
+            owner.animator.SetBool("isAttacking", true);
             owner.CanDamage = true;
         }
         currentCooldown = cooldown;
