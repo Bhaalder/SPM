@@ -116,9 +116,8 @@ public class AudioController : MonoBehaviour {
 
     public GameObject Play_InWorldspace(string name, GameObject gameObjectLocation) {
         try {
-
             if (allSoundsDictionary.ContainsKey(name)) {
-                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
+                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
                 sound = allSoundsDictionary[name];
                 sound.source = soundAtLocationGO.GetComponent<AudioSource>();
                 sound.source.clip = sound.clip;
@@ -210,7 +209,8 @@ public class AudioController : MonoBehaviour {
         public GameObject Play_RandomPitch_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
         try {
             if (allSoundsDictionary.ContainsKey(name)) {
-                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity);
+                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
+
                 sound = allSoundsDictionary[name];
                 sound.source = soundAtLocationGO.GetComponent<AudioSource>();
                 sound.source.clip = sound.clip;
