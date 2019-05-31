@@ -140,6 +140,35 @@ public class AudioController : MonoBehaviour {
         return null;
     }
 
+    public GameObject Play_InWorldspace_WithTag(string name, string tag) {
+        try {
+            if (allSoundsDictionary.ContainsKey(name)) {
+                GameObject[] gameObjectLocation = GameObject.FindGameObjectsWithTag(tag);
+                foreach(GameObject taggedObject in gameObjectLocation) {
+                    GameObject soundAtLocationGO = Instantiate(soundObject, taggedObject.transform.position, Quaternion.identity, taggedObject.transform);
+                    sound = allSoundsDictionary[name];
+                    sound.source = soundAtLocationGO.GetComponent<AudioSource>();
+                    sound.source.clip = sound.clip;
+                    sound.source.volume = sound.volume;
+                    sound.source.pitch = sound.pitch;
+                    sound.source.spatialBlend = sound.spatialBlend_2D_3D;
+                    sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
+                    sound.source.minDistance = sound.minDistance;
+                    sound.source.maxDistance = sound.maxDistance;
+                    sound.source.loop = sound.loop;
+                    sound.source.Play();
+                    if (!sound.source.loop) {
+                        Destroy(soundAtLocationGO, sound.clip.length);
+                    }
+                    return soundAtLocationGO;
+                }               
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+        return null;
+    }
+
     public void Stop(string name) {
         try {
             FindSound(name).source.Stop();
@@ -206,7 +235,7 @@ public class AudioController : MonoBehaviour {
                 break;
         }
     }
-        public GameObject Play_RandomPitch_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
+    public GameObject Play_RandomPitch_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
         try {
             if (allSoundsDictionary.ContainsKey(name)) {
                 GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
@@ -227,11 +256,12 @@ public class AudioController : MonoBehaviour {
                 }
                 return soundAtLocationGO;
             }
-        } catch (System.NullReferenceException) {            
+        } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
         return null;
     }
+
     #endregion
 
     #region Volume / Pitch Methods

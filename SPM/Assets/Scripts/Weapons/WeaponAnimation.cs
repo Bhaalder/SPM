@@ -130,15 +130,15 @@ public class WeaponAnimation : MonoBehaviour{
         if (!playerMovementController.IsGrounded()) {
             return;
         }
-        float xPlayerMovement = 0.0f;
-        float yPlayerMovement = 0.0f;
+        float xPlayerMovement = 0f;
+        float yPlayerMovement = 0f;
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         Vector3 calculatePosition = InitialPositionOfWeapon();
 
         if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0) {
-            timer = 0.0f;
+            timer = 0f;
         } else {
             xPlayerMovement = Mathf.Sin(timer) / 2;
             yPlayerMovement = -Mathf.Sin(timer);
@@ -159,7 +159,7 @@ public class WeaponAnimation : MonoBehaviour{
         if (xPlayerMovement != 0) {
             float translateChange = xPlayerMovement * bobbingAmount;
             float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
-            totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
+            totalAxes = Mathf.Clamp(totalAxes, 0f, 1f);
             translateChange = totalAxes * translateChange;
 
             calculatePosition.x = xOffset + translateChange;
@@ -169,14 +169,14 @@ public class WeaponAnimation : MonoBehaviour{
         if (yPlayerMovement != 0) {
             float translateChange = yPlayerMovement * bobbingAmount;
             float totalAxes = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
-            totalAxes = Mathf.Clamp(totalAxes, 0.0f, 1.0f);
+            totalAxes = Mathf.Clamp(totalAxes, 0f, 1f);
             translateChange = totalAxes * translateChange;
 
             calculatePosition.y = yOffset + translateChange;
         } else {
             calculatePosition.y = yOffset;
         }
-        selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, calculatePosition, Time.deltaTime);
+        selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, calculatePosition + InitialPositionOfWeapon(), Time.deltaTime);
     }
 
     #endregion
