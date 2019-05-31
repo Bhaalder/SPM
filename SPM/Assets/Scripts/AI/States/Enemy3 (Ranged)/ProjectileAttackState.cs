@@ -58,7 +58,7 @@ public class ProjectileAttackState : EnemyBaseState
         currentCool = cooldown;
     }
 
-    private void ProjectileAttack()
+    public void ProjectileAttack()
     {
         GameObject enemyProj = Instantiate(enemyWeapon.GetProjectile(), owner.transform.position + owner.transform.forward * 2 + projectileOffset, Quaternion.identity);
         enemyProj.GetComponent<EnemyProjectile>().SetProjectileSpeed(enemyWeapon.GetProjectileSpeed());
