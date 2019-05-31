@@ -6,6 +6,16 @@ using UnityEngine.AI;
 
 public class ProjectileEnemy : Enemy
 {
+
+    [SerializeField] private Vector3 projectileOffset;
+    private ProjectileWeapon enemyWeapon;
+
+
+    protected override void Awake()
+    {
+        enemyWeapon = WeaponController.Instance.GetEnemyProjectileWeapon();
+        base.Awake();
+    }
     public override void TakeDamage(float damage)
     {
 
@@ -29,7 +39,7 @@ public class ProjectileEnemy : Enemy
     }
     public void ProjectileAttack()
     {
-        GameObject enemyProj = Instantiate(enemyWeapon.GetProjectile(), owner.transform.position + owner.transform.forward * 2 + projectileOffset, Quaternion.identity);
+        GameObject enemyProj = Instantiate(enemyWeapon.GetProjectile(), transform.position + transform.forward * 2 + projectileOffset, Quaternion.identity);
         enemyProj.GetComponent<EnemyProjectile>().SetProjectileSpeed(enemyWeapon.GetProjectileSpeed());
         enemyProj.GetComponent<EnemyProjectile>().SetProjectileTravelDistance(enemyWeapon.GetRange());
         enemyProj.GetComponent<EnemyProjectile>().SetProjectileDamage(enemyWeapon.GetDamage());
