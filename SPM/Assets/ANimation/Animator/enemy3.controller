@@ -14,10 +14,10 @@ AnimatorStateMachine:
     m_Position: {x: 390, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3825788063918246994}
-    m_Position: {x: 390, y: 100, z: 0}
+    m_Position: {x: 390, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -817026267508856903}
-    m_Position: {x: 190, y: 220, z: 0}
+    m_Position: {x: 120, y: 240, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -75,8 +75,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: 765d5311412092b4aba801ed1878b4c4,
-    type: 3}
+  m_Motion: {fileID: 7400000, guid: be6f3bae93b85114ebece9fe1712f2ee, type: 2}
   m_Tag: ProjectileAttack
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -104,8 +103,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -203655887218126122, guid: e7dbd8e19682ba7429792afee738da9b,
-    type: 3}
+  m_Motion: {fileID: 7400000, guid: 936bd7b50709c1d4b910111c92bc4e88, type: 2}
   m_Tag: Idle
   m_SpeedParameter: 
   m_MirrorParameter: 

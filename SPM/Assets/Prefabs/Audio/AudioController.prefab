@@ -265,14 +265,14 @@ MonoBehaviour:
     maxDistance: 30
     loop: 0
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
-    spatialBlend_2D_3D: 0
+  - name: Enemy3Shoot
+    clip: {fileID: 8300000, guid: 49630d86bef22460d9fba2e638c70288, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 1
     rolloffMode: 0
-    minDistance: 0
-    maxDistance: 0
+    minDistance: 1
+    maxDistance: 30
     loop: 0
     source: {fileID: 0}
   environmentSounds:
