@@ -6,8 +6,14 @@ using UnityEngine.AI;
 
 public class MeleeEnemy : Enemy
 {
+    [SerializeField] private float enemyHealth;
 
     // Methods
+    protected override void Awake()
+    {
+        health = enemyHealth;
+        base.Awake();
+    }
     public override void TakeDamage(float damage)
     {
 

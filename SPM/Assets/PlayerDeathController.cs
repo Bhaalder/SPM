@@ -60,6 +60,7 @@ public class PlayerDeathController : MonoBehaviour
 
     public void SaveAndExit()
     {
+        GameController.Instance.SaveGame();
         //Call on save and exit methods
     }
 

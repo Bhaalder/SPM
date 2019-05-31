@@ -40,6 +40,12 @@ public class ChargeMeleeAttackState : EnemyBaseState
         }
         owner.agent.SetDestination(owner.player.transform.position);
 
+        if(CanSeePlayer() == true)
+        {
+            float step = 3 * Time.deltaTime;
+            Vector3.RotateTowards(owner.transform.forward, owner.player.transform.position, step, 0.0f);
+        }
+
     }
 
     private void Attack()

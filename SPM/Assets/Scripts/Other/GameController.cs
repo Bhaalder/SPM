@@ -197,4 +197,15 @@ public class GameController : MonoBehaviour {
         Player.transform.position = position;
         Player.transform.eulerAngles = new Vector3(rotation.x, rotation.y, rotation.z);
     }
+
+    public void LoadEnemyData()
+    {
+        EnemyData data = SaveSystem.LoadEnemies();
+    }
+
+    public void SaveGame()
+    {
+        SavePlayerData();
+        SaveEnemyData();
+    }
 }
