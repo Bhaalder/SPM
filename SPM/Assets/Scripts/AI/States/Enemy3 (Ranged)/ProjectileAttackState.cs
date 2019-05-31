@@ -23,6 +23,7 @@ public class ProjectileAttackState : EnemyBaseState
         enemyWeapon = WeaponController.Instance.GetEnemyProjectileWeapon();
 
         cooldown = enemyWeapon.GetFireRate();
+        currentCool = cooldown;
     }
 
     public override void HandleUpdate()
