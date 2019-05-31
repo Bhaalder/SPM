@@ -16,7 +16,7 @@ public class Enemy : StateMachine
 
     public bool HasRecentlyCharged { get; set; }
 
-    [SerializeField] protected float health;
+    public float health { get; set; }
     [SerializeField] protected float damageResistance;
     public int EnemyMeleeDamage { get; set; }
     
@@ -91,5 +91,10 @@ public class Enemy : StateMachine
         {
             return false;
         }
+    }
+
+    public void SaveEnemyData()
+    {
+        SaveSystem.SaveEnemyData(this);
     }
 }

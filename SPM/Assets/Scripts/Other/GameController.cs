@@ -160,4 +160,39 @@ public class GameController : MonoBehaviour {
         yield return new WaitForSecondsRealtime(hitmarkTimer);
         hitmark.enabled = false;
     }
+
+    public void SavePlayerData()
+    {
+        SaveSystem.SavePlayer(this);
+    }
+
+    public void SaveEnemyData()
+    {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject target in gameObjects)
+        {
+            target.GetComponent<Enemy>().SaveEnemyData();
+        }
+    }
+
+    public void LoadPlayerData()
+    {
+        PlayerData data = SaveSystem.LoadPlayer();
+
+        PlayerHP = data.PlayerHP;
+        PlayerArmor = data.PlayerArmor;
+
+        Vector3 position;
+        position.x = data.PlayerPosition[0];
+        position.y = data.PlayerPosition[1];
+        position.z = data.PlayerPosition[2];
+
+        Vector3 rotation;
+        rotation.x = data.PlayerRotation[0];
+        rotation.y = data.PlayerRotation[1];
+        rotation.z = data.PlayerRotation[2];
+
+        Player.transform.position = position;
+        Player.transform.eulerAngles = new Vector3(rotation.x, rotation.y, rotation.z);
+    }
 }
