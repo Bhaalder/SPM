@@ -15,7 +15,7 @@ public class PlayerMovementController : MonoBehaviour{
 
     [Header("Jumping")]
     [SerializeField] private float jumpForce = 10;
-    [SerializeField] private float extraJumps = 1;
+    [SerializeField] private int extraJumps = 1;
     [SerializeField] private float fakeExtraGravity = 15;
     [Tooltip("The chance to play a jumpgrunt sound 1-100")]
     [SerializeField] private float jumpSoundPercentChance = 25;
@@ -25,8 +25,9 @@ public class PlayerMovementController : MonoBehaviour{
     [SerializeField] private float nextTimeToDash = 2;
     [SerializeField] private float dashDuration = 0.5f;
 
-    private float timeToDash;
-    private float jumpCount;
+    private int jumpCount;
+    private int checkJumpSound = 2;
+    private float timeToDash;   
     private float distanceToGround;
     private bool isDashing;
 
@@ -82,11 +83,15 @@ public class PlayerMovementController : MonoBehaviour{
 
 
     private void Jump() {
-        if (Input.GetButtonDown("Jump")) {           
-            if (jumpCount>0 || IsGrounded()) {             
-                JumpSound();
+        if (Input.GetButtonDown("Jump")) {
+            if (jumpCount>0 || IsGrounded()) {
                 jumpCount--;
-                if(rigidBody.velocity.y > 0) {
+                --checkJumpSound;
+                if (checkJumpSound == 0) {
+                    AudioController.Instance.PlayRandomSFX_RandomPitch(3, "Jump1", "Jump2", "Jump3", null, null);
+                    checkJumpSound = 2;
+                }
+                if (rigidBody.velocity.y > 0) {
                     rigidBody.velocity = new Vector3(0, rigidBody.velocity.y, 0);
                 } else {
                     rigidBody.velocity = new Vector3(0, 0, 0);
@@ -98,12 +103,12 @@ public class PlayerMovementController : MonoBehaviour{
         }
     }
 
-    private void JumpSound() {
-        int soundChance = Random.Range(1, 100);
-        if (soundChance <= jumpSoundPercentChance) {
-            AudioController.Instance.PlayRandomSFX_RandomPitch(3, "Jump1", "Jump2", "Jump3", null, null);
-        }     
-    }
+    //private void JumpSound() {
+    //    int soundChance = Random.Range(1, 100);
+    //    if (soundChance <= jumpSoundPercentChance) {
+            
+    //    }     
+    //}
 
     public void Dash() {
         isDashing = true;
