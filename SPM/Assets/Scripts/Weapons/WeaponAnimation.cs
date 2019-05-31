@@ -318,6 +318,8 @@ public class WeaponAnimation : MonoBehaviour{
         Quaternion startRot = startPos.transform.localRotation;
         Quaternion endRot = endPos.transform.localRotation;
 
+        moveDuration -= 0.5f;
+
         for (float time = 0f; time < moveDuration; time += Time.unscaledDeltaTime) {
             if (!GameController.Instance.Player.GetComponent<PlayerInput>().IsReloading) {
                 time += 10;
