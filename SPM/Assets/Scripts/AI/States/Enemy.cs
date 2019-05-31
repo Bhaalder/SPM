@@ -76,26 +76,20 @@ public class Enemy : StateMachine
         return isDead;
     }
 
-    private void DoMeleeDamage()
+    public void DoMeleeDamage()
     {
         GameController.Instance.TakeDamage(EnemyMeleeDamage);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public bool CurrentAnimatorState(string animatorTag)
     {
-        if (CanDamage && collision.gameObject.tag == "Player" && animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack")) //Change "MeleeAttack" to the tag name of the attack!
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag(animatorTag))
         {
-            DoMeleeDamage();
-            CanDamage = false;
+            return true;
         }
-    }
-
-    private void OnCollisionStay(Collision collision)
-    {
-        if (CanDamage && collision.gameObject.tag == "Player" && animator.GetCurrentAnimatorStateInfo(0).IsTag("MeleeAttack")) //Change "MeleeAttack" to the tag name of the attack!
+        else
         {
-            DoMeleeDamage();
-            CanDamage = false;
+            return false;
         }
     }
 }

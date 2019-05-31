@@ -22,6 +22,7 @@ public class ChargeMeleeAttackState : EnemyBaseState
     public override void Enter()
     {
         base.Enter();
+        owner.EnemyMeleeDamage = damage;
         
     }
 
@@ -59,7 +60,7 @@ public class ChargeMeleeAttackState : EnemyBaseState
             owner.animator.SetBool("isBuilding", false);
             owner.animator.SetBool("isCharging", false);
             owner.animator.SetBool("isStunned", false);
-            GameController.Instance.TakeDamage(damage); // animationen träffar efter 1 sekund
+            //GameController.Instance.TakeDamage(damage); // animationen träffar efter 1 sekund
         }
 
         currentCooldown = cooldown;
