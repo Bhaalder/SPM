@@ -306,6 +306,16 @@ MonoBehaviour:
     maxDistance: 50
     loop: 0
     source: {fileID: 0}
+  - name: LabBubbling
+    clip: {fileID: 8300000, guid: 80e776b10f3a4a04e9113153d6aa0e01, type: 3}
+    volume: 0.82
+    pitch: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 10
+    loop: 1
+    source: {fileID: 0}
   musicSounds:
   - name: Song4Start
     clip: {fileID: 8300000, guid: 6a43e8e96ffab4b4eb7b0e2c1b47dbd5, type: 3}
