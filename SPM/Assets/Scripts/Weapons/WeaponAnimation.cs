@@ -312,15 +312,21 @@ public class WeaponAnimation : MonoBehaviour{
 
     private IEnumerator ReloadAnimationSequence(GameObject weapon, float moveDuration, Transform startPos, Transform endPos) {
         Quaternion startRot = startPos.transform.localRotation;
-        Quaternion endRot = endPos.transform.localRotation * new Quaternion(-0.4f, 1, 1, 1);
+        Quaternion endRot = endPos.transform.localRotation;
 
         for (float time = 0f; time < moveDuration; time += Time.unscaledDeltaTime) {
             if (!GameController.Instance.Player.GetComponent<PlayerInput>().IsReloading) {
                 time += 10;
             }
             float normalizedTime = time / moveDuration;
-            weapon.transform.localRotation = Quaternion.Lerp(startRot, endRot, normalizedTime);
-            weapon.transform.localPosition = Vector3.Lerp(startPos.localPosition, endPos.localPosition/2, normalizedTime);
+            if(GameController.Instance.SelectedWeapon.GetName() == "Rifle") {
+                weapon.transform.localRotation = Quaternion.Lerp(startRot, endRot * new Quaternion(-0.5f, -0.5f, -0.5f, 4f), normalizedTime);
+                weapon.transform.localPosition = Vector3.Lerp(startPos.localPosition, endPos.localPosition / 2.6f + new Vector3(0, 0, 0.4f), normalizedTime);
+            } else {
+                weapon.transform.localRotation = Quaternion.Lerp(startRot, endRot * new Quaternion(-0.4f, -0.3f, 0.5f, 4f), normalizedTime);
+                weapon.transform.localPosition = Vector3.Lerp(startPos.localPosition, endPos.localPosition / 2.4f + new Vector3(0f, 0, 0.3f), normalizedTime);
+            }
+            
             yield return null;
         }
 
@@ -338,11 +344,11 @@ public class WeaponAnimation : MonoBehaviour{
         startRecoilDuration = recoilDuration;
 
         if (!isRecoiling) {
-            StartCoroutine(RecoilSequence(weapon));
+            StartCoroutine(RecoilAnimationSequence(weapon));
         }
     }
 
-    private IEnumerator RecoilSequence(GameObject weapon) {
+    private IEnumerator RecoilAnimationSequence(GameObject weapon) {
         isRecoiling = true;
         Vector3 rotationAmount;
 
