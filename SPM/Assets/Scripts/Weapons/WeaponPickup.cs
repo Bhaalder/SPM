@@ -11,12 +11,14 @@ public class WeaponPickup : MonoBehaviour {
     private Mesh mesh;
 
     private void Start() {
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        
         meshFilter = gameObject.GetComponent<MeshFilter>();
         mesh = gameObject.GetComponent<Mesh>();
-        meshRenderer = weaponPickupPrefab.GetComponent<MeshRenderer>();
+        meshRenderer = gameObject.GetComponent<MeshRenderer>();
+
         meshFilter = weaponPickupPrefab.GetComponent<MeshFilter>();
         mesh = weaponPickupPrefab.GetComponent<Mesh>();
+        meshRenderer = weaponPickupPrefab.GetComponent<MeshRenderer>();
         gameObject.transform.localScale = weaponPickupPrefab.transform.localScale;
     }
 
