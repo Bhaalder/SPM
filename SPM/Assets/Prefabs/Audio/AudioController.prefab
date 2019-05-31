@@ -247,7 +247,7 @@ MonoBehaviour:
   enemySounds:
   - name: Enemy4Roar
     clip: {fileID: 8300000, guid: 930ae47cb14a34b4b91df6d1c18e32e0, type: 3}
-    volume: 0.622
+    volume: 0.5
     pitch: 1
     spatialBlend_2D_3D: 1
     rolloffMode: 0
@@ -255,14 +255,14 @@ MonoBehaviour:
     maxDistance: 30
     loop: 0
     source: {fileID: 0}
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
-    spatialBlend_2D_3D: 0
+  - name: Enemy4MeleeAttack
+    clip: {fileID: 8300000, guid: cd8c97a2f58c93346806e6a98e387e36, type: 3}
+    volume: 0.5
+    pitch: 1
+    spatialBlend_2D_3D: 1
     rolloffMode: 0
-    minDistance: 0
-    maxDistance: 0
+    minDistance: 1
+    maxDistance: 30
     loop: 0
     source: {fileID: 0}
   - name: 
