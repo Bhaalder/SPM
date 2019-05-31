@@ -256,6 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathPanel: {fileID: 509308529017628778}
   respawnManager: {fileID: 0}
+  player: {fileID: 0}
   deathLocation: {x: 0, y: 0, z: 0}
   isDead: 0
 --- !u!1 &1423267420983861008
@@ -584,7 +585,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1357294309935790953}
-        m_MethodName: RespawnAtLastCheckpoint
+        m_MethodName: SaveAndExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
