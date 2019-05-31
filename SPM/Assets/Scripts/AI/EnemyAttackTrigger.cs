@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class EnemyAttackTrigger : MonoBehaviour
 {
+    [Tooltip("Time in Seconds between Damage.")]
+    [SerializeField] private float timeBetweenDamage;
+
     private bool canDamage;
-    // Start is called before the first frame update
+
     void Start()
     {
         canDamage = true;
@@ -29,7 +32,7 @@ public class EnemyAttackTrigger : MonoBehaviour
     private IEnumerator TimeBetweeenDamage()
     {
         canDamage = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(timeBetweenDamage);
         canDamage = true;
     }
 }
