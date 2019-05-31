@@ -9,6 +9,8 @@ public class ProjectileIdleState : EnemyBaseState
     // Attributes
     [Tooltip("Distance at which the Enemy starts chasing the Player if it can see the Player.")]
     [SerializeField] private float chaseDistance;
+    [Tooltip("Distance at which Enemy will start Attacking the Player")]
+    [SerializeField] private float attackDistance;
 
     // Methods
     public override void Enter()
@@ -22,7 +24,11 @@ public class ProjectileIdleState : EnemyBaseState
 
     public override void HandleUpdate()
     {
-        if (CanSeePlayer() && Vector3.Distance(owner.transform.position, owner.player.transform.position) < chaseDistance)
+        if (CanSeePlayer() && DistanceToPlayer() < attackDistance)
+        {
+            owner.Transition<ProjectileAttackState>();
+        }
+        else if(CanSeePlayer() && DistanceToPlayer() < chaseDistance)
         {
             owner.Transition<ProjectileChaseState>();
         }
