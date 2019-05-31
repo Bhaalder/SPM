@@ -11,13 +11,16 @@ public class ChargeEnemy : Enemy
     [Tooltip("Time in Seconds between two seperate charges.")]
     [SerializeField] private float chargeDowntime;
     private float currentCooldown;
+    [SerializeField] private float enemyHealth;
 
     protected override void Awake()
     {
         DealtDamage = false;
         HasRecentlyCharged = false;
         currentCooldown = chargeDowntime;
+        health = enemyHealth;
         base.Awake();
+        
     }
 
     protected override void Update()

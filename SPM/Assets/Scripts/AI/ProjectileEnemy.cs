@@ -8,12 +8,14 @@ public class ProjectileEnemy : Enemy
 {
 
     [SerializeField] private Vector3 projectileOffset;
+    [SerializeField] private float enemyHealth;
     private ProjectileWeapon enemyWeapon;
 
 
     protected override void Awake()
     {
         enemyWeapon = WeaponController.Instance.GetEnemyProjectileWeapon();
+        health = enemyHealth;
         base.Awake();
     }
     public override void TakeDamage(float damage)
