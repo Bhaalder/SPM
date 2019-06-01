@@ -6,22 +6,19 @@ public class KommandoRumWave : MonoBehaviour
 {
 
     public SpawnManager eSpawner;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject gO;
 
-    // Update is called once per frame
-    void Update()
+
+    private void Start()
     {
-        
+        gO.SetActive(false);
     }
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("InteractionPlayer"))
         {
             eSpawner.InitializeSpawner();
+            gO.SetActive(true);
             Destroy(gameObject);
         }
     }
