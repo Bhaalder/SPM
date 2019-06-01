@@ -21,8 +21,10 @@ public class GameController : MonoBehaviour {
 
     public float PlayerHP, PlayerArmor;
 
-    public bool GameIsPaused, PlayerIsInteracting;
+    public bool PlayerIsInteracting;
+    public bool GameIsPaused;
     public bool GameIsSlowmotion = false;
+    public bool PauseAudio;
 
     [SerializeField] private float invulnerableStateTime;
     private float invulnerableState;
@@ -112,7 +114,10 @@ public class GameController : MonoBehaviour {
     public void GamePaused() {
         if (GameIsPaused) {
             GameIsPaused = false;
-            AudioController.Instance.PauseAllSound(false);
+            if (PauseAudio) {
+                AudioController.Instance.PauseAllSound(false);
+                PauseAudio = false;
+            }           
             if (GameIsSlowmotion) {
                 GetComponent<Slowmotion>().SlowTime();
             } else {
@@ -121,7 +126,9 @@ public class GameController : MonoBehaviour {
             }
         } else {
             GameIsPaused = true;
-            AudioController.Instance.PauseAllSound(true);
+            if (PauseAudio) {
+                AudioController.Instance.PauseAllSound(true);
+            }
             Time.timeScale = 0f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
