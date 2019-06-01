@@ -221,7 +221,7 @@ public class PlayerInput : MonoBehaviour {
                 GameController.Instance.SelectedWeapon = secondWeapon;
             }
         }
-        if (Input.GetButtonDown("Weapon3") && thirdWeapon != null || Input.GetAxis("Weapon2") > 0 && thirdWeapon != null) {
+        if (Input.GetButtonDown("Weapon3") && thirdWeapon != null || Input.GetAxis("Weapon3") > 0 && thirdWeapon != null) {
             AbortReload();
             if (selectedWeapon != thirdWeapon) {
                 SwitchWeaponAnimation(thirdWeapon);
