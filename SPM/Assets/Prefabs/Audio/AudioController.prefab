@@ -313,6 +313,16 @@ MonoBehaviour:
     spatialBlend_2D_3D: 1
     rolloffMode: 0
     minDistance: 1
+    maxDistance: 6
+    loop: 1
+    source: {fileID: 0}
+  - name: Snore
+    clip: {fileID: 8300000, guid: e90ffcbe3265d4d4eb253cddbc421a7f, type: 3}
+    volume: 0.82
+    pitch: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 0
+    minDistance: 1
     maxDistance: 10
     loop: 1
     source: {fileID: 0}
