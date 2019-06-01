@@ -114,7 +114,7 @@ public class AudioController : MonoBehaviour {
         }
     }
 
-    public GameObject Play_InWorldspace(string name, GameObject gameObjectLocation) {
+    public void Play_InWorldspace(string name, GameObject gameObjectLocation) {
         try {
             if (allSoundsDictionary.ContainsKey(name)) {
                 GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
@@ -132,12 +132,10 @@ public class AudioController : MonoBehaviour {
                 if (!sound.source.loop) {
                     Destroy(soundAtLocationGO, sound.clip.length);
                 }
-                return soundAtLocationGO;
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
-        return null;
     }
 
     public void Play_InWorldspace_WithTag(string name, string tag) {
@@ -305,7 +303,7 @@ public class AudioController : MonoBehaviour {
                 break;
         }
     }
-    public GameObject Play_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
+    public void Play_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
         try {
             if (allSoundsDictionary.ContainsKey(name)) {
                 GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
@@ -324,12 +322,10 @@ public class AudioController : MonoBehaviour {
                 if (!sound.source.loop) {
                     Destroy(soundAtLocationGO, sound.clip.length);
                 }
-                return soundAtLocationGO;
             }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
-        return null;
     }
 
     #endregion
@@ -519,6 +515,49 @@ public class AudioController : MonoBehaviour {
         }
     }
 
+    public void Play_Delay_InWorldspace(string name, GameObject gameObjectLocation, float minDelay, float maxDelay) {
+        try {
+            if (allSoundsDictionary.ContainsKey(name)) {
+                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
+
+                sound = allSoundsDictionary[name];
+                sound.source = soundAtLocationGO.GetComponent<AudioSource>();
+                sound.source.clip = sound.clip;
+                sound.source.volume = sound.volume;
+                sound.source.pitch = sound.pitch;
+                sound.source.spatialBlend = sound.spatialBlend_2D_3D;
+                sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
+                sound.source.minDistance = sound.minDistance;
+                sound.source.maxDistance = sound.maxDistance;
+                sound.source.loop = sound.loop;
+                PlayDelaySequence(sound, minDelay, maxDelay);
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+
+    public void Play_Delay_InWorldspace(string name, GameObject gameObjectLocation, float minDelay, float maxDelay, float minPitch, float maxPitch) {
+        try {
+            if (allSoundsDictionary.ContainsKey(name)) {
+                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
+
+                sound = allSoundsDictionary[name];
+                sound.source = soundAtLocationGO.GetComponent<AudioSource>();
+                sound.source.clip = sound.clip;
+                sound.source.volume = sound.volume;
+                sound.source.pitch = Random.Range(minPitch, maxPitch);
+                sound.source.spatialBlend = sound.spatialBlend_2D_3D;
+                sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
+                sound.source.minDistance = sound.minDistance;
+                sound.source.maxDistance = sound.maxDistance;
+                sound.source.loop = sound.loop;
+                PlayDelaySequence(sound, minDelay, maxDelay, minPitch, maxPitch);
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
 
     private IEnumerator PlayDelaySequence(Sound sound, float minDelay, float maxDelay) {
         float delay = Random.Range(minDelay, maxDelay);

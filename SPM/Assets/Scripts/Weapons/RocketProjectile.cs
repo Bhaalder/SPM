@@ -10,11 +10,10 @@ public class RocketProjectile : MonoBehaviour{
     private float projectileSpeed;
     private float projectileDamage;
     private float projectileForce;
-    private GameObject rocketSound;
     private float distanceToTarget = 10000;
 
     private void Awake() {
-        rocketSound = AudioController.Instance.Play_InWorldspace("RocketLauncher_Rocket", gameObject, 0.95f, 1f);
+        AudioController.Instance.Play_InWorldspace("RocketLauncher_Rocket", gameObject, 0.95f, 1f);
         Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, distanceToTarget, layerMask);
         gameObject.transform.LookAt(hit.point);
     }
