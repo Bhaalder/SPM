@@ -25,7 +25,8 @@ public class AmmoBox : MonoBehaviour
             }
             GameController.Instance.UpdateSelectedWeapon_AmmoText();
             GetComponentInParent<PowerUpSpawner>().Respawner();
-            
+            AudioController.Instance.Play("AmmoPickup");
+
 
         }
         Destroy(gameObject);

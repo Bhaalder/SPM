@@ -366,6 +366,46 @@ MonoBehaviour:
     maxDistance: 1.01
     loop: 0
     source: {fileID: 0}
+  - name: HPShieldPickup
+    clip: {fileID: 8300000, guid: 54c552faa8efd7549bdff74e8a6c853d, type: 3}
+    volume: 0.787
+    pitch: 1.02
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 1.01
+    loop: 0
+    source: {fileID: 0}
+  - name: AmmoPickup
+    clip: {fileID: 8300000, guid: 8ac72840250ff09468123d0ac7f0fbc2, type: 3}
+    volume: 0.787
+    pitch: 1.02
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 1.01
+    loop: 0
+    source: {fileID: 0}
+  - name: SpeedPickUp
+    clip: {fileID: 8300000, guid: 68a85c15497f14a4caeb10f6f356bdde, type: 3}
+    volume: 0.787
+    pitch: 1.02
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 1.01
+    loop: 0
+    source: {fileID: 0}
+  - name: Jumppad
+    clip: {fileID: 8300000, guid: 68e964aacab022646a299ad1b49787c6, type: 3}
+    volume: 0.787
+    pitch: 1.02
+    spatialBlend_2D_3D: 1
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 5
+    loop: 0
+    source: {fileID: 0}
   musicSounds:
   - name: Song4Start
     clip: {fileID: 8300000, guid: 6a43e8e96ffab4b4eb7b0e2c1b47dbd5, type: 3}

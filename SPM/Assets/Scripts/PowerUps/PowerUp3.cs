@@ -20,6 +20,7 @@ public class PowerUp3 : MonoBehaviour
         {
             GameController.Instance.GetComponent<GameController>().PlayerArmor = 100;
             GetComponentInParent<PowerUpSpawner>().Respawner();
+            AudioController.Instance.Play("HPShieldPickup");
             Destroy(gameObject);//
             anim.SetTrigger("FullArmor");
             //StartCoroutine(UsedBoost());

@@ -20,6 +20,7 @@ public class PowerUp2 : MonoBehaviour
         {
             GameController.Instance.GetComponent<GameController>().PlayerHP = 100;
             GetComponentInParent<PowerUpSpawner>().Respawner();
+            AudioController.Instance.Play("HPShieldPickup");
             Destroy(gameObject);
             anim.SetTrigger("FullHealth");
             //StartCoroutine(UsedBoost());

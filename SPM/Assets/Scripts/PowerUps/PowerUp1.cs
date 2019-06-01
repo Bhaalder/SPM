@@ -17,6 +17,7 @@ public class PowerUp1 : MonoBehaviour
         {
             other.transform.parent.GetComponent<PlayerMovementController>().SpeedMultiplier(speedDuration, speedIncrease);       
             GetComponentInParent<PowerUpSpawner>().Respawner();
+            AudioController.Instance.Play("SpeedPickup");
             Destroy(gameObject);//
             //StartCoroutine(UsedBoost());
         }

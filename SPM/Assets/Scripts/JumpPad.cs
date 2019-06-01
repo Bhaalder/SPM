@@ -14,6 +14,7 @@ public class JumpPad : MonoBehaviour
         {
             other.transform.parent.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpForce);
             other.transform.parent.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * forwardForce);
+            AudioController.Instance.Play_RandomPitch_InWorldspace("Jumppad", gameObject, 0.95f, 1.0f);
 
         }
     }
