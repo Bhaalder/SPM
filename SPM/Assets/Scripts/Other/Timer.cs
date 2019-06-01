@@ -5,9 +5,18 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public Text timerText;
+    private Text timerText;
+    double time;
 
     private void Start() {
-        
+       timerText = GameObject.Find("TimerText").GetComponent<Text>();
     }
+
+    private void Update() {
+        timerText.text = time.ToString("F2");
+        if (!GameController.Instance.GameIsPaused) {
+            time += Time.unscaledDeltaTime;
+        }       
+    }
+
 }

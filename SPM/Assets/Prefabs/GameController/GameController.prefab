@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6964004597814307124}
   - component: {fileID: 6168297538791629986}
   - component: {fileID: 4320215421209216543}
+  - component: {fileID: 3838453420883797816}
   - component: {fileID: 1151457421364921892}
   m_Layer: 0
   m_Name: GameController
@@ -59,9 +60,10 @@ MonoBehaviour:
   weaponImage: {fileID: 0}
   PlayerHP: 0
   PlayerArmor: 0
-  GameIsPaused: 0
   PlayerIsInteracting: 0
+  GameIsPaused: 0
   GameIsSlowmotion: 0
+  PauseAudio: 0
   invulnerableStateTime: 0.25
   interactionText: {fileID: 0}
   crosshair: {fileID: 0}
@@ -79,6 +81,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowdownAmount: 0.1
+--- !u!114 &3838453420883797816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814260381439902556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070bfdf43b6e99a4eb0faae8df0420fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1151457421364921892
 MonoBehaviour:
   m_ObjectHideFlags: 0
