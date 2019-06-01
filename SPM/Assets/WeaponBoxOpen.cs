@@ -10,6 +10,9 @@ public class WeaponBoxOpen : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             anim.SetBool("isOpening", true);
+            AudioController.Instance.Play_InWorldspace("Box", gameObject);
+            Collider col = GetComponent<Collider>();
+            col.enabled = false;
         }
     }
 

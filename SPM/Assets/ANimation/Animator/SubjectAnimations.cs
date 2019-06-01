@@ -20,8 +20,9 @@ public class SubjectAnimations : MonoBehaviour
         }else if (isAlien1)
         {
             anim.SetBool("Alien1", true);
-
-        }else if (isSleepDude)
+            AudioController.Instance.Play_InWorldspace("AlienTalk", gameObject);
+        }
+        else if (isSleepDude)
         {
             anim.SetBool("SleepDude", true);
             AudioController.Instance.Play_InWorldspace("Snore", gameObject);

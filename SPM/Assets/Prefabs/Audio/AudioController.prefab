@@ -297,7 +297,7 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
   - name: Button
-    clip: {fileID: 8300000, guid: f62b8418022b0154b8e6f631d6b60d8e, type: 3}
+    clip: {fileID: 8300000, guid: e8f399cf1b9564a5fbfaf719decf8ee0, type: 3}
     volume: 1
     pitch: 1
     spatialBlend_2D_3D: 1
@@ -308,12 +308,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: LabBubbling
     clip: {fileID: 8300000, guid: 80e776b10f3a4a04e9113153d6aa0e01, type: 3}
-    volume: 0.82
+    volume: 0.308
     pitch: 1
     spatialBlend_2D_3D: 1
     rolloffMode: 0
     minDistance: 1
-    maxDistance: 6
+    maxDistance: 10
     loop: 1
     source: {fileID: 0}
   - name: Snore
@@ -323,8 +323,48 @@ MonoBehaviour:
     spatialBlend_2D_3D: 1
     rolloffMode: 0
     minDistance: 1
-    maxDistance: 10
+    maxDistance: 5
     loop: 1
+    source: {fileID: 0}
+  - name: Box
+    clip: {fileID: 8300000, guid: 57069373903344728a3b59a3a8afb908, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 10
+    loop: 0
+    source: {fileID: 0}
+  - name: AlienTalk
+    clip: {fileID: 8300000, guid: 0cc8145a1cc0f5e4f962113eb97e22b2, type: 3}
+    volume: 0.787
+    pitch: 1.11
+    spatialBlend_2D_3D: 1
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 2
+    loop: 1
+    source: {fileID: 0}
+  - name: SlidingDoors
+    clip: {fileID: 8300000, guid: 671b1348f49834394bbb9ed14b947df7, type: 3}
+    volume: 0.787
+    pitch: 1.11
+    spatialBlend_2D_3D: 1
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 10
+    loop: 0
+    source: {fileID: 0}
+  - name: RandomAmbience
+    clip: {fileID: 8300000, guid: 9427c6b8bb3dc4e1e96d7d39e6835086, type: 3}
+    volume: 0.787
+    pitch: 1.02
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 1.01
+    loop: 0
     source: {fileID: 0}
   musicSounds:
   - name: Song4Start
