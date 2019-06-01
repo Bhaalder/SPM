@@ -271,16 +271,19 @@ public class WeaponAnimation : MonoBehaviour{
         string weaponName = weapon;
         switch (weaponName) {
             case "Rifle":
-                
-                StartCoroutine(ReloadAnimationSequence(Rifle, GameController.Instance.ReloadSlider.maxValue, Rifle.transform, rifleOutOfScreen));
+                if (!GameController.Instance.GameIsSlowmotion) {
+                    StartCoroutine(ReloadAnimationSequence(Rifle, GameController.Instance.ReloadSlider.maxValue, Rifle.transform, rifleOutOfScreen));
+                }
                 break;
             case "Shotgun":
-                
-                StartCoroutine(ReloadAnimationSequence(Shotgun, GameController.Instance.ReloadSlider.maxValue, Shotgun.transform, shotgunOutOfScreen));
+                if (!GameController.Instance.GameIsSlowmotion) {
+                    StartCoroutine(ReloadAnimationSequence(Shotgun, GameController.Instance.ReloadSlider.maxValue, Shotgun.transform, shotgunOutOfScreen));
+                }
                 break;
             case "Rocket Launcher":
-                
-                StartCoroutine(ReloadAnimationSequence(RocketLauncher, GameController.Instance.ReloadSlider.maxValue, RocketLauncher.transform, rocketLauncherOutOfScreen));
+                if (!GameController.Instance.GameIsSlowmotion) {
+                    StartCoroutine(ReloadAnimationSequence(RocketLauncher, GameController.Instance.ReloadSlider.maxValue, RocketLauncher.transform, rocketLauncherOutOfScreen));
+                }
                 break;
             default:
                 Debug.LogWarning("ReloadWeaponAnimation, weaponName not found");
