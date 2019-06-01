@@ -6,9 +6,16 @@ public class WeaponPickup : MonoBehaviour {
     //Author: Patrik Ahlgren
 
     [SerializeField] private string weaponName;
+    [SerializeField] private Animator anim;
+
+    private void Start()
+    {
+        anim = GameObject.Find("WeaponText").GetComponent<Animator>();
+    }
 
     public void GetWeapon() {
         BaseWeapon weaponPickup = null;
+     //   anim.SetTrigger("WeaponPickUp");
         if (weaponName == "Rifle") {
             weaponPickup = WeaponController.Instance.GetRifle();
         }

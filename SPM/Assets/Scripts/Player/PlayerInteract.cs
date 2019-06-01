@@ -7,6 +7,7 @@ public class PlayerInteract : MonoBehaviour{
 
     //Author: Patrik Ahlgren
     [SerializeField] private Text interactText;
+    [SerializeField] private Image textBackground;
     [SerializeField] private LayerMask layerMask;
 
     [SerializeField] private Transform interaction;
@@ -14,7 +15,8 @@ public class PlayerInteract : MonoBehaviour{
     private float distanceToTarget = 2f;
 	
     private void Awake(){
-        interactText = GameObject.Find("InteractionText").GetComponent<Text>();       
+        interactText = GameObject.Find("InteractionText").GetComponent<Text>();
+        textBackground = GameObject.Find("TextBackground").GetComponent<Image>();
     }
 
     private void Start() {
@@ -25,9 +27,11 @@ public class PlayerInteract : MonoBehaviour{
     private void LateUpdate() {
         Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, distanceToTarget, layerMask);
         interactText.enabled = false;
+        textBackground.enabled = false;
         try {
             if (hit.transform.gameObject.tag == "InteractableObject") {
                 interactText.enabled = true;
+                textBackground.enabled = true;
                 if (GameController.Instance.PlayerIsInteracting) {
                     hit.transform.GetComponent<InteractableObject>().Interact();
                     GameController.Instance.PlayerIsInteracting = false;
