@@ -34,6 +34,7 @@ public class MenuController : MonoBehaviour
         InGameMenuActive = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        GameController.Instance.PauseAudio = true;
         GameController.Instance.GamePaused();
 
     }
@@ -68,6 +69,7 @@ public class MenuController : MonoBehaviour
         InGameMenuActive = true;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        GameController.Instance.PauseAudio = true;
         GameController.Instance.GamePaused();
     }
 
