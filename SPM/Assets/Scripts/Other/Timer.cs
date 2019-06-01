@@ -20,4 +20,7 @@ public class Timer : MonoBehaviour{
         }       
     }
 
+    public void AddToTimer(float timeAdded) {
+        TimeCount += timeAdded;
+    }
 }
