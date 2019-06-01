@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour{
 
-    public double TimeCount;
+    private float timeCount;
 
     private Text timerText;
 
@@ -14,13 +14,28 @@ public class Timer : MonoBehaviour{
     }
 
     private void Update() {
-        timerText.text = TimeCount.ToString("F2");
+        timerText.text = timeCount.ToString("F2");
+        if (timeCount < 0) {//ifall vi ska ha system att tiden minskar om man dödar fiender eller något
+            timeCount = 0;
+        }
         if (!GameController.Instance.GameIsPaused) {
-            TimeCount += Time.unscaledDeltaTime;
+            timeCount += Time.unscaledDeltaTime;
         }       
     }
 
+    public float GetTimer() {
+        return timeCount;
+    }
+
+    public void SetTimer(float timer) {
+        timeCount = timer;
+    }
+
     public void AddToTimer(float timeAdded) {
-        TimeCount += timeAdded;
+        timeCount += timeAdded;
+    }
+
+    public void SubtractFromTimer(float timeSubtracted) {
+        timeCount -= timeSubtracted;
     }
 }
