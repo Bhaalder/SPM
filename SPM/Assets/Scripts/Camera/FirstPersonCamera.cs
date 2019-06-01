@@ -5,14 +5,15 @@ using UnityEngine;
 public class FirstPersonCamera: MonoBehaviour {
     //Author: Patrik Ahlgren
 
-    public float MouseSensitivity = 60;
+    public float CameraXSensitivity = 60;
+    public float CameraYSensitivity = 60;
     [SerializeField] private Transform cameraTarget, player;
     [SerializeField] private Vector2 cameraClamp = new Vector2(-85, 85);
     [SerializeField] private Transform weaponCamera;
 
 
-    private float mouseX;
-    private float mouseY;
+    private float cameraX;
+    private float cameraY;
     private Vector3 targetRotation;
     private Vector3 velocity = Vector3.zero;
 
@@ -32,14 +33,14 @@ public class FirstPersonCamera: MonoBehaviour {
         if (GameController.Instance.GameIsPaused) {
 
         } else {
-            mouseX += Input.GetAxis("Mouse X") * MouseSensitivity * Time.unscaledDeltaTime;
-            mouseY -= Input.GetAxis("Mouse Y") * MouseSensitivity * Time.unscaledDeltaTime;
+            cameraX += Input.GetAxis("Camera X") * CameraXSensitivity * Time.unscaledDeltaTime;
+            cameraY -= Input.GetAxis("Camera Y") * CameraYSensitivity * Time.unscaledDeltaTime;
         }
-        mouseY = Mathf.Clamp(mouseY, cameraClamp.x, cameraClamp.y);
+        cameraY = Mathf.Clamp(cameraY, cameraClamp.x, cameraClamp.y);
 
-        targetRotation = new Vector3(mouseY, mouseX);
+        targetRotation = new Vector3(cameraY, cameraX);
         transform.eulerAngles = targetRotation;
-        player.rotation = Quaternion.Euler(0, mouseX, 0);
+        player.rotation = Quaternion.Euler(0, cameraX, 0);
         transform.position = cameraTarget.position;
     }
 }
