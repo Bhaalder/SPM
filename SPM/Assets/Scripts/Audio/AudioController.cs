@@ -523,9 +523,8 @@ public class AudioController : MonoBehaviour {
     private IEnumerator PlayDelaySequence(Sound sound, float minDelay, float maxDelay) {
         float delay = Random.Range(minDelay, maxDelay);
 
-        yield return new WaitForSeconds(delay);
-
-        sound.source.Play();
+        sound.source.PlayDelayed(delay);
+        yield return new WaitForSeconds(delay + sound.source.clip.length);
         Play_Delay(sound.name, minDelay, maxDelay);
         yield return null;
     }
@@ -534,10 +533,11 @@ public class AudioController : MonoBehaviour {
         float delay = Random.Range(minDelay, maxDelay);
         float pitch = Random.Range(minPitch, maxPitch);
 
-        yield return new WaitForSeconds(delay);
+        
 
         sound.source.pitch = pitch;
-        sound.source.Play();
+        sound.source.PlayDelayed(delay);
+        yield return new WaitForSeconds(delay + sound.source.clip.length);
         Play_Delay(sound.name, minDelay, maxDelay, minPitch, maxPitch);
         yield return null;
     }
