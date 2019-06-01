@@ -207,21 +207,21 @@ public class PlayerInput : MonoBehaviour {
         } catch (System.ArgumentOutOfRangeException) {
 
         }
-        if (Input.GetButtonDown("Weapon1") && firstWeapon != null) {
+        if (Input.GetButtonDown("Weapon1") && firstWeapon != null || Input.GetAxis("Weapon1") > 0 && firstWeapon != null) {
             AbortReload();
             if (selectedWeapon != firstWeapon){
                 SwitchWeaponAnimation(firstWeapon);       
                 GameController.Instance.SelectedWeapon = firstWeapon;
             }
         }
-        if (Input.GetButtonDown("Weapon2") && secondWeapon != null) {
+        if (Input.GetButtonDown("Weapon2") && secondWeapon != null || Input.GetAxis("Weapon2") < 0 && secondWeapon != null) {
             AbortReload();
             if (selectedWeapon != secondWeapon) {
                 SwitchWeaponAnimation(secondWeapon);
                 GameController.Instance.SelectedWeapon = secondWeapon;
             }
         }
-        if (Input.GetButtonDown("Weapon3") && thirdWeapon != null) {
+        if (Input.GetButtonDown("Weapon3") && thirdWeapon != null || Input.GetAxis("Weapon3") > 0 && thirdWeapon != null) {
             AbortReload();
             if (selectedWeapon != thirdWeapon) {
                 SwitchWeaponAnimation(thirdWeapon);
@@ -275,7 +275,7 @@ public class PlayerInput : MonoBehaviour {
 
     #region Menu Method
     private void InGameMenu() {
-        if (Input.GetKeyDown(KeyCode.F10)) {
+        if (Input.GetButtonDown("Menu")) {
             try {
                 GameObject menucontroller = GameObject.Find("MenuController");
                 if (menucontroller.GetComponent<MenuController>().InGameMenuActive) {

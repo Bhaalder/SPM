@@ -121,8 +121,8 @@ public class WeaponAnimation : MonoBehaviour{
 
     #region WeaponSway and Bobbing Methods
     private void WeaponSway() {
-        float swayX = Input.GetAxis("Mouse X") * swayAmount;
-        float swayY = Input.GetAxis("Mouse Y") * swayAmount;
+        float swayX = Input.GetAxis("Camera X") * swayAmount;
+        float swayY = Input.GetAxis("Camera Y") * swayAmount;
 
         swayX = Mathf.Clamp(swayX, -maxSwayAmount, maxSwayAmount);
         swayY = Mathf.Clamp(swayY, -maxSwayAmount, maxSwayAmount);

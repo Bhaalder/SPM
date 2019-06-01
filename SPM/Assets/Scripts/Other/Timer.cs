@@ -5,37 +5,46 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour{
 
-    private float timeCount;
+    private float minuteTimeCount;
+    private float secondsTimeCount;
+    private float totalSecondsTimeCount;
 
     private Text timerText;
 
     private void Start() {
        timerText = GameObject.Find("TimerText").GetComponent<Text>();
+        //secondsTimeCount = 50;
+        //minuteTimeCount = 9;
     }
 
-    private void Update() {
-        timerText.text = timeCount.ToString("F2");
-        if (timeCount < 0) {//ifall vi ska ha system att tiden minskar om man dödar fiender eller något
-            timeCount = 0;
-        }
+    private void Update() {       
         if (!GameController.Instance.GameIsPaused) {
-            timeCount += Time.unscaledDeltaTime;
+            secondsTimeCount += Time.unscaledDeltaTime;
         }       
+        if (secondsTimeCount >= 60f) {
+            secondsTimeCount -= 60;
+            ++minuteTimeCount;
+        }
+        timerText.text = minuteTimeCount.ToString("00") + ":" + secondsTimeCount.ToString("00.00");
+        if (secondsTimeCount < 0) {//ifall vi ska ha system att tiden minskar om man dödar fiender eller något
+            secondsTimeCount = 0;
+        }
+        totalSecondsTimeCount = (minuteTimeCount * 60) + secondsTimeCount;
     }
 
     public float GetTimer() {
-        return timeCount;
+        return secondsTimeCount;
     }
 
     public void SetTimer(float timer) {
-        timeCount = timer;
+        secondsTimeCount = timer;
     }
 
     public void AddToTimer(float timeAdded) {
-        timeCount += timeAdded;
+        secondsTimeCount += timeAdded;
     }
 
     public void SubtractFromTimer(float timeSubtracted) {
-        timeCount -= timeSubtracted;
+        secondsTimeCount -= timeSubtracted;
     }
 }
