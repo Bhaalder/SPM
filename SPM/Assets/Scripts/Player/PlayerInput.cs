@@ -152,13 +152,13 @@ public class PlayerInput : MonoBehaviour {
             string name = selectedWeapon.GetName();
             switch (name) {
                 case "Rifle":
-                    AudioController.Instance.PlaySFX_RandomPitch("Rifle_Reload", 0.95f, 1f);
+                    AudioController.Instance.PlaySFX("Rifle_Reload", 0.95f, 1f);
                     break;
                 case "Shotgun":
-                    AudioController.Instance.PlaySFX_RandomPitch("Shotgun_Reload", 0.95f, 1f);
+                    AudioController.Instance.PlaySFX("Shotgun_Reload", 0.95f, 1f);
                     break;
                 case "Rocket Launcher":
-                    AudioController.Instance.PlaySFX_RandomPitch("RocketLauncher_Reload", 0.95f, 1f);
+                    AudioController.Instance.PlaySFX("RocketLauncher_Reload", 0.95f, 1f);
                     break;
                 default:
                     Debug.LogWarning("Couldn't find reload sound for weapon: " + name + "!");

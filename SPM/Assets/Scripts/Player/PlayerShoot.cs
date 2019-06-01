@@ -57,7 +57,7 @@ public class PlayerShoot : MonoBehaviour{
     private void ShootHitScan(BaseWeapon weapon) {
 
         if (weapon.GetAmmoInClip() != 0) {           
-            AudioController.Instance.PlaySFX_RandomPitch("Rifle", 0.92f, 1f);
+            AudioController.Instance.PlaySFX("Rifle", 0.92f, 1f);
             muzzleFlash.Play();//----------------Animation
             weaponAnimation.ShootWeaponAnimation(weapon.GetName());
             weapon.DecreaseAmmoInClip();
@@ -86,7 +86,7 @@ public class PlayerShoot : MonoBehaviour{
 
     private void ShootShotgunHitScan(BaseWeapon weapon){
         if (weapon.GetAmmoInClip() != 0){           
-            AudioController.Instance.PlaySFX_RandomPitch("Shotgun", 0.95f, 1f);
+            AudioController.Instance.PlaySFX("Shotgun", 0.95f, 1f);
             muzzleFlash.Play();//------------Animation
             weaponAnimation.ShootWeaponAnimation(weapon.GetName());
             weapon.DecreaseAmmoInClip();
@@ -134,7 +134,7 @@ public class PlayerShoot : MonoBehaviour{
     private void ShootProjectile(ProjectileWeapon weapon) {
         if (weapon.GetAmmoInClip() != 0) {
             weaponAnimation.ShootWeaponAnimation(weapon.GetName());
-            AudioController.Instance.PlaySFX_RandomPitch("RocketLauncher_Launch", 0.95f, 1f);
+            AudioController.Instance.PlaySFX("RocketLauncher_Launch", 0.95f, 1f);
             weapon.DecreaseAmmoInClip();
 
             GameObject rocketProj = Instantiate(weapon.GetProjectile(), transform.position + (Camera.main.transform.forward*0.1f), Camera.main.transform.rotation);

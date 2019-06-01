@@ -70,7 +70,7 @@ public class PlayerMovementController : MonoBehaviour{
         Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         IsIdle = movementInput.magnitude == 0;
         if (IsGrounded() && !IsIdle) {
-            AudioController.Instance.PlaySFX_RandomPitchAndVolume_Finish("Walking", 0.9f, 1f, 0);
+            AudioController.Instance.PlaySFX_Finish("Walking", 0.9f, 1f, 0, 0.3f, 0.4f);
             //Debug.Log("Walking!");
         } else {
         }
@@ -88,7 +88,7 @@ public class PlayerMovementController : MonoBehaviour{
                 jumpCount--;
                 checkJumpSound--;
                 if (checkJumpSound == 0) {
-                    AudioController.Instance.PlayRandomSFX_RandomPitch(3, "Jump1", "Jump2", "Jump3", null, null);
+                    AudioController.Instance.PlayRandomSFX("Jump1", "Jump2", "Jump3");
                     checkJumpSound = 1;
                 }
                 if (rigidBody.velocity.y > 0) {
@@ -113,7 +113,7 @@ public class PlayerMovementController : MonoBehaviour{
     public void Dash() {
         isDashing = true;
         if(Time.time >= timeToDash+nextTimeToDash) {
-            AudioController.Instance.PlaySFX_RandomPitch("Dash", 0.93f, 1f);
+            AudioController.Instance.PlaySFX("Dash", 0.93f, 1f);
             timeToDash = Time.time + dashDuration;
         }
     }
