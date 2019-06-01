@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
-{
+public class Timer : MonoBehaviour{
+
+    public double TimeCount;
+
     private Text timerText;
-    double time;
 
     private void Start() {
        timerText = GameObject.Find("TimerText").GetComponent<Text>();
     }
 
     private void Update() {
-        timerText.text = time.ToString("F2");
+        timerText.text = TimeCount.ToString("F2");
         if (!GameController.Instance.GameIsPaused) {
-            time += Time.unscaledDeltaTime;
+            TimeCount += Time.unscaledDeltaTime;
         }       
     }
 
