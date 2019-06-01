@@ -8,6 +8,7 @@ public class SubjectAnimations : MonoBehaviour
 
     public  bool isSuperHuman;
     public bool isAlien1;
+    public bool isSleepDude;
 
 
     void Start()
@@ -20,6 +21,10 @@ public class SubjectAnimations : MonoBehaviour
         {
             anim.SetBool("Alien1", true);
 
+        }else if (isSleepDude)
+        {
+            anim.SetBool("SleepDude", true);
+            AudioController.Instance.Play_InWorldspace("Snore", gameObject);
         }
     }
 
