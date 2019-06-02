@@ -154,6 +154,36 @@ MonoBehaviour:
     maxDistance: 0
     loop: 0
     source: {fileID: 0}
+  - name: RifleWeaponSwitch
+    clip: {fileID: 8300000, guid: 6a84757107620d74983942f05348066d, type: 3}
+    volume: 0.5
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: ShotgunWeaponSwitch
+    clip: {fileID: 8300000, guid: 073fb51c283018a40824e32b4c3f1801, type: 3}
+    volume: 0.5
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: RocketLWeaponSwitch
+    clip: {fileID: 8300000, guid: 937a21d6f05d3a44c9c7980e7f35a9e9, type: 3}
+    volume: 0.5
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+    loop: 0
+    source: {fileID: 0}
   - name: Shotgun
     clip: {fileID: 8300000, guid: 109366313f737214cb20497f152c552f, type: 3}
     volume: 1

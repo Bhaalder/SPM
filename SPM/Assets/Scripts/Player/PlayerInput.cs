@@ -242,7 +242,23 @@ public class PlayerInput : MonoBehaviour {
     public void SwitchWeaponAnimation(BaseWeapon switchedWeapon) {
         weaponAnimation.LowerWeaponAnimation(lastSelectedWeapon.GetName());
         weaponAnimation.RaiseWeaponAnimation(switchedWeapon.GetName());
+        WeaponSwitchSound(switchedWeapon);
         lastSelectedWeapon = switchedWeapon;
+    }
+
+    public void WeaponSwitchSound(BaseWeapon switchedWeapon) {
+        string weaponName = switchedWeapon.GetName();
+        switch (weaponName){
+            case "Rifle":
+                AudioController.Instance.PlaySFX("RifleWeaponSwitch", 0.95f, 1f);
+                break;
+            case "Shotgun":
+                AudioController.Instance.PlaySFX("ShotgunWeaponSwitch", 0.95f, 1f);
+                break;
+            case "Rocket Launcher":
+                AudioController.Instance.PlaySFX("RocketLWeaponSwitch", 0.95f, 1f);
+                break;
+        }
     }
 
     #endregion

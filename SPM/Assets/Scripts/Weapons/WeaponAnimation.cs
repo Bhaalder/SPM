@@ -191,7 +191,7 @@ public class WeaponAnimation : MonoBehaviour{
         string weaponName = weapon;
         switch (weaponName){
             case "Rifle":
-                selectedWeapon = Rifle;
+                selectedWeapon = Rifle;  
                 MoveWeaponPosition(Rifle, switchWeaponTime, Rifle.transform, rifleInScreen);         
                 break;
             case "Shotgun":
@@ -226,7 +226,6 @@ public class WeaponAnimation : MonoBehaviour{
                 Debug.LogWarning("LowerWeaponAnimation, weaponName not found");
                 break;
         }
-
         //Debug.Log("Lowering " + weaponName + "!");
     }
     #endregion
