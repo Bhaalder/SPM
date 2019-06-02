@@ -5,11 +5,8 @@ using UnityEngine;
 public class PowerUp1 : MonoBehaviour
 {
     //Author: Marcus Söderberg
-    public Transform powerUpSpawner;
-    private float speedIncrease = 1f;
-    private float speedDuration = 2f;
-    //public float TimeToDestroy = 0.0f;
-
+    [SerializeField] private float speedIncrease = 1f;
+    [SerializeField] private float speedDuration = 2f;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,15 +15,7 @@ public class PowerUp1 : MonoBehaviour
             other.transform.parent.GetComponent<PlayerMovementController>().SpeedMultiplier(speedDuration, speedIncrease);       
             GetComponentInParent<PowerUpSpawner>().Respawner();
             AudioController.Instance.Play("SpeedPickup");
-            Destroy(gameObject);//
-            //StartCoroutine(UsedBoost());
+            Destroy(gameObject);
         }
     }
-
-
-    //IEnumerator UsedBoost()
-    //{
-    //    yield return new WaitForSeconds(TimeToDestroy);
-    //    Destroy(gameObject);
-    //}
 }

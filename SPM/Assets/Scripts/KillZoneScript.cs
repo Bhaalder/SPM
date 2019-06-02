@@ -5,10 +5,7 @@ using UnityEngine;
 public class KillZoneScript : MonoBehaviour
 {
     //Author: Teo
-
-
-
-    
+    [SerializeField] private PlayerRespawner playerRespawner;
 
     // Start is called before the first frame update
     void Start()
@@ -26,8 +23,7 @@ public class KillZoneScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            GameController.Instance.PlayerHP = 0;
-            
+            playerRespawner.RespawnMethod();            
         }
         if (other.gameObject.CompareTag("Enemy")){
             Destroy(other.gameObject);

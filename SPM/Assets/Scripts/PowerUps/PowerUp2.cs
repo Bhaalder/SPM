@@ -5,9 +5,7 @@ using UnityEngine;
 public class PowerUp2 : MonoBehaviour
 {
     //Author: Marcus Söderberg
-    public Transform powerUpSpawner;
     private Animator anim;
-    //public float TimeToDestroy = 0.0f;
 
     private void Start()
     {
@@ -18,19 +16,14 @@ public class PowerUp2 : MonoBehaviour
     {
         if (other.gameObject.tag == "InteractionPlayer")
         {
-            GameController.Instance.GetComponent<GameController>().PlayerHP = 100;
-            GetComponentInParent<PowerUpSpawner>().Respawner();
-            AudioController.Instance.Play("HPShieldPickup");
-            Destroy(gameObject);
-            anim.SetTrigger("FullHealth");
-            //StartCoroutine(UsedBoost());
+            if (GameController.Instance.PlayerHP < 100)
+            {
+                GameController.Instance.GetComponent<GameController>().PlayerHP = 100;
+                GetComponentInParent<PowerUpSpawner>().Respawner();
+                AudioController.Instance.Play("HPShieldPickup");
+                Destroy(gameObject);
+                anim.SetTrigger("FullHealth");
+            }
         }
     }
-
-
-    //IEnumerator UsedBoost()
-    //{
-    //    yield return new WaitForSeconds(TimeToDestroy);
-    //    Destroy(gameObject);
-    //}
 }

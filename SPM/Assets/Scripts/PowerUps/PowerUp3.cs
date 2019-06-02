@@ -5,9 +5,7 @@ using UnityEngine;
 public class PowerUp3 : MonoBehaviour
 {
     //Author: Marcus Söderberg
-    public Transform powerUpSpawner;
-    public Animator anim;
-    //public float TimeToDestroy = 0.0f;
+    private Animator anim;
 
     private void Start()
     {
@@ -18,19 +16,15 @@ public class PowerUp3 : MonoBehaviour
     {
         if (other.gameObject.tag == "InteractionPlayer")
         {
-            GameController.Instance.GetComponent<GameController>().PlayerArmor = 100;
-            GetComponentInParent<PowerUpSpawner>().Respawner();
-            AudioController.Instance.Play("HPShieldPickup");
-            Destroy(gameObject);//
-            anim.SetTrigger("FullArmor");
-            //StartCoroutine(UsedBoost());
+            if(GameController.Instance.PlayerArmor < 100)
+            {
+                GameController.Instance.GetComponent<GameController>().PlayerArmor = 100;
+                GetComponentInParent<PowerUpSpawner>().Respawner();
+                AudioController.Instance.Play("HPShieldPickup");
+                Destroy(gameObject);
+                anim.SetTrigger("FullArmor");
+            }
         }
     }
 
-
-    //IEnumerator UsedBoost()
-    //{
-    //    yield return new WaitForSeconds(TimeToDestroy);
-    //    Destroy(gameObject);
-    //}
 }
