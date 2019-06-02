@@ -48,7 +48,7 @@ public class Enemy : StateMachine
     {
         if (frozenRotation == true)
         {
-            UnFreezeRotation();
+            //UnFreezeRotation();
         }
         base.Update();
     }

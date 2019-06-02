@@ -9,9 +9,8 @@ public class PlayerDeathController : MonoBehaviour
     [SerializeField] private GameObject respawnManager;
     [SerializeField] private GameObject player;
 
-    [SerializeField] private Vector3 deathLocation;
     [SerializeField] private bool isDead;
-
+    [SerializeField] private float addToTimer;
 
     // Start is called before the first frame update
     void Start()
@@ -27,13 +26,12 @@ public class PlayerDeathController : MonoBehaviour
         {
             isDead = true;
             LoadGameObjectReferences();
-            OnPlayerDeath(player.transform.position);
+            OnPlayerDeath();
         }
     }
 
-    public void OnPlayerDeath(Vector3 deathlocation)
+    public void OnPlayerDeath()
     {
-        deathLocation = deathlocation;
         deathPanel.SetActive(true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -47,21 +45,7 @@ public class PlayerDeathController : MonoBehaviour
         PauseAndUnpauseGame();
         isDead = false;
         deathPanel.SetActive(false);
-    }
-
-    public void RespawnAtDeathLocation()
-    {        
-        resetStatus();
-        DisableCursor();
-        PauseAndUnpauseGame();
-        deathPanel.SetActive(false);
-        player.transform.position = player.transform.position + player.transform.up *5;
-    }
-
-    public void SaveAndExit()
-    {
-        GameController.Instance.SaveGame();
-        //Call on save and exit methods
+        GameController.Instance.GetComponent<Timer>().AddToTimer(addToTimer);
     }
 
     private void PauseAndUnpauseGame()
@@ -86,6 +70,4 @@ public class PlayerDeathController : MonoBehaviour
         player = GameController.Instance.Player;
         respawnManager = FindObjectOfType<PlayerRespawner>().gameObject;
     }
-
-
 }
