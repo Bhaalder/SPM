@@ -18,7 +18,7 @@ public class PlayerMovementController : MonoBehaviour{
     [SerializeField] private int extraJumps = 1;
     [SerializeField] private float fakeExtraGravity = 15;
     [Tooltip("The chance to play a jumpgrunt sound 1-100")]
-    [SerializeField] private float jumpSoundPercentChance = 25;
+    [SerializeField] private float jumpSoundPercentChance = 33;
 
     [Header("Dash")]
     [SerializeField] private float dashForce = 20;
@@ -26,7 +26,6 @@ public class PlayerMovementController : MonoBehaviour{
     [SerializeField] private float dashDuration = 0.5f;
 
     private int jumpCount;
-    private int checkJumpSound = 2;
     private float timeToDash;   
     private float distanceToGround;
     private bool isDashing;
@@ -86,11 +85,7 @@ public class PlayerMovementController : MonoBehaviour{
         if (Input.GetButtonDown("Jump")) {
             if (jumpCount>0 || IsGrounded()) {
                 jumpCount--;
-                checkJumpSound--;
-                if (checkJumpSound == 0) {
-                    AudioController.Instance.PlayRandomSFX("Jump1", "Jump2", "Jump3");
-                    checkJumpSound = 1;
-                }
+                JumpSound();
                 if (rigidBody.velocity.y > 0) {
                     rigidBody.velocity = new Vector3(0, rigidBody.velocity.y, 0);
                 } else {
@@ -103,12 +98,12 @@ public class PlayerMovementController : MonoBehaviour{
         }
     }
 
-    //private void JumpSound() {
-    //    int soundChance = Random.Range(1, 100);
-    //    if (soundChance <= jumpSoundPercentChance) {
-            
-    //    }     
-    //}
+    private void JumpSound() {
+        int soundChance = Random.Range(1, 100);
+        if (soundChance <= jumpSoundPercentChance) {
+            AudioController.Instance.PlayRandomSFX("Jump1", "Jump2", "Jump3");
+        }
+    }
 
     public void Dash() {
         isDashing = true;
