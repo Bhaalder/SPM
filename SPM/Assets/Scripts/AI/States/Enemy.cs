@@ -1,5 +1,6 @@
 ﻿// Daniel Fors
 //Marcus Söderberg
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,17 +20,18 @@ public class Enemy : StateMachine
     public float health { get; set; }
     [SerializeField] protected float damageResistance;
     public int EnemyMeleeDamage { get; set; }
-    
+    public int ParentID { get; set; }
+
     public bool DealtDamage { get; set; }
     public bool CanDamage { get; set; }
     protected bool isDamaged;
 
     private bool isDead;
 
-
     // Methods
     protected override void Awake()
     {
+
         Renderer = GetComponent<MeshRenderer>();
         agent = GetComponent<NavMeshAgent>();
         player = (PlayerMovementController)FindObjectOfType(typeof(PlayerMovementController));

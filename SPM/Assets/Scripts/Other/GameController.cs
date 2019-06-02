@@ -226,6 +226,7 @@ public class GameController : MonoBehaviour {
     public void LoadEnemyData()
     {
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
         foreach (GameObject target in gameObjects)
         {
             Destroy(target);
@@ -242,6 +243,13 @@ public class GameController : MonoBehaviour {
                 GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy1);
                 enemy.transform.position = position;
                 enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+                foreach (GameObject target in spawners)
+                {
+                    if(target.GetInstanceID() == enemyData.ParentID)
+                    {
+                        enemy.transform.parent = target.transform;
+                    }
+                }
                 Debug.Log("Enemy is at location: " + enemy.transform.position);
             }
             else if (name.Contains("Enemy3"))
@@ -250,6 +258,13 @@ public class GameController : MonoBehaviour {
                 GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy3);
                 enemy.transform.position = position;
                 enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+                foreach (GameObject target in spawners)
+                {
+                    if (target.GetInstanceID() == enemyData.ParentID)
+                    {
+                        enemy.transform.parent = target.transform;
+                    }
+                }
                 Debug.Log("Enemy is at location: " + enemy.transform.position);
             }
             else if (name.Contains("Enemy4"))
@@ -258,6 +273,13 @@ public class GameController : MonoBehaviour {
                 GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy4);
                 enemy.transform.position = position;
                 enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+                foreach (GameObject target in spawners)
+                {
+                    if (target.GetInstanceID() == enemyData.ParentID)
+                    {
+                        enemy.transform.parent = target.transform;
+                    }
+                }
                 Debug.Log("Enemy is at location: " + enemy.transform.position);
             }
             else

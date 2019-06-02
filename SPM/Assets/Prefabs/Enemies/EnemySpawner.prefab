@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 9220699852368298250}
   - component: {fileID: 9220699852368298251}
   m_Layer: 0
-  m_Name: EnemyManager
-  m_TagString: Untagged
+  m_Name: EnemySpawner
+  m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,12 +54,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Waves:
-  - EnemiesPerWave: 5
-    Enemy: {fileID: 4254946551304860461, guid: 5ebe6e51820a5d044befeb13ea05c4c0, type: 3}
-  - EnemiesPerWave: 10
-    Enemy: {fileID: 4254946551304860461, guid: 5ebe6e51820a5d044befeb13ea05c4c0, type: 3}
-  - EnemiesPerWave: 10
-    Enemy: {fileID: 4254946551304860461, guid: 5ebe6e51820a5d044befeb13ea05c4c0, type: 3}
+  - Enemies: []
+    Numberofenemy: 
+  - Enemies: []
+    Numberofenemy: 
+  - Enemies: []
+    Numberofenemy: 
   SpawnPoints:
   - {fileID: 9220699854065314741}
   - {fileID: 9220699853129373219}
@@ -72,6 +72,10 @@ MonoBehaviour:
   - {fileID: 9220699853442327819}
   - {fileID: 9220699853214941006}
   TimeBetweenEnemies: 0.1
+  isRoomCleared: 0
+  isArenaSpawner: 0
+  isCommandoRoom: 0
+  door: {fileID: 0}
 --- !u!1 &9220699852443683329
 GameObject:
   m_ObjectHideFlags: 0

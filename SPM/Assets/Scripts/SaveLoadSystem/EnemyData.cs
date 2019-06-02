@@ -19,6 +19,8 @@ public class EnemyData
 
     public string EnemyName { get; set; }
 
+    public int ParentID { get; set; }
+
     public EnemyData(Enemy enemy)
     {
         EnemyName = enemy.gameObject.name;
@@ -32,5 +34,7 @@ public class EnemyData
         EnemyRotationX = enemy.transform.eulerAngles.x;
         EnemyRotationY = enemy.transform.eulerAngles.y;
         EnemyRotationZ = enemy.transform.eulerAngles.z;
+
+        ParentID = enemy.ParentID;
     }
 }

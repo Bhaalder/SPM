@@ -43,6 +43,7 @@ public class SpawnManager : MonoBehaviour
         totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
         isRoomCleared = false;
         // StartNextWave(); //used for testing
+        Debug.Log("This is my gameobject ID: " + gameObject.GetInstanceID());
     }
 
 
@@ -95,6 +96,16 @@ public class SpawnManager : MonoBehaviour
 
                     GameObject newEnemy1 = Instantiate(enemies[place], SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
                     newEnemy1.transform.parent = gameObject.transform;
+                    try
+                    {
+                        newEnemy1.GetComponent<Enemy>().ParentID = gameObject.GetInstanceID();
+                        Debug.Log(newEnemy1.GetComponent<Enemy>().ParentID);
+                    }
+                    catch (Exception e)
+                    {
+                        newEnemy1.GetComponent<Enemy>().ParentID = 0;
+                        Debug.Log(newEnemy1.GetComponent<Enemy>().ParentID);
+                    }
                     if (spawnPointIndex == SpawnPoints.Length - 1) { spawnPointIndex = 0; }
                     yield return new WaitForSeconds(TimeBetweenEnemies);
                 }
