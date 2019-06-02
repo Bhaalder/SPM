@@ -43,7 +43,6 @@ public class SpawnManager : MonoBehaviour
         totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
         isRoomCleared = false;
         // StartNextWave(); //used for testing
-        Debug.Log("This is my gameobject ID: " + gameObject.GetInstanceID());
     }
 
 
