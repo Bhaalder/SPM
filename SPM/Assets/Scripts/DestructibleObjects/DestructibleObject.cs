@@ -5,8 +5,8 @@ using UnityEngine;
 public class DestructibleObject : MonoBehaviour {
 //Author: Patrik Ahlgren
 
-    public float Durability = 10;
-    public bool IsDestroyed;
+    protected float Durability = 10;
+    public bool IsDestroyed { get; set; }
 
     public virtual void TakeDamage(float damage) {
         Durability -= damage;
