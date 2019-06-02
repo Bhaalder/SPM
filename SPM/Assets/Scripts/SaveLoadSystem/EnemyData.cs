@@ -5,24 +5,32 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyData
 {
-    public float[] EnemyPosition { get; set; }
-    public float[] EnemyRotation { get; set; }
-    public float EnemyHealth { get; set; }
-    public float PlayerArmor { get; set; }
+    public float EnemyPositionX { get; set; }
+    public float EnemyPositionY { get; set; }
 
+    public float EnemyPositionZ { get; set; }
+
+    public float EnemyRotationX { get; set; }
+    public float EnemyRotationY { get; set; }
+    public float EnemyRotationZ { get; set; }
+    public float EnemyHealth { get; set; }
+
+    public int EnemyNumber { get; set; }
+
+    public string EnemyName { get; set; }
 
     public EnemyData(Enemy enemy)
     {
+        EnemyName = enemy.gameObject.name;
+
         EnemyHealth = enemy.health;
 
-        EnemyPosition = new float[3];
-        EnemyPosition[0] = enemy.transform.position.x;
-        EnemyPosition[1] = enemy.transform.position.y;
-        EnemyPosition[2] = enemy.transform.position.z;
+        EnemyPositionX = enemy.transform.position.x;
+        EnemyPositionY = enemy.transform.position.y;
+        EnemyPositionZ = enemy.transform.position.z;
 
-        EnemyRotation = new float[3];
-        EnemyRotation[0] = enemy.transform.eulerAngles.x;
-        EnemyRotation[1] = enemy.transform.eulerAngles.y;
-        EnemyRotation[2] = enemy.transform.eulerAngles.z;
+        EnemyRotationX = enemy.transform.eulerAngles.x;
+        EnemyRotationY = enemy.transform.eulerAngles.y;
+        EnemyRotationZ = enemy.transform.eulerAngles.z;
     }
 }

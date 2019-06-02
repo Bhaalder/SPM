@@ -34,6 +34,12 @@ public class GameController : MonoBehaviour {
 
     private static GameController _instance;
 
+    [SerializeField] private GameObject Enemy1;
+    [SerializeField] private GameObject Enemy3;
+    [SerializeField] private GameObject Enemy4;
+
+    public List<EnemyData> enemies = new List<EnemyData>();
+
     public static GameController Instance {
         get {
             if (_instance == null) {
@@ -178,12 +184,15 @@ public class GameController : MonoBehaviour {
     public void SaveEnemyData()
     {
         SaveSystem.DeleteSaveFile();
-
+        enemies.Clear();
+        
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject target in gameObjects)
         {
             target.GetComponent<Enemy>().SaveEnemyData();
         }
+
+        SaveSystem.WriteEnemyDataToFile(enemies);
     }
 
     public void LoadPlayerData()
@@ -209,12 +218,58 @@ public class GameController : MonoBehaviour {
 
     public void LoadEnemyData()
     {
-        EnemyData data = SaveSystem.LoadEnemies();
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject target in gameObjects)
+        {
+            Destroy(target);
+        }
+
+        enemies = SaveSystem.LoadEnemies();
+
+        foreach (EnemyData enemyData in enemies)
+        {
+            string name = enemyData.EnemyName;
+            if (name.Contains("Enemy1"))
+            {
+                Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
+                GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy1);
+                enemy.transform.position = position;
+                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+                Debug.Log("Enemy is at location: " + enemy.transform.position);
+            }
+            else if (name.Contains("Enemy3"))
+            {
+                Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
+                GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy3);
+                enemy.transform.position = position;
+                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+                Debug.Log("Enemy is at location: " + enemy.transform.position);
+            }
+            else if (name.Contains("Enemy4"))
+            {
+                Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
+                GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy4);
+                enemy.transform.position = position;
+                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+                Debug.Log("Enemy is at location: " + enemy.transform.position);
+            }
+            else
+            {
+                Debug.LogError("Unknown Enemy Type. Instantiate failed for: " + name);
+            }
+            
+        }
     }
 
     public void SaveGame()
     {
         SavePlayerData();
         SaveEnemyData();
+    }
+
+    public void LoadGame()
+    {
+        LoadPlayerData();
+        LoadEnemyData();
     }
 }

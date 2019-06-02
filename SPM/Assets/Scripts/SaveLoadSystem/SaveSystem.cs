@@ -41,41 +41,39 @@ public static class SaveSystem
 
     public static void SaveEnemyData(Enemy enemy)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-
-        string path = Application.persistentDataPath + "/enemies.sav";
-        if (File.Exists(path) == false)
-        {
-            FileStream stream = new FileStream(path, FileMode.Create);
-            EnemyData data = new EnemyData(enemy);
-
-            formatter.Serialize(stream, data);
-            stream.Close();
-        }
-        else
-        {
-            FileStream stream = new FileStream(path, FileMode.Append);
-            EnemyData data = new EnemyData(enemy);
-
-            formatter.Serialize(stream, data);
-            stream.Close();
-        }
-
+        EnemyData data = new EnemyData(enemy);
+        Debug.Log(data.EnemyName + " " + data.EnemyHealth + " " + data.EnemyPositionX + " " + data.EnemyRotationX);
+        GameController.Instance.enemies.Add(data);
     }
 
-    public static EnemyData LoadEnemies()
+    public static void WriteEnemyDataToFile(List<EnemyData> enemies)
     {
+
+        DeleteSaveFile();
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/enemies.sav";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, enemies);
+        stream.Close();
+
+        GameController.Instance.enemies.Clear();
+    }
+
+    public static List<EnemyData> LoadEnemies()
+    {
+
         string path = Application.persistentDataPath + "/enemies.sav";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
 
-            EnemyData data = formatter.Deserialize(stream) as EnemyData;
+            List<EnemyData> enemies = formatter.Deserialize(stream) as List<EnemyData>;
 
             stream.Close();
 
-            return data;
+            return enemies;
         }
         else
         {

@@ -82,4 +82,14 @@ public class MenuController : MonoBehaviour
         GameController.Instance.GamePaused();
     }
 
+    public void SaveGame()
+    {
+        GameController.Instance.SaveGame();
+    }
+
+    public void LoadGame()
+    {
+        GameController.Instance.LoadGame();
+    }
+
 }
