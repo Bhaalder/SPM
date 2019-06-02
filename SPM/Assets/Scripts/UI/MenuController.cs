@@ -90,6 +90,7 @@ public class MenuController : MonoBehaviour
     public void LoadGame()
     {
         GameController.Instance.LoadGame();
+        DeactivateMenu();
     }
 
 }
