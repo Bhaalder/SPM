@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1427340117932609682}
   - component: {fileID: 7968531273084218020}
   - component: {fileID: 4443189787155584605}
+  - component: {fileID: 2998324693508761223}
   m_Layer: 0
   m_Name: Bebop_Couch_01.02
   m_TagString: Untagged
@@ -77,3 +78,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &2998324693508761223
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2708272643129172609}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 7424380141105748642, guid: b68648ecac341a44e91fb290f5a87903, type: 3}
