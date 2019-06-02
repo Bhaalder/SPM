@@ -243,7 +243,7 @@ public class GameController : MonoBehaviour {
                 Debug.Log(enemyData.EnemyName + " " + " " + enemyData.EnemyPositionX + " " + enemyData.EnemyPositionY + " " + enemyData.EnemyPositionZ);
                 GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy1);
                 enemy.transform.position = position;
-                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY+1, enemyData.EnemyRotationZ);
                 foreach (GameObject target in spawners)
                 {
                     if(target.GetInstanceID() == enemyData.ParentID)
@@ -258,7 +258,7 @@ public class GameController : MonoBehaviour {
                 Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
                 GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy3);
                 enemy.transform.position = position;
-                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY+1, enemyData.EnemyRotationZ);
                 foreach (GameObject target in spawners)
                 {
                     if (target.GetInstanceID() == enemyData.ParentID)
@@ -273,7 +273,7 @@ public class GameController : MonoBehaviour {
                 Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
                 GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy4);
                 enemy.transform.position = position;
-                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY+1, enemyData.EnemyRotationZ);
                 foreach (GameObject target in spawners)
                 {
                     if (target.GetInstanceID() == enemyData.ParentID)
