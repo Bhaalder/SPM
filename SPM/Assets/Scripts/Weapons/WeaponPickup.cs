@@ -15,7 +15,7 @@ public class WeaponPickup : MonoBehaviour {
 
     public void GetWeapon() {
         BaseWeapon weaponPickup = null;
-     //   anim.SetTrigger("WeaponPickUp");
+        anim.SetTrigger("WeaponPickUp");
         if (weaponName == "Rifle") {
             weaponPickup = WeaponController.Instance.GetRifle();
         }
