@@ -42,7 +42,7 @@ public static class SaveSystem
     public static void SaveEnemyData(Enemy enemy)
     {
         EnemyData data = new EnemyData(enemy);
-        Debug.Log(data.EnemyName + " " + data.EnemyHealth + " " + data.EnemyPositionX + " " + data.EnemyRotationX);
+        Debug.Log(data.EnemyName + " " + " " + data.EnemyPositionX + " " + data.EnemyPositionY + " " + data.EnemyPositionZ);
         GameController.Instance.enemies.Add(data);
     }
 

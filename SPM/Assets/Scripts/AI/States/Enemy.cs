@@ -28,7 +28,7 @@ public class Enemy : StateMachine
 
     private bool isDead;
     private bool frozenRotation;
-    private float currentCooldown;
+    private float unfreezeCooldown;
 
     // Methods
     protected override void Awake()
@@ -109,9 +109,9 @@ public class Enemy : StateMachine
 
     public void UnFreezeRotation()
     {
-        currentCooldown += Time.deltaTime;
+        unfreezeCooldown += Time.deltaTime;
 
-        if (currentCooldown < 5f)
+        if (unfreezeCooldown < 5f)
         {
             return;
         }

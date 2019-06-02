@@ -24,7 +24,7 @@ public class SpawnManager : MonoBehaviour
     private int enemiesInWaveLeft;
     private int spawnedEnemies;
 
-    private int currentWave;
+    public int CurrentWave { get; set; }
     private int totalWaves;
     private int spawnPointIndex = 0;
 
@@ -39,7 +39,7 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        currentWave = -1; // avoid off by 1
+        CurrentWave = -1; // avoid off by 1
         totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
         isRoomCleared = false;
         // StartNextWave(); //used for testing
@@ -55,12 +55,12 @@ public class SpawnManager : MonoBehaviour
     {
         Debug.Log("Next wave started");
 
-        currentWave++;
+        CurrentWave++;
 
         int[] enemycount;
         enemycount = null;
 
-        enemycount = Waves[currentWave].Numberofenemy;
+        enemycount = Waves[CurrentWave].Numberofenemy;
 
         for (int i = 0; i < enemycount.Length; i++)
         {
@@ -76,8 +76,8 @@ public class SpawnManager : MonoBehaviour
     // Coroutine to spawn all of our enemies
     IEnumerator SpawnEnemies()
     {
-        int enemiesCount = Waves[currentWave].Enemies.Length;
-        GameObject[] enemies = Waves[currentWave].Enemies;
+        int enemiesCount = Waves[CurrentWave].Enemies.Length;
+        GameObject[] enemies = Waves[CurrentWave].Enemies;
 
         while (spawnedEnemies < totalEnemiesInCurrentWave)
         {
@@ -85,7 +85,7 @@ public class SpawnManager : MonoBehaviour
             foreach (GameObject enemy in enemies)
             {
                 int place = System.Array.IndexOf(enemies, enemy);
-                int numberofenemytospawn = Waves[currentWave].Numberofenemy[place];
+                int numberofenemytospawn = Waves[CurrentWave].Numberofenemy[place];
 
                 for (int i = 0; i < numberofenemytospawn; i++)
                 {
@@ -98,12 +98,10 @@ public class SpawnManager : MonoBehaviour
                     try
                     {
                         newEnemy1.GetComponent<Enemy>().ParentID = gameObject.GetInstanceID();
-                        Debug.Log(newEnemy1.GetComponent<Enemy>().ParentID);
                     }
                     catch (Exception e)
                     {
                         newEnemy1.GetComponent<Enemy>().ParentID = 0;
-                        Debug.Log(newEnemy1.GetComponent<Enemy>().ParentID);
                     }
                     if (spawnPointIndex == SpawnPoints.Length - 1) { spawnPointIndex = 0; }
                     yield return new WaitForSeconds(TimeBetweenEnemies);
@@ -126,7 +124,7 @@ public class SpawnManager : MonoBehaviour
         {
 
             // Check to see if the last enemy was killed from the last wave
-            if (currentWave == totalWaves && enemiesInWaveLeft == 0 && spawnedEnemies == totalEnemiesInCurrentWave)
+            if (CurrentWave == totalWaves && enemiesInWaveLeft == 0 && spawnedEnemies == totalEnemiesInCurrentWave)
             {
                 Debug.Log("clear condition has been reached");
                 StopCoroutine(SpawnEnemies());

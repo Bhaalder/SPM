@@ -49,7 +49,7 @@ public class Elevator : MonoBehaviour
     {
         if (triggerGO.GetComponent<ElevatorTrigger>().GetTriggered() && !hasSwitch)
             ToggleMove();
-        else if (triggerGO.GetComponent<ElevatorTrigger>().GetTriggered() && hasSwitch && Input.GetKeyDown(KeyCode.E))       
+        else if (triggerGO.GetComponent<ElevatorTrigger>().GetTriggered() && hasSwitch && GameController.Instance.PlayerIsInteracting)       
             ToggleMove();      
     }
 

@@ -240,6 +240,7 @@ public class GameController : MonoBehaviour {
             if (name.Contains("Enemy1"))
             {
                 Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
+                Debug.Log(enemyData.EnemyName + " " + " " + enemyData.EnemyPositionX + " " + enemyData.EnemyPositionY + " " + enemyData.EnemyPositionZ);
                 GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy1);
                 enemy.transform.position = position;
                 enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
