@@ -183,7 +183,6 @@ public class WeaponAnimation : MonoBehaviour{
         }
         selectedWeapon.transform.localPosition = Vector3.Lerp(selectedWeapon.transform.localPosition, calculatePosition + InitialPositionOfWeapon(), Time.deltaTime);
     }
-
     #endregion
 
     #region Raise/Lower Weapon Methods
@@ -291,9 +290,6 @@ public class WeaponAnimation : MonoBehaviour{
 
         //Debug.Log("Reloading " + weaponName + "!");
     }
-
-
-
     #endregion
 
     #region MoveWeapon Methods

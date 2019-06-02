@@ -44,7 +44,7 @@ public class Trigger : MonoBehaviour
             Player.transform.parent = null;
             foreach (Transform child in transform)
             {
-                GameObject.Destroy(child.gameObject);
+                Destroy(child.gameObject);
             }
             
         }
