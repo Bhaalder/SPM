@@ -27,6 +27,8 @@ public class Enemy : StateMachine
     protected bool isDamaged;
 
     private bool isDead;
+    private bool frozenRotation;
+    private float currentCooldown;
 
     // Methods
     protected override void Awake()
@@ -38,11 +40,16 @@ public class Enemy : StateMachine
         isDead = false;
         isDamaged = false;
         CanDamage = false;
+        frozenRotation = true;
         base.Awake();
     }
 
     protected override void Update()
     {
+        if (frozenRotation == true)
+        {
+            UnFreezeRotation();
+        }
         base.Update();
     }
 
@@ -98,5 +105,17 @@ public class Enemy : StateMachine
     public void SaveEnemyData()
     {
         SaveSystem.SaveEnemyData(this);
+    }
+
+    public void UnFreezeRotation()
+    {
+        currentCooldown += Time.deltaTime;
+
+        if (currentCooldown < 5f)
+        {
+            return;
+        }
+
+        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
     }
 }
