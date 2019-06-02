@@ -104,6 +104,13 @@ public class GameController : MonoBehaviour {
     }
 
     public void UpdateSelectedWeapon_AmmoText() {
+        if (SelectedWeapon.GetTotalAmmoLeft() == 0 && SelectedWeapon.GetAmmoInClip() == 0) {
+            weaponAmmoText.color = Color.red;
+        } else if (SelectedWeapon.GetTotalAmmoLeft() <= SelectedWeapon.GetMaxAmmoInClip()) {
+            weaponAmmoText.color = Color.yellow;
+        } else {
+            weaponAmmoText.color = Color.white;
+        }
         weaponAmmoText.text = SelectedWeapon.GetAmmoInClip() + "/" + SelectedWeapon.GetTotalAmmoLeft();
     }
 

@@ -10,7 +10,6 @@ public class ExplosiveBarrel : DestructibleObject{
             GetComponent<Explosion>().Explode(5, 35);
             Destroy(gameObject);
             IsDestroyed = true;
-        }
-        
+        }       
     }
 }

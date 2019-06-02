@@ -19,8 +19,7 @@ public class DestructibleObject : MonoBehaviour {
         if (!IsDestroyed) {         
             Destroy(gameObject);
             IsDestroyed = true;
-        }
-        
+        }      
     }
 
 }
