@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3204911372695073818}
   - component: {fileID: 5845997045195099692}
   - component: {fileID: 152469541968786133}
-  - component: {fileID: 4150232751089933511}
+  - component: {fileID: 2220677860645807794}
   m_Layer: 0
   m_Name: Terminal
   m_TagString: Untagged
@@ -78,8 +78,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4150232751089933511
-MeshCollider:
+--- !u!65 &2220677860645807794
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -88,7 +88,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -1444909868921906229, guid: caf6c15fef2359c4ca224687371edddf, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 5.9355955, y: 21.132395, z: 23.262447}
+  m_Center: {x: 0.000091552734, y: -0.10385088, z: 0.00009920689}
