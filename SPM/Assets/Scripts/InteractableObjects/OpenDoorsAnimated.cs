@@ -7,7 +7,6 @@ public class OpenDoorsAnimated : MonoBehaviour
     //Main Author: Teo
     //Secondary Author: Patrik Ahlgren
     bool isOpen;
-    bool isClosed;
 
     [SerializeField] private GameObject redPanel;
     [SerializeField] private GameObject greenPanel;
@@ -16,12 +15,15 @@ public class OpenDoorsAnimated : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private bool spawnEnemies;
 
+    public int DoorID { get; set; }
+
     void Start()
     {
         greenPanel = gameObject.transform.GetChild(0).gameObject;
         redPanel = gameObject.transform.GetChild(1).gameObject;
         greenPanel.SetActive(false);
-        redPanel.SetActive(true);  
+        redPanel.SetActive(true);
+        DoorID = gameObject.GetInstanceID();
     }
 
     public void OpenAndClose() {
