@@ -51,7 +51,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &5536971111751372721
 CapsuleCollider:
@@ -90,9 +90,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   player: {fileID: 0}
-  health: 15
   damageResistance: 5
   projectileOffset: {x: 0.2, y: 2, z: 0.2}
+  enemyHealth: 0
 --- !u!195 &2110957073145418597
 NavMeshAgent:
   m_ObjectHideFlags: 0
