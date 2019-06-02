@@ -6,7 +6,7 @@ public class DestructibleObject : MonoBehaviour {
 //Author: Patrik Ahlgren
 
     protected float Durability = 10;
-    protected bool IsDestroyed { get; set; }
+    public bool IsDestroyed { get; set; }
 
     public virtual void TakeDamage(float damage) {
         Durability -= damage;
