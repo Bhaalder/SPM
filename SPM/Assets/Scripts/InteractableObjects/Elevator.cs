@@ -47,9 +47,9 @@ public class Elevator : MonoBehaviour
 
     private void ControlTrigger()
     {
-        if (triggerGO.GetComponent<Trigger>().GetTriggered() && !hasSwitch)
+        if (triggerGO.GetComponent<ElevatorTrigger>().GetTriggered() && !hasSwitch)
             ToggleMove();
-        else if (triggerGO.GetComponent<Trigger>().GetTriggered() && hasSwitch && Input.GetKeyDown(KeyCode.E))       
+        else if (triggerGO.GetComponent<ElevatorTrigger>().GetTriggered() && hasSwitch && Input.GetKeyDown(KeyCode.E))       
             ToggleMove();      
     }
 
