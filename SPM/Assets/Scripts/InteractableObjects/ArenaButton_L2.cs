@@ -21,6 +21,7 @@ public class ArenaButton_L2 : MonoBehaviour
             sceneManagerScript.buttonIsPressed = true;
             Debug.Log("Knappen tryckt");
             spawnerScript.GetComponent<SpawnManager>().InitializeSpawner();
+            AudioController.Instance.Play_ThenPlay("Song4Start", "Song4Loop");
             Destroy(gameObject);
 
             obj1.SetActive(false);

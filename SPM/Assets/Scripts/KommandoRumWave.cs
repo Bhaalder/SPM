@@ -17,6 +17,8 @@ public class KommandoRumWave : MonoBehaviour
     {
         if (other.CompareTag("InteractionPlayer"))
         {
+            AudioController.Instance.Play_ThenPlay("Song2Start", "Song2Loop");
+            AudioController.Instance.FadeOut("LetsGetItOn", 2, 0);
             eSpawner.InitializeSpawner();
             gO.SetActive(true);
             Destroy(gameObject);

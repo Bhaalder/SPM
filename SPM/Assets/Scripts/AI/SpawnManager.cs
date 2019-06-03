@@ -33,6 +33,7 @@ public class SpawnManager : MonoBehaviour
     // Designer input
     [SerializeField] private bool isRoomCleared;
     [SerializeField] private bool isArenaSpawner;
+    [SerializeField] private bool isLevel2;
     [SerializeField] private bool isCommandoRoom;
     [SerializeField] private GameObject door;
 
@@ -132,7 +133,11 @@ public class SpawnManager : MonoBehaviour
                 if (isArenaSpawner)
                 {
                     GameController.Instance.SceneCompletedSequence(true);
-                    AudioController.Instance.FadeOut("Song3Loop", 5, 0);
+                    if (isLevel2) {
+                        AudioController.Instance.FadeOut("Song4Loop", 5, 0);
+                    } else {
+                        AudioController.Instance.FadeOut("Song3Loop", 5, 0);
+                    }                
                     GameObject sceneManager = GameObject.Find("SceneManager");
                     sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
                     door.SetActive(false);
