@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1403981671785416254
 Transform:
@@ -108,7 +108,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &5234648080127533475
 Transform:
@@ -196,7 +196,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &6688435865881821524
 Transform:
@@ -228,6 +228,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BlueChair
+      objectReference: {fileID: 0}
+    - target: {fileID: 641269705137493475, guid: 4184352406c069349bfa33a98af0f7a1,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 5475628503549880136, guid: 4184352406c069349bfa33a98af0f7a1,
         type: 3}
@@ -319,6 +324,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: deskscifi
       objectReference: {fileID: 0}
+    - target: {fileID: 4470490375362051884, guid: 37cae7057007a3e4c910ab3551fb3fa3,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 599267472718630207, guid: 37cae7057007a3e4c910ab3551fb3fa3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -408,6 +418,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Screen (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5746659602294213604, guid: 51b3db08007c50041bb6ddf27a4ddce0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8762709301740665335, guid: 51b3db08007c50041bb6ddf27a4ddce0,
         type: 3}
