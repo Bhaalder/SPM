@@ -20,14 +20,15 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private Transform[] SpawnPoints;
     public float TimeBetweenEnemies = 2f;
 
-    private int totalEnemiesInCurrentWave;
-    private int enemiesInWaveLeft;
-    private int spawnedEnemies;
+    public int TotalEnemiesInCurrentWave { get; set; }
+    public int EnemiesInWaveLeft { get; set; }
+    public int SpawnedEnemies { get; set; }
 
     public int CurrentWave { get; set; }
     private int totalWaves;
     private int spawnPointIndex = 0;
 
+    public int SpawnerInstancedID { get; set; }
 
     // Designer input
     [SerializeField] private bool isRoomCleared;
@@ -64,11 +65,11 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < enemycount.Length; i++)
         {
-            totalEnemiesInCurrentWave += enemycount[i];
+            TotalEnemiesInCurrentWave += enemycount[i];
         }
 
-        enemiesInWaveLeft = 0;
-        spawnedEnemies = 0;
+        EnemiesInWaveLeft = 0;
+        SpawnedEnemies = 0;
 
         StartCoroutine(SpawnEnemies());
     }
@@ -79,7 +80,7 @@ public class SpawnManager : MonoBehaviour
         int enemiesCount = Waves[CurrentWave].Enemies.Length;
         GameObject[] enemies = Waves[CurrentWave].Enemies;
 
-        while (spawnedEnemies < totalEnemiesInCurrentWave)
+        while (SpawnedEnemies < TotalEnemiesInCurrentWave)
         {
 
             foreach (GameObject enemy in enemies)
@@ -89,8 +90,8 @@ public class SpawnManager : MonoBehaviour
 
                 for (int i = 0; i < numberofenemytospawn; i++)
                 {
-                    spawnedEnemies++;
-                    enemiesInWaveLeft++;
+                    SpawnedEnemies++;
+                    EnemiesInWaveLeft++;
                     spawnPointIndex++;
 
                     GameObject newEnemy1 = Instantiate(enemies[place], SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
@@ -117,14 +118,14 @@ public class SpawnManager : MonoBehaviour
     // called by an enemy when they're defeated
     public void EnemyDefeated()
     {
-        enemiesInWaveLeft--;
+        EnemiesInWaveLeft--;
 
         // We start the next wave once we have spawned and defeated them all
-        if (enemiesInWaveLeft == 0 && spawnedEnemies == totalEnemiesInCurrentWave)
+        if (EnemiesInWaveLeft == 0 && SpawnedEnemies == TotalEnemiesInCurrentWave)
         {
 
             // Check to see if the last enemy was killed from the last wave
-            if (CurrentWave == totalWaves && enemiesInWaveLeft == 0 && spawnedEnemies == totalEnemiesInCurrentWave)
+            if (CurrentWave == totalWaves && EnemiesInWaveLeft == 0 && SpawnedEnemies == TotalEnemiesInCurrentWave)
             {
                 Debug.Log("clear condition has been reached");
                 StopCoroutine(SpawnEnemies());
@@ -145,7 +146,7 @@ public class SpawnManager : MonoBehaviour
                 return;
             }
             else {
-                totalEnemiesInCurrentWave = 0;
+                TotalEnemiesInCurrentWave = 0;
                 StartNextWave();
             }
 

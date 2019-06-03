@@ -24,6 +24,7 @@ public class MeleeChaseState : EnemyBaseState
     public override void HandleUpdate()
     {
         owner.agent.SetDestination(owner.player.transform.position);
+        Debug.Log("I am heading towards destination: " + owner.agent.destination);
 
 
         if (DistanceToPlayer() < attackDistance)

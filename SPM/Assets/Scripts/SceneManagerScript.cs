@@ -9,6 +9,7 @@ public class SceneManagerScript : MonoBehaviour
     //Secondary author: Marcus Söderberg
     public bool buttonIsPressed;
     public GameObject menuController;
+    public int SceneBuildIndex { get; set; }
 
 
     // Start is called before the first frame update
@@ -18,16 +19,14 @@ public class SceneManagerScript : MonoBehaviour
         // SpawnManager spawnScript = GetComponent<SpawnManager>();
         //DontDestroyOnLoad(gameObject);
         menuController = GameObject.Find("MenuController");
-
- 
-
+        SceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-      
+        
     }
 
     public void MainMenu()

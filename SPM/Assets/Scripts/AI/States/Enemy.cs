@@ -46,10 +46,6 @@ public class Enemy : StateMachine
 
     protected override void Update()
     {
-        if (frozenRotation == true)
-        {
-            //UnFreezeRotation();
-        }
         base.Update();
     }
 
@@ -105,17 +101,5 @@ public class Enemy : StateMachine
     public void SaveEnemyData()
     {
         SaveSystem.SaveEnemyData(this);
-    }
-
-    public void UnFreezeRotation()
-    {
-        unfreezeCooldown += Time.deltaTime;
-
-        if (unfreezeCooldown < 5f)
-        {
-            return;
-        }
-
-        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
     }
 }
