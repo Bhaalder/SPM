@@ -135,16 +135,24 @@ public class AudioController : MonoBehaviour {
         try {
             if (allSoundsDictionary.ContainsKey(name)) {
                 GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
-                sound = allSoundsDictionary[name];
-                sound.source = soundAtLocationGO.GetComponent<AudioSource>();
-                sound.source.clip = sound.clip;
-                sound.source.volume = sound.volume;
+                InWorldSpaceRoutine(name, soundAtLocationGO);
                 sound.source.pitch = sound.pitch;
-                sound.source.spatialBlend = sound.spatialBlend_2D_3D;
-                sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
-                sound.source.minDistance = sound.minDistance;
-                sound.source.maxDistance = sound.maxDistance;
-                sound.source.loop = sound.loop;
+                sound.source.Play();
+                if (!sound.source.loop) {
+                    Destroy(soundAtLocationGO, sound.clip.length);
+                }
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+
+    public void Play_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
+        try {
+            if (allSoundsDictionary.ContainsKey(name)) {
+                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
+                InWorldSpaceRoutine(name, soundAtLocationGO);
+                sound.source.pitch = Random.Range(minPitch, maxPitch);
                 sound.source.Play();
                 if (!sound.source.loop) {
                     Destroy(soundAtLocationGO, sound.clip.length);
@@ -161,16 +169,8 @@ public class AudioController : MonoBehaviour {
                 GameObject[] gameObjectLocation = GameObject.FindGameObjectsWithTag(tag);
                 foreach(GameObject taggedObject in gameObjectLocation) {
                     GameObject soundAtLocationGO = Instantiate(soundObject, taggedObject.transform.position, Quaternion.identity, taggedObject.transform);
-                    sound = allSoundsDictionary[name];
-                    sound.source = soundAtLocationGO.GetComponent<AudioSource>();
-                    sound.source.clip = sound.clip;
-                    sound.source.volume = sound.volume;
+                    InWorldSpaceRoutine(name, soundAtLocationGO);
                     sound.source.pitch = sound.pitch;
-                    sound.source.spatialBlend = sound.spatialBlend_2D_3D;
-                    sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
-                    sound.source.minDistance = sound.minDistance;
-                    sound.source.maxDistance = sound.maxDistance;
-                    sound.source.loop = sound.loop;
                     sound.source.Play();
                     if (!sound.source.loop) {
                         Destroy(soundAtLocationGO, sound.clip.length);
@@ -190,11 +190,21 @@ public class AudioController : MonoBehaviour {
         }       
     }
 
-
+    private void InWorldSpaceRoutine(string name, GameObject soundAtLocationGO) {
+        sound = allSoundsDictionary[name];
+        sound.source = soundAtLocationGO.GetComponent<AudioSource>();
+        sound.source.clip = sound.clip;
+        sound.source.volume = sound.volume;
+        sound.source.spatialBlend = sound.spatialBlend_2D_3D;
+        sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
+        sound.source.minDistance = sound.minDistance;
+        sound.source.maxDistance = sound.maxDistance;
+        sound.source.loop = sound.loop;
+    }
 
     #endregion
 
-    #region PlayRandomPitch
+    #region PlayRandom
     public void Play(string name, float minPitch, float maxPitch) {
         sound = FindSound(name);
         try {
@@ -213,6 +223,35 @@ public class AudioController : MonoBehaviour {
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }       
+    }
+
+    public void PlayRandomSFX_InWorldspace(string name, string name2, GameObject gameObjectLocation, float minPitch, float maxPitch) {
+        int i = Random.Range(1, 2);
+        try {
+            if (allSoundsDictionary.ContainsKey(name)) {
+                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
+                if (i == 1) {
+                    sound = allSoundsDictionary[name];
+                } else if (i == 2) {
+                    sound = allSoundsDictionary[name2];
+                }
+                sound.source = soundAtLocationGO.GetComponent<AudioSource>();
+                sound.source.clip = sound.clip;
+                sound.source.volume = sound.volume;
+                sound.source.spatialBlend = sound.spatialBlend_2D_3D;
+                sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
+                sound.source.minDistance = sound.minDistance;
+                sound.source.maxDistance = sound.maxDistance;
+                sound.source.loop = sound.loop;
+                sound.source.pitch = Random.Range(minPitch, maxPitch);
+                sound.source.Play();
+                if (!sound.source.loop) {
+                    Destroy(soundAtLocationGO, sound.clip.length);
+                }
+            }
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
     }
 
     public void PlayRandomSFX(string name, string name2) {
@@ -320,30 +359,7 @@ public class AudioController : MonoBehaviour {
                 break;
         }
     }
-    public void Play_InWorldspace(string name, GameObject gameObjectLocation, float minPitch, float maxPitch) {
-        try {
-            if (allSoundsDictionary.ContainsKey(name)) {
-                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
 
-                sound = allSoundsDictionary[name];
-                sound.source = soundAtLocationGO.GetComponent<AudioSource>();
-                sound.source.clip = sound.clip;
-                sound.source.volume = sound.volume;
-                sound.source.pitch = Random.Range(minPitch, maxPitch);
-                sound.source.spatialBlend = sound.spatialBlend_2D_3D;
-                sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
-                sound.source.minDistance = sound.minDistance;
-                sound.source.maxDistance = sound.maxDistance;
-                sound.source.loop = sound.loop;
-                sound.source.Play();
-                if (!sound.source.loop) {
-                    Destroy(soundAtLocationGO, sound.clip.length);
-                }
-            }
-        } catch (System.NullReferenceException) {
-            AudioNotFound(name);
-        }
-    }
 
     #endregion
 

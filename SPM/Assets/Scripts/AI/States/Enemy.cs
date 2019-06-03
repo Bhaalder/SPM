@@ -26,6 +26,7 @@ public class Enemy : StateMachine
     public bool CanDamage { get; set; }
     protected bool isDamaged;
 
+    [SerializeField] private GameObject bloodExplosion;
     private bool isDead;
     private bool frozenRotation;
     private float unfreezeCooldown;
@@ -67,14 +68,19 @@ public class Enemy : StateMachine
 
     protected void Death()
     {
-        if (GetComponentInParent<SpawnManager>() && !isDead)
-        {
-            isDead = true;
-            GetComponentInParent<SpawnManager>().EnemyDefeated();
+        if (!isDead) {
+            GameObject explosionDeath = Instantiate(bloodExplosion, transform.position + new Vector3(0, 3, 0), Quaternion.identity);
+            AudioController.Instance.PlayRandomSFX_InWorldspace("EnemyDeath1", "EnemyDeath2", explosionDeath, 0.95f, 1f);
+            Destroy(explosionDeath, 2f);
+            if (GetComponentInParent<SpawnManager>()) {
+                isDead = true;
+                GetComponentInParent<SpawnManager>().EnemyDefeated();
+            }
         }
         isDead = true;
-        //GameObject.FindObjectOfType<DataStorage>().KillCount++;
+        //GameObject.FindObjectOfType<DataStorage>().KillCount++;  
         Destroy(gameObject);
+        
     }
 
     public bool getIsDead()

@@ -275,6 +275,26 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   enemySounds:
+  - name: EnemyDeath1
+    clip: {fileID: 8300000, guid: 838b06c563fd0bd42a76636c503b2311, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 40
+    loop: 0
+    source: {fileID: 0}
+  - name: EnemyDeath2
+    clip: {fileID: 8300000, guid: e1ead7fe9b9571144a753fc2b8a7da2f, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 40
+    loop: 0
+    source: {fileID: 0}
   - name: Enemy4Roar
     clip: {fileID: 8300000, guid: 930ae47cb14a34b4b91df6d1c18e32e0, type: 3}
     volume: 0.5
