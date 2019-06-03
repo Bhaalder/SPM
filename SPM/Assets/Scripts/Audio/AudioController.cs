@@ -14,6 +14,8 @@ public class AudioController : MonoBehaviour {
     [SerializeField] private Sound[] environmentSounds;
     [Header("Music")]
     [SerializeField] private Sound[] musicSounds;
+    [Header("VoiceLines")]
+    [SerializeField] private Sound[] voiceSounds;
     [Header("Sound Object")]
     [SerializeField] private GameObject soundObject;
     [Header("AudioMixer")]
@@ -21,9 +23,11 @@ public class AudioController : MonoBehaviour {
     [SerializeField] private AudioMixerGroup masterMixerGroup;
     [SerializeField] private AudioMixerGroup sfxMixerGroup;
     [SerializeField] private AudioMixerGroup musicMixerGroup;
+    [SerializeField] private AudioMixerGroup voiceMixerGroup;
 
     private Dictionary<string, Sound> musicDictionary = new Dictionary<string, Sound>();
     private Dictionary<string, Sound> sfxDictionary = new Dictionary<string, Sound>();
+    private Dictionary<string, Sound> voiceDictionary = new Dictionary<string, Sound>();
     private Dictionary<string, Sound> allSoundsDictionary = new Dictionary<string, Sound>();
 
     private Dictionary<string, float> soundTimerDictonary = new Dictionary<string, float>();
@@ -63,8 +67,9 @@ public class AudioController : MonoBehaviour {
         foreach (Sound enemy_S in enemySounds) { allSoundsDictionary[enemy_S.name] = enemy_S; sfxDictionary[enemy_S.name] = enemy_S; }
         foreach (Sound environment_S in environmentSounds) { allSoundsDictionary[environment_S.name] = environment_S; sfxDictionary[environment_S.name] = environment_S; }
         foreach (Sound music_S in musicSounds) { allSoundsDictionary[music_S.name] = music_S; musicDictionary[music_S.name] = music_S; }
+        foreach (Sound voice_S in voiceSounds) { allSoundsDictionary[voice_S.name] = voice_S; voiceDictionary[voice_S.name] = voice_S; }
 
-        
+
 
         foreach (KeyValuePair<string, Sound> s in allSoundsDictionary) {
             s.Value.source = gameObject.AddComponent<AudioSource>();
@@ -85,6 +90,10 @@ public class AudioController : MonoBehaviour {
 
         foreach (KeyValuePair<string, Sound> s in musicDictionary) {
             s.Value.source.outputAudioMixerGroup = musicMixerGroup;
+        }
+
+        foreach (KeyValuePair<string, Sound> s in voiceDictionary) {
+            s.Value.source.outputAudioMixerGroup = voiceMixerGroup;
         }
 
     }
@@ -109,6 +118,14 @@ public class AudioController : MonoBehaviour {
     public void PlayMusic(string name) {
         try {
             FindMusic(name).source.Play();
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+
+    public void PlayVoiceLine(string name) {
+        try {
+            FindVoiceLine(name).source.Play();
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
@@ -351,6 +368,14 @@ public class AudioController : MonoBehaviour {
         }
     }
 
+    public void VoiceSetVolume(float volume) {
+        if (volume == -80) {
+            audioMixer.SetFloat("VoiceVolume", volume);
+        } else {
+            audioMixer.SetFloat("VoiceVolume", (volume / 4));
+        }
+    }
+
     public void AllSoundsSetVolume(float volume) {
         if (volume == -80) {
             audioMixer.SetFloat("MasterVolume", volume);
@@ -493,6 +518,13 @@ public class AudioController : MonoBehaviour {
         return null;
     }
 
+    private Sound FindVoiceLine(string name) {
+        if (voiceDictionary.ContainsKey(name)) {
+            return voiceDictionary[name];
+        }
+        return null;
+    }
+
     #endregion
 
     #region WaitForFinish/PlayDelay Methods
@@ -510,50 +542,6 @@ public class AudioController : MonoBehaviour {
         try {
             sound = FindSound(name);
             StartCoroutine(PlayDelaySequence(sound, minDelay, maxDelay, minPitch, maxPitch));
-        } catch (System.NullReferenceException) {
-            AudioNotFound(name);
-        }
-    }
-
-    public void Play_Delay_InWorldspace(string name, GameObject gameObjectLocation, float minDelay, float maxDelay) {
-        try {
-            if (allSoundsDictionary.ContainsKey(name)) {
-                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
-
-                sound = allSoundsDictionary[name];
-                sound.source = soundAtLocationGO.GetComponent<AudioSource>();
-                sound.source.clip = sound.clip;
-                sound.source.volume = sound.volume;
-                sound.source.pitch = sound.pitch;
-                sound.source.spatialBlend = sound.spatialBlend_2D_3D;
-                sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
-                sound.source.minDistance = sound.minDistance;
-                sound.source.maxDistance = sound.maxDistance;
-                sound.source.loop = sound.loop;
-                PlayDelaySequence(sound, minDelay, maxDelay);
-            }
-        } catch (System.NullReferenceException) {
-            AudioNotFound(name);
-        }
-    }
-
-    public void Play_Delay_InWorldspace(string name, GameObject gameObjectLocation, float minDelay, float maxDelay, float minPitch, float maxPitch) {
-        try {
-            if (allSoundsDictionary.ContainsKey(name)) {
-                GameObject soundAtLocationGO = Instantiate(soundObject, gameObjectLocation.transform.position, Quaternion.identity, gameObjectLocation.transform);
-
-                sound = allSoundsDictionary[name];
-                sound.source = soundAtLocationGO.GetComponent<AudioSource>();
-                sound.source.clip = sound.clip;
-                sound.source.volume = sound.volume;
-                sound.source.pitch = Random.Range(minPitch, maxPitch);
-                sound.source.spatialBlend = sound.spatialBlend_2D_3D;
-                sound.source.rolloffMode = (AudioRolloffMode)sound.rolloffMode;
-                sound.source.minDistance = sound.minDistance;
-                sound.source.maxDistance = sound.maxDistance;
-                sound.source.loop = sound.loop;
-                PlayDelaySequence(sound, minDelay, maxDelay, minPitch, maxPitch);
-            }
         } catch (System.NullReferenceException) {
             AudioNotFound(name);
         }
@@ -588,7 +576,20 @@ public class AudioController : MonoBehaviour {
             firstSound.source.Play();
             StartCoroutine(WaitToPlay(secondSound, firstSound.source.clip.length));
         } catch (System.NullReferenceException) {
-            AudioNotFound(name);
+            AudioNotFound(name); AudioNotFound(otherName);
+        }
+    }
+
+    public void Play_ThenPlay(string name, string otherName, string thirdname) {
+        try {
+            Sound firstSound = FindSound(name);
+            Sound secondSound = FindSound(otherName);
+            Sound thirdSound = FindSound(thirdname);
+            firstSound.source.Play();
+            StartCoroutine(WaitToPlay(secondSound, firstSound.source.clip.length));
+            StartCoroutine(WaitToPlay(thirdSound, firstSound.source.clip.length + secondSound.source.clip.length));
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name); AudioNotFound(otherName); AudioNotFound(thirdname);
         }
     }
 
@@ -642,6 +643,17 @@ public class AudioController : MonoBehaviour {
         }
         return true;
 
+    }
+
+    #endregion
+
+    #region GetSoundLength Methods
+
+    public float GetSoundLength(string name) {
+        if (allSoundsDictionary.ContainsKey(name)) {
+            return allSoundsDictionary[name].source.clip.length;
+        }
+        return -1;
     }
 
     #endregion

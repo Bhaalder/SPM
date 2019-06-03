@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour {
     [SerializeField] private Text weaponNameText, weaponAmmoText;
     [SerializeField] private GameObject weaponImage;
 
+    public Text TipText;
     public float PlayerHP, PlayerArmor;
 
     public bool PlayerIsInteracting;
@@ -72,7 +73,9 @@ public class GameController : MonoBehaviour {
         ReloadSlider.value = 0;
 
         WinText = GameObject.Find("WinText");
+        TipText = GameObject.Find("TipText").GetComponent<Text>();
         WinText.SetActive(false);
+        TipText.color = new Color(TipText.color.r, TipText.color.g, TipText.color.b, 0);
         weaponNameText = GameObject.Find("WeaponText").GetComponent<Text>();
         weaponAmmoText = GameObject.Find("AmmunitionText").GetComponent<Text>();
         weaponImage = GameObject.Find("Weapon Image");

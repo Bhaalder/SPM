@@ -467,6 +467,17 @@ MonoBehaviour:
     maxDistance: 0
     loop: 1
     source: {fileID: 0}
+  voiceSounds:
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+    loop: 0
+    source: {fileID: 0}
   soundObject: {fileID: 6700177346115011188, guid: ddb2114bbd45c3642aa7a7835618ba84,
     type: 3}
   audioMixer: {fileID: 24100000, guid: 752ece395493a0a4e89b430a12a0759e, type: 2}
@@ -474,4 +485,6 @@ MonoBehaviour:
   sfxMixerGroup: {fileID: -3486055903324069846, guid: 752ece395493a0a4e89b430a12a0759e,
     type: 2}
   musicMixerGroup: {fileID: 7919790566032920357, guid: 752ece395493a0a4e89b430a12a0759e,
+    type: 2}
+  voiceMixerGroup: {fileID: -888474812841347579, guid: 752ece395493a0a4e89b430a12a0759e,
     type: 2}
