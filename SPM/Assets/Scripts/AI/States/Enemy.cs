@@ -73,6 +73,7 @@ public class Enemy : StateMachine
             GetComponentInParent<SpawnManager>().EnemyDefeated();
         }
         isDead = true;
+        //GameObject.FindObjectOfType<DataStorage>().KillCount++;
         Destroy(gameObject);
     }
 
@@ -101,5 +102,10 @@ public class Enemy : StateMachine
     public void SaveEnemyData()
     {
         SaveSystem.SaveEnemyData(this);
+    }
+
+    public void InvokeDeath()
+    {
+        Death();
     }
 }

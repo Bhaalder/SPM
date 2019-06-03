@@ -26,7 +26,7 @@ public class KillZoneScript : MonoBehaviour
             playerRespawner.RespawnMethod();            
         }
         if (other.gameObject.CompareTag("Enemy")){
-            Destroy(other.gameObject);
+            other.GetComponent<Enemy>().InvokeDeath();
         }
     }
 }
