@@ -261,7 +261,7 @@ MonoBehaviour:
     spatialBlend_2D_3D: 1
     rolloffMode: 1
     minDistance: 1
-    maxDistance: 100
+    maxDistance: 90
     loop: 0
     source: {fileID: 0}
   - name: Hurt
@@ -427,7 +427,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Jumppad
-    clip: {fileID: 8300000, guid: 68e964aacab022646a299ad1b49787c6, type: 3}
+    clip: {fileID: 8300000, guid: 5c7112828f512441f88a38364a8552b0, type: 3}
     volume: 0.787
     pitch: 1.02
     spatialBlend_2D_3D: 1
@@ -438,12 +438,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: LetsGetItOn
     clip: {fileID: 8300000, guid: 44b9d814011a5f44f8102b6354de96c4, type: 3}
-    volume: 0.5
-    pitch: 1.02
+    volume: 0.45
+    pitch: 1
     spatialBlend_2D_3D: 1
-    rolloffMode: 1
+    rolloffMode: 0
     minDistance: 1
-    maxDistance: 20
+    maxDistance: 30
     loop: 1
     source: {fileID: 0}
   musicSounds:
