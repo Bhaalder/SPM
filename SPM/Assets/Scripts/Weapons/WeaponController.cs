@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class WeaponController : MonoBehaviour{
     //Author: Patrik Ahlgren
-    [SerializeField] private GameObject rocketLaucherProjectileGO;
-    [SerializeField] private GameObject enemyWeaponProjectileGO;
-    [SerializeField] public Sprite[] Crosshair;
+    public GameObject RocketLaucherProjectileGO;
+    public GameObject EnemyWeaponProjectileGO;
+    public Sprite[] Crosshair;
 
     [Header ("Weapon Damage")]
     [SerializeField] private float rifleDmg = 7.5f;
@@ -48,12 +48,12 @@ public class WeaponController : MonoBehaviour{
     }
 
     public ProjectileWeapon GetRocketLauncher() {
-        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", rocketLDmg, 100, 1.15f, 3.3f, 0.01f, 20, 15, rocketLClipMaxAmmo, rocketLClipMaxAmmo, rocketLTotalAmmoStart, rocketLaucherProjectileGO);
+        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", rocketLDmg, 100, 1.15f, 3.3f, 0.01f, 20, 15, rocketLClipMaxAmmo, rocketLClipMaxAmmo, rocketLTotalAmmoStart);
         return rocketLauncher;
     }
 
     public ProjectileWeapon GetEnemyProjectileWeapon() {
-        ProjectileWeapon enemyWeapon = new ProjectileWeapon("Enemy Projectile", 10, 50, 0.9f, 0.3f, 0.1f, 20, 20, 99999, 99999, 99999, enemyWeaponProjectileGO);
+        ProjectileWeapon enemyWeapon = new ProjectileWeapon("Enemy Projectile", 10, 50, 0.9f, 0.3f, 0.1f, 20, 20, 99999, 99999, 99999);
         return enemyWeapon;
     }
 

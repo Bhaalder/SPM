@@ -41,7 +41,7 @@ public class ProjectileEnemy : Enemy
     }
     public void ProjectileAttack()
     {
-        GameObject enemyProj = Instantiate(enemyWeapon.GetProjectile(), transform.position + transform.forward * 2 + projectileOffset, Quaternion.identity);
+        GameObject enemyProj = Instantiate(WeaponController.Instance.EnemyWeaponProjectileGO, transform.position + transform.forward * 2 + projectileOffset, Quaternion.identity);
         enemyProj.GetComponent<EnemyProjectile>().SetProjectileSpeed(enemyWeapon.GetProjectileSpeed());
         enemyProj.GetComponent<EnemyProjectile>().SetProjectileTravelDistance(enemyWeapon.GetRange());
         enemyProj.GetComponent<EnemyProjectile>().SetProjectileDamage(enemyWeapon.GetDamage());

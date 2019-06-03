@@ -137,7 +137,7 @@ public class PlayerShoot : MonoBehaviour{
             AudioController.Instance.PlaySFX("RocketLauncher_Launch", 0.95f, 1f);
             weapon.DecreaseAmmoInClip();
 
-            GameObject rocketProj = Instantiate(weapon.GetProjectile(), transform.position + (Camera.main.transform.forward*0.1f), Camera.main.transform.rotation);
+            GameObject rocketProj = Instantiate(WeaponController.Instance.RocketLaucherProjectileGO, transform.position + (Camera.main.transform.forward*0.1f), Camera.main.transform.rotation);
             rocketProj.GetComponent<RocketProjectile>().SetProjectileSpeed(weapon.GetProjectileSpeed());
             rocketProj.GetComponent<RocketProjectile>().SetProjectileForce(weapon.GetImpactForce());
             rocketProj.GetComponent<RocketProjectile>().SetProjectileDamage(weapon.GetDamage());
