@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class ProjectileWeapon : BaseWeapon{
     //Author: Patrik Ahlgren
     private float projectileSpeed;
