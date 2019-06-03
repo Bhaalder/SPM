@@ -9,7 +9,6 @@ public class GameController : MonoBehaviour {
     public List<BaseWeapon> PlayerWeapons = new List<BaseWeapon>();
     public int GameEventID = 1;
     public bool SceneCompleted;
-    public GameObject WinText;
 
     public GameObject Player;
 
@@ -72,9 +71,7 @@ public class GameController : MonoBehaviour {
         SlowmotionSlider.value = SlowmotionSlider.maxValue;
         ReloadSlider.value = 0;
 
-        WinText = GameObject.Find("WinText");
         TipText = GameObject.Find("TipText").GetComponent<Text>();
-        WinText.SetActive(false);
         TipText.color = new Color(TipText.color.r, TipText.color.g, TipText.color.b, 0);
         weaponNameText = GameObject.Find("WeaponText").GetComponent<Text>();
         weaponAmmoText = GameObject.Find("AmmunitionText").GetComponent<Text>();
@@ -131,7 +128,6 @@ public class GameController : MonoBehaviour {
     }
 
     public void SceneCompletedSequence(bool b) {
-        WinText.SetActive(b);
         SceneCompleted = b;
     }
 

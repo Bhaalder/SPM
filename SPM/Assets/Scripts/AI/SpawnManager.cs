@@ -132,7 +132,7 @@ public class SpawnManager : MonoBehaviour
                 if (isArenaSpawner)
                 {
                     GameController.Instance.SceneCompletedSequence(true);
-                    FadeMusic();
+                    AudioController.Instance.FadeOut("Song3Loop", 5, 0);
                     GameObject sceneManager = GameObject.Find("SceneManager");
                     sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
                     door.SetActive(false);
@@ -140,7 +140,7 @@ public class SpawnManager : MonoBehaviour
                 if (isCommandoRoom)
                 {
                     door.SetActive(false);
-                    FadeMusic();
+                    AudioController.Instance.FadeOut("Song2Loop", 5, 0);
                 }
 
                 isRoomCleared = true;
@@ -160,9 +160,4 @@ public class SpawnManager : MonoBehaviour
         FindObjectOfType<DataStorage>().GetComponent<DataStorage>().SaveSpawnerData(this);
     }
 
-    private void FadeMusic() {
-        AudioController.Instance.FadeOut("Song2Loop", 5, 0);
-        AudioController.Instance.FadeOut("Song3Loop", 5, 0);
-        AudioController.Instance.FadeOut("Song4Loop", 5, 0);
-    }
 }
