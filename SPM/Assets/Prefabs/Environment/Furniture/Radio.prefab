@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 5938738459038237548}
   - component: {fileID: 3400681261568883034}
   - component: {fileID: 8938850303540200867}
-  m_Layer: 0
+  - component: {fileID: 2557859878367054707}
+  - component: {fileID: 985771821560041660}
+  m_Layer: 13
   m_Name: Radio
-  m_TagString: Untagged
+  m_TagString: DestructibleObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,3 +79,29 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2557859878367054707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7219827590771126655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4854e61efd61844db2248321212f735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &985771821560041660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7219827590771126655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de920f76e2ecbe84492e80376c0b30e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionEffect: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1,
+    type: 3}

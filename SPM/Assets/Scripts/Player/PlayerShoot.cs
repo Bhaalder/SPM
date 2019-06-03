@@ -107,7 +107,7 @@ public class PlayerShoot : MonoBehaviour{
                         //Debug.Log(ShotGunHits(hits, x, weapon.GetDamage()));
                         InstantiateMultipleBulletHits(bulletImpactAlienGO, hits, x, alienWoundTimer);                       
                     } else if (hits[x].collider.gameObject.layer == 13) {
-                        hits[x].transform.GetComponent<ExplosiveBarrel>().TakeDamage(ShotGunHits(hits, x, weapon.GetDamage()));
+                        hits[x].transform.GetComponent<DestructibleObject>().TakeDamage(ShotGunHits(hits, x, weapon.GetDamage()));
                         InstantiateMultipleBulletHits(bulletImpactMetalSGGO, hits, x, 0.2f);
                     } else {
                         InstantiateMultipleBulletHits(bulletImpactMetalSGGO, hits, x, 2.0f);
