@@ -38,17 +38,17 @@ public class WeaponController : MonoBehaviour{
     }
 
     public BaseWeapon GetRifle() {
-        BaseWeapon rifle = new BaseWeapon("Rifle", rifleDmg, 150, 9f, 1.6f, 0.1f, 15, rifleClipMaxAmmo, rifleClipMaxAmmo, rifleTotalAmmoStart, crosshair[0]);
+        BaseWeapon rifle = new BaseWeapon("Rifle", rifleDmg, 150, 9f, 1.6f, 0.1f, 15, rifleClipMaxAmmo, rifleClipMaxAmmo, rifleTotalAmmoStart);
         return rifle;
     }
 
     public BaseWeapon GetShotgun() {
-        BaseWeapon shotgun = new BaseWeapon("Shotgun", shotgunDmg, 20, 2f, 2f, 0.1f, 30, shotgunClipMaxAmmo, shotgunClipMaxAmmo, shotgunTotalAmmoStart, crosshair[1]);
+        BaseWeapon shotgun = new BaseWeapon("Shotgun", shotgunDmg, 20, 2f, 2f, 0.1f, 30, shotgunClipMaxAmmo, shotgunClipMaxAmmo, shotgunTotalAmmoStart);
         return shotgun;
     }
 
     public ProjectileWeapon GetRocketLauncher() {
-        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", rocketLDmg, 100, 1.15f, 3.3f, 0.01f, 20, 15, rocketLClipMaxAmmo, rocketLClipMaxAmmo, rocketLTotalAmmoStart, rocketLaucherProjectileGO, crosshair[2]);
+        ProjectileWeapon rocketLauncher = new ProjectileWeapon("Rocket Launcher", rocketLDmg, 100, 1.15f, 3.3f, 0.01f, 20, 15, rocketLClipMaxAmmo, rocketLClipMaxAmmo, rocketLTotalAmmoStart, rocketLaucherProjectileGO);
         return rocketLauncher;
     }
 

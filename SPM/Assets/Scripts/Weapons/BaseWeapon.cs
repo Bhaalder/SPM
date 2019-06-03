@@ -16,9 +16,8 @@ public class BaseWeapon{
     private int ammoInClip;
     private int maxAmmoInClip;
     private int totalAmmoLeft;
-    private Sprite crosshair;
 
-    public BaseWeapon(string name, float damage, float range, float fireRate, float reloadTime, float impactForce, float spread, int ammoInClip, int maxAmmoInClip, int totalAmmoLeft, s) {
+    public BaseWeapon(string name, float damage, float range, float fireRate, float reloadTime, float impactForce, float spread, int ammoInClip, int maxAmmoInClip, int totalAmmoLeft) {
         this.name = name;
         this.damage = damage;
         this.range = range;
@@ -29,7 +28,6 @@ public class BaseWeapon{
         this.ammoInClip = ammoInClip;
         this.maxAmmoInClip = maxAmmoInClip;
         this.totalAmmoLeft = totalAmmoLeft;
-        this.crosshair = crosshair;
     }
 
     public string GetName() {
@@ -100,12 +98,6 @@ public class BaseWeapon{
     }
     public void IncreaseTotalAmmoLeft(int i) {
         totalAmmoLeft += i;
-    }
-    public Sprite GetCrosshair() {
-        return crosshair;
-    }
-    public void SetCrosshair(Sprite sprite) {
-        crosshair = sprite;
     }
 
 
