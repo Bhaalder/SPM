@@ -528,14 +528,54 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
   voiceSounds:
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
+  - name: Fck
+    clip: {fileID: 8300000, guid: 81494f0ad2939b94c9b3992957248e8b, type: 3}
+    volume: 1
+    pitch: 1
     spatialBlend_2D_3D: 0
     rolloffMode: 0
-    minDistance: 0
-    maxDistance: 0
+    minDistance: 1
+    maxDistance: 1.01
+    loop: 0
+    source: {fileID: 0}
+  - name: IfYouCouldJump
+    clip: {fileID: 8300000, guid: 8910b30b6ef9f094986916188ed948c2, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 1.01
+    loop: 0
+    source: {fileID: 0}
+  - name: NowYoureStuck
+    clip: {fileID: 8300000, guid: 092483cf4faa5284388076f72d20761b, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 1.01
+    loop: 0
+    source: {fileID: 0}
+  - name: Specimen420
+    clip: {fileID: 8300000, guid: c5656897c3299e348875bfd1745a94a4, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 1.01
+    loop: 0
+    source: {fileID: 0}
+  - name: UnderstandNowHuman
+    clip: {fileID: 8300000, guid: 6e36e40f75da8ae48a76c60015b2d4c2, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 1.01
     loop: 0
     source: {fileID: 0}
   soundObject: {fileID: 6700177346115011188, guid: ddb2114bbd45c3642aa7a7835618ba84,
