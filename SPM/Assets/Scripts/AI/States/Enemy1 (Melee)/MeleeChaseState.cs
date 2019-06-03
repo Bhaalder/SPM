@@ -30,7 +30,7 @@ public class MeleeChaseState : EnemyBaseState
             owner.Transition<MeleeAttackState>();
         }
 
-        if (DistanceToPlayer() < stopChaseDistance && CanSeePlayer() == false)
+        if (DistanceToPlayer() > stopChaseDistance && CanSeePlayer() == false)
         {
             owner.Transition<MeleeIdleState>();
         }
