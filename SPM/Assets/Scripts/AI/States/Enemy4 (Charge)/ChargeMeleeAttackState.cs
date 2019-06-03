@@ -44,7 +44,6 @@ public class ChargeMeleeAttackState : EnemyBaseState
         {
             float step = 3 * Time.deltaTime;
             Vector3.RotateTowards(owner.transform.forward, owner.player.transform.position, step, 0.0f);
-            owner.transform.LookAt(owner.player.transform, Vector3.up);
         }
 
     }
@@ -60,6 +59,7 @@ public class ChargeMeleeAttackState : EnemyBaseState
 
         if (CanSeePlayer() == true)
         {
+            owner.transform.LookAt(owner.player.transform, Vector3.up);
             //owner.animator.Play("Attack");
             owner.animator.SetBool("isRunning", false);
             owner.animator.SetBool("isIdle", false);
