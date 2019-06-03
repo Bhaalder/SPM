@@ -18,7 +18,7 @@ public class BaseWeapon{
     private int totalAmmoLeft;
     private Sprite crosshair;
 
-    public BaseWeapon(string name, float damage, float range, float fireRate, float reloadTime, float impactForce, float spread, int ammoInClip, int maxAmmoInClip, int totalAmmoLeft, s) {
+    public BaseWeapon(string name, float damage, float range, float fireRate, float reloadTime, float impactForce, float spread, int ammoInClip, int maxAmmoInClip, int totalAmmoLeft, Sprite crosshair) {
         this.name = name;
         this.damage = damage;
         this.range = range;
