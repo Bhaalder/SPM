@@ -211,6 +211,7 @@ public class GameController : MonoBehaviour {
 
         PlayerHP = data.PlayerHP;
         PlayerArmor = data.PlayerArmor;
+        SlowmotionSlider.value = data.SlowmotionValue;
 
         Vector3 position;
         position.x = data.PlayerPosition[0];
@@ -224,6 +225,10 @@ public class GameController : MonoBehaviour {
 
         Player.transform.position = position;
         Player.transform.eulerAngles = new Vector3(rotation.x, rotation.y, rotation.z);
+
+        PlayerWeapons = data.PlayerWeapons;
+        SelectedWeapon = data.SelectedWeapon;
+        UpdateSelectedWeapon();
     }
 
     public void LoadEnemyData()
