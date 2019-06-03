@@ -30,7 +30,6 @@ public class OpenDoorsAnimated : MonoBehaviour
 
         
         isOpen = !isOpen;
-        Debug.Log("F");
         AudioController.Instance.Play_InWorldspace("Button", gameObject);
         if (isOpen) {
             anim.SetBool("isOpen", true);
