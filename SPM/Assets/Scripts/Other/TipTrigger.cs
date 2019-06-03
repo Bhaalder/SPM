@@ -7,6 +7,7 @@ public class TipTrigger : MonoBehaviour{
 
     [SerializeField] private string voiceLine;
     [SerializeField] private string tipText;
+    [SerializeField] private float waitBeforeFade = 5;
     [SerializeField] private bool hasVoiceLine;
     [SerializeField] private bool hasTip;
 
@@ -21,7 +22,7 @@ public class TipTrigger : MonoBehaviour{
                 }
                 if (hasTip) {
                     GameController.Instance.TipText.text = tipText;
-                    StartCoroutine(FadeText(AudioController.Instance.GetSoundLength(voiceLine) + 5, 5, GameController.Instance.TipText));
+                    StartCoroutine(FadeText(AudioController.Instance.GetSoundLength(voiceLine) + waitBeforeFade, 5, GameController.Instance.TipText));
                 }
                 isTriggered = true;
             }
