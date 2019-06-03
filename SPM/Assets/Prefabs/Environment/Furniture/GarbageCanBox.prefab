@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7951417833998563768}
   - component: {fileID: 4885804678658564237}
   - component: {fileID: 59426017611355330}
+  - component: {fileID: 3218625546025837912}
   m_Layer: 0
   m_Name: GarbageCanBox
   m_TagString: Untagged
@@ -100,3 +101,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &3218625546025837912
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6341707901994159019}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6189444, y: 1.0116608, z: 0.6189486}
+  m_Center: {x: 0.00001822412, y: 0.50392425, z: 0}

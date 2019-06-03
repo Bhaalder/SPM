@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 8208371658718160471}
   - component: {fileID: 4606169808199105335}
   - component: {fileID: 2999084125598489712}
+  - component: {fileID: 7093414852427571473}
   m_Layer: 0
   m_Name: Desk
   m_TagString: Untagged
@@ -109,6 +110,34 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &7093414852427571473
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3653798227679403340}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 6317106008045385693, guid: 156ba999593b8684b9f7325835609ce2, type: 3}
+--- !u!64 &2619631529014175759
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4445022144010160128}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -6264831526926562434, guid: 156ba999593b8684b9f7325835609ce2, type: 3}
 --- !u!1001 &3839841435344444899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -183,6 +212,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4184352406c069349bfa33a98af0f7a1, type: 3}
+--- !u!1 &4445022144010160128 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 641269705137493475, guid: 4184352406c069349bfa33a98af0f7a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 3839841435344444899}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9130076740332305067 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5475628503549880136, guid: 4184352406c069349bfa33a98af0f7a1,
