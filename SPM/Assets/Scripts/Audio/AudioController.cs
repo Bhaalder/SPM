@@ -364,6 +364,15 @@ public class AudioController : MonoBehaviour {
     #endregion
 
     #region Volume / Pitch Methods
+
+    public void SoundSetVolume(string name, float volume) {
+        try {
+            FindSound(name).source.volume = volume;
+        } catch (System.NullReferenceException) {
+            AudioNotFound(name);
+        }
+    }
+
     public void SFXSetPitch(float pitch) {
         audioMixer.SetFloat("SFXPitch", pitch);
     }
