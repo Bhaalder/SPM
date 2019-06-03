@@ -44,6 +44,7 @@ public class ChargeMeleeAttackState : EnemyBaseState
         {
             float step = 3 * Time.deltaTime;
             Vector3.RotateTowards(owner.transform.forward, owner.player.transform.position, step, 0.0f);
+            owner.transform.LookAt(owner.player.transform, Vector3.up);
         }
 
     }
