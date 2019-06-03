@@ -669,7 +669,7 @@ public class AudioController : MonoBehaviour {
         if (allSoundsDictionary.ContainsKey(name)) {
             return allSoundsDictionary[name].source.clip.length;
         }
-        return -1;
+        return 0;
     }
 
     #endregion

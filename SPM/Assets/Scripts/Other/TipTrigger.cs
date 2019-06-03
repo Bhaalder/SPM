@@ -22,7 +22,8 @@ public class TipTrigger : MonoBehaviour{
                 }
                 if (hasTip) {
                     GameController.Instance.TipText.text = tipText;
-                    StartCoroutine(FadeText(AudioController.Instance.GetSoundLength(voiceLine) + waitBeforeFade, 5, GameController.Instance.TipText));
+                    float voiceLineLength = AudioController.Instance.GetSoundLength(voiceLine);
+                    StartCoroutine(FadeText(voiceLineLength + waitBeforeFade, 5, GameController.Instance.TipText));
                 }
                 isTriggered = true;
             }
