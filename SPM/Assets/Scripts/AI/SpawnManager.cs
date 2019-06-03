@@ -155,6 +155,11 @@ public class SpawnManager : MonoBehaviour
         
     }
 
+    public void SaveSpawnerData()
+    {
+        FindObjectOfType<DataStorage>().GetComponent<DataStorage>().SaveSpawnerData(this);
+    }
+
     private void FadeMusic() {
         AudioController.Instance.FadeOut("Song2Loop", 5, 0);
         AudioController.Instance.FadeOut("Song3Loop", 5, 0);

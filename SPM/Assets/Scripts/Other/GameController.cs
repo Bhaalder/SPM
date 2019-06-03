@@ -242,6 +242,7 @@ public class GameController : MonoBehaviour {
         PlayerWeapons = data.PlayerWeapons;
         SelectedWeapon = data.SelectedWeapon;
         UpdateSelectedWeapon();
+        Player.GetComponent<PlayerInput>().SwitchWeaponAnimation(SelectedWeapon);
     }
 
     public void LoadEnemyData()
