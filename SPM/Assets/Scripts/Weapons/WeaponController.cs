@@ -7,7 +7,7 @@ public class WeaponController : MonoBehaviour{
     //Author: Patrik Ahlgren
     [SerializeField] private GameObject rocketLaucherProjectileGO;
     [SerializeField] private GameObject enemyWeaponProjectileGO;
-    [SerializeField] private Sprite[] crosshair;
+    [SerializeField] public Sprite[] Crosshair;
 
     [Header ("Weapon Damage")]
     [SerializeField] private float rifleDmg = 7.5f;

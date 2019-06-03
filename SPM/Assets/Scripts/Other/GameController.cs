@@ -102,7 +102,20 @@ public class GameController : MonoBehaviour {
                 break;
             }
         }
-        crosshair.sprite = SelectedWeapon.GetCrosshair();
+        switch (SelectedWeapon.GetName()) {
+            case "Rifle":
+                crosshair.sprite = WeaponController.Instance.Crosshair[0];
+                break;
+            case "Shotgun":
+                crosshair.sprite = WeaponController.Instance.Crosshair[1];
+                break;
+            case "Rocket Launcher":
+                crosshair.sprite = WeaponController.Instance.Crosshair[2];
+                break;
+            default:
+                crosshair.sprite = WeaponController.Instance.Crosshair[0];
+                break;
+        }
         UpdateSelectedWeapon_AmmoText();
     }
 
