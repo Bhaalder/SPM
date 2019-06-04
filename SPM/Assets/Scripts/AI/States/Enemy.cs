@@ -72,13 +72,13 @@ public class Enemy : StateMachine
             GameObject explosionDeath = Instantiate(bloodExplosion, transform.position + new Vector3(0, 3, 0), Quaternion.identity);
             AudioController.Instance.PlayRandomSFX_InWorldspace("EnemyDeath1", "EnemyDeath2", explosionDeath, 0.95f, 1f);
             Destroy(explosionDeath, 2f);
+            GameController.Instance.KillCount++;
             if (GetComponentInParent<SpawnManager>()) {
                 isDead = true;
                 GetComponentInParent<SpawnManager>().EnemyDefeated();
             }
         }
         isDead = true;
-        GameController.Instance.KillCount++;
         Destroy(gameObject);
         
     }
