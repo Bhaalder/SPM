@@ -40,24 +40,40 @@ public class ScoreScreen : MonoBehaviour{
         }
     }
 
-    public void CountScore(float totalTime, float killCount) {
+    public void CountScore(float minutesTaken, float secondsTaken, float killCount) {
         IsCountingScore = true;
         scoreTexts.gameObject.SetActive(true);
         killCountText.text = "Kills: " + killCount;
 
         gameObject.transform.SetAsLastSibling();
 
-        StartCoroutine(Counter(totalTime, killCount));
+        StartCoroutine(Counter(minutesTaken, secondsTaken, killCount));
     }
 
-    private IEnumerator Counter(float totalTime, float killCount) {
-        int time = Mathf.RoundToInt(totalTime);
-        //animation som förstorar timescore ett kort tag och minskar ner
-        for(int i = time; i < maxTimerScore; i++) {
-            timeScore++;
-            totalScore++;
-            yield return new WaitForFixedUpdate();
+    private IEnumerator Counter(float minutesTaken, float secondsTaken, float killCount) {
+        int secondsScore = 60 - Mathf.RoundToInt(secondsTaken);
+        int minuteScore = 29 - (int)minutesTaken;
+        if(minuteScore <= 1) {
+            minuteScore = 0;
+        } else {
+            for (int i = 0; i < minuteScore; i++) {
+                timeScore += 60;
+                totalScore += 60;
+                maxTimerScore -= 60;
+                yield return new WaitForFixedUpdate();
+            }
         }
+        //animation som förstorar timescore ett kort tag och minskar ner
+        if(secondsScore <= 0) {
+            secondsScore = 0;
+        } else {
+            for (int i = 0; i < secondsScore; i++) {
+                timeScore++;
+                totalScore++;
+                yield return new WaitForFixedUpdate();
+            }
+        }
+
         //animation som förstorar killscore ett kort tag och minskar ner
         for(int i = 0; i < killCount; i++) {
             killScore += 10;

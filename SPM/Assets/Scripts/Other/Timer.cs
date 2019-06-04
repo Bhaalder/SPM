@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour{
 
-    private float minuteTimeCount;
-    private float secondsTimeCount;
+    private float minuteTimeCount = 0;
+    private float secondsTimeCount = 0;
     private float totalSecondsTimeCount;
 
     public bool TimerIsActive;
@@ -16,8 +16,8 @@ public class Timer : MonoBehaviour{
     private void Start() {
        timerText = GameObject.Find("TimerText").GetComponent<Text>();
         timerText.text = "00:00.00";
-        //secondsTimeCount = 30;//TA BORT SEN
-        //minuteTimeCount = 28; // TA BORT SEN
+        //secondsTimeCount = 00;//TA BORT SEN
+        //minuteTimeCount = 15; // TA BORT SEN
     }
 
     private void Update() {
@@ -43,6 +43,14 @@ public class Timer : MonoBehaviour{
 
     public float GetFinalTime() {
         return totalSecondsTimeCount;
+    }
+
+    public float GetMinutesTaken() {
+        return minuteTimeCount;
+    }
+
+    public float GetSecondsTaken() {
+        return secondsTimeCount;
     }
 
     public void SetTimer(float timer) {

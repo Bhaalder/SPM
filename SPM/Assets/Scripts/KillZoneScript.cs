@@ -22,14 +22,21 @@ public class KillZoneScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            anim.SetTrigger("FadeOut");
-            playerRespawner.RespawnMethod();
+        if (other.gameObject.CompareTag("Player")){
+            StartCoroutine(FadeOutDie());
             GameController.Instance.GetComponent<Timer>().AddToTimer(15);
         }
         if (other.gameObject.CompareTag("Enemy")){
             other.GetComponent<Enemy>().InvokeDeath();
         }
     }
+
+    private IEnumerator FadeOutDie() {
+        anim.SetTrigger("FadeOut");
+        yield return new WaitForSeconds(1.5f);
+        playerRespawner.RespawnMethod();
+        anim.SetTrigger("FadeIn");
+        yield return null;
+    }
+
 }
