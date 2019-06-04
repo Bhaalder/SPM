@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6168297538791629986}
   - component: {fileID: 4320215421209216543}
   - component: {fileID: 3838453420883797816}
-  - component: {fileID: 1151457421364921892}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -47,9 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SubscribedScripts: []
+  PlayerWeapons: []
   GameEventID: 1
   SceneCompleted: 0
-  WinText: {fileID: 0}
   Player: {fileID: 0}
   HealthSlider: {fileID: 0}
   ArmorSlider: {fileID: 0}
@@ -58,6 +57,7 @@ MonoBehaviour:
   weaponNameText: {fileID: 0}
   weaponAmmoText: {fileID: 0}
   weaponImage: {fileID: 0}
+  TipText: {fileID: 0}
   PlayerHP: 0
   PlayerArmor: 0
   PlayerIsInteracting: 0
@@ -97,15 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 070bfdf43b6e99a4eb0faae8df0420fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1151457421364921892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4814260381439902556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8d1e38b34549724dabb27a894eb6a49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  TimerIsActive: 0
