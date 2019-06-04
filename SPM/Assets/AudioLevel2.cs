@@ -7,6 +7,7 @@ public class AudioLevel2 : MonoBehaviour
 {
     [SerializeField] bool barSign;
     [SerializeField] bool gasLeak;
+    [SerializeField] bool generator;
     void Start()
     {
         //AudioController.Instance.Play("RandomAmbience");
@@ -20,6 +21,10 @@ public class AudioLevel2 : MonoBehaviour
         if (gasLeak)
         {
             AudioController.Instance.Play_InWorldspace("GasLeak", gameObject);
+        }
+        if (generator)
+        {
+            AudioController.Instance.Play_InWorldspace("GeneratorSound", gameObject);
         }
 
     }

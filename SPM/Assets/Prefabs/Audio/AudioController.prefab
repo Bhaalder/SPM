@@ -537,6 +537,16 @@ MonoBehaviour:
     maxDistance: 20
     loop: 1
     source: {fileID: 0}
+  - name: GeneratorSound
+    clip: {fileID: 8300000, guid: eefb8034b200fe64ca0c8719e93adec9, type: 3}
+    volume: 0.615
+    pitch: 0.85
+    spatialBlend_2D_3D: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 15
+    loop: 1
+    source: {fileID: 0}
   musicSounds:
   - name: Song2Start
     clip: {fileID: 8300000, guid: 114acd03ee919c5448aac1601165941b, type: 3}
