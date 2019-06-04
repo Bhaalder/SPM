@@ -47,6 +47,7 @@ public class DataStorage : MonoBehaviour
         GameController.Instance.Player.GetComponent<PlayerInput>().SwitchWeaponAnimation(GameController.Instance.SelectedWeapon);
     }
     #endregion;
+
     #region EnemyData
     public void SaveEnemyData()
     {
@@ -132,21 +133,22 @@ public class DataStorage : MonoBehaviour
     #endregion
 
     #region LevelData
-    public void SetData()
+    public void SaveLevelData()
     {
         Timer = GameController.Instance.GetComponent<Timer>().GetFinalTime();
         SceneBuildIndex = GameObject.FindObjectOfType<SceneManagerScript>().SceneBuildIndex;
         CurrentCheckpoint = GameController.Instance.GameEventID;
+        KillCount = GameController.Instance.KillCount;
         SaveSystem.SaveLevelData(this);
     }
-    private void LoadLevelData()
+    public void LoadLevelData()
     {
         LevelData data = SaveSystem.LoadLevelData();
 
         GameController.Instance.GetComponent<Timer>().SetTimer(data.Timer);
-        GameObject.FindObjectOfType<SceneManagerScript>().SceneBuildIndex = SceneBuildIndex;
+        SceneBuildIndex = data.SceneBuildIndex;
         GameController.Instance.GameEventID = data.CurrentCheckpoint;
-        KillCount = data.KillCount;
+        GameController.Instance.KillCount = data.KillCount;
     }
     #endregion
 
@@ -192,21 +194,32 @@ public class DataStorage : MonoBehaviour
     #endregion
 
 
-
     public void SaveGame()
     {
         GameController.Instance.SavePlayerData();
         SaveEnemyData();
         InitializeSpawnerDataSave();
-        SetData();
+        SaveLevelData();
     }
 
-    public void LoadGame()
+    public void LoadGameData()
     {
         LoadLevelData();
         LoadPlayerData();
         LoadEnemyData();
-        LoadSpawnerData();
-        
+        LoadSpawnerData();        
+    }
+
+    public void LoadLastLevelData()
+    {
+        LevelData data = SaveSystem.LoadLevelData();
+        if (data == null)
+        {
+            Debug.Log("No SaveFile detected for LevelData");
+        }
+        else
+        {
+            SceneBuildIndex = data.SceneBuildIndex;
+        }
     }
 }
