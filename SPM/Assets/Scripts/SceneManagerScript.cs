@@ -41,6 +41,10 @@ public class SceneManagerScript : MonoBehaviour
         SceneManager.LoadScene("Level1WhiteBoxArea");
     }
 
+    public void StartLevelTwo() {
+        SceneManager.LoadScene("Level2WhiteBox");
+    }
+
     public void ExitGame()
     {
         Application.Quit();
@@ -49,28 +53,6 @@ public class SceneManagerScript : MonoBehaviour
     public void ContinuePreviousGame()
     {
         SceneManager.LoadScene(dataStorage.SceneBuildIndex);
-    }
-
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("InteractionPlayer") && GameController.Instance.PlayerIsInteracting && GameController.Instance.SceneCompleted)
-        {
-            SceneManager.LoadScene("Level2WhiteBox");
-            GameController.Instance.SceneCompletedSequence(false);
-        }
-        if(!buttonIsPressed)
-        {
-            Debug.Log("Du måste låsa upp dörren!!");
-        }
-        if (!GameController.Instance.PlayerIsInteracting)
-        {
-            Debug.Log("Klicka E!");
-        }
-        if (!GameController.Instance.SceneCompleted)
-        {
-            Debug.Log("Rensa rummet från fiender!!");
-        }
     }
 
     public void EndGameScreen()
