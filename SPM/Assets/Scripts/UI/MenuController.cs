@@ -89,10 +89,6 @@ public class MenuController : MonoBehaviour
     {
         Debug.Log("Clicked button: Main Menu");
         scenemanager = GameObject.Find("SceneManager");
-        Destroy(GameObject.Find("Canvas"));
-        Destroy(GameObject.Find("GameController"));
-        AudioController.Instance.StopAllSounds();
-        Destroy(GameObject.Find("AudioController"));
         scenemanager.GetComponent<SceneManagerScript>().MainMenu();
         DeactivateMenu();
     }

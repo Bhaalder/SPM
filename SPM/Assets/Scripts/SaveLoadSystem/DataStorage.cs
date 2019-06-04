@@ -17,11 +17,24 @@ public class DataStorage : MonoBehaviour
     public List<EnemyData> enemies = new List<EnemyData>();
     private List<SpawnerData> spawners = new List<SpawnerData>();
 
+    private float currentCooldown;
+    private float saveCooldown;
+
     private void Start()
     {
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
             LoadGameData();
+        }
+
+        saveCooldown = 5f;
+    }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            ContinousSave();
         }
     }
 
@@ -64,12 +77,21 @@ public class DataStorage : MonoBehaviour
     public void SaveEnemyData()
     {
         SaveSystem.DeleteEnemySaveFile();
-        enemies.Clear();
+        try
+        {
+            enemies.Clear();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("Could not clear DataStorage.enemies: " + e);
+        }
 
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject target in gameObjects)
         {
-            target.GetComponent<Enemy>().SaveEnemyData();
+            EnemyData data = new EnemyData(target.GetComponent<Enemy>().SaveEnemyData());
+            enemies.Add(data);
+            Debug.Log("Enemy Saved");
         }
 
         SaveSystem.WriteEnemyDataToFile(enemies);
@@ -97,8 +119,7 @@ public class DataStorage : MonoBehaviour
                 {
                     Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
                     GameObject enemy = GameObject.Instantiate(Enemy1);
-                    enemy.GetComponent<Enemy>().agent.Warp(position);
-                    enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+
                     foreach (GameObject target in spawners)
                     {
                         if (target.GetInstanceID() == enemyData.ParentID)
@@ -106,13 +127,14 @@ public class DataStorage : MonoBehaviour
                             enemy.transform.parent = target.transform;
                         }
                     }
+                    enemy.GetComponent<Enemy>().agent.Warp(position);
+                    enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
                 }
                 else if (name.Contains("Enemy3"))
                 {
                     Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
                     GameObject enemy = GameObject.Instantiate(Enemy3);
-                    enemy.GetComponent<Enemy>().agent.Warp(position);
-                    enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+
                     foreach (GameObject target in spawners)
                     {
                         if (target.GetInstanceID() == enemyData.ParentID)
@@ -120,13 +142,13 @@ public class DataStorage : MonoBehaviour
                             enemy.transform.parent = target.transform;
                         }
                     }
+                    enemy.GetComponent<Enemy>().agent.Warp(position);
+                    enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
                 }
                 else if (name.Contains("Enemy4"))
                 {
                     Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
                     GameObject enemy = GameObject.Instantiate(Enemy4);
-                    enemy.GetComponent<Enemy>().agent.Warp(position);
-                    enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
                     foreach (GameObject target in spawners)
                     {
                         if (target.GetInstanceID() == enemyData.ParentID)
@@ -134,6 +156,8 @@ public class DataStorage : MonoBehaviour
                             enemy.transform.parent = target.transform;
                         }
                     }
+                    enemy.GetComponent<Enemy>().agent.Warp(position);
+                    enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
                 }
                 else
                 {
@@ -238,8 +262,23 @@ public class DataStorage : MonoBehaviour
         }
     }
 
-    void OnApplicationQuit()
+    IEnumerator OnApplicationQuit()
     {
         SaveGame();
+        yield return new WaitForSeconds(3f);
+        Debug.Log("Game Exit");
+    }
+
+    private void ContinousSave()
+    {
+        currentCooldown -= Time.deltaTime;
+
+        if (currentCooldown > 0)
+        {
+            return;
+        }
+
+        SaveGame();
+        currentCooldown = saveCooldown;
     }
 }

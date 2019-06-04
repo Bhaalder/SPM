@@ -32,7 +32,7 @@ public class SceneManagerScript : MonoBehaviour
     public void MainMenu()
     {
         dataStorage.SaveGame();
-        StartCoroutine(LoadAsynchronously(mainMenuIndex));
+        WaitForSeconds();
     }
 
     public void StartLevelOne()
@@ -76,5 +76,15 @@ public class SceneManagerScript : MonoBehaviour
             slider.value = progress;
             yield return null;
         }
+    }
+
+    IEnumerator WaitForSeconds()
+    {
+        yield return new WaitForSeconds(10f);
+        //Destroy(GameObject.Find("Canvas"));
+        //Destroy(GameObject.Find("GameController"));
+        //AudioController.Instance.StopAllSounds();
+        //Destroy(GameObject.Find("AudioController"));
+        //StartCoroutine(LoadAsynchronously(mainMenuIndex));
     }
 }

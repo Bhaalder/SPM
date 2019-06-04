@@ -50,13 +50,6 @@ public static class SaveSystem
 
     #region EnemyData
 
-    public static void SaveEnemyData(Enemy enemy)
-    {
-        EnemyData data = new EnemyData(enemy);
-        Debug.Log(data.EnemyName + " " + " " + data.EnemyPositionX + " " + data.EnemyPositionY + " " + data.EnemyPositionZ);
-        GameObject.FindObjectOfType<DataStorage>().enemies.Add(data);
-    }
-
     public static void WriteEnemyDataToFile(List<EnemyData> enemies)
     {
 

@@ -105,9 +105,9 @@ public class Enemy : StateMachine
         }
     }
 
-    public void SaveEnemyData()
+    public Enemy SaveEnemyData()
     {
-        SaveSystem.SaveEnemyData(this);
+        return this;
     }
 
     public void InvokeDeath()
