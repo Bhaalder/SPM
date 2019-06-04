@@ -78,11 +78,8 @@ public class ScoreScreen : MonoBehaviour{
     }
 
     private void MainMenu() {
-        Debug.Log("Clicked button: Main Menu");
-        Destroy(GameObject.Find("GameController"));
-        Destroy(GameObject.Find("AudioController"));
-        scenemanager.GetComponent<SceneManagerScript>().MainMenu();
-        Destroy(GameObject.Find("Canvas"));
+        GameObject menuController = GameObject.Find("MenuController");
+        menuController.GetComponent<MenuController>().MainMenu();
     }
 
 }
