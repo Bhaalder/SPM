@@ -91,6 +91,7 @@ public class ScoreScreen : MonoBehaviour{
     }
 
     private void MainMenu() {
+        SaveSystem.DeleteAllSaveFiles();
         GameObject.Find("MenuController").GetComponent<MenuController>().MainMenu();
     }
 
