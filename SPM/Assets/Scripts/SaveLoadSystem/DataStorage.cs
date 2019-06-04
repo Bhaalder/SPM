@@ -115,7 +115,7 @@ public class DataStorage : MonoBehaviour
         GameController.Instance.PlayerWeapons = data.PlayerWeapons;
         GameController.Instance.SelectedWeapon = data.SelectedWeapon;
         GameController.Instance.UpdateSelectedWeapon();
-        GameController.Instance.Player.GetComponent<PlayerInput>().SwitchWeaponAnimation(SelectedWeapon);
+        GameController.Instance.Player.GetComponent<PlayerInput>().SwitchWeaponAnimation(GameController.Instance.SelectedWeapon);
     }
 
     public void LoadEnemyData()
@@ -136,7 +136,7 @@ public class DataStorage : MonoBehaviour
             {
                 Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
                 Debug.Log(enemyData.EnemyName + " " + " " + enemyData.EnemyPositionX + " " + enemyData.EnemyPositionY + " " + enemyData.EnemyPositionZ);
-                GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy1);
+                GameObject enemy = GameObject.Instantiate(Enemy1);
                 enemy.GetComponent<Enemy>().agent.Warp(position);
                 enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
                 foreach (GameObject target in spawners)
@@ -151,7 +151,7 @@ public class DataStorage : MonoBehaviour
             else if (name.Contains("Enemy3"))
             {
                 Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
-                GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy3);
+                GameObject enemy = GameObject.Instantiate(Enemy3);
                 enemy.GetComponent<Enemy>().agent.Warp(position);
                 enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
                 foreach (GameObject target in spawners)
@@ -166,7 +166,7 @@ public class DataStorage : MonoBehaviour
             else if (name.Contains("Enemy4"))
             {
                 Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
-                GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy4);
+                GameObject enemy = GameObject.Instantiate(Enemy4);
                 enemy.GetComponent<Enemy>().agent.Warp(position);
                 enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
                 foreach (GameObject target in spawners)

@@ -89,12 +89,12 @@ public class MenuController : MonoBehaviour
 
     public void SaveGame()
     {
-        GameController.Instance.SaveGame();
+        GameObject.FindObjectOfType<DataStorage>().SaveGame();
     }
 
     public void LoadGame()
     {
-        GameController.Instance.LoadGame();
+        GameObject.FindObjectOfType<DataStorage>().LoadGame();
         DeactivateMenu();
     }
 

@@ -48,7 +48,7 @@ public static class SaveSystem
     {
         EnemyData data = new EnemyData(enemy);
         Debug.Log(data.EnemyName + " " + " " + data.EnemyPositionX + " " + data.EnemyPositionY + " " + data.EnemyPositionZ);
-        GameController.Instance.enemies.Add(data);
+        GameObject.FindObjectOfType<DataStorage>().enemies.Add(data);
     }
 
     public static void WriteEnemyDataToFile(List<EnemyData> enemies)
@@ -62,7 +62,7 @@ public static class SaveSystem
         formatter.Serialize(stream, enemies);
         stream.Close();
 
-        GameController.Instance.enemies.Clear();
+        GameObject.FindObjectOfType<DataStorage>().enemies.Clear();
     }
 
     public static List<EnemyData> LoadEnemies()
