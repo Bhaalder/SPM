@@ -75,7 +75,7 @@ public class SceneManagerScript : MonoBehaviour
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
             slider.value = progress;
             Debug.Log("sliderprogress: " + progress);
+            yield return null;
         }
-        yield return null;
     }
 }
