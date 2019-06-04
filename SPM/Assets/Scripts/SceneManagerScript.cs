@@ -66,16 +66,13 @@ public class SceneManagerScript : MonoBehaviour
     IEnumerator LoadAsynchronously(int sceneIndex)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
-        Debug.Log("starting load");
 
         loadingScreen.SetActive(true);
-        Debug.Log("set loading screen active");
 
         while (!operation.isDone)
         {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            float progress = Mathf.Clamp01(operation.progress / .9f);
             slider.value = progress;
-            Debug.Log("sliderprogress: " + progress);
             yield return null;
         }
     }

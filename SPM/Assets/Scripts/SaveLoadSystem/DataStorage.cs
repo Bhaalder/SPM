@@ -31,29 +31,32 @@ public class DataStorage : MonoBehaviour
     {
         PlayerData data = SaveSystem.LoadPlayer();
 
-        GameController.Instance.PlayerHP = data.PlayerHP;
-        GameController.Instance.PlayerArmor = data.PlayerArmor;
-        GameController.Instance.SlowmotionSlider.value = data.SlowmotionValue;
+        if(data != null)
+        {
+            GameController.Instance.PlayerHP = data.PlayerHP;
+            GameController.Instance.PlayerArmor = data.PlayerArmor;
+            GameController.Instance.SlowmotionSlider.value = data.SlowmotionValue;
 
-        Vector3 position;
-        position.x = data.PlayerPosition[0];
-        position.y = data.PlayerPosition[1];
-        position.z = data.PlayerPosition[2];
+            Vector3 position;
+            position.x = data.PlayerPosition[0];
+            position.y = data.PlayerPosition[1];
+            position.z = data.PlayerPosition[2];
 
-        Vector3 rotation;
-        rotation.x = data.PlayerRotation[0];
-        rotation.y = data.PlayerRotation[1];
-        rotation.z = data.PlayerRotation[2];
+            Vector3 rotation;
+            rotation.x = data.PlayerRotation[0];
+            rotation.y = data.PlayerRotation[1];
+            rotation.z = data.PlayerRotation[2];
 
-        GameController.Instance.Player.transform.position = position;
-        GameController.Instance.Player.transform.rotation = Quaternion.Euler(rotation);
-        FindObjectOfType<FirstPersonCamera>().transform.rotation = Quaternion.Euler(rotation);
-        FindObjectOfType<FirstPersonCamera>().gameObject.transform.rotation = Quaternion.Euler(rotation);
+            GameController.Instance.Player.transform.position = position;
+            GameController.Instance.Player.transform.rotation = Quaternion.Euler(rotation);
+            FindObjectOfType<FirstPersonCamera>().transform.rotation = Quaternion.Euler(rotation);
+            FindObjectOfType<FirstPersonCamera>().gameObject.transform.rotation = Quaternion.Euler(rotation);
 
-        GameController.Instance.PlayerWeapons = data.PlayerWeapons;
-        GameController.Instance.SelectedWeapon = data.SelectedWeapon;
-        GameController.Instance.UpdateSelectedWeapon();
-        GameController.Instance.Player.GetComponent<PlayerInput>().SwitchWeaponAnimation(GameController.Instance.SelectedWeapon);
+            GameController.Instance.PlayerWeapons = data.PlayerWeapons;
+            GameController.Instance.SelectedWeapon = data.SelectedWeapon;
+            GameController.Instance.UpdateSelectedWeapon();
+            GameController.Instance.Player.GetComponent<PlayerInput>().SwitchWeaponAnimation(GameController.Instance.SelectedWeapon);
+        }
     }
     #endregion;
 
@@ -83,60 +86,59 @@ public class DataStorage : MonoBehaviour
 
         enemies = SaveSystem.LoadEnemies();
 
-        foreach (EnemyData enemyData in enemies)
+        if (enemies != null)
         {
-            string name = enemyData.EnemyName;
-            if (name.Contains("Enemy1"))
+            foreach (EnemyData enemyData in enemies)
             {
-                Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
-                Debug.Log(enemyData.EnemyName + " " + " " + enemyData.EnemyPositionX + " " + enemyData.EnemyPositionY + " " + enemyData.EnemyPositionZ);
-                GameObject enemy = GameObject.Instantiate(Enemy1);
-                enemy.GetComponent<Enemy>().agent.Warp(position);
-                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
-                foreach (GameObject target in spawners)
+                string name = enemyData.EnemyName;
+                if (name.Contains("Enemy1"))
                 {
-                    if (target.GetInstanceID() == enemyData.ParentID)
+                    Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
+                    GameObject enemy = GameObject.Instantiate(Enemy1);
+                    enemy.GetComponent<Enemy>().agent.Warp(position);
+                    enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+                    foreach (GameObject target in spawners)
                     {
-                        enemy.transform.parent = target.transform;
+                        if (target.GetInstanceID() == enemyData.ParentID)
+                        {
+                            enemy.transform.parent = target.transform;
+                        }
                     }
                 }
-                Debug.Log("Enemy is at location: " + enemy.transform.position);
-            }
-            else if (name.Contains("Enemy3"))
-            {
-                Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
-                GameObject enemy = GameObject.Instantiate(Enemy3);
-                enemy.GetComponent<Enemy>().agent.Warp(position);
-                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
-                foreach (GameObject target in spawners)
+                else if (name.Contains("Enemy3"))
                 {
-                    if (target.GetInstanceID() == enemyData.ParentID)
+                    Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
+                    GameObject enemy = GameObject.Instantiate(Enemy3);
+                    enemy.GetComponent<Enemy>().agent.Warp(position);
+                    enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+                    foreach (GameObject target in spawners)
                     {
-                        enemy.transform.parent = target.transform;
+                        if (target.GetInstanceID() == enemyData.ParentID)
+                        {
+                            enemy.transform.parent = target.transform;
+                        }
                     }
                 }
-                Debug.Log("Enemy is at location: " + enemy.transform.position);
-            }
-            else if (name.Contains("Enemy4"))
-            {
-                Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
-                GameObject enemy = GameObject.Instantiate(Enemy4);
-                enemy.GetComponent<Enemy>().agent.Warp(position);
-                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
-                foreach (GameObject target in spawners)
+                else if (name.Contains("Enemy4"))
                 {
-                    if (target.GetInstanceID() == enemyData.ParentID)
+                    Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
+                    GameObject enemy = GameObject.Instantiate(Enemy4);
+                    enemy.GetComponent<Enemy>().agent.Warp(position);
+                    enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
+                    foreach (GameObject target in spawners)
                     {
-                        enemy.transform.parent = target.transform;
+                        if (target.GetInstanceID() == enemyData.ParentID)
+                        {
+                            enemy.transform.parent = target.transform;
+                        }
                     }
                 }
-                Debug.Log("Enemy is at location: " + enemy.transform.position);
-            }
-            else
-            {
-                Debug.LogError("Unknown Enemy Type. Instantiate failed for: " + name);
-            }
+                else
+                {
+                    Debug.LogError("Unknown Enemy Type. Instantiate failed for: " + name);
+                }
 
+            }
         }
     }
     #endregion
@@ -154,10 +156,13 @@ public class DataStorage : MonoBehaviour
     {
         LevelData data = SaveSystem.LoadLevelData();
 
-        GameController.Instance.GetComponent<Timer>().SetTimer(data.Timer);
-        SceneBuildIndex = data.SceneBuildIndex;
-        GameController.Instance.GameEventID = data.CurrentCheckpoint;
-        GameController.Instance.KillCount = data.KillCount;
+        if (data != null)
+        {
+            GameController.Instance.GetComponent<Timer>().SetTimer(data.Timer);
+            SceneBuildIndex = data.SceneBuildIndex;
+            GameController.Instance.GameEventID = data.CurrentCheckpoint;
+            GameController.Instance.KillCount = data.KillCount;
+        }
     }
     #endregion
 
@@ -184,18 +189,21 @@ public class DataStorage : MonoBehaviour
 
         spawners = SaveSystem.LoadSpawnerData();
 
-        foreach (SpawnerData spawnerData in spawners)
+        if(spawners != null)
         {
-            int ID = spawnerData.SpawnerInstancedID;
-
-            foreach (GameObject target in spawnersingame)
+            foreach (SpawnerData spawnerData in spawners)
             {
-                if (ID == target.GetInstanceID())
+                int ID = spawnerData.SpawnerInstancedID;
+
+                foreach (GameObject target in spawnersingame)
                 {
-                    spawnerData.TotalEnemiesInCurrentWave = target.GetComponent<SpawnManager>().TotalEnemiesInCurrentWave;
-                    spawnerData.EnemiesInWaveLeft = target.GetComponent<SpawnManager>().EnemiesInWaveLeft;
-                    spawnerData.SpawnedEnemies = target.GetComponent<SpawnManager>().SpawnedEnemies;
-                    spawnerData.CurrentWave = target.GetComponent<SpawnManager>().CurrentWave;
+                    if (ID == target.GetInstanceID())
+                    {
+                        spawnerData.TotalEnemiesInCurrentWave = target.GetComponent<SpawnManager>().TotalEnemiesInCurrentWave;
+                        spawnerData.EnemiesInWaveLeft = target.GetComponent<SpawnManager>().EnemiesInWaveLeft;
+                        spawnerData.SpawnedEnemies = target.GetComponent<SpawnManager>().SpawnedEnemies;
+                        spawnerData.CurrentWave = target.GetComponent<SpawnManager>().CurrentWave;
+                    }
                 }
             }
         }
@@ -222,11 +230,7 @@ public class DataStorage : MonoBehaviour
     public void LoadLastLevelData()
     {
         LevelData data = SaveSystem.LoadLevelData();
-        if (data == null)
-        {
-            Debug.Log("No SaveFile detected for LevelData");
-        }
-        else
+        if (data != null)
         {
             SceneBuildIndex = data.SceneBuildIndex;
         }

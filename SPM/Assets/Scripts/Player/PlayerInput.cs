@@ -299,6 +299,7 @@ public class PlayerInput : MonoBehaviour {
                 GameObject menucontroller = GameObject.Find("MenuController");
                 if (menucontroller.GetComponent<MenuController>().InGameMenuActive) {
                     menucontroller.GetComponent<MenuController>().DeactivateMenu();
+                    FindObjectOfType<MenuAudioSliders>().gameObject.SetActive(false);
                 } else {
                     menucontroller.GetComponent<MenuController>().ActivateMenu();
                 }
