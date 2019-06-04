@@ -213,6 +213,13 @@ public class DataStorage : MonoBehaviour
     public void LoadLastLevelData()
     {
         LevelData data = SaveSystem.LoadLevelData();
-        SceneBuildIndex = data.SceneBuildIndex;
+        if (data == null)
+        {
+            Debug.Log("No SaveFile detected for LevelData");
+        }
+        else
+        {
+            SceneBuildIndex = data.SceneBuildIndex;
+        }
     }
 }
