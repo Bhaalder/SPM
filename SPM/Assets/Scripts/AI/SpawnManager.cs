@@ -140,7 +140,12 @@ public class SpawnManager : MonoBehaviour
                     }                
                     GameObject sceneManager = GameObject.Find("SceneManager");
                     sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
-                    door.SetActive(false);
+                    try {
+                        door.SetActive(false);
+                    } catch (NullReferenceException) {
+
+                    }
+                    
                 }
                 if (isCommandoRoom)
                 {

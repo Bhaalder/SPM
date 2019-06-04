@@ -381,7 +381,7 @@ public class AudioController : MonoBehaviour {
         if (volume == -80) {
             audioMixer.SetFloat("SFXVolume", volume);
         } else {
-            audioMixer.SetFloat("SFXVolume", (volume / 4));
+            audioMixer.SetFloat("SFXVolume", (volume));
         }
     }
 
@@ -389,7 +389,7 @@ public class AudioController : MonoBehaviour {
         if (volume == -80) {
             audioMixer.SetFloat("MusicVolume", volume);
         } else {
-            audioMixer.SetFloat("MusicVolume", (volume / 4));
+            audioMixer.SetFloat("MusicVolume", (volume));
         }
     }
 
@@ -397,7 +397,7 @@ public class AudioController : MonoBehaviour {
         if (volume == -80) {
             audioMixer.SetFloat("VoiceVolume", volume);
         } else {
-            audioMixer.SetFloat("VoiceVolume", (volume / 4));
+            audioMixer.SetFloat("VoiceVolume", (volume));
         }
     }
 
@@ -405,7 +405,7 @@ public class AudioController : MonoBehaviour {
         if (volume == -80) {
             audioMixer.SetFloat("MasterVolume", volume);
         } else {
-            audioMixer.SetFloat("MasterVolume", (volume / 4));
+            audioMixer.SetFloat("MasterVolume", (volume));
         }
     }
     #endregion

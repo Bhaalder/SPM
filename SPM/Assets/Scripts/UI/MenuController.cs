@@ -51,8 +51,9 @@ public class MenuController : MonoBehaviour
     public void MainMenu()
     {
         Debug.Log("Clicked button: Main Menu");
-        Destroy(GameObject.Find("GameController"));
+        Destroy(GameController.Instance);
         Destroy(GameObject.Find("Canvas"));
+        Destroy(AudioController.Instance);
         scenemanager.GetComponent<SceneManagerScript>().MainMenu();
         DeactivateMenu();
     }
@@ -64,6 +65,9 @@ public class MenuController : MonoBehaviour
 
     public void EndGameActivate()
     {
+
+        //End button activates
+
         scenemanager = GameObject.Find("SceneManager");
         EndGamePanel.SetActive(true);
         InGameMenuActive = true;
