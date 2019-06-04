@@ -190,6 +190,16 @@ public class AudioController : MonoBehaviour {
         }       
     }
 
+    public void StopAllSounds() {
+        foreach (KeyValuePair<string, Sound> s in allSoundsDictionary) {
+            try {
+                s.Value.source.Stop();
+            } catch (System.Exception) {
+
+            }
+        }
+    }
+
     private void InWorldSpaceRoutine(string name, GameObject soundAtLocationGO) {
         sound = allSoundsDictionary[name];
         sound.source = soundAtLocationGO.GetComponent<AudioSource>();

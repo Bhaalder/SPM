@@ -17,8 +17,8 @@ public class TipTrigger : MonoBehaviour{
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             if (!isTriggered) {
-                if (!GameController.Instance.GetComponent<Timer>().TimerStart) {
-                    GameController.Instance.GetComponent<Timer>().TimerStart = true;
+                if (!GameController.Instance.GetComponent<Timer>().TimerIsActive) {
+                    GameController.Instance.GetComponent<Timer>().TimerIsActive = true;
                 }
                 if (hasVoiceLine) {
                     //AudioController.Instance.PlayVoiceLine(voiceLine);

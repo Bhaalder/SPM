@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour{
     private float secondsTimeCount;
     private float totalSecondsTimeCount;
 
-    public bool TimerStart;
+    public bool TimerIsActive;
 
     private Text timerText;
 
@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour{
     }
 
     private void Update() {
-        if (TimerStart) {
+        if (TimerIsActive) {
             if (!GameController.Instance.GameIsPaused) {
                 secondsTimeCount += Time.unscaledDeltaTime;
             }
@@ -37,7 +37,11 @@ public class Timer : MonoBehaviour{
         }       
     }
 
-    public float GetTimer() {
+    public GameObject GetTimerObject() {
+        return timerText.gameObject;
+    }
+
+    public float GetFinalTime() {
         return secondsTimeCount;
     }
 

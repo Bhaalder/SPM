@@ -13,7 +13,7 @@ public class DataStorage : MonoBehaviour
 
     public void SetData()
     {
-        Timer = GameController.Instance.GetComponent<Timer>().GetTimer();
+        Timer = GameController.Instance.GetComponent<Timer>().GetFinalTime();
         SceneBuildIndex = GameObject.FindObjectOfType<SceneManagerScript>().SceneBuildIndex;
         CurrentCheckpoint = GameController.Instance.GameEventID;
     }
