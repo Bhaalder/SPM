@@ -16,80 +16,7 @@ public class DataStorage : MonoBehaviour
     public List<EnemyData> enemies = new List<EnemyData>();
     private List<SpawnerData> spawners = new List<SpawnerData>();
 
-    public void SetData()
-    {
-        Timer = GameController.Instance.GetComponent<Timer>().GetFinalTime();
-        SceneBuildIndex = GameObject.FindObjectOfType<SceneManagerScript>().SceneBuildIndex;
-        CurrentCheckpoint = GameController.Instance.GameEventID;
-    }
-
-    public void LoadData()
-    {
-        LoadSpawnerData();
-        LoadLevelData();
-    }
-
-    public void SaveSpawnerData(SpawnManager spawnManager)
-    {
-        SpawnerData data = new SpawnerData(spawnManager);
-        spawners.Add(data);
-    }
-
-    public void InitializeSpawnerDataSave()
-    {
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Spawner");
-        foreach (GameObject target in gameObjects)
-        {
-            target.GetComponent<SpawnManager>().SaveSpawnerData();
-        }
-    }
-
-    private void LoadSpawnerData()
-    {
-        GameObject[] spawnersingame = GameObject.FindGameObjectsWithTag("Spawner");
-
-        spawners = SaveSystem.LoadSpawnerData();
-
-        foreach (SpawnerData spawnerData in spawners)
-        {
-            int ID = spawnerData.SpawnerInstancedID;
-
-            foreach(GameObject target in spawnersingame)
-            {
-                if (ID == target.GetInstanceID())
-                {
-                    spawnerData.TotalEnemiesInCurrentWave = target.GetComponent<SpawnManager>().TotalEnemiesInCurrentWave;
-                    spawnerData.EnemiesInWaveLeft = target.GetComponent<SpawnManager>().EnemiesInWaveLeft;
-                    spawnerData.SpawnedEnemies = target.GetComponent<SpawnManager>().SpawnedEnemies;
-                    spawnerData.CurrentWave = target.GetComponent<SpawnManager>().CurrentWave;
-                }
-            }
-        }
-    }
-    private void LoadLevelData()
-    {
-        LevelData data = SaveSystem.LoadLevelData();
-
-        GameController.Instance.GetComponent<Timer>().SetTimer(data.Timer);
-        GameObject.FindObjectOfType<SceneManagerScript>().SceneBuildIndex = SceneBuildIndex;
-        GameController.Instance.GameEventID = data.CurrentCheckpoint;
-        KillCount = data.KillCount;
-    }
-
-
-    public void SaveEnemyData()
-    {
-        SaveSystem.DeleteEnemySaveFile();
-        enemies.Clear();
-
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject target in gameObjects)
-        {
-            target.GetComponent<Enemy>().SaveEnemyData();
-        }
-
-        SaveSystem.WriteEnemyDataToFile(enemies);
-    }
+    #region PlayerData
 
     public void LoadPlayerData()
     {
@@ -116,6 +43,21 @@ public class DataStorage : MonoBehaviour
         GameController.Instance.SelectedWeapon = data.SelectedWeapon;
         GameController.Instance.UpdateSelectedWeapon();
         GameController.Instance.Player.GetComponent<PlayerInput>().SwitchWeaponAnimation(GameController.Instance.SelectedWeapon);
+    }
+    #endregion;
+    #region EnemyData
+    public void SaveEnemyData()
+    {
+        SaveSystem.DeleteEnemySaveFile();
+        enemies.Clear();
+
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject target in gameObjects)
+        {
+            target.GetComponent<Enemy>().SaveEnemyData();
+        }
+
+        SaveSystem.WriteEnemyDataToFile(enemies);
     }
 
     public void LoadEnemyData()
@@ -185,16 +127,84 @@ public class DataStorage : MonoBehaviour
 
         }
     }
+    #endregion
+
+    #region LevelData
+    public void SetData()
+    {
+        Timer = GameController.Instance.GetComponent<Timer>().GetFinalTime();
+        SceneBuildIndex = GameObject.FindObjectOfType<SceneManagerScript>().SceneBuildIndex;
+        CurrentCheckpoint = GameController.Instance.GameEventID;
+        SaveSystem.SaveLevelData(this);
+    }
+    private void LoadLevelData()
+    {
+        LevelData data = SaveSystem.LoadLevelData();
+
+        GameController.Instance.GetComponent<Timer>().SetTimer(data.Timer);
+        GameObject.FindObjectOfType<SceneManagerScript>().SceneBuildIndex = SceneBuildIndex;
+        GameController.Instance.GameEventID = data.CurrentCheckpoint;
+        KillCount = data.KillCount;
+    }
+    #endregion
+
+    #region SpawnerData
+    public void SaveSpawnerData(SpawnManager spawnManager)
+    {
+        SpawnerData data = new SpawnerData(spawnManager);
+        spawners.Add(data);
+    }
+
+    public void InitializeSpawnerDataSave()
+    {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Spawner");
+        foreach (GameObject target in gameObjects)
+        {
+            target.GetComponent<SpawnManager>().SaveSpawnerData();
+        }
+        SaveSystem.SaveSpawnerData(spawners);
+    }
+
+    private void LoadSpawnerData()
+    {
+        GameObject[] spawnersingame = GameObject.FindGameObjectsWithTag("Spawner");
+
+        spawners = SaveSystem.LoadSpawnerData();
+
+        foreach (SpawnerData spawnerData in spawners)
+        {
+            int ID = spawnerData.SpawnerInstancedID;
+
+            foreach (GameObject target in spawnersingame)
+            {
+                if (ID == target.GetInstanceID())
+                {
+                    spawnerData.TotalEnemiesInCurrentWave = target.GetComponent<SpawnManager>().TotalEnemiesInCurrentWave;
+                    spawnerData.EnemiesInWaveLeft = target.GetComponent<SpawnManager>().EnemiesInWaveLeft;
+                    spawnerData.SpawnedEnemies = target.GetComponent<SpawnManager>().SpawnedEnemies;
+                    spawnerData.CurrentWave = target.GetComponent<SpawnManager>().CurrentWave;
+                }
+            }
+        }
+    }
+    #endregion
+
+
 
     public void SaveGame()
     {
         GameController.Instance.SavePlayerData();
         SaveEnemyData();
+        InitializeSpawnerDataSave();
+        SetData();
     }
 
     public void LoadGame()
     {
+        LoadLevelData();
         LoadPlayerData();
         LoadEnemyData();
+        LoadSpawnerData();
+        
     }
 }

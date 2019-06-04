@@ -99,7 +99,7 @@ public static class SaveSystem
     #endregion
 
     #region LevelData
-    public static void LevelData(DataStorage levelData)
+    public static void SaveLevelData(DataStorage levelData)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/leveldata.sav";

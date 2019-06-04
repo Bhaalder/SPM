@@ -173,7 +173,7 @@ public class SpawnManager : MonoBehaviour
 
     public void SaveSpawnerData()
     {
-        FindObjectOfType<DataStorage>().GetComponent<DataStorage>().SaveSpawnerData(this);
+        FindObjectOfType<DataStorage>().SaveSpawnerData(this);
     }
 
 }
