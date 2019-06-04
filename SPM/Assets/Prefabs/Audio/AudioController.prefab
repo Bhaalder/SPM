@@ -494,7 +494,7 @@ MonoBehaviour:
     spatialBlend_2D_3D: 1
     rolloffMode: 1
     minDistance: 1
-    maxDistance: 10
+    maxDistance: 35
     loop: 1
     source: {fileID: 0}
   - name: Alarm
@@ -505,6 +505,26 @@ MonoBehaviour:
     rolloffMode: 0
     minDistance: 1
     maxDistance: 100
+    loop: 1
+    source: {fileID: 0}
+  - name: BarSign
+    clip: {fileID: 8300000, guid: a696ce3924e08a644b4dc72e935c6d55, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 10
+    loop: 1
+    source: {fileID: 0}
+  - name: BarSignFlick
+    clip: {fileID: 8300000, guid: 8889659c332cd50449aed2379dc84a85, type: 3}
+    volume: 0.655
+    pitch: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 10
     loop: 1
     source: {fileID: 0}
   musicSounds:

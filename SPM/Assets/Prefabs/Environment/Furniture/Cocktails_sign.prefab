@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8998824680060158163}
   - component: {fileID: 124194105236273893}
   - component: {fileID: 5946352990721263132}
+  - component: {fileID: 2106457751686706688}
   m_Layer: 0
   m_Name: Cocktails_sign
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2106457751686706688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5384447557568557760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad62a118ef22b0340ae615ff48cf9c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  barSign: 1
