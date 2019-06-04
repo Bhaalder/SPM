@@ -166,6 +166,7 @@ public class GameController : MonoBehaviour {
             if (PlayerArmor <= 0) {
                 PlayerHP -= damage;
                 Debug.Log("Player took: "+damage + " to health");
+                GetComponent<BloodyScreenScript>().ShowHurtScreen("Health");
                 if(damage > PlayerHP) {
                     AudioController.Instance.PlayRandomSFX("Die1", "Die2", "Die3");
                 } else {
@@ -173,6 +174,7 @@ public class GameController : MonoBehaviour {
                 }            
             } else {
                 PlayerArmor -= damage;
+                GetComponent<BloodyScreenScript>().ShowHurtScreen("Armor");
 
             }
         } else {
