@@ -5,7 +5,7 @@ using UnityEngine;
 public class InteractableObject : MonoBehaviour
 {
     //Author: Patrik Ahlgren
-    [SerializeField] private enum Object {OpenDoorsAnimated, ArenaButton, ArenaButtonLV2, WeaponPickup, ElevatorTrigger, EndGameButton};
+    [SerializeField] private enum Object {OpenDoorsAnimated, ArenaButton, ArenaButtonLV2, WeaponPickup, ElevatorTrigger, EndGameButton, ExitLvl1};
     [SerializeField] private Object obj;
 
     public void Interact() {
@@ -27,6 +27,10 @@ public class InteractableObject : MonoBehaviour
                 break;
             case (Object.EndGameButton):
                 GetComponent<EndGameButton>().PressButton();
+                break;
+            case (Object.ExitLvl1):
+                GameObject.Find("SceneManager").GetComponent<SceneManagerScript>().StartLevelTwo();
+                GameController.Instance.SceneCompletedSequence(false);
                 break;
             default:
                 Debug.LogWarning("Hittade inte det önskade objektet");

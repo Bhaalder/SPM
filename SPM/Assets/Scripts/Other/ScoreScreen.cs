@@ -78,7 +78,7 @@ public class ScoreScreen : MonoBehaviour{
         for(int i = 0; i < killCount; i++) {
             killScore += 10;
             totalScore += 10;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForFixedUpdate();
         }
         congratulationsText.SetActive(true);
         mainMenuButton.SetActive(true);

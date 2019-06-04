@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6168297538791629986}
   - component: {fileID: 4320215421209216543}
   - component: {fileID: 3838453420883797816}
+  - component: {fileID: 2938865818982118588}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -68,10 +69,6 @@ MonoBehaviour:
   interactionText: {fileID: 0}
   crosshair: {fileID: 0}
   hitmark: {fileID: 0}
-  Enemy1: {fileID: 8168278882437978176, guid: 7d25e387d684e2e44b94e8cae21f2ad0, type: 3}
-  Enemy3: {fileID: 5536971111751372718, guid: 5bd02430c7376dc439af97fc0ded8adf, type: 3}
-  Enemy4: {fileID: 4430046657957968993, guid: 50f846ecbab46a2468727b55bbc0e0fb, type: 3}
-  enemies: []
 --- !u!114 &4320215421209216543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,3 +95,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimerIsActive: 0
+--- !u!114 &2938865818982118588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814260381439902556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edcbfd8ca18a4ba4085e89cff282b192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
