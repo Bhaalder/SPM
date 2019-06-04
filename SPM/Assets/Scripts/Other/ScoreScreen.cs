@@ -5,14 +5,18 @@ using UnityEngine.UI;
 
 public class ScoreScreen : MonoBehaviour{
     //Author: Patrik Ahlgren
+
     [SerializeField] private Text killCountText;
 
     [SerializeField] private Text timeScoreText;
     [SerializeField] private Text killScoreText;
 
-    [SerializeField] private Text totalScoreText;
+    [SerializeField] private Text totalScoreValueText;
 
-    [SerializeField] private Text congratulationsText;
+    [SerializeField] private GameObject congratulationsText;
+    [SerializeField] private GameObject scoreTexts;
+    [SerializeField] private GameObject mainMenuButton;
+    private GameObject scenemanager;
 
     private int maxTimerScore = 1800;
 
@@ -20,24 +24,32 @@ public class ScoreScreen : MonoBehaviour{
     private int killScore = 0;
     private int totalScore = 0;
 
-    public bool IsEndScreen;
+    public bool IsCountingScore;
 
     private void Awake() {
-        killCountText.gameObject.SetActive(false);
+        congratulationsText.SetActive(false);
+        scoreTexts.SetActive(false);
+        mainMenuButton.GetComponent<Button>().onClick.AddListener(delegate { MainMenu(); });
+        mainMenuButton.SetActive(false);
     }
 
     private void Update() {
-        if (IsEndScreen) {
-            totalScoreText.text = totalScore.ToString();
-            timeScoreText.text = timeScore.ToString();
-            killScoreText.text = killScore.ToString();
+        if (IsCountingScore) {
+            totalScoreValueText.text = totalScore.ToString();
+            timeScoreText.text = "TimeScore: " + timeScore;
+            killScoreText.text = "KillScore: " + killScore;
         }
     }
 
     public void CountScore(float totalTime, float killCount) {
-        IsEndScreen = true;
+        IsCountingScore = true;
         GameController.Instance.Player.GetComponent<PlayerInput>().InputIsFrozen = true;
-        killCountText.gameObject.SetActive(true);
+        scenemanager = GameObject.Find("SceneManager");
+        scoreTexts.gameObject.SetActive(true);
+        killCountText.text = "Kills: " + killCount;
+
+        gameObject.transform.SetAsLastSibling();
+
         StartCoroutine(Counter(totalTime, killCount));
     }
 
@@ -47,16 +59,30 @@ public class ScoreScreen : MonoBehaviour{
         for(int i = time; i < maxTimerScore; i++) {
             timeScore++;
             totalScore++;
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForEndOfFrame();
         }
         //animation som förstorar killscore ett kort tag och minskar ner
         for(int i = 0; i < killCount; i++) {
             killScore += 10;
             totalScore += 10;
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.05f);
         }
-        congratulationsText.text = "Congratulations! You saved humanity from slavery!";
+        congratulationsText.SetActive(true);
+        mainMenuButton.SetActive(true);
+        IsCountingScore = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        GameController.Instance.GamePaused();
+
         yield return null;
+    }
+
+    private void MainMenu() {
+        Debug.Log("Clicked button: Main Menu");
+        Destroy(GameObject.Find("GameController"));
+        Destroy(GameObject.Find("AudioController"));
+        scenemanager.GetComponent<SceneManagerScript>().MainMenu();
+        Destroy(GameObject.Find("Canvas"));
     }
 
 }

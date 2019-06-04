@@ -54,8 +54,9 @@ public class PlayerInput : MonoBehaviour {
                 DashInput();
             }           
         }      
-
-        InGameMenu();
+        if (!InputIsFrozen) {
+            InGameMenu();
+        }       
 
         Teleport();//TA BORT SEN
     }

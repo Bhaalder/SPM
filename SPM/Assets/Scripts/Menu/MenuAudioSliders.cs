@@ -17,7 +17,6 @@ public class MenuAudioSliders : MonoBehaviour{
         musicVolumeSlider.onValueChanged.AddListener(delegate { MusicValueChangeCheck(); });
         sfxVolumeSlider.onValueChanged.AddListener(delegate { SFXValueChangeCheck(); });
         voiceVolumeSlider.onValueChanged.AddListener(delegate { VoiceValueChangeCheck(); });
-        voiceVolumeSlider.gameObject.transform.SetAsLastSibling();
     }
     //alla sliders ska vara mellan -80 till 0 i valuerange
     public void MasterValueChangeCheck() {

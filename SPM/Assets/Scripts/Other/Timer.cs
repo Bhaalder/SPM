@@ -16,8 +16,8 @@ public class Timer : MonoBehaviour{
     private void Start() {
        timerText = GameObject.Find("TimerText").GetComponent<Text>();
         timerText.text = "00:00.00";
-        //secondsTimeCount = 50;
-        //minuteTimeCount = 9;
+        secondsTimeCount = 30;//TA BORT SEN
+        minuteTimeCount = 28; // TA BORT SEN
     }
 
     private void Update() {
@@ -38,11 +38,11 @@ public class Timer : MonoBehaviour{
     }
 
     public GameObject GetTimerObject() {
-        return timerText.gameObject;
+        return gameObject;
     }
 
     public float GetFinalTime() {
-        return secondsTimeCount;
+        return totalSecondsTimeCount;
     }
 
     public void SetTimer(float timer) {

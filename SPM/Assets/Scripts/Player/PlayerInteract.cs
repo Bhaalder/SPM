@@ -26,12 +26,12 @@ public class PlayerInteract : MonoBehaviour{
 
     private void LateUpdate() {
         Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, distanceToTarget, layerMask);
-        try {
+        if (interactText != null) {
             interactText.enabled = false;
-        } catch (System.NullReferenceException) {
-            
-        }    
-        textBackground.enabled = false;
+        }
+        if (textBackground != null) {
+            textBackground.enabled = false;
+        }
         try {
             if (hit.transform.gameObject.tag == "InteractableObject") {
                 interactText.enabled = true;

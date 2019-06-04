@@ -11,28 +11,30 @@ public class EndGameButton : MonoBehaviour {
     private ScoreScreen scoreScreen;
 
     private void Start() {
-        timerGO = GameController.Instance.GetComponent<Timer>().GetTimerObject();
-        timer = timerGO.GetComponent<Timer>();
-        scoreScreen = GetComponent<ScoreScreen>();
+        timerGO = GameObject.Find("TimerText");
+        timer = GameController.Instance.GetComponent<Timer>();
+        scoreScreen = GameObject.Find("ScoreScreen").GetComponent<ScoreScreen>();
     }
 
     public void PressButton() {
         timer.TimerIsActive = false;
         timerGO.transform.SetAsLastSibling();
-
+        StartCoroutine(ExplosionEnding());
     }
 
     private IEnumerator ExplosionEnding() {
-        AudioController.Instance.Play_Delay("Explosion", 0.3f, 2.7f);
+        AudioController.Instance.Play_Delay("Explosion", 0.3f, 1.7f);
         Camera.main.GetComponent<CameraShake>().ShakeIncrease(25f, 1.5f);
         yield return new WaitForSeconds(1f);
         //skärmen fadear
         Camera.main.GetComponent<CameraShake>().ShakeIncrease(30f, 3f);
         yield return new WaitForSeconds(2f);
         Camera.main.GetComponent<CameraShake>().ShakeIncrease(15f, 1f);
-        AudioController.Instance.FadeOut("Explosion", 5, 0);
+        AudioController.Instance.FadeOut("Explosion", 2, 0);
+        Camera.main.GetComponent<CameraShake>().ShakeIncrease(25f, 2f);
+        yield return new WaitForSeconds(2f);
         AudioController.Instance.StopAllSounds();
-        scoreScreen.IsEndScreen = true;
+        scoreScreen.IsCountingScore = true;
         scoreScreen.CountScore(timer.GetFinalTime(), 10);//10 ska vara killcount
         yield return null;
     }
