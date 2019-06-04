@@ -31,13 +31,14 @@ public class SceneManagerScript : MonoBehaviour
 
     public void MainMenu()
     {
+        dataStorage.SaveGame();
         StartCoroutine(LoadAsynchronously(mainMenuIndex));
     }
 
     public void StartLevelOne()
     {
-        StartCoroutine(LoadAsynchronously(level1));
         SaveSystem.DeleteAllSaveFiles();
+        StartCoroutine(LoadAsynchronously(level1));
     }
 
     public void StartLevelTwo()

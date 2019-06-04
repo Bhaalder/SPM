@@ -77,17 +77,19 @@ public class DataStorage : MonoBehaviour
 
     public void LoadEnemyData()
     {
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
-        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
-        foreach (GameObject target in gameObjects)
-        {
-            Destroy(target);
-        }
+
 
         enemies = SaveSystem.LoadEnemies();
 
         if (enemies != null)
         {
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
+            GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+            foreach (GameObject target in gameObjects)
+            {
+                Destroy(target);
+            }
+
             foreach (EnemyData enemyData in enemies)
             {
                 string name = enemyData.EnemyName;
