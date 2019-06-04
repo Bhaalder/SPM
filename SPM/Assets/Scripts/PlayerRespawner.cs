@@ -9,7 +9,7 @@ public class PlayerRespawner : MonoBehaviour
     public GameObject Player;
     public GameObject[] respawn;
     //public GameController cntrl;
-
+    [SerializeField] private Animator anim;
 
     void Start()
     {
@@ -29,6 +29,7 @@ public class PlayerRespawner : MonoBehaviour
     {
         if (GameController.Instance.GameEventID == 1)
         {
+          
             Player.transform.position = respawn[0].transform.position;
             resetStatus();
         }
@@ -60,6 +61,7 @@ public class PlayerRespawner : MonoBehaviour
     }
     public void resetStatus()
     {
+        anim.SetTrigger("FadeIn");
         GameController.Instance.PlayerHP = 100;
         GameController.Instance.PlayerArmor = 100;
     }

@@ -6,7 +6,8 @@ public class KillZoneScript : MonoBehaviour
 {
     //Author: Teo
     [SerializeField] private PlayerRespawner playerRespawner;
-
+    [SerializeField] private Animator anim;
+ 
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,7 @@ public class KillZoneScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            anim.SetTrigger("FadeOut");
             playerRespawner.RespawnMethod();
             GameController.Instance.GetComponent<Timer>().AddToTimer(15);
         }
