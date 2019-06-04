@@ -18,9 +18,13 @@ public class PowerUp3 : MonoBehaviour
         {
             if(GameController.Instance.PlayerArmor < 100)
             {
-                GameController.Instance.GetComponent<GameController>().PlayerArmor = 100;
+                AudioController.Instance.Play("ArmorPickup");
+                for (int i = 0; i <= 50; i++) {
+                    if (GameController.Instance.PlayerArmor != 100) {
+                        GameController.Instance.PlayerArmor++;
+                    }
+                }
                 GetComponentInParent<PowerUpSpawner>().Respawner();
-                AudioController.Instance.Play("HPShieldPickup");
                 Destroy(gameObject);
                 anim.SetTrigger("FullArmor");
             }

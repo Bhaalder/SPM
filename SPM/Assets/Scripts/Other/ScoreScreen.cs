@@ -56,7 +56,7 @@ public class ScoreScreen : MonoBehaviour{
         for(int i = time; i < maxTimerScore; i++) {
             timeScore++;
             totalScore++;
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
         //animation som förstorar killscore ett kort tag och minskar ner
         for(int i = 0; i < killCount; i++) {

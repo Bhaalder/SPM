@@ -427,9 +427,19 @@ MonoBehaviour:
     maxDistance: 1.01
     loop: 0
     source: {fileID: 0}
-  - name: HPShieldPickup
-    clip: {fileID: 8300000, guid: 54c552faa8efd7549bdff74e8a6c853d, type: 3}
-    volume: 0.787
+  - name: HPPickup
+    clip: {fileID: 8300000, guid: f850b3d2ef9d01f4da01f4911e45412d, type: 3}
+    volume: 1
+    pitch: 1.02
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 1.01
+    loop: 0
+    source: {fileID: 0}
+  - name: ArmorPickup
+    clip: {fileID: 8300000, guid: 2ff0f0f5a2aadad458c67bf487bf2680, type: 3}
+    volume: 1
     pitch: 1.02
     spatialBlend_2D_3D: 0
     rolloffMode: 0
@@ -438,8 +448,8 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: AmmoPickup
-    clip: {fileID: 8300000, guid: 8ac72840250ff09468123d0ac7f0fbc2, type: 3}
-    volume: 0.787
+    clip: {fileID: 8300000, guid: 32f68a047ca2b70458447b7fd36a49ce, type: 3}
+    volume: 1
     pitch: 1.02
     spatialBlend_2D_3D: 0
     rolloffMode: 0
@@ -448,8 +458,8 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: SpeedPickUp
-    clip: {fileID: 8300000, guid: 68a85c15497f14a4caeb10f6f356bdde, type: 3}
-    volume: 0.787
+    clip: {fileID: 8300000, guid: ba017e5a001295a4781c47d0bcea99f4, type: 3}
+    volume: 1
     pitch: 1.02
     spatialBlend_2D_3D: 0
     rolloffMode: 0
