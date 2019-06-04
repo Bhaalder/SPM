@@ -99,8 +99,6 @@ public class DataStorage : MonoBehaviour
 
     public void LoadEnemyData()
     {
-
-
         enemies = SaveSystem.LoadEnemies();
 
         if (enemies != null)
@@ -248,7 +246,7 @@ public class DataStorage : MonoBehaviour
     public void LoadGameData()
     {
         LoadLevelData();
-        LoadPlayerData();
+        //LoadPlayerData();
         LoadEnemyData();
         LoadSpawnerData();        
     }

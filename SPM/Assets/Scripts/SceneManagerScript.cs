@@ -32,7 +32,7 @@ public class SceneManagerScript : MonoBehaviour
     public void MainMenu()
     {
         dataStorage.SaveGame();
-        WaitForSeconds();
+        StartCoroutine(WaitForSeconds());
     }
 
     public void StartLevelOne()
@@ -80,11 +80,11 @@ public class SceneManagerScript : MonoBehaviour
 
     IEnumerator WaitForSeconds()
     {
-        yield return new WaitForSeconds(10f);
-        //Destroy(GameObject.Find("Canvas"));
-        //Destroy(GameObject.Find("GameController"));
-        //AudioController.Instance.StopAllSounds();
-        //Destroy(GameObject.Find("AudioController"));
-        //StartCoroutine(LoadAsynchronously(mainMenuIndex));
+        yield return new WaitForSeconds(3f);
+        Destroy(GameObject.Find("Canvas"));
+        Destroy(GameObject.Find("GameController"));
+        AudioController.Instance.StopAllSounds();
+        Destroy(GameObject.Find("AudioController"));
+        StartCoroutine(LoadAsynchronously(mainMenuIndex));
     }
 }
