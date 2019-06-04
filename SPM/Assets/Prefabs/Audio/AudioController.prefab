@@ -429,7 +429,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: RandomAmbience
     clip: {fileID: 8300000, guid: 9427c6b8bb3dc4e1e96d7d39e6835086, type: 3}
-    volume: 0.505
+    volume: 0.444
     pitch: 1
     spatialBlend_2D_3D: 0
     rolloffMode: 0
@@ -525,6 +525,16 @@ MonoBehaviour:
     rolloffMode: 1
     minDistance: 1
     maxDistance: 10
+    loop: 1
+    source: {fileID: 0}
+  - name: GasLeak
+    clip: {fileID: 8300000, guid: f826f267160595e48896f5294f203025, type: 3}
+    volume: 0.683
+    pitch: 0.85
+    spatialBlend_2D_3D: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 20
     loop: 1
     source: {fileID: 0}
   musicSounds:
