@@ -369,12 +369,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: LabBubbling
     clip: {fileID: 8300000, guid: 80e776b10f3a4a04e9113153d6aa0e01, type: 3}
-    volume: 0.308
+    volume: 1
     pitch: 1
     spatialBlend_2D_3D: 1
-    rolloffMode: 0
+    rolloffMode: 1
     minDistance: 1
-    maxDistance: 10
+    maxDistance: 5
     loop: 1
     source: {fileID: 0}
   - name: Snore
@@ -482,9 +482,9 @@ MonoBehaviour:
     volume: 0.65
     pitch: 1
     spatialBlend_2D_3D: 1
-    rolloffMode: 0
+    rolloffMode: 1
     minDistance: 1
-    maxDistance: 30
+    maxDistance: 10
     loop: 1
     source: {fileID: 0}
   - name: Alarm
@@ -579,7 +579,7 @@ MonoBehaviour:
     maxDistance: 1.01
     loop: 0
     source: {fileID: 0}
-  - name: Specimen420
+  - name: Speciment420
     clip: {fileID: 8300000, guid: c5656897c3299e348875bfd1745a94a4, type: 3}
     volume: 1
     pitch: 1

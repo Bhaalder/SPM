@@ -13,6 +13,6 @@ public class AudioAmbience : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        AudioController.Instance.Play_Delay("RandomAmbience", 1f, 3f);
     }
 }
