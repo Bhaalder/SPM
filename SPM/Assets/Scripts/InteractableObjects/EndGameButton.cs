@@ -15,6 +15,7 @@ public class EndGameButton : MonoBehaviour {
         timerGO = GameObject.Find("TimerText");
         timer = GameController.Instance.GetComponent<Timer>();
         scoreScreen = GameObject.Find("ScoreScreen").GetComponent<ScoreScreen>();
+        anim = GameObject.Find("Fade").GetComponent<Animator>();
     }
 
     public void PressButton() {

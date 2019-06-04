@@ -23,7 +23,8 @@ public class KillZoneScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            playerRespawner.RespawnMethod();            
+            playerRespawner.RespawnMethod();
+            GameController.Instance.GetComponent<Timer>().AddToTimer(15);
         }
         if (other.gameObject.CompareTag("Enemy")){
             other.GetComponent<Enemy>().InvokeDeath();
