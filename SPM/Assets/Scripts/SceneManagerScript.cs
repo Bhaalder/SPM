@@ -36,8 +36,8 @@ public class SceneManagerScript : MonoBehaviour
 
     public void StartLevelOne()
     {
-        StartCoroutine(LoadAsynchronously(level1));
         SaveSystem.DeleteAllSaveFiles();
+        StartCoroutine(LoadAsynchronously(level1));
     }
 
     public void StartLevelTwo()
