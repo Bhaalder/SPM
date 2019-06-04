@@ -318,7 +318,7 @@ public class WeaponAnimation : MonoBehaviour{
 
         moveDuration -= 0.5f;
 
-        for (float time = 0f; time < moveDuration; time += Time.unscaledDeltaTime) {
+        for (float time = 0f; time < moveDuration; time += Time.deltaTime) {
             if (!GameController.Instance.Player.GetComponent<PlayerInput>().IsReloading) {
                 time += 10;
             }

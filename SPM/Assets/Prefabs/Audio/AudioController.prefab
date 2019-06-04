@@ -335,6 +335,16 @@ MonoBehaviour:
     maxDistance: 30
     loop: 0
     source: {fileID: 0}
+  - name: Teleport
+    clip: {fileID: 8300000, guid: 407774e66980f0f49b20fe0fecaf713b, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 1
+    minDistance: 1
+    maxDistance: 30
+    loop: 0
+    source: {fileID: 0}
   environmentSounds:
   - name: Space Ambience
     clip: {fileID: 8300000, guid: dfdbba5d3499bb64aab00b8dad47de3e, type: 3}
