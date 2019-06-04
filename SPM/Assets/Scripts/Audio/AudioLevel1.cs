@@ -6,6 +6,7 @@ using UnityEngine;
 public class AudioLevel1 : MonoBehaviour{
     [SerializeField] bool barSign;
     [SerializeField] bool gasLeak;
+    [SerializeField] bool generator;
     void Start(){
         //AudioController.Instance.Play("RandomAmbience");
        // AudioController.Instance.Play_InWorldspace_WithTag("LabBubbling", "SuperHuman");
@@ -18,6 +19,10 @@ public class AudioLevel1 : MonoBehaviour{
         if (gasLeak)
         {
             AudioController.Instance.Play_InWorldspace("GasLeak", gameObject);
+        }
+        if (generator)
+        {
+            AudioController.Instance.Play_InWorldspace("GeneratorSound", gameObject);
         }
 
     }
