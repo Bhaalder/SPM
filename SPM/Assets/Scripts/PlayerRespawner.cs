@@ -13,7 +13,7 @@ public class PlayerRespawner : MonoBehaviour
 
     void Start()
     {
-        
+        anim = GameObject.Find("Fade").GetComponent<Animator>();
     }
 
     // Update is called once per frame
