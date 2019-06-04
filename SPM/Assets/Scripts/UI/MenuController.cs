@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -47,10 +48,39 @@ public class MenuController : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        menuPanel.SetActive(false);
-        optionPanel.SetActive(false);
-        controller.SetActive(false);
-        settings.SetActive(false);
+        try
+        {
+            menuPanel.SetActive(false);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("MenuPanel already inactive");
+        }
+        try
+        {
+            optionPanel.SetActive(false);
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log("OptionPanel already inactive");
+        }
+        try
+        {
+            controller.SetActive(false);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("ControllerPanel already inactive");
+        }
+        try
+        {
+            settings.SetActive(false);
+        }
+        catch (Exception e)
+        {
+            Debug.Log("SettingsPanel already inactive");
+        }
         InGameMenuActive = false;
         GameController.Instance.GamePaused();
     }
