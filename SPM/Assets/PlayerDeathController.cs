@@ -11,12 +11,14 @@ public class PlayerDeathController : MonoBehaviour
 
     [SerializeField] private bool isDead;
     [SerializeField] private float addToTimer;
+    public Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
         LoadGameObjectReferences();
         isDead = false;
+        
     }
 
     // Update is called once per frame
@@ -33,9 +35,11 @@ public class PlayerDeathController : MonoBehaviour
     public void OnPlayerDeath()
     {
         deathPanel.SetActive(true);
+        anim.SetBool("isDead", true);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
-        PauseAndUnpauseGame();
+        StartCoroutine(WaitASec());
+
     }
 
     public void RespawnAtLastCheckpoint()
@@ -69,5 +73,11 @@ public class PlayerDeathController : MonoBehaviour
     {
         player = GameController.Instance.Player;
         respawnManager = FindObjectOfType<PlayerRespawner>().gameObject;
+    }
+
+    private IEnumerator WaitASec()
+    {
+        yield return new WaitForSeconds(2);
+        PauseAndUnpauseGame();
     }
 }
