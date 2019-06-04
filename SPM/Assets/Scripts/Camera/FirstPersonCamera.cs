@@ -25,7 +25,9 @@ public class FirstPersonCamera: MonoBehaviour {
 
     private void Update() {
         if (!GameController.Instance.GameIsPaused) {
-            CameraControl();
+            if (!GameController.Instance.Player.GetComponent<PlayerInput>().InputIsFrozen) {
+                CameraControl();
+            }          
         }
     }
 

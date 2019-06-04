@@ -20,10 +20,9 @@ public class TipTrigger : MonoBehaviour{
                 if (!GameController.Instance.GetComponent<Timer>().TimerIsActive) {
                     GameController.Instance.GetComponent<Timer>().TimerIsActive = true;
                 }
-                if (hasVoiceLine) {
-                    //AudioController.Instance.PlayVoiceLine(voiceLine);
+                if (hasVoiceLine) {            
                     AudioController.Instance.Stop(voiceLineInterrupt);
-                    AudioController.Instance.Play(voiceLine);
+                    AudioController.Instance.PlayVoiceLine(voiceLine);
                 }
                 if (hasTip) {
                     GameController.Instance.TipText.text = tipText;

@@ -12,6 +12,7 @@ public class ScoreScreen : MonoBehaviour{
 
     [SerializeField] private Text totalScoreText;
 
+    [SerializeField] private Text congratulationsText;
 
     private int maxTimerScore = 1800;
 
@@ -19,33 +20,42 @@ public class ScoreScreen : MonoBehaviour{
     private int killScore = 0;
     private int totalScore = 0;
 
-    private bool isEndScreen;
+    public bool IsEndScreen;
+
+    private void Awake() {
+        killCountText.gameObject.SetActive(false);
+    }
 
     private void Update() {
-        if (isEndScreen) {
+        if (IsEndScreen) {
             totalScoreText.text = totalScore.ToString();
             timeScoreText.text = timeScore.ToString();
+            killScoreText.text = killScore.ToString();
         }
     }
 
     public void CountScore(float totalTime, float killCount) {
-        isEndScreen = true;
+        IsEndScreen = true;
+        GameController.Instance.Player.GetComponent<PlayerInput>().InputIsFrozen = true;
+        killCountText.gameObject.SetActive(true);
         StartCoroutine(Counter(totalTime, killCount));
     }
 
     private IEnumerator Counter(float totalTime, float killCount) {
         int time = Mathf.RoundToInt(totalTime);
+        //animation som förstorar timescore ett kort tag och minskar ner
         for(int i = time; i < maxTimerScore; i++) {
             timeScore++;
             totalScore++;
             yield return new WaitForSeconds(0.03f);
         }
+        //animation som förstorar killscore ett kort tag och minskar ner
         for(int i = 0; i < killCount; i++) {
             killScore += 10;
             totalScore += 10;
             yield return new WaitForSeconds(0.03f);
         }
-
+        congratulationsText.text = "Congratulations! You saved humanity from slavery!";
         yield return null;
     }
 

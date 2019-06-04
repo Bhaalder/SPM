@@ -20,7 +20,7 @@ public class PlayerInput : MonoBehaviour {
     private BaseWeapon firstWeapon, secondWeapon, thirdWeapon;
     private float nextTimeToFire = 0f;
     public bool IsReloading = false;
-
+    public bool InputIsFrozen;
     private bool skipShootDelayToSlowmotion;
 
     private void Awake() {
@@ -44,13 +44,15 @@ public class PlayerInput : MonoBehaviour {
 
     private void Update() {
         if (!GameController.Instance.GameIsPaused) {
-            ReloadWeaponInput();
-            ReloadSequence();
-            ShootWeaponInput();
-            SwitchWeaponInput();
-            SlowmotionInput();
-            InteractInput();
-            DashInput();
+            if (!InputIsFrozen) {
+                ReloadWeaponInput();
+                ReloadSequence();
+                ShootWeaponInput();
+                SwitchWeaponInput();
+                SlowmotionInput();
+                InteractInput();
+                DashInput();
+            }           
         }      
 
         InGameMenu();

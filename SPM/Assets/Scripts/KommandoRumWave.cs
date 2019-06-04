@@ -29,7 +29,11 @@ public class KommandoRumWave : MonoBehaviour
     private IEnumerator WaitASec() {
         yield return new WaitForSeconds(2);
         AudioController.Instance.Play_ThenPlay("Song2Start", "Song2Loop");
-        AudioController.Instance.FadeOut("LetsGetItOn", 2, 0);
+        try {
+            AudioController.Instance.FadeOut("LetsGetItOn", 2, 0);
+        } catch (System.Exception) {
+
+        }        
         eSpawner.InitializeSpawner();
     }
 
