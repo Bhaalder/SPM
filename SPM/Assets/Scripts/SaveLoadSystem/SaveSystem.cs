@@ -7,11 +7,17 @@ using System.Runtime.Serialization.Formatters.Binary;
 public static class SaveSystem
 {
 
+    private static string playerDataString = "/playerdata.sav";
+    private static string enemyDataString = "/enemydata.sav";
+    private static string levelDataString = "/leveldata.sav";
+    private static string spawnerDataString = "/spawnerdata.sav";
+    private static string[] allpaths = new string[] { playerDataString,enemyDataString,levelDataString,spawnerDataString };
+
     #region PlayerData
     public static void SavePlayer(GameController gameController)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/player.sav";
+        string path = Application.persistentDataPath + playerDataString;
         FileStream stream = new FileStream(path, FileMode.Create);
 
         PlayerData data = new PlayerData(gameController);
@@ -22,7 +28,7 @@ public static class SaveSystem
 
     public static PlayerData LoadPlayer()
     {
-        string path = Application.persistentDataPath + "/player.sav";
+        string path = Application.persistentDataPath + playerDataString;
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -56,7 +62,7 @@ public static class SaveSystem
 
         DeleteEnemySaveFile();
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/enemies.sav";
+        string path = Application.persistentDataPath + enemyDataString;
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, enemies);
@@ -68,7 +74,7 @@ public static class SaveSystem
     public static List<EnemyData> LoadEnemies()
     {
 
-        string path = Application.persistentDataPath + "/enemies.sav";
+        string path = Application.persistentDataPath + enemyDataString;
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -102,7 +108,7 @@ public static class SaveSystem
     public static void SaveLevelData(DataStorage levelData)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/leveldata.sav";
+        string path = Application.persistentDataPath + levelDataString;
         FileStream stream = new FileStream(path, FileMode.Create);
 
         LevelData data = new LevelData(levelData);
@@ -113,7 +119,7 @@ public static class SaveSystem
 
     public static LevelData LoadLevelData()
     {
-        string path = Application.persistentDataPath + "/leveldata.sav";
+        string path = Application.persistentDataPath + levelDataString;
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -137,7 +143,7 @@ public static class SaveSystem
     public static void SaveSpawnerData(List<SpawnerData> spawnerData)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/spawnerdata.sav";
+        string path = Application.persistentDataPath + spawnerDataString;
         FileStream stream = new FileStream(path, FileMode.Create);
 
         formatter.Serialize(stream, spawnerData);
@@ -146,7 +152,7 @@ public static class SaveSystem
 
     public static List<SpawnerData> LoadSpawnerData()
     {
-        string path = Application.persistentDataPath + "/spawnerdata.sav";
+        string path = Application.persistentDataPath + spawnerDataString;
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -166,5 +172,17 @@ public static class SaveSystem
     }
     #endregion
 
+
+    public static void DeleteAllSaveFiles()
+    {
+        foreach (string savepath in allpaths)
+        {
+            string path = Application.persistentDataPath + savepath;
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
+    }
 
 }

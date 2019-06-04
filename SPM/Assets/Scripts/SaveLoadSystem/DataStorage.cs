@@ -37,7 +37,9 @@ public class DataStorage : MonoBehaviour
         rotation.z = data.PlayerRotation[2];
 
         GameController.Instance.Player.transform.position = position;
-        GameController.Instance.Player.transform.eulerAngles = new Vector3(rotation.x, rotation.y, rotation.z);
+        GameController.Instance.Player.transform.rotation = Quaternion.Euler(rotation);
+        FindObjectOfType<FirstPersonCamera>().transform.rotation = Quaternion.Euler(rotation);
+        FindObjectOfType<FirstPersonCamera>().gameObject.transform.rotation = Quaternion.Euler(rotation);
 
         GameController.Instance.PlayerWeapons = data.PlayerWeapons;
         GameController.Instance.SelectedWeapon = data.SelectedWeapon;
