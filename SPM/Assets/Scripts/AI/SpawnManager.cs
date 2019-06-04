@@ -18,6 +18,7 @@ public class SpawnManager : MonoBehaviour
     //Author: Marcus Söderberg
     [SerializeField] private Wave[] Waves; // class to hold information per wave
     [SerializeField] private Transform[] SpawnPoints;
+    [SerializeField] private GameObject teleportEffect;
     public float TimeBetweenEnemies = 2f;
 
     public int TotalEnemiesInCurrentWave { get; set; }
@@ -97,6 +98,8 @@ public class SpawnManager : MonoBehaviour
 
                     GameObject newEnemy1 = Instantiate(enemies[place], SpawnPoints[spawnPointIndex].position, SpawnPoints[spawnPointIndex].rotation);
                     newEnemy1.transform.parent = gameObject.transform;
+                    GameObject teleport = Instantiate(teleportEffect, newEnemy1.transform.position, Quaternion.identity);
+                    AudioController.Instance.Play_InWorldspace("Teleport", newEnemy1, 0.95f, 1.05f);
                     try
                     {
                         newEnemy1.GetComponent<Enemy>().ParentID = gameObject.GetInstanceID();
@@ -106,6 +109,7 @@ public class SpawnManager : MonoBehaviour
                         newEnemy1.GetComponent<Enemy>().ParentID = 0;
                     }
                     if (spawnPointIndex == SpawnPoints.Length - 1) { spawnPointIndex = 0; }
+                    Destroy(teleport, 3f);
                     yield return new WaitForSeconds(TimeBetweenEnemies);
                 }
             }
