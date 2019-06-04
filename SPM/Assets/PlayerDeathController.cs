@@ -39,7 +39,7 @@ public class PlayerDeathController : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         StartCoroutine(WaitASec());
-
+        GameController.Instance.GetComponent<Timer>().TimerIsActive = false;
     }
 
     public void RespawnAtLastCheckpoint()
@@ -50,6 +50,7 @@ public class PlayerDeathController : MonoBehaviour
         isDead = false;
         deathPanel.SetActive(false);
         GameController.Instance.GetComponent<Timer>().AddToTimer(addToTimer);
+        GameController.Instance.GetComponent<Timer>().TimerIsActive = true;
     }
 
     private void PauseAndUnpauseGame()
