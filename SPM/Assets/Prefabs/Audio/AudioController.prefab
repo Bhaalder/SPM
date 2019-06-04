@@ -145,6 +145,16 @@ MonoBehaviour:
     maxDistance: 0
     loop: 0
     source: {fileID: 0}
+  - name: Scream
+    clip: {fileID: 8300000, guid: 1aa590766ee46834390879048994984f, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 0
+    rolloffMode: 0
+    minDistance: 0
+    maxDistance: 0
+    loop: 0
+    source: {fileID: 0}
   - name: Dash
     clip: {fileID: 8300000, guid: ea65a88f8c270344285512ba67516d04, type: 3}
     volume: 1
@@ -369,10 +379,10 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: LabBubbling
     clip: {fileID: 8300000, guid: 80e776b10f3a4a04e9113153d6aa0e01, type: 3}
-    volume: 0.308
+    volume: 1
     pitch: 1
     spatialBlend_2D_3D: 1
-    rolloffMode: 0
+    rolloffMode: 1
     minDistance: 1
     maxDistance: 10
     loop: 1
@@ -382,7 +392,7 @@ MonoBehaviour:
     volume: 0.82
     pitch: 1
     spatialBlend_2D_3D: 1
-    rolloffMode: 0
+    rolloffMode: 1
     minDistance: 1
     maxDistance: 5
     loop: 1
@@ -402,9 +412,9 @@ MonoBehaviour:
     volume: 0.787
     pitch: 1.11
     spatialBlend_2D_3D: 1
-    rolloffMode: 0
+    rolloffMode: 1
     minDistance: 1
-    maxDistance: 2
+    maxDistance: 5
     loop: 1
     source: {fileID: 0}
   - name: SlidingDoors
@@ -419,11 +429,11 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: RandomAmbience
     clip: {fileID: 8300000, guid: 9427c6b8bb3dc4e1e96d7d39e6835086, type: 3}
-    volume: 0.787
-    pitch: 1.02
+    volume: 0.505
+    pitch: 1
     spatialBlend_2D_3D: 0
     rolloffMode: 0
-    minDistance: 0
+    minDistance: 1
     maxDistance: 1.01
     loop: 0
     source: {fileID: 0}
@@ -482,9 +492,9 @@ MonoBehaviour:
     volume: 0.65
     pitch: 1
     spatialBlend_2D_3D: 1
-    rolloffMode: 0
+    rolloffMode: 1
     minDistance: 1
-    maxDistance: 30
+    maxDistance: 10
     loop: 1
     source: {fileID: 0}
   - name: Alarm
@@ -579,7 +589,7 @@ MonoBehaviour:
     maxDistance: 1.01
     loop: 0
     source: {fileID: 0}
-  - name: Specimen420
+  - name: Speciment420
     clip: {fileID: 8300000, guid: c5656897c3299e348875bfd1745a94a4, type: 3}
     volume: 1
     pitch: 1

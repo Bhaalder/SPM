@@ -45,14 +45,12 @@ public class ProjectileAttackState : EnemyBaseState
             return;
         }
 
-        if (CanSeePlayer() == true)
+        if (CanSeePlayer() == true && IsGrounded())
         {
             owner.transform.LookAt(owner.player.transform, Vector3.up);
             owner.animator.SetBool("isIdle", false);
             owner.animator.SetBool("isRunning", false);
             owner.animator.SetBool("isAttacking", true);
-
-
         }
 
         currentCool = cooldown;
