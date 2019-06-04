@@ -5,8 +5,12 @@ using UnityEngine;
 public class MenuController : MonoBehaviour
 {
     //Author: Marcus Söderberg
-    public GameObject menuPanel;
-    public GameObject EndGamePanel;
+    [SerializeField] private GameObject menuPanel;
+    [SerializeField] private GameObject EndGamePanel;
+    [SerializeField] GameObject optionPanel;
+    [SerializeField] GameObject controller;
+    [SerializeField] GameObject settings;
+
 
     private GameObject scenemanager;
 
@@ -44,6 +48,9 @@ public class MenuController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuPanel.SetActive(false);
+        optionPanel.SetActive(false);
+        controller.SetActive(false);
+        settings.SetActive(false);
         InGameMenuActive = false;
         GameController.Instance.GamePaused();
     }
