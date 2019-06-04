@@ -31,6 +31,7 @@ public class SceneManagerScript : MonoBehaviour
 
     public void MainMenu()
     {
+        dataStorage.SaveGame();
         StartCoroutine(LoadAsynchronously(mainMenuIndex));
     }
 
