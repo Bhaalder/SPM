@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class TipTrigger : MonoBehaviour{
 
     [SerializeField] private string voiceLine;
+    [SerializeField] private string voiceLineInterrupt;
     [SerializeField] private string tipText;
     [SerializeField] private float waitBeforeFade = 5;
     [SerializeField] private bool hasVoiceLine;
@@ -21,6 +22,7 @@ public class TipTrigger : MonoBehaviour{
                 }
                 if (hasVoiceLine) {
                     //AudioController.Instance.PlayVoiceLine(voiceLine);
+                    AudioController.Instance.Stop(voiceLineInterrupt);
                     AudioController.Instance.Play(voiceLine);
                 }
                 if (hasTip) {

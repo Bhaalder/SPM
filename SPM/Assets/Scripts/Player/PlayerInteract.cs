@@ -12,7 +12,7 @@ public class PlayerInteract : MonoBehaviour{
 
     [SerializeField] private Transform interaction;
 
-    private float distanceToTarget = 2f;
+    private float distanceToTarget = 3f;
 	
     private void Awake(){
         interactText = GameObject.Find("InteractionText").GetComponent<Text>();
