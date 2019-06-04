@@ -16,7 +16,6 @@ public class ScoreScreen : MonoBehaviour{
     [SerializeField] private GameObject congratulationsText;
     [SerializeField] private GameObject scoreTexts;
     [SerializeField] private GameObject mainMenuButton;
-    private GameObject scenemanager;
 
     private int maxTimerScore = 1800;
 
@@ -44,7 +43,6 @@ public class ScoreScreen : MonoBehaviour{
     public void CountScore(float totalTime, float killCount) {
         IsCountingScore = true;
         GameController.Instance.Player.GetComponent<PlayerInput>().InputIsFrozen = true;
-        scenemanager = GameObject.Find("SceneManager");
         scoreTexts.gameObject.SetActive(true);
         killCountText.text = "Kills: " + killCount;
 
@@ -78,8 +76,7 @@ public class ScoreScreen : MonoBehaviour{
     }
 
     private void MainMenu() {
-        GameObject menuController = GameObject.Find("MenuController");
-        menuController.GetComponent<MenuController>().MainMenu();
+        GameObject.Find("MenuController").GetComponent<MenuController>().MainMenu();
     }
 
 }
