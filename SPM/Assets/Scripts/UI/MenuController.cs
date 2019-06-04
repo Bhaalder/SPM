@@ -94,7 +94,7 @@ public class MenuController : MonoBehaviour
 
     public void LoadGame()
     {
-        GameObject.FindObjectOfType<DataStorage>().LoadGame();
+        GameObject.FindObjectOfType<DataStorage>().LoadGameData();
         //DeactivateMenu();
     }
 

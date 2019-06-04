@@ -10,6 +10,7 @@ public class SceneManagerScript : MonoBehaviour
     public bool buttonIsPressed;
     public GameObject menuController;
     public int SceneBuildIndex { get; set; }
+    private DataStorage dataStorage;
 
 
     // Start is called before the first frame update
@@ -20,7 +21,8 @@ public class SceneManagerScript : MonoBehaviour
         //DontDestroyOnLoad(gameObject);
         menuController = GameObject.Find("MenuController");
         SceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
-
+        dataStorage = FindObjectOfType<DataStorage>();
+        dataStorage.LoadLastLevelData();
     }
 
     // Update is called once per frame
@@ -44,6 +46,10 @@ public class SceneManagerScript : MonoBehaviour
         Application.Quit();
     }
 
+    public void ContinuePreviousGame()
+    {
+        SceneManager.LoadScene(dataStorage.SceneBuildIndex);
+    }
 
 
     private void OnTriggerStay(Collider other)
