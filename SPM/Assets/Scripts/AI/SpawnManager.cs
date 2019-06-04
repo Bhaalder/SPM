@@ -39,7 +39,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private GameObject door;
 
 
-
     void Start()
     {
         CurrentWave = -1; // avoid off by 1
@@ -139,11 +138,14 @@ public class SpawnManager : MonoBehaviour
                     GameController.Instance.SceneCompletedSequence(true);
                     if (isLevel2) {
                         AudioController.Instance.FadeOut("Song4Loop", 5, 0);
+                        door.GetComponent<Animator>().SetBool("isOpen", true);
+                        AudioController.Instance.Play_InWorldspace("Alarm", door);
                     } else {
                         AudioController.Instance.FadeOut("Song3Loop", 5, 0);
-                    }                
-                    GameObject sceneManager = GameObject.Find("SceneManager");
-                    sceneManager.GetComponent<SceneManagerScript>().EndGameScreen();
+                    }
+                    
+                    
+
                     try {
                         door.SetActive(false);
                     } catch (NullReferenceException) {

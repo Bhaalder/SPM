@@ -6,6 +6,7 @@ public class EndGameButton : MonoBehaviour {
     //Author: Patrik Ahlgren
 
     [SerializeField] private GameObject timerGO;
+    [SerializeField] private Animator anim;
     private Timer timer;
 
     private ScoreScreen scoreScreen;
@@ -17,20 +18,22 @@ public class EndGameButton : MonoBehaviour {
     }
 
     public void PressButton() {
+        GameController.Instance.Player.GetComponent<PlayerInput>().InputIsFrozen = true;
         timer.TimerIsActive = false;
         timerGO.transform.SetAsLastSibling();
         StartCoroutine(ExplosionEnding());
     }
 
     private IEnumerator ExplosionEnding() {
-        AudioController.Instance.Play_Delay("Explosion", 0.3f, 1.7f);
+        AudioController.Instance.Play_InWorldspace("Explosion", GameController.Instance.Player, 0.95f, 1.5f);
         Camera.main.GetComponent<CameraShake>().ShakeIncrease(25f, 1.5f);
         yield return new WaitForSeconds(1f);
-        //skärmen fadear
+        AudioController.Instance.Play_InWorldspace("Explosion", GameController.Instance.Player, 0.95f, 1.5f);
         Camera.main.GetComponent<CameraShake>().ShakeIncrease(30f, 3f);
         yield return new WaitForSeconds(2f);
+        anim.SetTrigger("FadeOut");
+        AudioController.Instance.Play_InWorldspace("Explosion", GameController.Instance.Player, 0.95f, 1.5f);
         Camera.main.GetComponent<CameraShake>().ShakeIncrease(15f, 1f);
-        AudioController.Instance.FadeOut("Explosion", 2, 0);
         Camera.main.GetComponent<CameraShake>().ShakeIncrease(25f, 2f);
         yield return new WaitForSeconds(2f);
         AudioController.Instance.StopAllSounds();

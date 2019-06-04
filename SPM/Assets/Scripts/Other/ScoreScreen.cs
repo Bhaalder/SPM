@@ -42,7 +42,6 @@ public class ScoreScreen : MonoBehaviour{
 
     public void CountScore(float totalTime, float killCount) {
         IsCountingScore = true;
-        GameController.Instance.Player.GetComponent<PlayerInput>().InputIsFrozen = true;
         scoreTexts.gameObject.SetActive(true);
         killCountText.text = "Kills: " + killCount;
 

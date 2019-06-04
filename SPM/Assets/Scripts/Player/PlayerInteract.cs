@@ -34,8 +34,12 @@ public class PlayerInteract : MonoBehaviour{
         }
         try {
             if (hit.transform.gameObject.tag == "InteractableObject") {
-                interactText.enabled = true;
-                textBackground.enabled = true;
+                if (interactText != null) {
+                    interactText.enabled = true;
+                }
+                if (textBackground != null) {
+                    textBackground.enabled = true;
+                }
                 if (GameController.Instance.PlayerIsInteracting) {
                     hit.transform.GetComponent<InteractableObject>().Interact();
                     GameController.Instance.PlayerIsInteracting = false;

@@ -31,8 +31,7 @@ public class SceneManagerScript : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
-       
+        SceneManager.LoadScene("MainMenu");  
     }
 
     public void StartLevelOne()

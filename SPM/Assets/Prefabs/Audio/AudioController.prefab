@@ -468,12 +468,22 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: LetsGetItOn
     clip: {fileID: 8300000, guid: 44b9d814011a5f44f8102b6354de96c4, type: 3}
-    volume: 0.45
+    volume: 0.65
     pitch: 1
     spatialBlend_2D_3D: 1
     rolloffMode: 0
     minDistance: 1
     maxDistance: 30
+    loop: 1
+    source: {fileID: 0}
+  - name: Alarm
+    clip: {fileID: 8300000, guid: f62b8418022b0154b8e6f631d6b60d8e, type: 3}
+    volume: 1
+    pitch: 1
+    spatialBlend_2D_3D: 1
+    rolloffMode: 0
+    minDistance: 1
+    maxDistance: 100
     loop: 1
     source: {fileID: 0}
   musicSounds:
