@@ -94,7 +94,7 @@ public static class SaveSystem
     }
     public static void DeleteEnemySaveFile()
     {
-        string path = Application.persistentDataPath + "/enemies.sav";
+        string path = Application.persistentDataPath + enemyDataString;
 
         if (File.Exists(path))
         {
