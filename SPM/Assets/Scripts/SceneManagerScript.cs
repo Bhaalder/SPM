@@ -30,17 +30,18 @@ public class SceneManagerScript : MonoBehaviour
 
     public void MainMenu()
     {
-        StartCoroutine(LoadAsynchronously(0));
+        StartCoroutine(LoadAsynchronously("MainMenu"));
     }
 
     public void StartLevelOne()
     {
-        StartCoroutine(LoadAsynchronously(1));
+        StartCoroutine(LoadAsynchronously("Level1WhiteBoxArea"));
+        SaveSystem.DeleteAllSaveFiles();
     }
 
     public void StartLevelTwo()
     {
-        StartCoroutine(LoadAsynchronously(2));
+        StartCoroutine(LoadAsynchronously("Level2WhiteBox"));
     }
 
     public void ExitGame()
@@ -61,9 +62,9 @@ public class SceneManagerScript : MonoBehaviour
         }
     }
 
-    IEnumerator LoadAsynchronously(int sceneIndex)
+    IEnumerator LoadAsynchronously(string sceneName)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         Debug.Log("starting load");
 
         loadingScreen.SetActive(true);
