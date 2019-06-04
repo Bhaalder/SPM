@@ -39,7 +39,7 @@ public class EndGameButton : MonoBehaviour {
         yield return new WaitForSeconds(2f);
         AudioController.Instance.StopAllSounds();
         scoreScreen.IsCountingScore = true;
-        scoreScreen.CountScore(timer.GetFinalTime(), 10);//10 ska vara killcount
+        scoreScreen.CountScore(timer.GetFinalTime(), GameController.Instance.KillCount);
         yield return null;
     }
 
