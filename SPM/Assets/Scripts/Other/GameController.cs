@@ -32,13 +32,9 @@ public class GameController : MonoBehaviour {
     [SerializeField] private Text interactionText;
     [SerializeField] private Image crosshair, hitmark;
 
+    public int KillCount { get; set; }
+
     private static GameController _instance;
-
-    [SerializeField] private GameObject Enemy1;
-    [SerializeField] private GameObject Enemy3;
-    [SerializeField] private GameObject Enemy4;
-
-    public List<EnemyData> enemies = new List<EnemyData>();
 
     public static GameController Instance {
         get {
@@ -198,126 +194,5 @@ public class GameController : MonoBehaviour {
     public void SavePlayerData()
     {
         SaveSystem.SavePlayer(this);
-    }
-
-    public void SaveEnemyData()
-    {
-        SaveSystem.DeleteSaveFile();
-        enemies.Clear();
-        
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject target in gameObjects)
-        {
-            target.GetComponent<Enemy>().SaveEnemyData();
-        }
-
-        SaveSystem.WriteEnemyDataToFile(enemies);
-    }
-
-    public void LoadPlayerData()
-    {
-        PlayerData data = SaveSystem.LoadPlayer();
-
-        PlayerHP = data.PlayerHP;
-        PlayerArmor = data.PlayerArmor;
-        SlowmotionSlider.value = data.SlowmotionValue;
-
-        Vector3 position;
-        position.x = data.PlayerPosition[0];
-        position.y = data.PlayerPosition[1];
-        position.z = data.PlayerPosition[2];
-
-        Vector3 rotation;
-        rotation.x = data.PlayerRotation[0];
-        rotation.y = data.PlayerRotation[1];
-        rotation.z = data.PlayerRotation[2];
-
-        Player.transform.position = position;
-        Player.transform.eulerAngles = new Vector3(rotation.x, rotation.y, rotation.z);
-
-        PlayerWeapons = data.PlayerWeapons;
-        SelectedWeapon = data.SelectedWeapon;
-        UpdateSelectedWeapon();
-        Player.GetComponent<PlayerInput>().SwitchWeaponAnimation(SelectedWeapon);
-    }
-
-    public void LoadEnemyData()
-    {
-        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
-        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
-        foreach (GameObject target in gameObjects)
-        {
-            Destroy(target);
-        }
-
-        enemies = SaveSystem.LoadEnemies();
-
-        foreach (EnemyData enemyData in enemies)
-        {
-            string name = enemyData.EnemyName;
-            if (name.Contains("Enemy1"))
-            {
-                Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
-                Debug.Log(enemyData.EnemyName + " " + " " + enemyData.EnemyPositionX + " " + enemyData.EnemyPositionY + " " + enemyData.EnemyPositionZ);
-                GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy1);
-                enemy.GetComponent<Enemy>().agent.Warp(position);
-                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
-                foreach (GameObject target in spawners)
-                {
-                    if(target.GetInstanceID() == enemyData.ParentID)
-                    {
-                        enemy.transform.parent = target.transform;
-                    }
-                }
-                Debug.Log("Enemy is at location: " + enemy.transform.position);
-            }
-            else if (name.Contains("Enemy3"))
-            {
-                Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
-                GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy3);
-                enemy.GetComponent<Enemy>().agent.Warp(position);
-                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
-                foreach (GameObject target in spawners)
-                {
-                    if (target.GetInstanceID() == enemyData.ParentID)
-                    {
-                        enemy.transform.parent = target.transform;
-                    }
-                }
-                Debug.Log("Enemy is at location: " + enemy.transform.position);
-            }
-            else if (name.Contains("Enemy4"))
-            {
-                Vector3 position = new Vector3(enemyData.EnemyPositionX, enemyData.EnemyPositionY, enemyData.EnemyPositionZ);
-                GameObject enemy = GameObject.Instantiate(GameController.Instance.Enemy4);
-                enemy.GetComponent<Enemy>().agent.Warp(position);
-                enemy.transform.rotation = Quaternion.Euler(enemyData.EnemyRotationX, enemyData.EnemyRotationY, enemyData.EnemyRotationZ);
-                foreach (GameObject target in spawners)
-                {
-                    if (target.GetInstanceID() == enemyData.ParentID)
-                    {
-                        enemy.transform.parent = target.transform;
-                    }
-                }
-                Debug.Log("Enemy is at location: " + enemy.transform.position);
-            }
-            else
-            {
-                Debug.LogError("Unknown Enemy Type. Instantiate failed for: " + name);
-            }
-            
-        }
-    }
-
-    public void SaveGame()
-    {
-        SavePlayerData();
-        SaveEnemyData();
-    }
-
-    public void LoadGame()
-    {
-        LoadPlayerData();
-        LoadEnemyData();
     }
 }

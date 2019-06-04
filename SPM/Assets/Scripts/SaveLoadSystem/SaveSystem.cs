@@ -6,6 +6,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
+
+    #region PlayerData
     public static void SavePlayer(GameController gameController)
     {
         BinaryFormatter formatter = new BinaryFormatter();
@@ -38,6 +40,9 @@ public static class SaveSystem
             return null;
         }
     }
+    #endregion
+
+    #region EnemyData
 
     public static void SaveEnemyData(Enemy enemy)
     {
@@ -49,7 +54,7 @@ public static class SaveSystem
     public static void WriteEnemyDataToFile(List<EnemyData> enemies)
     {
 
-        DeleteSaveFile();
+        DeleteEnemySaveFile();
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/enemies.sav";
         FileStream stream = new FileStream(path, FileMode.Create);
@@ -81,8 +86,7 @@ public static class SaveSystem
             return null;
         }
     }
-
-    public static void DeleteSaveFile()
+    public static void DeleteEnemySaveFile()
     {
         string path = Application.persistentDataPath + "/enemies.sav";
 
@@ -92,4 +96,75 @@ public static class SaveSystem
         }
 
     }
+    #endregion
+
+    #region LevelData
+    public static void LevelData(DataStorage levelData)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/leveldata.sav";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        LevelData data = new LevelData(levelData);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
+    public static LevelData LoadLevelData()
+    {
+        string path = Application.persistentDataPath + "/leveldata.sav";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            LevelData data = formatter.Deserialize(stream) as LevelData;
+
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+            return null;
+        }
+    }
+    #endregion
+
+    #region SpawnerData
+    public static void SaveSpawnerData(List<SpawnerData> spawnerData)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/spawnerdata.sav";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, spawnerData);
+        stream.Close();
+    }
+
+    public static List<SpawnerData> LoadSpawnerData()
+    {
+        string path = Application.persistentDataPath + "/spawnerdata.sav";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            List<SpawnerData> data = formatter.Deserialize(stream) as List<SpawnerData>;
+
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            Debug.LogError("Save file not found in " + path);
+            return null;
+        }
+    }
+    #endregion
+
+
 }

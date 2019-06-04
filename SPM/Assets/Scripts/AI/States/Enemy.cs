@@ -78,7 +78,7 @@ public class Enemy : StateMachine
             }
         }
         isDead = true;
-        //GameObject.FindObjectOfType<DataStorage>().KillCount++;  
+        GameController.Instance.KillCount++;
         Destroy(gameObject);
         
     }
