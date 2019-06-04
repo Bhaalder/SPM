@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DataStorage : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class DataStorage : MonoBehaviour
 
     public List<EnemyData> enemies = new List<EnemyData>();
     private List<SpawnerData> spawners = new List<SpawnerData>();
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            LoadGameData();
+        }
+    }
 
     #region PlayerData
 
@@ -221,5 +230,10 @@ public class DataStorage : MonoBehaviour
         {
             SceneBuildIndex = data.SceneBuildIndex;
         }
+    }
+
+    void OnApplicationQuit()
+    {
+        SaveGame();
     }
 }

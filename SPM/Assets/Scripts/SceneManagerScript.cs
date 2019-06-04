@@ -14,9 +14,9 @@ public class SceneManagerScript : MonoBehaviour
     public GameObject menuController;
     public int SceneBuildIndex { get; set; }
     private DataStorage dataStorage;
-    private int level1;
-    private int level2;
-    private int mainMenuIndex;
+    private int level1 = 1;
+    private int level2 = 2;
+    private int mainMenuIndex = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -26,22 +26,23 @@ public class SceneManagerScript : MonoBehaviour
         SceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
         dataStorage = FindObjectOfType<DataStorage>();
         dataStorage.LoadLastLevelData();
+
     }
 
     public void MainMenu()
     {
-        StartCoroutine(LoadAsynchronously("MainMenu"));
+        StartCoroutine(LoadAsynchronously(mainMenuIndex));
     }
 
     public void StartLevelOne()
     {
-        StartCoroutine(LoadAsynchronously("Level1WhiteBoxArea"));
+        StartCoroutine(LoadAsynchronously(level1));
         SaveSystem.DeleteAllSaveFiles();
     }
 
     public void StartLevelTwo()
     {
-        StartCoroutine(LoadAsynchronously("Level2WhiteBox"));
+        StartCoroutine(LoadAsynchronously(level2));
     }
 
     public void ExitGame()
@@ -51,7 +52,7 @@ public class SceneManagerScript : MonoBehaviour
 
     public void ContinuePreviousGame()
     {
-        SceneManager.LoadScene(dataStorage.SceneBuildIndex);
+        StartCoroutine(LoadAsynchronously(dataStorage.SceneBuildIndex));
     }
 
     public void EndGameScreen()
@@ -62,9 +63,9 @@ public class SceneManagerScript : MonoBehaviour
         }
     }
 
-    IEnumerator LoadAsynchronously(string sceneName)
+    IEnumerator LoadAsynchronously(int sceneIndex)
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
         Debug.Log("starting load");
 
         loadingScreen.SetActive(true);
