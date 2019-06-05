@@ -14,7 +14,7 @@ public class DataStorage : MonoBehaviour
     [SerializeField] private GameObject Enemy3;
     [SerializeField] private GameObject Enemy4;
 
-    public List<EnemyData> enemies = new List<EnemyData>();
+    private List<EnemyData> enemies = new List<EnemyData>();
     private List<SpawnerData> spawners = new List<SpawnerData>();
 
     private float currentCooldown;
@@ -34,7 +34,7 @@ public class DataStorage : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
-            ContinousSave();
+            //ContinousSave();
         }
     }
 
@@ -76,15 +76,15 @@ public class DataStorage : MonoBehaviour
     #region EnemyData
     public void SaveEnemyData()
     {
-        SaveSystem.DeleteEnemySaveFile();
-        try
-        {
-            enemies.Clear();
-        }
-        catch (System.Exception e)
-        {
-            Debug.Log("Could not clear DataStorage.enemies: " + e);
-        }
+        //SaveSystem.DeleteEnemySaveFile();
+        //try
+        //{
+        //    ClearEnemyList();
+        //}
+        //catch (System.Exception e)
+        //{
+        //    Debug.Log("Could not clear DataStorage.enemies: " + e);
+        //}
 
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject target in gameObjects)
@@ -164,6 +164,11 @@ public class DataStorage : MonoBehaviour
 
             }
         }
+    }
+
+    public void ClearEnemyList()
+    {
+        enemies.Clear();
     }
     #endregion
 

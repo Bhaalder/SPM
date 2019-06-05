@@ -28,20 +28,16 @@ public class Enemy : StateMachine
 
     [SerializeField] private GameObject bloodExplosion;
     private bool isDead;
-    private bool frozenRotation;
-    private float unfreezeCooldown;
 
     // Methods
     protected override void Awake()
     {
-
         Renderer = GetComponent<MeshRenderer>();
         agent = GetComponent<NavMeshAgent>();
         player = (PlayerMovementController)FindObjectOfType(typeof(PlayerMovementController));
         isDead = false;
         isDamaged = false;
         CanDamage = false;
-        frozenRotation = true;
         base.Awake();
     }
 

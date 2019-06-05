@@ -61,7 +61,7 @@ public static class SaveSystem
         formatter.Serialize(stream, enemies);
         stream.Close();
 
-        GameObject.FindObjectOfType<DataStorage>().enemies.Clear();
+        GameObject.FindObjectOfType<DataStorage>().ClearEnemyList();
     }
 
     public static List<EnemyData> LoadEnemies()
