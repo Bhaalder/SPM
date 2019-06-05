@@ -58,35 +58,35 @@ public class PlayerInput : MonoBehaviour {
             InGameMenu();
         }       
 
-        Teleport();//TA BORT SEN
+        //Teleport();//TA BORT SEN
     }
 
-    private void Teleport() {//TA BORT SEN
-        if (Input.GetKeyDown(KeyCode.T)) {
-            SceneManager.LoadScene("Level2WhiteBox");
-        }
-        if (Input.GetKeyDown(KeyCode.I)) {
-            try {
-                transform.position = startTeleport.transform.position;
-            } catch (System.Exception) {
-                Debug.Log("FINNS INGEN DEFINERAD 'startTeleport'");
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.O)) {
-            try {
-                transform.position = secondTeleport.transform.position;
-            } catch (System.Exception) {
-                Debug.Log("FINNS INGEN DEFINERAD 'secondTeleport'");
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.P)) {
-            try {
-                transform.position = thirdTeleport.transform.position;
-            } catch (System.Exception) {
-                Debug.Log("FINNS INGEN DEFINERAD 'thirdTeleport'");
-            }
-        }
-    }//TA BORT SEN
+    //private void Teleport() {//TA BORT SEN
+    //    if (Input.GetKeyDown(KeyCode.T)) {
+    //        SceneManager.LoadScene("Level2WhiteBox");
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.I)) {
+    //        try {
+    //            transform.position = startTeleport.transform.position;
+    //        } catch (System.Exception) {
+    //            Debug.Log("FINNS INGEN DEFINERAD 'startTeleport'");
+    //        }
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.O)) {
+    //        try {
+    //            transform.position = secondTeleport.transform.position;
+    //        } catch (System.Exception) {
+    //            Debug.Log("FINNS INGEN DEFINERAD 'secondTeleport'");
+    //        }
+    //    }
+    //    if (Input.GetKeyDown(KeyCode.P)) {
+    //        try {
+    //            transform.position = thirdTeleport.transform.position;
+    //        } catch (System.Exception) {
+    //            Debug.Log("FINNS INGEN DEFINERAD 'thirdTeleport'");
+    //        }
+    //    }
+    //}//TA BORT SEN
 
     #region Reload Methods
     private void ReloadWeaponInput() {
