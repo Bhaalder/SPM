@@ -18,6 +18,7 @@ public class Timer : MonoBehaviour{
         timerText.text = "00:00.00";
         //secondsTimeCount = 00;//TA BORT SEN
         //minuteTimeCount = 15; // TA BORT SEN
+        TimerIsActive = true;
     }
 
     private void Update() {

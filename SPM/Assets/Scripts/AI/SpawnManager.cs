@@ -24,6 +24,8 @@ public class SpawnManager : MonoBehaviour
     public int TotalEnemiesInCurrentWave { get; set; }
     public int EnemiesInWaveLeft { get; set; }
     public int SpawnedEnemies { get; set; }
+    public bool StartedSpawning { get; set; }
+
 
     public int CurrentWave { get; set; }
     private int totalWaves;
@@ -44,6 +46,7 @@ public class SpawnManager : MonoBehaviour
         CurrentWave = -1; // avoid off by 1
         totalWaves = Waves.Length - 1; // adjust, because we're using 0 index
         isRoomCleared = false;
+        StartedSpawning = false;
         // StartNextWave(); //used for testing
     }
 
@@ -51,6 +54,7 @@ public class SpawnManager : MonoBehaviour
     public void InitializeSpawner()
     {
         StartNextWave();
+        StartedSpawning = true;
     }
 
     void StartNextWave()
@@ -174,6 +178,19 @@ public class SpawnManager : MonoBehaviour
     public void SaveSpawnerData()
     {
         FindObjectOfType<DataStorage>().SaveSpawnerData(this);
+    }
+
+    private IEnumerator CheckForChildren()
+    {
+        yield return new WaitForSeconds(3f);
+        if(transform.childCount <= 0)
+        {
+            EnemiesInWaveLeft = 0;
+        }
+        if(StartedSpawning == true && totalWaves > CurrentWave)
+        {
+            StartNextWave();
+        }
     }
 
 }

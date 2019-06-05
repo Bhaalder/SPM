@@ -11,6 +11,7 @@ public class SpawnerData
     public int EnemiesInWaveLeft { get; set; }
     public int SpawnedEnemies { get; set; }
     public int CurrentWave { get; set; }
+    public bool StartedSpawning { get; set; }
 
     public SpawnerData(SpawnManager spawnManagerData)
     {
@@ -19,5 +20,6 @@ public class SpawnerData
         EnemiesInWaveLeft = spawnManagerData.EnemiesInWaveLeft;
         SpawnedEnemies = spawnManagerData.SpawnedEnemies;
         CurrentWave = spawnManagerData.CurrentWave;
+        StartedSpawning = spawnManagerData.StartedSpawning;
     }
 }

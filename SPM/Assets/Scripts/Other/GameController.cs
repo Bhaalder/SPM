@@ -85,6 +85,19 @@ public class GameController : MonoBehaviour {
         UpdateSelectedWeapon();
     }
 
+    private void Start()
+    {
+        LevelData levelData = FindObjectOfType<DataStorage>().levelDataStorage;
+        if (levelData.SceneBuildIndex == FindObjectOfType<SceneManagerScript>().GetSceneIndex() && FindObjectOfType<DataStorage>().NewGame == false)
+        {
+            DataStorage dataStorage = FindObjectOfType<DataStorage>();
+            dataStorage.LoadPlayerData();
+            dataStorage.LoadEnemyData();
+            dataStorage.LoadLevelData();
+            dataStorage.LoadSpawnerData();
+        }
+    }
+
     public void UpdateSelectedWeapon() {
         weaponNameText.text = SelectedWeapon.GetName();
         foreach (Transform child in weaponImage.transform) {

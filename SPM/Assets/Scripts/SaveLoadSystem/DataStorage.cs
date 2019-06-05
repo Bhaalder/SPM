@@ -14,8 +14,12 @@ public class DataStorage : MonoBehaviour
     [SerializeField] private GameObject Enemy3;
     [SerializeField] private GameObject Enemy4;
 
-    private List<EnemyData> enemies = new List<EnemyData>();
-    private List<SpawnerData> spawners = new List<SpawnerData>();
+    private List<EnemyData> EnemiesStorage { get; set; } = new List<EnemyData>();
+    public List<SpawnerData> SpawnersStorage { get; set; } = new List<SpawnerData>();
+    public PlayerData PlayerDataStorage { get; set; }
+    public LevelData levelDataStorage { get; set; }
+
+    public bool NewGame { get; set; }
 
     private float currentCooldown;
     private float saveCooldown;
@@ -26,7 +30,13 @@ public class DataStorage : MonoBehaviour
         {
             //LoadGameData();
         }
+        else
+        {
+            LoadInMainMenu();
+        }
 
+        NewGame = false;
+        DontDestroyOnLoad(gameObject);
         saveCooldown = 5f;
     }
 
@@ -90,18 +100,18 @@ public class DataStorage : MonoBehaviour
         foreach (GameObject target in gameObjects)
         {
             EnemyData data = new EnemyData(target.GetComponent<Enemy>().SaveEnemyData());
-            enemies.Add(data);
+            EnemiesStorage.Add(data);
             Debug.Log("Enemy Saved");
         }
 
-        SaveSystem.WriteEnemyDataToFile(enemies);
+        SaveSystem.WriteEnemyDataToFile(EnemiesStorage);
     }
 
     public void LoadEnemyData()
     {
-        enemies = SaveSystem.LoadEnemies();
+        EnemiesStorage = SaveSystem.LoadEnemies();
 
-        if (enemies != null)
+        if (EnemiesStorage != null)
         {
             GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
             GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
@@ -110,7 +120,7 @@ public class DataStorage : MonoBehaviour
                 Destroy(target);
             }
 
-            foreach (EnemyData enemyData in enemies)
+            foreach (EnemyData enemyData in EnemiesStorage)
             {
                 string name = enemyData.EnemyName;
                 if (name.Contains("Enemy1"))
@@ -168,7 +178,7 @@ public class DataStorage : MonoBehaviour
 
     public void ClearEnemyList()
     {
-        enemies.Clear();
+        EnemiesStorage.Clear();
     }
     #endregion
 
@@ -199,7 +209,7 @@ public class DataStorage : MonoBehaviour
     public void SaveSpawnerData(SpawnManager spawnManager)
     {
         SpawnerData data = new SpawnerData(spawnManager);
-        spawners.Add(data);
+        SpawnersStorage.Add(data);
     }
 
     public void InitializeSpawnerDataSave()
@@ -209,18 +219,18 @@ public class DataStorage : MonoBehaviour
         {
             target.GetComponent<SpawnManager>().SaveSpawnerData();
         }
-        SaveSystem.SaveSpawnerData(spawners);
+        SaveSystem.SaveSpawnerData(SpawnersStorage);
     }
 
-    private void LoadSpawnerData()
+    public void LoadSpawnerData()
     {
         GameObject[] spawnersingame = GameObject.FindGameObjectsWithTag("Spawner");
 
-        spawners = SaveSystem.LoadSpawnerData();
+        SpawnersStorage = SaveSystem.LoadSpawnerData();
 
-        if(spawners != null)
+        if(SpawnersStorage != null)
         {
-            foreach (SpawnerData spawnerData in spawners)
+            foreach (SpawnerData spawnerData in SpawnersStorage)
             {
                 int ID = spawnerData.SpawnerInstancedID;
 
@@ -232,6 +242,7 @@ public class DataStorage : MonoBehaviour
                         spawnerData.EnemiesInWaveLeft = target.GetComponent<SpawnManager>().EnemiesInWaveLeft;
                         spawnerData.SpawnedEnemies = target.GetComponent<SpawnManager>().SpawnedEnemies;
                         spawnerData.CurrentWave = target.GetComponent<SpawnManager>().CurrentWave;
+                        spawnerData.StartedSpawning = target.GetComponent<SpawnManager>().StartedSpawning;
                     }
                 }
             }
@@ -267,7 +278,10 @@ public class DataStorage : MonoBehaviour
 
     IEnumerator OnApplicationQuit()
     {
-        SaveGame();
+        if(SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            SaveGame();
+        }
         yield return new WaitForSeconds(3f);
         Debug.Log("Game Exit");
     }
@@ -281,7 +295,18 @@ public class DataStorage : MonoBehaviour
             return;
         }
 
-        SaveGame();
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            SaveGame();
+        }
         currentCooldown = saveCooldown;
+    }
+
+    private void LoadInMainMenu()
+    {
+        EnemiesStorage = SaveSystem.LoadEnemies();
+        SpawnersStorage = SaveSystem.LoadSpawnerData();
+        levelDataStorage = SaveSystem.LoadLevelData();
+        PlayerDataStorage = SaveSystem.LoadPlayer();
     }
 }

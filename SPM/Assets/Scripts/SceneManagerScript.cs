@@ -37,15 +37,18 @@ public class SceneManagerScript : MonoBehaviour
         Destroy(GameObject.Find("GameController"));
         AudioController.Instance.StopAllSounds();
         Destroy(GameObject.Find("AudioController"));
+        Destroy(FindObjectOfType<DataStorage>().gameObject);
         SceneManager.LoadScene(mainMenuIndex);
+        //StartCoroutine(LoadAsynchronously(mainMenuIndex));
         //StartCoroutine(WaitForSeconds());
     }
 
     public void StartLevelOne()
     {
         SaveSystem.DeleteAllSaveFiles();
-        SceneManager.LoadScene(level1);
-        //StartCoroutine(LoadAsynchronously(level1));
+        //SceneManager.LoadScene(level1);
+        FindObjectOfType<DataStorage>().NewGame = true;
+        StartCoroutine(LoadAsynchronously(level1));
     }
 
     public void StartLevelTwo()
@@ -82,6 +85,7 @@ public class SceneManagerScript : MonoBehaviour
         {
             float progress = Mathf.Clamp01(operation.progress / .9f);
             slider.value = progress;
+            Debug.Log(progress);
             yield return null;
         }
     }
@@ -94,5 +98,10 @@ public class SceneManagerScript : MonoBehaviour
         AudioController.Instance.StopAllSounds();
         Destroy(GameObject.Find("AudioController"));
         StartCoroutine(LoadAsynchronously(mainMenuIndex));
+    }
+
+    public int GetSceneIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
     }
 }
