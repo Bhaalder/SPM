@@ -12,6 +12,8 @@ public static class SaveSystem
     private static string levelDataString = "/leveldata.sav";
     private static string spawnerDataString = "/spawnerdata.sav";
     private static string[] allpaths = new string[] { playerDataString,enemyDataString,levelDataString,spawnerDataString };
+    private static List<EnemyData> dummyEnemyDataList = new List<EnemyData>();
+    private static List<SpawnerData> dummyspawnersList = new List<SpawnerData>();
 
     #region PlayerData
     public static void SavePlayer(GameController gameController)
@@ -42,7 +44,7 @@ public static class SaveSystem
         }
         else
         {
-            Debug.Log("Save file not found in " + path);
+            Debug.LogError("Save file not found in " + path);
             return null;
         }
     }
@@ -81,8 +83,8 @@ public static class SaveSystem
         }
         else
         {
-            Debug.Log("Save file not found in " + path);
-            return null;
+            Debug.LogError("Save file not found in " + path);
+            return dummyEnemyDataList;
         }
     }
     public static void DeleteEnemySaveFile()
@@ -126,7 +128,7 @@ public static class SaveSystem
         }
         else
         {
-            Debug.Log("Save file not found in " + path);
+            Debug.LogError("Save file not found in " + path);
             return null;
         }
     }
@@ -159,8 +161,8 @@ public static class SaveSystem
         }
         else
         {
-            Debug.Log("Save file not found in " + path);
-            return null;
+            Debug.LogError("Save file not found in " + path);
+            return dummyspawnersList;
         }
     }
     #endregion

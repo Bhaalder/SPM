@@ -26,13 +26,19 @@ public class SceneManagerScript : MonoBehaviour
         SceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
         dataStorage = FindObjectOfType<DataStorage>();
         dataStorage.LoadLastLevelData();
+        loadingScreen.SetActive(false);
 
     }
 
     public void MainMenu()
     {
         dataStorage.SaveGame();
-        StartCoroutine(WaitForSeconds());
+        Destroy(GameObject.Find("Canvas"));
+        Destroy(GameObject.Find("GameController"));
+        AudioController.Instance.StopAllSounds();
+        Destroy(GameObject.Find("AudioController"));
+        SceneManager.LoadScene(mainMenuIndex);
+        //StartCoroutine(WaitForSeconds());
     }
 
     public void StartLevelOne()
