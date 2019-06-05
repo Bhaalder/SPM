@@ -24,7 +24,7 @@ public class DataStorage : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
-            LoadGameData();
+            //LoadGameData();
         }
 
         saveCooldown = 5f;
