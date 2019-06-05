@@ -44,12 +44,14 @@ public class SceneManagerScript : MonoBehaviour
     public void StartLevelOne()
     {
         SaveSystem.DeleteAllSaveFiles();
-        StartCoroutine(LoadAsynchronously(level1));
+        SceneManager.LoadScene(level1);
+        //StartCoroutine(LoadAsynchronously(level1));
     }
 
     public void StartLevelTwo()
     {
-        StartCoroutine(LoadAsynchronously(level2));
+        SceneManager.LoadScene(level2);
+        //StartCoroutine(LoadAsynchronously(level2));
     }
 
     public void ExitGame()

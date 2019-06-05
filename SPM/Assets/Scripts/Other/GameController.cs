@@ -59,7 +59,7 @@ public class GameController : MonoBehaviour {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         DontDestroyOnLoad(gameObject);
-        FindObjectOfType<DataStorage>().LoadPlayerData();
+        //FindObjectOfType<DataStorage>().LoadPlayerData();
 
         PlayerHP = 100;
         PlayerArmor = 100;
