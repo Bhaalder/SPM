@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class TipTrigger : MonoBehaviour{
+    //Author: Patrik Ahlgren
 
     [SerializeField] private string voiceLine;
     [SerializeField] private string voiceLineInterrupt;

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BloodyScreenScript : MonoBehaviour
-{
+public class BloodyScreenScript : MonoBehaviour{
+    //Author: Patrik Ahlgren
+
     private Image bloodyScreen;
     private Image armorScreen;
 

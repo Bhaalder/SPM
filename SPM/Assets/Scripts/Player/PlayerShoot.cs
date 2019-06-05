@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerShoot : MonoBehaviour{
     //Author: Patrik Ahlgren
 
-    public LayerMask layerMask;
+    [SerializeField] private LayerMask layerMask;
     
     [SerializeField] private GameObject bulletImpactMetalGO;
     [SerializeField] private GameObject bulletImpactMetalSGGO;

@@ -5,26 +5,26 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
     //Author: Patrik Ahlgren
-    public List<MonoBehaviour> SubscribedScripts = new List<MonoBehaviour>();
-    public List<BaseWeapon> PlayerWeapons = new List<BaseWeapon>();
+    public List<MonoBehaviour> SubscribedScripts { get; set; }
+    public List<BaseWeapon> PlayerWeapons { get; set; }
     public int GameEventID = 1;
-    public bool SceneCompleted;
+    public bool SceneCompleted { get; set; }
 
-    public GameObject Player;
+    public GameObject Player { get; set; }
 
-    public BaseWeapon SelectedWeapon;
+    public BaseWeapon SelectedWeapon { get; set; }
 
     public Slider HealthSlider, ArmorSlider, SlowmotionSlider, ReloadSlider;
     [SerializeField] private Text weaponNameText, weaponAmmoText;
     [SerializeField] private GameObject weaponImage;
 
-    public Text TipText;
+    public Text TipText { get; set; }
     public float PlayerHP, PlayerArmor;
 
-    public bool PlayerIsInteracting;
-    public bool GameIsPaused;
-    public bool GameIsSlowmotion = false;
-    public bool PauseAudio;
+    public bool PlayerIsInteracting { get; set; }
+    public bool GameIsPaused { get; set; }
+    public bool GameIsSlowmotion { get; set; }
+    public bool PauseAudio { get; set; }
 
     [SerializeField] private float invulnerableStateTime;
     private float invulnerableState;
@@ -74,12 +74,14 @@ public class GameController : MonoBehaviour {
         weaponAmmoText = GameObject.Find("AmmunitionText").GetComponent<Text>();
         weaponImage = GameObject.Find("Weapon Image");
 
+        PlayerWeapons = new List<BaseWeapon>();
+
         BaseWeapon rifle = WeaponController.Instance.GetRifle();
         PlayerWeapons.Add(rifle);
-        //BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
-        //PlayerWeapons.Add(shotgun);
-        //BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
-        //PlayerWeapons.Add(rocketLaucher);
+        BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
+        PlayerWeapons.Add(shotgun);
+        BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
+        PlayerWeapons.Add(rocketLaucher);
 
         SelectedWeapon = PlayerWeapons[0];
         UpdateSelectedWeapon();

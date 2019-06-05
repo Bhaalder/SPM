@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour{
-
+    //Author: Patrik Ahlgren
     private float minuteTimeCount = 0;
     private float secondsTimeCount = 0;
     private float totalSecondsTimeCount;

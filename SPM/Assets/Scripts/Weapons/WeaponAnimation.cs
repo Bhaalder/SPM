@@ -40,11 +40,6 @@ public class WeaponAnimation : MonoBehaviour{
 
     private bool isRecoiling = false;
 
-    public float x;
-    public float y;
-    public float z;
-    public float w;
-
     private void Awake() {
         weaponCamera = Camera.main.transform.GetChild(0);
 
