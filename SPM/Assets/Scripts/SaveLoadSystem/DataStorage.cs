@@ -21,14 +21,12 @@ public class DataStorage : MonoBehaviour
 
     public bool NewGame { get; set; }
 
-    private float currentCooldown;
-    private float saveCooldown;
 
     private void Start()
     {
         if (SceneManager.GetActiveScene().buildIndex != 0)
         {
-            //LoadGameData();
+            LoadGameData();
         }
         else
         {
@@ -37,15 +35,6 @@ public class DataStorage : MonoBehaviour
 
         NewGame = false;
         DontDestroyOnLoad(gameObject);
-        saveCooldown = 5f;
-    }
-
-    private void Update()
-    {
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            ContinousSave();
-        }
     }
 
     #region PlayerData
@@ -284,22 +273,6 @@ public class DataStorage : MonoBehaviour
         }
         yield return new WaitForSeconds(3f);
         Debug.Log("Game Exit");
-    }
-
-    private void ContinousSave()
-    {
-        currentCooldown -= Time.deltaTime;
-
-        if (currentCooldown > 0)
-        {
-            return;
-        }
-
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-        {
-            SaveGame();
-        }
-        currentCooldown = saveCooldown;
     }
 
     private void LoadInMainMenu()

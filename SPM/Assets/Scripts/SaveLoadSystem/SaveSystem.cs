@@ -137,6 +137,7 @@ public static class SaveSystem
     #region SpawnerData
     public static void SaveSpawnerData(List<SpawnerData> spawnerData)
     {
+        DeleteSpawnerSaveFile();
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + spawnerDataString;
         FileStream stream = new FileStream(path, FileMode.Create);
@@ -164,6 +165,17 @@ public static class SaveSystem
             Debug.LogError("Save file not found in " + path);
             return dummyspawnersList;
         }
+    }
+
+    public static void DeleteSpawnerSaveFile()
+    {
+        string path = Application.persistentDataPath + spawnerDataString;
+
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+        }
+
     }
     #endregion
 

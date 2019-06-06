@@ -27,7 +27,6 @@ public class SceneManagerScript : MonoBehaviour
         dataStorage = FindObjectOfType<DataStorage>();
         dataStorage.LoadLastLevelData();
         loadingScreen.SetActive(false);
-
     }
 
     public void MainMenu()
@@ -39,8 +38,6 @@ public class SceneManagerScript : MonoBehaviour
         Destroy(GameObject.Find("AudioController"));
         Destroy(FindObjectOfType<DataStorage>().gameObject);
         SceneManager.LoadScene(mainMenuIndex);
-        //StartCoroutine(LoadAsynchronously(mainMenuIndex));
-        //StartCoroutine(WaitForSeconds());
     }
 
     public void StartLevelOne()
@@ -54,7 +51,7 @@ public class SceneManagerScript : MonoBehaviour
     public void StartLevelTwo()
     {
         SceneManager.LoadScene(level2);
-        //StartCoroutine(LoadAsynchronously(level2));
+        //StartCoroutine(LoadAsynchronously(level2)); //Doesn't work for some reason
     }
 
     public void ExitGame()
@@ -88,16 +85,6 @@ public class SceneManagerScript : MonoBehaviour
             Debug.Log(progress);
             yield return null;
         }
-    }
-
-    IEnumerator WaitForSeconds()
-    {
-        yield return new WaitForSeconds(3f);
-        Destroy(GameObject.Find("Canvas"));
-        Destroy(GameObject.Find("GameController"));
-        AudioController.Instance.StopAllSounds();
-        Destroy(GameObject.Find("AudioController"));
-        StartCoroutine(LoadAsynchronously(mainMenuIndex));
     }
 
     public int GetSceneIndex()
