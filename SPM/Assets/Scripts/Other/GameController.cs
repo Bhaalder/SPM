@@ -75,7 +75,6 @@ public class GameController : MonoBehaviour {
         weaponImage = GameObject.Find("Weapon Image");
 
         PlayerWeapons = new List<BaseWeapon>();
-
         BaseWeapon rifle = WeaponController.Instance.GetRifle();
         PlayerWeapons.Add(rifle);
         BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
