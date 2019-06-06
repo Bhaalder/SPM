@@ -82,7 +82,7 @@ public class DataStorage : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.Log("Could not clear DataStorage.enemies: " + e);
+            Debug.Log("Could not clear DataStorage.EnemiesStorage: " + e);
         }
 
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Enemy");
@@ -203,6 +203,15 @@ public class DataStorage : MonoBehaviour
 
     public void InitializeSpawnerDataSave()
     {
+        try
+        {
+            ClearSpawnerList();
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log("Could not clear DataStorage.SpawnerStorage: " + e);
+        }
+
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Spawner");
         foreach (GameObject target in gameObjects)
         {
@@ -236,6 +245,11 @@ public class DataStorage : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void ClearSpawnerList()
+    {
+        SpawnersStorage.Clear();
     }
     #endregion
 
