@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
     //Author: Patrik Ahlgren
-    public List<MonoBehaviour> SubscribedScripts { get; set; }
     public List<BaseWeapon> PlayerWeapons { get; set; }
     public int GameEventID = 1;
     public bool SceneCompleted { get; set; }
@@ -14,7 +13,10 @@ public class GameController : MonoBehaviour {
 
     public BaseWeapon SelectedWeapon { get; set; }
 
-    public Slider HealthSlider, ArmorSlider, SlowmotionSlider, ReloadSlider;
+    public Slider HealthSlider { get; set; }
+    public Slider ArmorSlider { get; set; }
+    public Slider SlowmotionSlider { get; set; }
+    public Slider ReloadSlider { get; set; }
     [SerializeField] private Text weaponNameText, weaponAmmoText;
     [SerializeField] private GameObject weaponImage;
 
@@ -63,6 +65,13 @@ public class GameController : MonoBehaviour {
 
         PlayerHP = 100;
         PlayerArmor = 100;
+
+        HealthSlider = GameObject.Find("SliderHealth").GetComponent<Slider>();
+        ArmorSlider = GameObject.Find("SliderArmor").GetComponent<Slider>();
+        SlowmotionSlider = GameObject.Find("SliderSlowmotion").GetComponent<Slider>();
+        ReloadSlider = GameObject.Find("SliderReload").GetComponent<Slider>();
+        ReloadSlider.gameObject.SetActive(false);
+
         HealthSlider.value = PlayerHP;
         ArmorSlider.value = PlayerArmor;
         SlowmotionSlider.value = SlowmotionSlider.maxValue;
@@ -77,10 +86,6 @@ public class GameController : MonoBehaviour {
         PlayerWeapons = new List<BaseWeapon>();
         BaseWeapon rifle = WeaponController.Instance.GetRifle();
         PlayerWeapons.Add(rifle);
-        BaseWeapon shotgun = WeaponController.Instance.GetShotgun();
-        PlayerWeapons.Add(shotgun);
-        BaseWeapon rocketLaucher = WeaponController.Instance.GetRocketLauncher();
-        PlayerWeapons.Add(rocketLaucher);
 
         SelectedWeapon = PlayerWeapons[0];
         UpdateSelectedWeapon();
