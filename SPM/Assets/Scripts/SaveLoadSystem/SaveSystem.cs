@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
+//Author: Marcus Söderberg
 public static class SaveSystem
 {
 
