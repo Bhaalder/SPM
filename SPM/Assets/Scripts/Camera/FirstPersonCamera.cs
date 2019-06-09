@@ -5,8 +5,8 @@ using UnityEngine;
 public class FirstPersonCamera: MonoBehaviour {
     //Author: Patrik Ahlgren
 
-    public float CameraXSensitivity = 60;
-    public float CameraYSensitivity = 60;
+    public float CameraXSensitivity { get; set; }
+    public float CameraYSensitivity { get; set; }
     [SerializeField] private Transform cameraTarget, player;
     [SerializeField] private Vector2 cameraClamp = new Vector2(-85, 85);
     [SerializeField] private Transform weaponCamera;
@@ -18,6 +18,8 @@ public class FirstPersonCamera: MonoBehaviour {
     private Vector3 velocity = Vector3.zero;
 
     private void Start() {
+        CameraXSensitivity = 60;
+        CameraYSensitivity = 60;
         player = GameObject.Find("Player").transform;
         cameraTarget = GameObject.Find("CameraTarget").transform;
         weaponCamera = transform.GetChild(0).GetChild(0);

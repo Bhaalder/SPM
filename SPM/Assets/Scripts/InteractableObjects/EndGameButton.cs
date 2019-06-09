@@ -38,7 +38,6 @@ public class EndGameButton : MonoBehaviour {
         Camera.main.GetComponent<CameraShake>().ShakeIncrease(25f, 2f);
         yield return new WaitForSeconds(2f);
         AudioController.Instance.StopAllSounds();
-        scoreScreen.IsCountingScore = true;
         scoreScreen.CountScore(timer.GetMinutesTaken(), timer.GetSecondsTaken(), GameController.Instance.KillCount);
         yield return null;
     }

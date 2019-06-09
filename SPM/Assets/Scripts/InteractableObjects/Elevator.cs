@@ -14,14 +14,6 @@ public class Elevator : MonoBehaviour
     private bool movingUp = true;
     [SerializeField] private float movementSpeed;
 
-    
-    //spelaren så den kan bli child
-    
-    private void Start()
-    {
-        // sätter att knappen ska bli child så den kan följa med hissen
-        
-    }
 
     private void Update()
     {

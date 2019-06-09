@@ -1,5 +1,5 @@
 ﻿// Daniel Fors
-//Marcus Söderberg
+//Author: Marcus Söderberg
 using System;
 using System.Collections;
 using System.Collections.Generic;

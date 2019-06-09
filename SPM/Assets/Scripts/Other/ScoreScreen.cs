@@ -23,7 +23,7 @@ public class ScoreScreen : MonoBehaviour{
     private int killScore = 0;
     private int totalScore = 0;
 
-    public bool IsCountingScore;
+    private bool isCountingScore;
 
     private void Awake() {
         congratulationsText.SetActive(false);
@@ -33,7 +33,7 @@ public class ScoreScreen : MonoBehaviour{
     }
 
     private void Update() {
-        if (IsCountingScore) {
+        if (isCountingScore) {
             totalScoreValueText.text = totalScore.ToString();
             timeScoreText.text = "TimeScore: " + timeScore;
             killScoreText.text = "KillScore: " + killScore;
@@ -41,7 +41,7 @@ public class ScoreScreen : MonoBehaviour{
     }
 
     public void CountScore(float minutesTaken, float secondsTaken, float killCount) {
-        IsCountingScore = true;
+        isCountingScore = true;
         scoreTexts.gameObject.SetActive(true);
         killCountText.text = "Kills: " + killCount;
 
@@ -53,7 +53,7 @@ public class ScoreScreen : MonoBehaviour{
     private IEnumerator Counter(float minutesTaken, float secondsTaken, float killCount) {
         int secondsScore = 60 - Mathf.RoundToInt(secondsTaken);
         int minuteScore = 29 - (int)minutesTaken;
-        if(minuteScore <= 1) {
+        if(minuteScore <= 0) {
             minuteScore = 0;
         } else {
             for (int i = 0; i < minuteScore; i++) {
@@ -82,7 +82,7 @@ public class ScoreScreen : MonoBehaviour{
         }
         congratulationsText.SetActive(true);
         mainMenuButton.SetActive(true);
-        IsCountingScore = false;
+        isCountingScore = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         GameController.Instance.GamePaused();

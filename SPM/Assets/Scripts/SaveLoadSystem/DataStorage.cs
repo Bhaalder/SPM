@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Author: Marcus Söderberg
 public class DataStorage : MonoBehaviour
 {
     public float Timer { get; set; }
@@ -265,7 +266,6 @@ public class DataStorage : MonoBehaviour
     public void LoadGameData()
     {
         LoadLevelData();
-        //LoadPlayerData();
         LoadEnemyData();
         LoadSpawnerData();        
     }
