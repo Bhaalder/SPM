@@ -5,18 +5,8 @@ using UnityEngine;
 public class SpawnArea : MonoBehaviour
 {
     //Author: Marcus Söderberg
-    public float spawnArea;
+    [SerializeField] private float spawnArea;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     void OnDrawGizmosSelected()
     {
