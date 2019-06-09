@@ -21,10 +21,11 @@ public class WeaponAnimation : MonoBehaviour{
     private float xInit, yInit;
     private float timer = 0.0f;
 
+    
+    public GameObject Rifle { get; set; }
+    public GameObject Shotgun { get; set; }
+    public GameObject RocketLauncher{ get; set; }
     [Header("Weapons")]
-    public GameObject Rifle;
-    public GameObject Shotgun;
-    public GameObject RocketLauncher;
     [SerializeField] private Transform rifleOutOfScreen, shotgunOutOfScreen, rocketLauncherOutOfScreen;
     [SerializeField] private Transform rifleInScreen, shotgunInScreen, rocketLauncherInScreen;
     [SerializeField] private ParticleSystem rifleFlash, shotgunFlash, rocketFlash;
