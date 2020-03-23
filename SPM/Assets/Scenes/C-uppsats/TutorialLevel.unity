@@ -364,6 +364,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &598614419 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8226556171042456777, guid: b25375b5ef854c24ca45f79679bf4df4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2046847516}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &814220144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -657,6 +663,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3047494120657483824, guid: a2430e923db05a34289d30ce89414eab,
     type: 3}
   m_PrefabInstance: {fileID: 29789916}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1282491807 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3959434392701265289, guid: b25375b5ef854c24ca45f79679bf4df4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2046847516}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1298569898 stripped
 GameObject:
@@ -1111,6 +1123,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1499272557}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1918836799 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1105848752766499805, guid: b25375b5ef854c24ca45f79679bf4df4,
+    type: 3}
+  m_PrefabInstance: {fileID: 2046847516}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2046847516
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1228,6 +1246,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8226556171042456781, guid: b25375b5ef854c24ca45f79679bf4df4,
+        type: 3}
+      propertyPath: optionPanel
+      value: 
+      objectReference: {fileID: 1282491807}
+    - target: {fileID: 8226556171042456781, guid: b25375b5ef854c24ca45f79679bf4df4,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 598614419}
+    - target: {fileID: 8226556171042456781, guid: b25375b5ef854c24ca45f79679bf4df4,
+        type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 1918836799}
     - target: {fileID: 4284780746779530489, guid: b25375b5ef854c24ca45f79679bf4df4,
         type: 3}
       propertyPath: m_textInfo.characterCount
