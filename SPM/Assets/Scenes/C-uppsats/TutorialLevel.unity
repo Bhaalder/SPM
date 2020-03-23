@@ -145,7 +145,7 @@ PrefabInstance:
     - target: {fileID: 3047494120657839120, guid: a2430e923db05a34289d30ce89414eab,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -363
       objectReference: {fileID: 0}
     - target: {fileID: 3047494120657839120, guid: a2430e923db05a34289d30ce89414eab,
         type: 3}
@@ -811,16 +811,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1373786362899908123, guid: cbf6632aed667634db8eb72d83d70c97,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1267892592}
-    - target: {fileID: 1373786362899908123, guid: cbf6632aed667634db8eb72d83d70c97,
-        type: 3}
-      propertyPath: respawnManager
-      value: 
-      objectReference: {fileID: 1855312167}
     - target: {fileID: 3809094100502800154, guid: cbf6632aed667634db8eb72d83d70c97,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -831,6 +821,16 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1373786362899908123, guid: cbf6632aed667634db8eb72d83d70c97,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1267892592}
+    - target: {fileID: 1373786362899908123, guid: cbf6632aed667634db8eb72d83d70c97,
+        type: 3}
+      propertyPath: respawnManager
+      value: 
+      objectReference: {fileID: 1855312167}
     - target: {fileID: 9172014420814108423, guid: cbf6632aed667634db8eb72d83d70c97,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1013,7 +1013,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492291512}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: -357}
   m_LocalScale: {x: 50, y: 1, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1031,6 +1031,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RespawnManager
       objectReference: {fileID: 0}
+    - target: {fileID: 9135304762797509563, guid: e10dc924f033c244aac198d9404a632d,
+        type: 3}
+      propertyPath: respawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 1119282902}
     - target: {fileID: 9135304762797509562, guid: e10dc924f033c244aac198d9404a632d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1086,11 +1091,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9135304762797509563, guid: e10dc924f033c244aac198d9404a632d,
-        type: 3}
-      propertyPath: respawn.Array.data[0]
-      value: 
-      objectReference: {fileID: 1119282902}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e10dc924f033c244aac198d9404a632d, type: 3}
 --- !u!114 &1531569141 stripped
