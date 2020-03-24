@@ -20,4 +20,5 @@ public class LaserRotate : MonoBehaviour
         
         transform.Rotate(Vector3.up * Time.deltaTime * speed);
     }
+   
 }
