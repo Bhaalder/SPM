@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
     //Author: Patrik Ahlgren
     public List<BaseWeapon> PlayerWeapons { get; set; }
     public int GameEventID = 1;
@@ -20,7 +21,7 @@ public class GameController : MonoBehaviour {
     [SerializeField] private Text weaponNameText, weaponAmmoText;
     [SerializeField] private GameObject weaponImage;
 
-    
+
     public Text TipText { get; set; }
 
     public GameObject PopUp;
@@ -45,12 +46,16 @@ public class GameController : MonoBehaviour {
 
     private static GameController _instance;
 
-    public static GameController Instance {
-        get {
-            if (_instance == null) {
+    public static GameController Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
                 _instance = FindObjectOfType<GameController>();
 #if UNITY_EDITOR
-                if (FindObjectsOfType<GameController>().Length > 1) {
+                if (FindObjectsOfType<GameController>().Length > 1)
+                {
                     Debug.LogError("Found more than one gamecontroller");
                 }
 #endif
@@ -59,8 +64,10 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    private void Awake() {
-        if (_instance != null && _instance != this) {
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
             Destroy(gameObject);
             Debug.LogWarning("Destroyed other Singleton with name: " + gameObject.name);
         }
@@ -88,7 +95,7 @@ public class GameController : MonoBehaviour {
         TipText.color = new Color(TipText.color.r, TipText.color.g, TipText.color.b, 0);
 
         //PopUp = GameObject.Find("PopUpTutorial");
-      
+
         //popUpTextSubject = GameObject.Find("PopUpTextSubject").GetComponent<Text>();
         //popUpTextInfo = GameObject.Find("PopUpTextInfo").GetComponent<Text>();
 
@@ -124,18 +131,23 @@ public class GameController : MonoBehaviour {
         PopUp.SetActive(false);
     }
 
-    public void UpdateSelectedWeapon() {
+    public void UpdateSelectedWeapon()
+    {
         weaponNameText.text = SelectedWeapon.GetName();
-        foreach (Transform child in weaponImage.transform) {
+        foreach (Transform child in weaponImage.transform)
+        {
             child.GetComponent<Image>().enabled = false;
         }
-        for (int weapon = 0; weapon < PlayerWeapons.Count; weapon++) {
-            if (PlayerWeapons[weapon] == SelectedWeapon) {
+        for (int weapon = 0; weapon < PlayerWeapons.Count; weapon++)
+        {
+            if (PlayerWeapons[weapon] == SelectedWeapon)
+            {
                 weaponImage.transform.GetChild(weapon).GetComponent<Image>().enabled = true;
                 break;
             }
         }
-        switch (SelectedWeapon.GetName()) {
+        switch (SelectedWeapon.GetName())
+        {
             case "Rifle":
                 crosshair.sprite = WeaponController.Instance.Crosshair[0];
                 break;
@@ -152,44 +164,61 @@ public class GameController : MonoBehaviour {
         UpdateSelectedWeapon_AmmoText();
     }
 
-    public void UpdateSelectedWeapon_AmmoText() {
-        if (SelectedWeapon.GetTotalAmmoLeft() == 0 && SelectedWeapon.GetAmmoInClip() == 0) {
+    public void UpdateSelectedWeapon_AmmoText()
+    {
+        if (SelectedWeapon.GetTotalAmmoLeft() == 0 && SelectedWeapon.GetAmmoInClip() == 0)
+        {
             weaponAmmoText.color = Color.red;
-        } else if (SelectedWeapon.GetTotalAmmoLeft() <= SelectedWeapon.GetMaxAmmoInClip()) {
+        }
+        else if (SelectedWeapon.GetTotalAmmoLeft() <= SelectedWeapon.GetMaxAmmoInClip())
+        {
             weaponAmmoText.color = Color.yellow;
-        } else {
+        }
+        else
+        {
             weaponAmmoText.color = Color.white;
         }
         weaponAmmoText.text = SelectedWeapon.GetAmmoInClip() + "/" + SelectedWeapon.GetTotalAmmoLeft();
     }
 
-    public void SceneCompletedSequence(bool b) {
+    public void SceneCompletedSequence(bool b)
+    {
         SceneCompleted = b;
     }
 
-    public void PlayerPassedEvent() {
+    public void PlayerPassedEvent()
+    {
         GameEventID++;
         Debug.Log("Game event =" + GameEventID);
     }
 
-    public void GamePaused() {
+    public void GamePaused()
+    {
         Debug.Log("1");
-        if (GameIsPaused) {
+        if (GameIsPaused)
+        {
             GameIsPaused = false;
-            if (PauseAudio) {
+            if (PauseAudio)
+            {
                 AudioController.Instance.PauseAllSound(false);
                 PauseAudio = false;
-            }           
-            if (GameIsSlowmotion) {
+            }
+            if (GameIsSlowmotion)
+            {
                 GetComponent<Slowmotion>().SlowTime();
-            } else {
+            }
+            else
+            {
                 Time.timeScale = 1f;
                 Time.fixedDeltaTime = Time.timeScale * 0.02f;
             }
             return;
-        } else {
+        }
+        else
+        {
             GameIsPaused = true;
-            if (PauseAudio) {
+            if (PauseAudio)
+            {
                 AudioController.Instance.PauseAllSound(true);
             }
             Debug.Log("2");
@@ -198,40 +227,53 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    private void Update() {
+    private void Update()
+    {
         HealthSlider.value = PlayerHP;
         ArmorSlider.value = PlayerArmor;
     }
 
-    public void TakeDamage(float damage){
-        if (Time.time >= invulnerableState) {
+    public void TakeDamage(float damage)
+    {
+        if (Time.time >= invulnerableState)
+        {
             invulnerableState = Time.time + invulnerableStateTime;
-            if (PlayerArmor <= 0) {
+            if (PlayerArmor <= 0)
+            {
                 PlayerHP -= damage;
-                Debug.Log("Player took: "+damage + " to health");
+                Debug.Log("Player took: " + damage + " to health");
                 GetComponent<BloodyScreenScript>().ShowHurtScreen("Health");
-                if(damage > PlayerHP) {
+                if (damage > PlayerHP)
+                {
                     AudioController.Instance.PlayRandomSFX("Die1", "Die2", "Die3");
-                } else {
+                }
+                else
+                {
                     AudioController.Instance.PlayRandomSFX("Hurt1", "Hurt2", "Hurt3");
-                }            
-            } else {
+                }
+            }
+            else
+            {
                 PlayerArmor -= damage;
                 GetComponent<BloodyScreenScript>().ShowHurtScreen("Armor");
 
             }
-        } else {
+        }
+        else
+        {
             Debug.Log("InvulnerableState active, no damage");
         }
     }
 
-    public void ShowHitmark(float hitmarkTimer) {
+    public void ShowHitmark(float hitmarkTimer)
+    {
         StopAllCoroutines();
         hitmark.enabled = true;
         StartCoroutine(Hitmark(hitmarkTimer));
     }
 
-    private IEnumerator Hitmark(float hitmarkTimer) {
+    private IEnumerator Hitmark(float hitmarkTimer)
+    {
         yield return new WaitForSecondsRealtime(hitmarkTimer);
         hitmark.enabled = false;
     }
@@ -240,6 +282,24 @@ public class GameController : MonoBehaviour {
     {
         SaveSystem.SavePlayer(this);
     }
+    public string TipMethod(string s1)
+    {
+        TipText.text = s1;
 
-    
+        StartCoroutine(FadeText(0 + 0, 5, TipText));
+
+        return s1;
+    }
+    public IEnumerator FadeText(float waitBeforeFade, float fadeTime, Text tipText)
+    {
+        tipText.color = new Color(tipText.color.r, tipText.color.g, tipText.color.b, 1);
+        yield return new WaitForSeconds(waitBeforeFade);
+        while (tipText.color.a > 0.0f)
+        {
+            tipText.color = new Color(tipText.color.r, tipText.color.g, tipText.color.b, tipText.color.a - (Time.unscaledDeltaTime / fadeTime));
+            yield return null;
+        }
+
+
+    }
 }

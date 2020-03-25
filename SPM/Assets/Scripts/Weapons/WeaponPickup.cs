@@ -21,9 +21,12 @@ public class WeaponPickup : MonoBehaviour {
         }
         if (weaponName == "Shotgun") {
             weaponPickup = WeaponController.Instance.GetShotgun();
+            Invoke(GameController.Instance.TipMethod("Click 1 to 2 to switch between weapons!"), 4);
         }
         if (weaponName == "RocketLauncher") {
             weaponPickup = WeaponController.Instance.GetRocketLauncher();
+            Invoke(GameController.Instance.TipMethod("Click 1 to 3 to switch between weapons!"), 4);
+            
         }
         if (weaponPickup != null) {
             foreach (BaseWeapon weapon in GameController.Instance.PlayerWeapons) {

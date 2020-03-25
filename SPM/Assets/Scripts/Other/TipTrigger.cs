@@ -44,4 +44,6 @@ public class TipTrigger : MonoBehaviour{
         }
         Destroy(gameObject);
     }
+
+   
 }
