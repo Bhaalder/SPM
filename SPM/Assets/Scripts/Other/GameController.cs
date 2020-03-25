@@ -20,7 +20,14 @@ public class GameController : MonoBehaviour {
     [SerializeField] private Text weaponNameText, weaponAmmoText;
     [SerializeField] private GameObject weaponImage;
 
+    
     public Text TipText { get; set; }
+
+    public GameObject PopUp;
+    public Text popUpTextSubject { get; set; }
+    public Text popUpTextInfo { get; set; }
+
+
     public float PlayerHP, PlayerArmor;
 
     public bool PlayerIsInteracting { get; set; }
@@ -79,6 +86,13 @@ public class GameController : MonoBehaviour {
 
         TipText = GameObject.Find("TipText").GetComponent<Text>();
         TipText.color = new Color(TipText.color.r, TipText.color.g, TipText.color.b, 0);
+
+        PopUp = GameObject.Find("PopUpTutorial");
+      
+        popUpTextSubject = GameObject.Find("PopUpTextSubject").GetComponent<Text>();
+        popUpTextInfo = GameObject.Find("PopUpTextInfo").GetComponent<Text>();
+        
+
         weaponNameText = GameObject.Find("WeaponText").GetComponent<Text>();
         weaponAmmoText = GameObject.Find("AmmunitionText").GetComponent<Text>();
         weaponImage = GameObject.Find("Weapon Image");
@@ -102,6 +116,7 @@ public class GameController : MonoBehaviour {
         //    dataStorage.LoadLevelData();
         //    dataStorage.LoadSpawnerData();
         //}
+        PopUp.SetActive(false);
     }
 
     public void UpdateSelectedWeapon() {
