@@ -87,11 +87,16 @@ public class GameController : MonoBehaviour {
         TipText = GameObject.Find("TipText").GetComponent<Text>();
         TipText.color = new Color(TipText.color.r, TipText.color.g, TipText.color.b, 0);
 
-        PopUp = GameObject.Find("PopUpTutorial");
+        //PopUp = GameObject.Find("PopUpTutorial");
       
-        popUpTextSubject = GameObject.Find("PopUpTextSubject").GetComponent<Text>();
-        popUpTextInfo = GameObject.Find("PopUpTextInfo").GetComponent<Text>();
-        
+        //popUpTextSubject = GameObject.Find("PopUpTextSubject").GetComponent<Text>();
+        //popUpTextInfo = GameObject.Find("PopUpTextInfo").GetComponent<Text>();
+
+        PopUp = GameObject.Find("PopUpTutorial");
+
+        popUpTextSubject = GameObject.Find("SubjectText").GetComponent<Text>();
+        popUpTextInfo = GameObject.Find("InfoText").GetComponent<Text>();
+
 
         weaponNameText = GameObject.Find("WeaponText").GetComponent<Text>();
         weaponAmmoText = GameObject.Find("AmmunitionText").GetComponent<Text>();
@@ -168,6 +173,7 @@ public class GameController : MonoBehaviour {
     }
 
     public void GamePaused() {
+        Debug.Log("1");
         if (GameIsPaused) {
             GameIsPaused = false;
             if (PauseAudio) {
@@ -180,11 +186,13 @@ public class GameController : MonoBehaviour {
                 Time.timeScale = 1f;
                 Time.fixedDeltaTime = Time.timeScale * 0.02f;
             }
+            return;
         } else {
             GameIsPaused = true;
             if (PauseAudio) {
                 AudioController.Instance.PauseAllSound(true);
             }
+            Debug.Log("2");
             Time.timeScale = 0f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
@@ -233,9 +241,5 @@ public class GameController : MonoBehaviour {
         SaveSystem.SavePlayer(this);
     }
 
-    public void TriggerStuff()
-    {
-        PopUp.SetActive(false);
-        GamePaused();
-    }
+    
 }
