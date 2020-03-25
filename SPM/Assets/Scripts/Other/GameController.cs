@@ -232,4 +232,10 @@ public class GameController : MonoBehaviour {
     {
         SaveSystem.SavePlayer(this);
     }
+
+    public void TriggerStuff()
+    {
+        PopUp.SetActive(false);
+        GamePaused();
+    }
 }
