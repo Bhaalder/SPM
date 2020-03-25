@@ -7,6 +7,7 @@ public class WeaponPickup : MonoBehaviour {
 
     [SerializeField] private string weaponName;
     [SerializeField] private Animator anim;
+    
 
     private void Start()
     {
@@ -20,13 +21,14 @@ public class WeaponPickup : MonoBehaviour {
             weaponPickup = WeaponController.Instance.GetRifle();
         }
         if (weaponName == "Shotgun") {
+            Debug.Log("SHOTGUN PICKUP");
             weaponPickup = WeaponController.Instance.GetShotgun();
-            Invoke(GameController.Instance.TipMethod("Click 1 to 2 to switch between weapons!"), 4);
+            StartCoroutine(TextShowDelay("SHOTGUN INFO"));
         }
         if (weaponName == "RocketLauncher") {
             weaponPickup = WeaponController.Instance.GetRocketLauncher();
-            Invoke(GameController.Instance.TipMethod("Click 1 to 3 to switch between weapons!"), 4);
-            
+            StartCoroutine(TextShowDelay("ROCKET INFO"));
+
         }
         if (weaponPickup != null) {
             foreach (BaseWeapon weapon in GameController.Instance.PlayerWeapons) {
@@ -42,5 +44,20 @@ public class WeaponPickup : MonoBehaviour {
             GameController.Instance.UpdateSelectedWeapon();
         }
         Destroy(gameObject);
+    }
+
+    private IEnumerator TextShowDelay(string text)
+    {
+        Debug.Log("num started");
+        GameController.Instance.TipMethod(text);
+        yield return new WaitForSeconds(1);
+        
+        
+        Debug.Log("weaponText identified");
+        //yield return null;
+        
+
+        
+
     }
 }

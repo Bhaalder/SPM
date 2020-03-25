@@ -284,6 +284,7 @@ public class GameController : MonoBehaviour
     }
     public string TipMethod(string s1)
     {
+        Debug.Log("method started");
         TipText.text = s1;
 
         StartCoroutine(FadeText(0 + 0, 5, TipText));
@@ -292,7 +293,9 @@ public class GameController : MonoBehaviour
     }
     public IEnumerator FadeText(float waitBeforeFade, float fadeTime, Text tipText)
     {
+
         tipText.color = new Color(tipText.color.r, tipText.color.g, tipText.color.b, 1);
+
         yield return new WaitForSeconds(waitBeforeFade);
         while (tipText.color.a > 0.0f)
         {
