@@ -10,6 +10,7 @@ public class WeaponBoxOpen : MonoBehaviour
     public GameObject p3;
     public GameObject p4;
     public GameObject aLight;
+    public GameObject particle;
 
     private void Start()
     {
@@ -35,7 +36,7 @@ public class WeaponBoxOpen : MonoBehaviour
             p2.SetActive(true);
             p3.SetActive(true);
             p4.SetActive(true);
-
+            particle.SetActive(false);
 
             //p1.Play();
             //p2.Play();

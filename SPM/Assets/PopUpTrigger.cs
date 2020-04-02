@@ -7,8 +7,10 @@ public class PopUpTrigger : MonoBehaviour
 {
     [SerializeField] private string SubjectText;
     [SerializeField] private string InfoText;
+    [SerializeField] bool isBoxTutorial;
 
     bool isTriggered;
+
     
     private void OnTriggerEnter(Collider other)
     {
@@ -16,15 +18,8 @@ public class PopUpTrigger : MonoBehaviour
 
             if (!isTriggered)
             {
-                GameController.Instance.PauseAudio = true;
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-                GameController.Instance.PopUp.SetActive(true);
 
-                GameController.Instance.popUpTextSubject.text = SubjectText;
-                GameController.Instance.popUpTextInfo.text = InfoText;
-                GameController.Instance.GamePaused();
-                isTriggered = true;
+                PopUpMethod();
             }
                 
                 
@@ -38,6 +33,30 @@ public class PopUpTrigger : MonoBehaviour
         }
         
 
+    }
+    public void PopUpMethod()
+    {
+        GameController.Instance.PauseAudio = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        GameController.Instance.PopUp.SetActive(true);
+
+        GameController.Instance.popUpTextSubject.text = SubjectText;
+        GameController.Instance.popUpTextInfo.text = InfoText;
+        GameController.Instance.GamePaused();
+        isTriggered = true;
+    }
+    public void PopUpMethod(string subject, string info)
+    {
+        GameController.Instance.PauseAudio = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        GameController.Instance.PopUp.SetActive(true);
+
+        GameController.Instance.popUpTextSubject.text = subject;
+        GameController.Instance.popUpTextInfo.text = info;
+        GameController.Instance.GamePaused();
+        
     }
     
     

@@ -7,11 +7,14 @@ public class WeaponPickup : MonoBehaviour {
 
     [SerializeField] private string weaponName;
     [SerializeField] private Animator anim;
+    [SerializeField] bool isPopUp;
+    PopUpTrigger triggerScript;
     
 
     private void Start()
     {
         anim = GameObject.Find("WeaponText").GetComponent<Animator>();
+        triggerScript = GameObject.Find("PopUpTrigger").GetComponent<PopUpTrigger>();
     }
 
     public void GetWeapon() {
@@ -23,11 +26,26 @@ public class WeaponPickup : MonoBehaviour {
         if (weaponName == "Shotgun") {
             Debug.Log("SHOTGUN PICKUP");
             weaponPickup = WeaponController.Instance.GetShotgun();
-            StartCoroutine(TextShowDelay("SHOTGUN INFO"));
+            if (!isPopUp)
+            {
+                StartCoroutine(TextShowDelay("SHOTGUN INFO"));
+            }
+            else
+            {
+                triggerScript.PopUpMethod("THE SHOTGUN", "Switch to Shotgun by clicking '2'\nThe shotgun is good against big enemies");
+            }
+
         }
         if (weaponName == "RocketLauncher") {
             weaponPickup = WeaponController.Instance.GetRocketLauncher();
-            StartCoroutine(TextShowDelay("ROCKET INFO"));
+            if (!isPopUp)
+            {
+                StartCoroutine(TextShowDelay("ROCKET INFO"));
+            }
+            else
+            {
+                triggerScript.PopUpMethod("THE ROCKET LAUNCHER","Switch to Launcher by clicking '3'\n The Launcher is good vs clumped up enemies");
+            }
 
         }
         if (weaponPickup != null) {
