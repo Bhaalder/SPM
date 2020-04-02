@@ -9,19 +9,25 @@ public class Slowmotion:MonoBehaviour{
     private bool canSlowmo = true;
     private Animator anim;
 
+    //------
+    PlayerMovementController pMov;
+
     private void Start()
     {
         anim = GameObject.Find("SliderSlowmotion").GetComponent<Animator>();
+        pMov = GameObject.Find("Player").GetComponent<PlayerMovementController>();
     }
 
     public void SlowTime() {
         if (!GameController.Instance.GameIsPaused) {
             if (!GameController.Instance.GameIsSlowmotion && canSlowmo) {               
                 Time.timeScale = slowdownAmount;
+                pMov.movementSpeed = 50;
                 AudioController.Instance.SFXSetPitch(0.5f);
                 GameController.Instance.GameIsSlowmotion = true;
             } else if (GameController.Instance.GameIsSlowmotion) {
                 Time.timeScale = 1f;
+                pMov.movementSpeed = 14;
                 AudioController.Instance.SFXSetPitch(1f);
                 GameController.Instance.GameIsSlowmotion = false;
             }
@@ -42,6 +48,7 @@ public class Slowmotion:MonoBehaviour{
             GameController.Instance.GameIsSlowmotion = false;
             Time.timeScale = 1f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
+            pMov.movementSpeed = 14;
             AudioController.Instance.SFXSetPitch(1f);
         }
         SlowmotionSlider();

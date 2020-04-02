@@ -9,7 +9,7 @@ public class PlayerMovementController : MonoBehaviour{
     public bool Jumped;
 
     [Header("Movementspeeds")]
-    [SerializeField] private float movementSpeed = 14;
+    [SerializeField] public float movementSpeed = 14;
     [Tooltip("Denna används för att öka movmentspeed med pickups, per 0,1 ökas 10%")]
     [SerializeField] private float speedMultiplier;
 
