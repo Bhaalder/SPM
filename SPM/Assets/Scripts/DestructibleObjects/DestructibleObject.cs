@@ -9,10 +9,15 @@ public class DestructibleObject : MonoBehaviour {
     public bool IsDestroyed { get; set; }
 
     public virtual void TakeDamage(float damage) {
-        Durability -= damage;
-        if(Durability <= 0) {
-            Destroy();
+        if (!IsDestroyed)
+        {
+            Durability -= damage;
+            if (Durability <= 0)
+            {
+                Destroy();
+            }
         }
+        
     }
 
     public virtual void Destroy() {

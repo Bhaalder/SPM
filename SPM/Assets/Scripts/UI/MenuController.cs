@@ -46,8 +46,12 @@ public class MenuController : MonoBehaviour
 
     public void DeactivateMenu()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        
+        if (!GameController.Instance.TutorialPause)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
         try
         {
             menuPanel.SetActive(false);

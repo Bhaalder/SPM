@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour
     public bool GameIsPaused { get; set; }
     public bool GameIsSlowmotion { get; set; }
     public bool PauseAudio { get; set; }
+    public bool TutorialPause { get; set; }
 
     [SerializeField] private float invulnerableStateTime;
     private float invulnerableState;
@@ -194,7 +195,30 @@ public class GameController : MonoBehaviour
 
     public void GamePaused()
     {
-        Debug.Log("1");
+        if (TutorialPause)
+        {
+            return;
+        }
+        Pause();
+    }
+
+    public void TutorialPaus()
+    {
+        if (TutorialPause)
+        {
+            TutorialPause = false;
+            Pause();
+            return;
+        }
+        else
+        {
+            TutorialPause = true;
+            Pause();
+        }
+    }
+
+    private void Pause()
+    {
         if (GameIsPaused)
         {
             GameIsPaused = false;
@@ -221,7 +245,6 @@ public class GameController : MonoBehaviour
             {
                 AudioController.Instance.PauseAllSound(true);
             }
-            Debug.Log("2");
             Time.timeScale = 0f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }

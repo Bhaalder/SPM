@@ -43,7 +43,8 @@ public class PopUpTrigger : MonoBehaviour
 
         GameController.Instance.popUpTextSubject.text = SubjectText;
         GameController.Instance.popUpTextInfo.text = InfoText;
-        GameController.Instance.GamePaused();
+        GameController.Instance.TutorialPaus();
+        
         isTriggered = true;
     }
     public void PopUpMethod(string subject, string info)
@@ -52,11 +53,11 @@ public class PopUpTrigger : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         GameController.Instance.PopUp.SetActive(true);
-
         GameController.Instance.popUpTextSubject.text = subject;
         GameController.Instance.popUpTextInfo.text = info;
-        GameController.Instance.GamePaused();
-        
+        GameController.Instance.TutorialPaus();
+
+
     }
     
     
