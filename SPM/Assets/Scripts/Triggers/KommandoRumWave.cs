@@ -8,22 +8,23 @@ public class KommandoRumWave : MonoBehaviour
     public SpawnManager eSpawner;
     public GameObject gO;
 
-    private bool triggered;
+    private bool encounterStarted;
 
     private void Start()
     {
         gO.SetActive(false);
     }
-    public void OnTriggerEnter(Collider other)
+    
+    public void StartEncounter()
     {
-        if (other.CompareTag("InteractionPlayer"))
+        if (!encounterStarted)
         {
-            if (!triggered) {
-                gO.SetActive(true);
-                StartCoroutine(WaitASec());
-                triggered = true;
-            }         
+            gO.SetActive(true);
+            StartCoroutine(WaitASec());
+            encounterStarted = true;
         }
+        
+        
     }
 
     private IEnumerator WaitASec() {
