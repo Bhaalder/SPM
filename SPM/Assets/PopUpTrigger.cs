@@ -7,7 +7,7 @@ public class PopUpTrigger : MonoBehaviour
 {
     [SerializeField] private string SubjectText;
     [SerializeField] private string InfoText;
-    [SerializeField] bool isBoxTutorial;
+    
 
     bool isTriggered;
 
@@ -41,9 +41,11 @@ public class PopUpTrigger : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         GameController.Instance.PopUp.SetActive(true);
 
-        GameController.Instance.popUpTextSubject.text = SubjectText;
-        GameController.Instance.popUpTextInfo.text = InfoText;
+        GameController.Instance.popUpTextSubject.SetText(SubjectText);
+        GameController.Instance.popUpTextInfo.SetText(InfoText);
         GameController.Instance.TutorialPaus();
+
+        
         
         isTriggered = true;
     }

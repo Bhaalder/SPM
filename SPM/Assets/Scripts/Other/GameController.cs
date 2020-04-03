@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class GameController : MonoBehaviour
 {
@@ -20,14 +22,17 @@ public class GameController : MonoBehaviour
     public Slider ReloadSlider { get; set; }
     [SerializeField] private Text weaponNameText, weaponAmmoText;
     [SerializeField] private GameObject weaponImage;
-
+    
 
     public Text TipText { get; set; }
 
+    ///
     public GameObject PopUp;
-    public Text popUpTextSubject { get; set; }
-    public Text popUpTextInfo { get; set; }
-
+    public TextMeshProUGUI popUpTextSubject { get; set; }
+    public TextMeshProUGUI popUpTextInfo { get; set; }
+    
+    public Font font;
+    ///
 
     public float PlayerHP, PlayerArmor;
 
@@ -73,6 +78,8 @@ public class GameController : MonoBehaviour
             Debug.LogWarning("Destroyed other Singleton with name: " + gameObject.name);
         }
 
+        
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         DontDestroyOnLoad(gameObject);
@@ -102,9 +109,11 @@ public class GameController : MonoBehaviour
 
         PopUp = GameObject.Find("PopUpTutorial");
 
-        popUpTextSubject = GameObject.Find("SubjectText").GetComponent<Text>();
-        popUpTextInfo = GameObject.Find("InfoText").GetComponent<Text>();
-
+        popUpTextSubject = GameObject.Find("SubjectText").GetComponent<TextMeshProUGUI>();
+        popUpTextInfo = GameObject.Find("InfoText").GetComponent<TextMeshProUGUI>();
+        //popUpTextSubject.font = font;
+        //popUpTextInfo.font = font;
+        
 
         weaponNameText = GameObject.Find("WeaponText").GetComponent<Text>();
         weaponAmmoText = GameObject.Find("AmmunitionText").GetComponent<Text>();
