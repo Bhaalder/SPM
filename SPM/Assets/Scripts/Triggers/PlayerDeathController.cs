@@ -56,7 +56,7 @@ public class PlayerDeathController : MonoBehaviour
 
     private void PauseAndUnpauseGame()
     {
-        GameController.Instance.GamePaused();
+        GameController.Instance.TutorialPaus();
     }
     public void resetStatus()
     {
