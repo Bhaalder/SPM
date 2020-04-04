@@ -26,13 +26,19 @@ public class GameController : MonoBehaviour
 
     public Text TipText { get; set; }
 
-    ///
+    ///NYTT FÖR TUTORIALS
     public GameObject PopUp;
     public TextMeshProUGUI popUpTextSubject { get; set; }
     public TextMeshProUGUI popUpTextInfo { get; set; }
     
     public Font font;
+
+    private GameObject cancelTutorialObject;
+
+    public bool isTutorialTypePopUp;
     ///
+
+
 
     public float PlayerHP, PlayerArmor;
 
@@ -139,6 +145,18 @@ public class GameController : MonoBehaviour
         //    dataStorage.LoadSpawnerData();
         //}
         PopUp.SetActive(false);
+
+        if (isTutorialTypePopUp)
+        {
+            cancelTutorialObject = GameObject.Find("IntegreradTutorials");
+            cancelTutorialObject.SetActive(false);
+        }
+        else
+        {
+            cancelTutorialObject = GameObject.Find("PopUps").GetComponent<GameObject>();
+            cancelTutorialObject.SetActive(false);
+        }
+
     }
 
     public void UpdateSelectedWeapon()

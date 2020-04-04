@@ -7,14 +7,19 @@ public class WeaponPickup : MonoBehaviour {
 
     [SerializeField] private string weaponName;
     [SerializeField] private Animator anim;
-    [SerializeField] bool isPopUp;
+    
     PopUpTrigger triggerScript;
     
 
-    private void Start()
+    void Start()
     {
         anim = GameObject.Find("WeaponText").GetComponent<Animator>();
-        triggerScript = GameObject.Find("PopUpTrigger").GetComponent<PopUpTrigger>();
+
+        if (GameController.Instance.isTutorialTypePopUp)
+        {
+            triggerScript = GameObject.Find("PopUpTrigger").GetComponent<PopUpTrigger>();
+        }
+        
     }
 
     public void GetWeapon() {
@@ -26,7 +31,7 @@ public class WeaponPickup : MonoBehaviour {
         if (weaponName == "Shotgun") {
             Debug.Log("SHOTGUN PICKUP");
             weaponPickup = WeaponController.Instance.GetShotgun();
-            if (!isPopUp)
+            if (!GameController.Instance.isTutorialTypePopUp)
             {
                 StartCoroutine(TextShowDelay("SHOTGUN INFO"));
             }
@@ -38,7 +43,7 @@ public class WeaponPickup : MonoBehaviour {
         }
         if (weaponName == "RocketLauncher") {
             weaponPickup = WeaponController.Instance.GetRocketLauncher();
-            if (!isPopUp)
+            if (!GameController.Instance.isTutorialTypePopUp)
             {
                 StartCoroutine(TextShowDelay("ROCKET INFO"));
             }

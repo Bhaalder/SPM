@@ -8,6 +8,7 @@ public class TipTrigger : MonoBehaviour{
 
     [SerializeField] private string voiceLine;
     [SerializeField] private string voiceLineInterrupt;
+    [TextArea(1,20)]
     [SerializeField] private string tipText;
     [SerializeField] private float waitBeforeFade = 5;
     [SerializeField] private bool hasVoiceLine;
