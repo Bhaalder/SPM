@@ -15,7 +15,7 @@ public class WeaponPickup : MonoBehaviour {
     {
         anim = GameObject.Find("WeaponText").GetComponent<Animator>();
 
-        if (GameController.Instance.isTutorialTypePopUp)
+        if (TutorialController.Instance.isTutorialTypePopUp)
         {
             triggerScript = GameObject.Find("PopUpTrigger").GetComponent<PopUpTrigger>();
         }
@@ -31,7 +31,7 @@ public class WeaponPickup : MonoBehaviour {
         if (weaponName == "Shotgun") {
             Debug.Log("SHOTGUN PICKUP");
             weaponPickup = WeaponController.Instance.GetShotgun();
-            if (!GameController.Instance.isTutorialTypePopUp)
+            if (!TutorialController.Instance.isTutorialTypePopUp)
             {
                 StartCoroutine(TextShowDelay("SHOTGUN INFO"));
             }
@@ -43,7 +43,7 @@ public class WeaponPickup : MonoBehaviour {
         }
         if (weaponName == "RocketLauncher") {
             weaponPickup = WeaponController.Instance.GetRocketLauncher();
-            if (!GameController.Instance.isTutorialTypePopUp)
+            if (!TutorialController.Instance.isTutorialTypePopUp)
             {
                 StartCoroutine(TextShowDelay("ROCKET INFO"));
             }
@@ -72,7 +72,7 @@ public class WeaponPickup : MonoBehaviour {
     private IEnumerator TextShowDelay(string text)
     {
         Debug.Log("num started");
-        GameController.Instance.TipMethod(text);
+        TutorialController.Instance.TipMethod(text);
         yield return new WaitForSeconds(1);
         
         

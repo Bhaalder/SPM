@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+
 
 
 public class GameController : MonoBehaviour
@@ -24,19 +24,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject weaponImage;
     
 
-    public Text TipText { get; set; }
-
-    ///NYTT FÖR TUTORIALS
-    public GameObject PopUp;
-    public TextMeshProUGUI popUpTextSubject { get; set; }
-    public TextMeshProUGUI popUpTextInfo { get; set; }
     
-    public Font font;
-
-    private GameObject cancelTutorialObject;
-
-    public bool isTutorialTypePopUp;
-    ///
 
 
 
@@ -105,20 +93,15 @@ public class GameController : MonoBehaviour
         SlowmotionSlider.value = SlowmotionSlider.maxValue;
         ReloadSlider.value = 0;
 
-        TipText = GameObject.Find("TipText").GetComponent<Text>();
-        TipText.color = new Color(TipText.color.r, TipText.color.g, TipText.color.b, 0);
+        
 
         //PopUp = GameObject.Find("PopUpTutorial");
 
         //popUpTextSubject = GameObject.Find("PopUpTextSubject").GetComponent<Text>();
         //popUpTextInfo = GameObject.Find("PopUpTextInfo").GetComponent<Text>();
 
-        PopUp = GameObject.Find("PopUpTutorial");
-
-        popUpTextSubject = GameObject.Find("SubjectText").GetComponent<TextMeshProUGUI>();
-        popUpTextInfo = GameObject.Find("InfoText").GetComponent<TextMeshProUGUI>();
-        //popUpTextSubject.font = font;
-        //popUpTextInfo.font = font;
+        
+        
         
 
         weaponNameText = GameObject.Find("WeaponText").GetComponent<Text>();
@@ -144,18 +127,7 @@ public class GameController : MonoBehaviour
         //    dataStorage.LoadLevelData();
         //    dataStorage.LoadSpawnerData();
         //}
-        PopUp.SetActive(false);
-
-        if (isTutorialTypePopUp)
-        {
-            cancelTutorialObject = GameObject.Find("IntegreradTutorials");
-            cancelTutorialObject.SetActive(false);
-        }
-        else
-        {
-            cancelTutorialObject = GameObject.Find("PopUps").GetComponent<GameObject>();
-            cancelTutorialObject.SetActive(false);
-        }
+        
 
     }
 
@@ -332,27 +304,5 @@ public class GameController : MonoBehaviour
     {
         SaveSystem.SavePlayer(this);
     }
-    public string TipMethod(string s1)
-    {
-        Debug.Log("method started");
-        TipText.text = s1;
-
-        StartCoroutine(FadeText(0 + 0, 5, TipText));
-
-        return s1;
-    }
-    public IEnumerator FadeText(float waitBeforeFade, float fadeTime, Text tipText)
-    {
-
-        tipText.color = new Color(tipText.color.r, tipText.color.g, tipText.color.b, 1);
-
-        yield return new WaitForSeconds(waitBeforeFade);
-        while (tipText.color.a > 0.0f)
-        {
-            tipText.color = new Color(tipText.color.r, tipText.color.g, tipText.color.b, tipText.color.a - (Time.unscaledDeltaTime / fadeTime));
-            yield return null;
-        }
-
-
-    }
+   
 }

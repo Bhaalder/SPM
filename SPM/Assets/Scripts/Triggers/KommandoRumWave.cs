@@ -18,7 +18,7 @@ public class KommandoRumWave : MonoBehaviour
     {
         gO.SetActive(false);
 
-        if (GameController.Instance.isTutorialTypePopUp)
+        if (TutorialController.Instance.isTutorialTypePopUp)
         {
             pTut = GameObject.Find("PopUpTrigger").GetComponent<PopUpTrigger>();
         }
@@ -32,7 +32,7 @@ public class KommandoRumWave : MonoBehaviour
         {
             gO.SetActive(true);
             StartCoroutine(WaitASec());
-            if (GameController.Instance.isTutorialTypePopUp)
+            if (TutorialController.Instance.isTutorialTypePopUp)
             {
                 pTut.PopUpMethod("ARENA COMBAT", "Careful, when disabling alien technology you will alert them!");
             }
