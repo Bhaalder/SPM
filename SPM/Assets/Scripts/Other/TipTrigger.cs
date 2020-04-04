@@ -16,9 +16,12 @@ public class TipTrigger : MonoBehaviour{
     [SerializeField] private bool hasTip;
 
     private bool isTriggered;
+    private bool shouldBeOff = true;
+
+   
 
     private void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("InteractionPlayer")) {
             if (!isTriggered) {
                 if (!GameController.Instance.GetComponent<Timer>().TimerIsActive) {
                     GameController.Instance.GetComponent<Timer>().TimerIsActive = true;
@@ -29,14 +32,24 @@ public class TipTrigger : MonoBehaviour{
                 }
                 if (hasTip) {
                     TutorialController.Instance.tutorialCanvasObject.SetActive(true);
+                    //TutorialController.Instance.tutorialCanvasObject.SetActive(true);
                     TutorialController.Instance.TipText.text = tipText;
                     float voiceLineLength = AudioController.Instance.GetSoundLength(voiceLine);
                     //StartCoroutine(FadeText(voiceLineLength + waitBeforeFade, 5, TutorialController.Instance.TipText));
-                    StartCoroutine(RemoveTutorial(waitBeforeFade, TutorialController.Instance.tutorialCanvasObject));
+                    
 
                 }
                 isTriggered = true;
             }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("InteractionPlayer"))
+        {
+            
+            StartCoroutine(RemoveTutorial(waitBeforeFade, TutorialController.Instance.tutorialCanvasObject));
+            TutorialController.Instance.tutorialCanvasObject.SetActive(false);
         }
     }
 
@@ -49,14 +62,15 @@ public class TipTrigger : MonoBehaviour{
     //    }
     //    Destroy(gameObject);
     //}
-    
+
     public IEnumerator RemoveTutorial(float waitBeforeRemove, GameObject iTutorial)
     {
 
         yield return new WaitForSeconds(waitBeforeRemove);
 
 
-        iTutorial.SetActive(false);
+        
+        Destroy(gameObject);
     }
 
 
