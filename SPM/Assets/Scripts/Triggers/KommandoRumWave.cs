@@ -9,14 +9,17 @@ public class KommandoRumWave : MonoBehaviour
     public GameObject gO;
     private PopUpTrigger pTut;
     private TipTrigger iTut;
+    public GameObject obj, greenPanel, redPanel;
 
-    
 
     private bool encounterStarted;
 
     void Start()
     {
         gO.SetActive(false);
+       
+        redPanel.SetActive(true);
+        greenPanel.SetActive(false);
 
         if (TutorialController.Instance.isTutorialTypePopUp)
         {
@@ -30,7 +33,10 @@ public class KommandoRumWave : MonoBehaviour
     {
         if (!encounterStarted)
         {
+            obj.SetActive(false);
             gO.SetActive(true);
+            greenPanel.SetActive(!greenPanel.activeSelf);
+            redPanel.SetActive(!redPanel.activeSelf);
             StartCoroutine(WaitASec());
             if (TutorialController.Instance.isTutorialTypePopUp)
             {
