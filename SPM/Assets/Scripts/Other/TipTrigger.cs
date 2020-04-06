@@ -31,7 +31,7 @@ public class TipTrigger : MonoBehaviour{
                     AudioController.Instance.PlayVoiceLine(voiceLine);
                 }
                 if (hasTip) {
-                    TutorialController.Instance.tutorialCanvasObject.SetActive(true);
+                    //TutorialController.Instance.tutorialCanvasObject.SetActive(true);
                     //TutorialController.Instance.tutorialCanvasObject.SetActive(true);
                     TutorialController.Instance.TipText.text = tipText;
                     float voiceLineLength = AudioController.Instance.GetSoundLength(voiceLine);
@@ -43,13 +43,22 @@ public class TipTrigger : MonoBehaviour{
             }
         }
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("InteractionPlayer"))
+        {
+            TutorialController.Instance.tutorialCanvasObject.SetActive(true);
+
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("InteractionPlayer"))
         {
-            
-            StartCoroutine(RemoveTutorial(waitBeforeFade, TutorialController.Instance.tutorialCanvasObject));
             TutorialController.Instance.tutorialCanvasObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
@@ -63,15 +72,15 @@ public class TipTrigger : MonoBehaviour{
     //    Destroy(gameObject);
     //}
 
-    public IEnumerator RemoveTutorial(float waitBeforeRemove, GameObject iTutorial)
-    {
+    //public IEnumerator RemoveTutorial(float waitBeforeRemove, GameObject iTutorial)
+    //{
 
-        yield return new WaitForSeconds(waitBeforeRemove);
+    //    yield return new WaitForSeconds(waitBeforeRemove);
 
 
         
-        Destroy(gameObject);
-    }
+    //    Destroy(gameObject);
+    //}
 
 
 }
