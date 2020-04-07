@@ -10,7 +10,7 @@ public class laserHurt : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameController.Instance.TakeDamage(400);
+            GameController.Instance.TakeDamage(100);
         }
     }
 }
