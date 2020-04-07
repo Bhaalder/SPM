@@ -57,14 +57,6 @@ public class TipTrigger : MonoBehaviour{
                         Destroy(arr[0]);
                     }
 
-                    
-                    
-                    
-
-
-                   
-
-                   
 
                     Debug.Log(1);
                     GameObject instanceObject = Instantiate(thePrefab, theCanvas.transform);
