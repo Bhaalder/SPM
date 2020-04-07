@@ -47,24 +47,26 @@ public class TutorialController : MonoBehaviour
         
     void Start()
     {
-
+        //Popups
         PopUp = GameObject.Find("PopUpTutorial");
 
         popUpTextSubject = GameObject.Find("SubjectText").GetComponent<TextMeshProUGUI>();
         popUpTextInfo = GameObject.Find("InfoText").GetComponent<TextMeshProUGUI>();
 
-        TipText = GameObject.Find("TipText").GetComponent<TextMeshProUGUI>();
-        //TipText.color = new Color(TipText.color.r, TipText.color.g, TipText.color.b, 0);
+        
+        //Integrerad
         tutorialCanvasObject = GameObject.Find("TipTextObject");
-
+        TipText = GameObject.Find("TipText").GetComponent<TextMeshProUGUI>();
 
 
         PopUp.SetActive(false);
         tutorialCanvasObject.SetActive(false);
 
+        //Hittar Parentobjekt och disablar då vi ska köra den andra
         if (isTutorialTypePopUp)
         {
             cancelTutorialObject = GameObject.Find("IntegreradTutorials");
+            
             cancelTutorialObject.SetActive(false);
         }
         else

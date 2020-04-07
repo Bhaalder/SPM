@@ -14,11 +14,22 @@ public class TipTrigger : MonoBehaviour{
     [SerializeField] private float waitBeforeFade = 5;
     [SerializeField] private bool hasVoiceLine;
     [SerializeField] private bool hasTip;
+    [SerializeField] private bool kommandoSpecial;
 
     private bool isTriggered;
     private bool shouldBeOff = true;
 
-   
+    public GameObject thePrefab;
+    public GameObject theCanvas;
+
+    //GameObject[] canvasObjArr;
+    GameObject[] arr;
+
+    private void Start()
+    {
+        arr = new GameObject[2];
+        
+    }
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("InteractionPlayer")) {
@@ -31,34 +42,76 @@ public class TipTrigger : MonoBehaviour{
                     AudioController.Instance.PlayVoiceLine(voiceLine);
                 }
                 if (hasTip) {
+
                     //TutorialController.Instance.tutorialCanvasObject.SetActive(true);
                     //TutorialController.Instance.tutorialCanvasObject.SetActive(true);
                     TutorialController.Instance.TipText.text = tipText;
                     float voiceLineLength = AudioController.Instance.GetSoundLength(voiceLine);
                     //StartCoroutine(FadeText(voiceLineLength + waitBeforeFade, 5, TutorialController.Instance.TipText));
+
+                    //canvasObjArr = GameObject.FindGameObjectsWithTag("IntegratedTutorial");
+
+                    if (arr.Length > 1)
+                    {
+                        //ArrayCleanUp();
+                        Destroy(arr[0]);
+                    }
+
+                    
+                    
                     
 
+
+                   
+
+                   
+
+                    Debug.Log(1);
+                    GameObject instanceObject = Instantiate(thePrefab, theCanvas.transform);
+                    instanceObject.GetComponentInChildren<TextMeshProUGUI>().text = tipText;
+                    arr[0] = instanceObject;
+
+                    
                 }
                 isTriggered = true;
             }
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("InteractionPlayer"))
-        {
-            TutorialController.Instance.tutorialCanvasObject.SetActive(true);
+    //private void OnTriggerStay(Collider other)
+    //{
+    //    if (other.CompareTag("InteractionPlayer"))
+    //    {
+           
+    //        if (!isTriggered)
+    //        {
+                
+    //        }
 
-        }
-    }
+    //        //TutorialController.Instance.tutorialCanvasObject.SetActive(true);
+
+    //    }
+    //}
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("InteractionPlayer"))
         {
-            TutorialController.Instance.tutorialCanvasObject.SetActive(false);
-            Destroy(gameObject);
+            Debug.Log(2);
+            isTriggered = false;
+            //TutorialController.Instance.tutorialCanvasObject.SetActive(false);
+            if (kommandoSpecial)
+            {
+                RemoveTutorial(3, arr[0]);
+            }
+            else
+            {
+                //ArrayCleanUp();
+                Destroy(arr[0]);
+                Destroy(gameObject);
+            }
+
+           
         }
     }
 
@@ -72,15 +125,32 @@ public class TipTrigger : MonoBehaviour{
     //    Destroy(gameObject);
     //}
 
-    //public IEnumerator RemoveTutorial(float waitBeforeRemove, GameObject iTutorial)
-    //{
+    public IEnumerator RemoveTutorial(float waitBeforeRemove, GameObject iTutorial)
+    {
 
-    //    yield return new WaitForSeconds(waitBeforeRemove);
+        yield return new WaitForSeconds(waitBeforeRemove);
 
 
+        Destroy(iTutorial);
+        Destroy(gameObject);
+    }
+
+    private void ArrayCleanUp()
+    {
         
-    //    Destroy(gameObject);
-    //}
+        for (int i = 0; i <= arr.Length; i++)
+        {
+            
+            Debug.Log(3);
+            Destroy(arr[i]);
+        }
+
+        //if(canvasObjArr.Length > 0)
+        //{
+        //    Destroy(canvasObjArr[0]);
+
+        //}
+    }
 
 
 }
