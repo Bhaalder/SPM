@@ -6,6 +6,7 @@ using UnityEngine;
 public class PopUpTrigger : MonoBehaviour
 {
     [SerializeField] private string SubjectText;
+    [TextArea(1, 20)]
     [SerializeField] private string InfoText;
     
 
