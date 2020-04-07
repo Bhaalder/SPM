@@ -42,7 +42,7 @@ public class WeaponPickup : MonoBehaviour {
             }
             else
             {
-                triggerScript.PopUpMethod("THE SHOTGUN", "Switch to Shotgun by clicking '2'\nThe shotgun is good against big enemies");
+                triggerScript.PopUpMethod("THE SHOTGUN", "Switch to Shotgun by clicking [2]\nThe shotgun is good against big enemies");
             }
 
         }
@@ -54,7 +54,7 @@ public class WeaponPickup : MonoBehaviour {
             }
             else
             {
-                triggerScript.PopUpMethod("THE ROCKET LAUNCHER","Switch to Launcher by clicking '3'\n The Launcher is good vs clumped up enemies");
+                triggerScript.PopUpMethod("THE ROCKET LAUNCHER","Switch to Launcher by clicking [3]\n The Launcher is good vs clumped up enemies");
             }
 
         }
