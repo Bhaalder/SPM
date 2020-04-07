@@ -90,11 +90,11 @@ public class TipTrigger : MonoBehaviour{
         if (other.CompareTag("InteractionPlayer"))
         {
             Debug.Log(2);
-            isTriggered = false;
+            
             //TutorialController.Instance.tutorialCanvasObject.SetActive(false);
             if (kommandoSpecial)
             {
-                RemoveTutorial(3, arr[0]);
+                RemoveTutorial(2, arr[0]);
             }
             else
             {

@@ -9,16 +9,19 @@ public class WeaponPickup : MonoBehaviour {
     [SerializeField] private Animator anim;
     
     PopUpTrigger triggerScript;
-    
 
+
+    private void Awake()
+    {
+        triggerScript = GameObject.Find("PopUpTrigger").GetComponent<PopUpTrigger>();
+    }
     void Start()
     {
         anim = GameObject.Find("WeaponText").GetComponent<Animator>();
 
-        if (TutorialController.Instance.isTutorialTypePopUp)
-        {
-            triggerScript = GameObject.Find("PopUpTrigger").GetComponent<PopUpTrigger>();
-        }
+        
+           
+        
         
     }
 

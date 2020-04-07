@@ -17,7 +17,8 @@ public class TutorialController : MonoBehaviour
 
     
 
-    private GameObject cancelTutorialObject;
+    private GameObject cancelTutorialObject1;
+    private GameObject cancelTutorialObject2;
 
     public bool isTutorialTypePopUp;
     ///
@@ -42,12 +43,19 @@ public class TutorialController : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            isTutorialTypePopUp = !isTutorialTypePopUp;
+            TutorialPickMethod();
+        }
+    }
 
-   
-        
+
     void Start()
     {
-        //Popups
+        //Popups canvas element
         PopUp = GameObject.Find("PopUpTutorial");
 
         popUpTextSubject = GameObject.Find("SubjectText").GetComponent<TextMeshProUGUI>();
@@ -63,16 +71,24 @@ public class TutorialController : MonoBehaviour
         tutorialCanvasObject.SetActive(false);
 
         //Hittar Parentobjekt och disablar då vi ska köra den andra
+        cancelTutorialObject1 = GameObject.Find("IntegreradTutorials");
+        cancelTutorialObject2 = GameObject.Find("PopUps");
+        TutorialPickMethod();
+    }
+    private void TutorialPickMethod()
+    {
         if (isTutorialTypePopUp)
         {
-            cancelTutorialObject = GameObject.Find("IntegreradTutorials");
             
-            cancelTutorialObject.SetActive(false);
+
+            cancelTutorialObject1.SetActive(false);
+            cancelTutorialObject2.SetActive(true);
         }
         else
         {
-            cancelTutorialObject = GameObject.Find("PopUps");
-            cancelTutorialObject.SetActive(false);
+            
+            cancelTutorialObject1.SetActive(true);
+            cancelTutorialObject2.SetActive(false);
         }
     }
    
