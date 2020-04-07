@@ -10,6 +10,8 @@ public class WeaponPickup : MonoBehaviour {
     
     PopUpTrigger triggerScript;
 
+    public GameObject shotGun, Bazooka;
+
 
     private void Awake()
     {
@@ -19,10 +21,10 @@ public class WeaponPickup : MonoBehaviour {
     {
         anim = GameObject.Find("WeaponText").GetComponent<Animator>();
 
-        
-           
-        
-        
+        shotGun.SetActive(false);
+        Bazooka.SetActive(false);
+
+
     }
 
     public void GetWeapon() {
@@ -36,7 +38,7 @@ public class WeaponPickup : MonoBehaviour {
             weaponPickup = WeaponController.Instance.GetShotgun();
             if (!TutorialController.Instance.isTutorialTypePopUp)
             {
-                StartCoroutine(TextShowDelay("SHOTGUN INFO"));
+                shotGun.SetActive(true);
             }
             else
             {
@@ -48,7 +50,7 @@ public class WeaponPickup : MonoBehaviour {
             weaponPickup = WeaponController.Instance.GetRocketLauncher();
             if (!TutorialController.Instance.isTutorialTypePopUp)
             {
-                StartCoroutine(TextShowDelay("ROCKET INFO"));
+                Bazooka.SetActive(true);
             }
             else
             {
@@ -72,18 +74,18 @@ public class WeaponPickup : MonoBehaviour {
         Destroy(gameObject);
     }
 
-    private IEnumerator TextShowDelay(string text)
-    {
-        Debug.Log("num started");
-        TutorialController.Instance.TipMethod(text);
-        yield return new WaitForSeconds(1);
+    //private IEnumerator TextShowDelay(string text)
+    //{
+    //    Debug.Log("num started");
+    //    TutorialController.Instance.TipMethod(text);
+    //    yield return new WaitForSeconds(1);
         
         
-        Debug.Log("weaponText identified");
-        //yield return null;
-        
-
+    //    Debug.Log("weaponText identified");
+    //    //yield return null;
         
 
-    }
+        
+
+    //}
 }
