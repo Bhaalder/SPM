@@ -10,7 +10,7 @@ public class WeaponPickup : MonoBehaviour {
     
     PopUpTrigger triggerScript;
 
-    public GameObject shotGun, Bazooka;
+    public GameObject shotGunTrigger, BazookaTrigger;
 
 
     private void Awake()
@@ -21,8 +21,8 @@ public class WeaponPickup : MonoBehaviour {
     {
         anim = GameObject.Find("WeaponText").GetComponent<Animator>();
 
-        shotGun.SetActive(false);
-        Bazooka.SetActive(false);
+        shotGunTrigger.SetActive(false);
+        BazookaTrigger.SetActive(false);
 
 
     }
@@ -38,7 +38,7 @@ public class WeaponPickup : MonoBehaviour {
             weaponPickup = WeaponController.Instance.GetShotgun();
             if (!TutorialController.Instance.isTutorialTypePopUp)
             {
-                shotGun.SetActive(true);
+                shotGunTrigger.SetActive(true);
             }
             else
             {
@@ -50,7 +50,7 @@ public class WeaponPickup : MonoBehaviour {
             weaponPickup = WeaponController.Instance.GetRocketLauncher();
             if (!TutorialController.Instance.isTutorialTypePopUp)
             {
-                Bazooka.SetActive(true);
+                BazookaTrigger.SetActive(true);
             }
             else
             {
