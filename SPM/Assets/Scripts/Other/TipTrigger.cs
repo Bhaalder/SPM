@@ -25,12 +25,12 @@ public class TipTrigger : MonoBehaviour{
     GameObject instanceObject;
 
     //GameObject[] canvasObjArr;
-    //GameObject[] arr;
+    GameObject[] arr;
 
     private void Start()
     {
-        //arr = new GameObject[2];
         
+
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -59,9 +59,11 @@ public class TipTrigger : MonoBehaviour{
                     //    Destroy(arr[0]);
                     //}
 
-                    if(instanceObject != null)
+                    arr = GameObject.FindGameObjectsWithTag("IntegratedTutorial");
+                    if (arr.Length>=1)
                     {
-                        Destroy(instanceObject);
+                        //Destroy(instanceObject);
+                        ArrayCleanUp();
                     }
                     Debug.Log(1);
                     instanceObject = Instantiate(thePrefab, theCanvas.transform);
@@ -96,24 +98,16 @@ public class TipTrigger : MonoBehaviour{
         {
             Debug.Log(2);
 
-            Destroy(instanceObject);
-            Destroy(gameObject);
+            //Destroy(instanceObject);
+            //Destroy(gameObject);
 
             //TutorialController.Instance.tutorialCanvasObject.SetActive(false);
-            //if (kommandoSpecial)
-            //{
-            //    Debug.Log(3);
-            //    StartCoroutine(RemoveTutorial(instanceObject));
 
-            //}
-            //else
-            //{
-            //    //ArrayCleanUp();
-            //    Destroy(instanceObject);
-            //    Destroy(gameObject);
-            //}
-            //ArrayCleanUp();
 
+            //Destroy(instanceObject);
+
+            arr = GameObject.FindGameObjectsWithTag("IntegratedTutorial");
+            StartCoroutine(RemoveTutorial());
         }
     }
 
@@ -127,32 +121,29 @@ public class TipTrigger : MonoBehaviour{
     //    Destroy(gameObject);
     //}
 
-    public IEnumerator RemoveTutorial(GameObject iTutorial)
+    public IEnumerator RemoveTutorial()
     {
         Debug.Log(4);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
 
         Debug.Log(5);
-        Destroy(iTutorial);
+        //Destroy(iTutorial);
+        ArrayCleanUp();
+        DestroyDelay();
+    }
+    public IEnumerator DestroyDelay()
+    {
+        yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
 
-    //private void ArrayCleanUp()
-    //{
-        
-    //    for (int i = 0; i <= arr.Length; i++)
-    //    {
-            
-    //        Debug.Log(3);
-    //        Destroy(arr[i]);
-    //    }
-
-    //    //if(canvasObjArr.Length > 0)
-    //    //{
-    //    //    Destroy(canvasObjArr[0]);
-
-    //    //}
-    //}
+    private void ArrayCleanUp()
+    {
+        foreach(GameObject target in arr)
+        {
+            Destroy(target);
+        }
+    }
     private void OnDestroy()
     {
         Debug.Log("Im ded");
