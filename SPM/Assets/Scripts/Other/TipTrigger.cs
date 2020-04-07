@@ -14,7 +14,7 @@ public class TipTrigger : MonoBehaviour{
     [SerializeField] private float waitBeforeFade = 5;
     [SerializeField] private bool hasVoiceLine;
     [SerializeField] private bool hasTip;
-    [SerializeField] private bool kommandoSpecial;
+    
 
     private bool isTriggered;
     private bool shouldBeOff = true;
@@ -22,12 +22,14 @@ public class TipTrigger : MonoBehaviour{
     public GameObject thePrefab;
     public GameObject theCanvas;
 
+    GameObject instanceObject;
+
     //GameObject[] canvasObjArr;
-    GameObject[] arr;
+    //GameObject[] arr;
 
     private void Start()
     {
-        arr = new GameObject[2];
+        //arr = new GameObject[2];
         
     }
 
@@ -51,17 +53,20 @@ public class TipTrigger : MonoBehaviour{
 
                     //canvasObjArr = GameObject.FindGameObjectsWithTag("IntegratedTutorial");
 
-                    if (arr.Length > 1)
+                    //if (arr.Length > 1)
+                    //{
+                    //    //ArrayCleanUp();
+                    //    Destroy(arr[0]);
+                    //}
+
+                    if(instanceObject != null)
                     {
-                        //ArrayCleanUp();
-                        Destroy(arr[0]);
+                        Destroy(instanceObject);
                     }
-
-
                     Debug.Log(1);
-                    GameObject instanceObject = Instantiate(thePrefab, theCanvas.transform);
+                    instanceObject = Instantiate(thePrefab, theCanvas.transform);
                     instanceObject.GetComponentInChildren<TextMeshProUGUI>().text = tipText;
-                    arr[0] = instanceObject;
+                    //arr[0] = instanceObject;
 
                     
                 }
@@ -90,20 +95,25 @@ public class TipTrigger : MonoBehaviour{
         if (other.CompareTag("InteractionPlayer"))
         {
             Debug.Log(2);
-            
-            //TutorialController.Instance.tutorialCanvasObject.SetActive(false);
-            if (kommandoSpecial)
-            {
-                RemoveTutorial(2, arr[0]);
-            }
-            else
-            {
-                //ArrayCleanUp();
-                Destroy(arr[0]);
-                Destroy(gameObject);
-            }
 
-           
+            Destroy(instanceObject);
+            Destroy(gameObject);
+
+            //TutorialController.Instance.tutorialCanvasObject.SetActive(false);
+            //if (kommandoSpecial)
+            //{
+            //    Debug.Log(3);
+            //    StartCoroutine(RemoveTutorial(instanceObject));
+
+            //}
+            //else
+            //{
+            //    //ArrayCleanUp();
+            //    Destroy(instanceObject);
+            //    Destroy(gameObject);
+            //}
+            //ArrayCleanUp();
+
         }
     }
 
@@ -117,32 +127,35 @@ public class TipTrigger : MonoBehaviour{
     //    Destroy(gameObject);
     //}
 
-    public IEnumerator RemoveTutorial(float waitBeforeRemove, GameObject iTutorial)
+    public IEnumerator RemoveTutorial(GameObject iTutorial)
     {
+        Debug.Log(4);
+        yield return new WaitForSeconds(3);
 
-        yield return new WaitForSeconds(waitBeforeRemove);
-
-
+        Debug.Log(5);
         Destroy(iTutorial);
         Destroy(gameObject);
     }
 
-    private void ArrayCleanUp()
-    {
+    //private void ArrayCleanUp()
+    //{
         
-        for (int i = 0; i <= arr.Length; i++)
-        {
+    //    for (int i = 0; i <= arr.Length; i++)
+    //    {
             
-            Debug.Log(3);
-            Destroy(arr[i]);
-        }
+    //        Debug.Log(3);
+    //        Destroy(arr[i]);
+    //    }
 
-        //if(canvasObjArr.Length > 0)
-        //{
-        //    Destroy(canvasObjArr[0]);
+    //    //if(canvasObjArr.Length > 0)
+    //    //{
+    //    //    Destroy(canvasObjArr[0]);
 
-        //}
+    //    //}
+    //}
+    private void OnDestroy()
+    {
+        Debug.Log("Im ded");
     }
-
 
 }
